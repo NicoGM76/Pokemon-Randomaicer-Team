@@ -3,6 +3,7 @@ import type { GeneratorConfig, TeamSlot } from '../teams/types';
 export interface CollectionEntryConfig {
   id: string;
   label: string;
+  targetGeneration: number;
   generator: GeneratorConfig;
   allowBonus: boolean;
 }
@@ -17,6 +18,7 @@ export interface CollectionConfig {
 export interface CollectionTeam {
   entryId: string;
   label: string;
+  targetGeneration: number;
   gameId: string;
   team: TeamSlot[];
   complete: boolean;
