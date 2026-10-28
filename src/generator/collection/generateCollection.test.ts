@@ -47,7 +47,7 @@ const dataset = {
   ],
   mechanicCatalogs: [],
   availability: [],
-  availabilityCoverage: {},
+  availabilityCoverage: [],
   evolutions: []
 } as unknown as CompiledDataset;
 
