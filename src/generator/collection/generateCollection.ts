@@ -26,16 +26,19 @@ function reserve(team: TeamSlot[], species: Set<string>, families: Set<string>):
   }
 }
 
-function relaxedOriginConfig(config: GeneratorConfig): GeneratorConfig {
-  if (!config.customRules?.onlyCurrentGeneration) return config;
+function effectiveGeneratorConfig(entry: CollectionEntryConfig): GeneratorConfig {
+  const config = entry.generator;
   return {
     ...config,
-    customRules: { ...config.customRules, onlyCurrentGeneration: false }
+    typeChartGeneration: entry.targetGeneration,
+    customRules: config.customRules?.onlyCurrentGeneration
+      ? { ...config.customRules, onlyCurrentGeneration: false }
+      : config.customRules
   };
 }
 
 function gameCandidates(dataset: CompiledDataset, entry: CollectionEntryConfig): PokemonCandidate[] {
-  return buildCandidates(dataset, relaxedOriginConfig(entry.generator));
+  return buildCandidates(dataset, effectiveGeneratorConfig(entry));
 }
 
 function normalCandidates(dataset: CompiledDataset, entry: CollectionEntryConfig): PokemonCandidate[] {
@@ -69,7 +72,7 @@ function legalGlobalBonusCandidates(
 ): PokemonCandidate[] {
   const game = dataset.games.find(item => item.id === entry.generator.gameId);
   if (!game) return [];
-  const bonusConfig = relaxedOriginConfig(entry.generator);
+  const bonusConfig = effectiveGeneratorConfig(entry);
 
   return dataset.pokemon
     .map<PokemonCandidate>(pokemon => ({
@@ -116,19 +119,20 @@ function generateOne(
 ): CollectionTeam {
   if (current?.locked) return current;
 
+  const effectiveConfig = effectiveGeneratorConfig(entry);
   const lockedSlots = current?.team.filter(slot => slot.locked) ?? [];
   const allGameCandidates = gameCandidates(dataset, entry);
   const localCandidates = allGameCandidates.filter(
     candidate => familyOriginGeneration(dataset, candidate.evolutionFamilyId) === entry.targetGeneration
   );
   const legalCandidates = availableForCollection(localCandidates, reservedSpecies, reservedFamilies, collection, lockedSlots);
-  const generator = entry.generator.mode === 'adventure' ? generateAdventureTeam : generateRandomTeam;
-  const generated = generator(legalCandidates, entry.generator, lockedSlots, rng);
+  const generator = effectiveConfig.mode === 'adventure' ? generateAdventureTeam : generateRandomTeam;
+  const generated = generator(legalCandidates, effectiveConfig, lockedSlots, rng);
   let team = generated.team;
   const bonusKeys: string[] = current?.bonusCandidateKeys.filter(key => lockedSlots.some(slot => slot.candidate.candidateKey === key)) ?? [];
 
   if (
-    team.length < entry.generator.teamSize &&
+    team.length < effectiveConfig.teamSize &&
     entry.allowBonus &&
     bonusKeys.length < collection.maxBonusPerTeam
   ) {
@@ -139,7 +143,7 @@ function generateOne(
     if (pool.length) {
       const picked = pool[Math.floor(rng() * pool.length)];
       const slot: TeamSlot = { candidate: picked, locked: false };
-      team = [...team, slot].slice(0, entry.generator.teamSize);
+      team = [...team, slot].slice(0, effectiveConfig.teamSize);
       bonusKeys.push(picked.candidateKey);
     }
   }
@@ -148,15 +152,15 @@ function generateOne(
     entryId: entry.id,
     label: entry.label,
     targetGeneration: entry.targetGeneration,
-    gameId: entry.generator.gameId,
+    gameId: effectiveConfig.gameId,
     team,
-    complete: team.length === entry.generator.teamSize,
+    complete: team.length === effectiveConfig.teamSize,
     locked: false,
     bonusCandidateKeys: bonusKeys
   };
 }
 
-function summarize(teams: CollectionTeam[]): CollectionResult {
+function summarize(teams: CollectionTeam[], config: CollectionConfig): CollectionResult {
   const speciesCounts = new Map<string, number>();
   const familyCounts = new Map<string, number>();
   for (const team of teams) {
@@ -167,13 +171,15 @@ function summarize(teams: CollectionTeam[]): CollectionResult {
   }
   const duplicateSpecies = [...speciesCounts.values()].filter(count => count > 1).length;
   const duplicateFamilies = [...familyCounts.values()].filter(count => count > 1).length;
+  const violatesSpecies = config.avoidRepeatedSpecies && duplicateSpecies > 0;
+  const violatesFamilies = config.avoidRepeatedFamilies && duplicateFamilies > 0;
   const warnings: string[] = [];
   if (teams.some(team => !team.complete)) warnings.push('Algunos equipos no pudieron completarse sin relajar las reglas globales.');
-  if (duplicateSpecies) warnings.push('Hay especies repetidas en la colección.');
-  if (duplicateFamilies) warnings.push('Hay familias evolutivas repetidas en la colección.');
+  if (violatesSpecies) warnings.push('Hay especies repetidas aunque la colección las prohíbe.');
+  if (violatesFamilies) warnings.push('Hay familias evolutivas repetidas aunque la colección las prohíbe.');
   return {
     teams,
-    complete: teams.every(team => team.complete) && duplicateSpecies === 0 && duplicateFamilies === 0,
+    complete: teams.every(team => team.complete) && !violatesSpecies && !violatesFamilies,
     totalPokemon: teams.reduce((total, team) => total + team.team.length, 0),
     bonusesUsed: teams.reduce((total, team) => total + team.bonusCandidateKeys.length, 0),
     duplicateSpecies,
@@ -223,11 +229,13 @@ function attempt(
     reserve(team.team, reservedSpecies, reservedFamilies);
   }
 
-  return summarize(config.entries.map(entry => resultByEntry.get(entry.id)!).filter(Boolean));
+  return summarize(config.entries.map(entry => resultByEntry.get(entry.id)!).filter(Boolean), config);
 }
 
-function score(result: CollectionResult): number {
-  return result.totalPokemon * 1000 - result.bonusesUsed * 10 - result.duplicateSpecies * 10000 - result.duplicateFamilies * 10000;
+function score(result: CollectionResult, config: CollectionConfig): number {
+  const speciesPenalty = config.avoidRepeatedSpecies ? result.duplicateSpecies * 10000 : 0;
+  const familyPenalty = config.avoidRepeatedFamilies ? result.duplicateFamilies * 10000 : 0;
+  return result.totalPokemon * 1000 - result.bonusesUsed * 10 - speciesPenalty - familyPenalty;
 }
 
 export function generateCollection(
@@ -240,8 +248,8 @@ export function generateCollection(
   const attempts = current ? 8 : 16;
   for (let index = 0; index < attempts; index++) {
     const next = attempt(dataset, config, current, rng);
-    if (!best || score(next) > score(best)) best = next;
+    if (!best || score(next, config) > score(best, config)) best = next;
     if (next.complete && next.bonusesUsed === 0) break;
   }
-  return best ?? summarize([]);
+  return best ?? summarize([], config);
 }
