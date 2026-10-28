@@ -9,6 +9,7 @@ import contentPacks from './curated/content-packs.json';
 import regionalDexes from './curated/regional-dexes.json';
 import mechanicCatalogs from './curated/mechanic-catalogs.json';
 import availability from './curated/availability.json';
+import availabilityCoverage from './curated/availability-coverage.json';
 import type { CompiledDataset } from './types';
 
 export function loadDataset(): CompiledDataset {
@@ -28,6 +29,7 @@ export function loadDataset(): CompiledDataset {
     regionalDexEntries,
     mechanicCatalogs,
     availability,
+    availabilityCoverage,
     evolutions
   } as CompiledDataset;
 }
