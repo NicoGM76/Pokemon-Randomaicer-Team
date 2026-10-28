@@ -1,12 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import type { CompiledDataset } from '../../data/types';
+import type { PokemonType } from '../../domain/pokemon/types';
 import type { GeneratorConfig } from '../../domain/teams/types';
 import { buildCandidates, usesRegionalDexFallback } from './buildCandidates';
 
 const pokemon = (id: number, name: string) => ({
   id,
   name,
-  types: ['normal'] as const,
+  types: ['normal'] as PokemonType[],
   introducedGeneration: 1,
   evolutionFamilyId: `chain-${id}`,
   stats: { hp: 50, attack: 50, defense: 50, specialAttack: 50, specialDefense: 50, speed: 50 },
