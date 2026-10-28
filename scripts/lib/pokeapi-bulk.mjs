@@ -8,6 +8,7 @@ const FILES = [
   'pokedexes.csv',
   'pokemon_dex_numbers.csv',
   'pokemon_species.csv',
+  'pokemon_evolution.csv',
   'pokemon.csv',
   'pokemon_types.csv',
   'pokemon_stats.csv',
@@ -98,6 +99,94 @@ export function buildDexEntries(bundle, regionalDexes) {
 
 function titleFromIdentifier(identifier) {
   return identifier.split('-').map(part => part ? part[0].toUpperCase() + part.slice(1) : part).join(' ');
+}
+
+function numberOrNull(value) {
+  if (value == null || value === '') return null;
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function evolutionConditions(row) {
+  const conditions = [];
+  const trigger = numberOrNull(row.evolution_trigger_id);
+  const minLevel = numberOrNull(row.minimum_level);
+  const minHappiness = numberOrNull(row.minimum_happiness);
+  const gender = numberOrNull(row.gender_id);
+  const triggerItem = numberOrNull(row.trigger_item_id);
+  const knownMove = numberOrNull(row.known_move_id);
+
+  if (trigger === 2) conditions.push({ type: 'trade' });
+  if (trigger === 3 && triggerItem != null) conditions.push({ type: 'item', itemId: `item-${triggerItem}` });
+  if (minLevel != null) conditions.push({ type: 'level', minLevel });
+  if (minHappiness != null) conditions.push({ type: 'friendship', minFriendship: minHappiness });
+  if (row.time_of_day === 'day' || row.time_of_day === 'night' || row.time_of_day === 'dusk') {
+    conditions.push({ type: 'time', value: row.time_of_day });
+  }
+  if (gender === 1) conditions.push({ type: 'gender', value: 'female' });
+  if (gender === 2) conditions.push({ type: 'gender', value: 'male' });
+  if (knownMove != null) conditions.push({ type: 'move_known', moveId: `move-${knownMove}` });
+
+  const specialFields = [
+    ['location_id', row.location_id],
+    ['held_item_id', row.held_item_id],
+    ['known_move_type_id', row.known_move_type_id],
+    ['minimum_beauty', row.minimum_beauty],
+    ['minimum_affection', row.minimum_affection],
+    ['relative_physical_stats', row.relative_physical_stats],
+    ['party_species_id', row.party_species_id],
+    ['party_type_id', row.party_type_id],
+    ['needs_overworld_rain', row.needs_overworld_rain === '1' ? '1' : ''],
+    ['turn_upside_down', row.turn_upside_down === '1' ? '1' : ''],
+    ['needs_multiplayer', row.needs_multiplayer === '1' ? '1' : ''],
+    ['near_special_rock', row.near_special_rock === '1' ? '1' : ''],
+    ['region_id', row.region_id],
+    ['required_pokemon_form_id', row.required_pokemon_form_id],
+    ['used_move_id', row.used_move_id],
+    ['minimum_move_count', row.minimum_move_count],
+    ['minimum_steps', row.minimum_steps],
+    ['minimum_damage_taken', row.minimum_damage_taken],
+    ['nature_bitmask', row.nature_bitmask],
+    ['condition_expression', row.condition_expression]
+  ];
+  for (const [field, value] of specialFields) {
+    if (value != null && value !== '' && value !== '0') {
+      conditions.push({ type: 'special', conditionId: `${field}:${value}` });
+    }
+  }
+
+  if (![1, 2, 3].includes(trigger ?? -1)) {
+    conditions.push({ type: 'special', conditionId: `trigger:${trigger ?? 'unknown'}` });
+  }
+  if (trigger === 3 && triggerItem == null) {
+    conditions.push({ type: 'special', conditionId: 'trigger:use-item-without-item' });
+  }
+  if (conditions.length === 0) {
+    conditions.push({ type: 'special', conditionId: `pokeapi-evolution:${row.id}` });
+  }
+
+  return conditions;
+}
+
+export function buildEvolutionDataset(bundle) {
+  const speciesById = new Map(bundle['pokemon_species.csv'].map(row => [Number(row.id), row]));
+  const steps = [];
+  const seen = new Set();
+
+  for (const row of bundle['pokemon_evolution.csv'] ?? []) {
+    const toId = numberOrNull(row.evolved_species_id);
+    const target = toId == null ? undefined : speciesById.get(toId);
+    const fromId = numberOrNull(target?.evolves_from_species_id);
+    if (fromId == null || toId == null || !speciesById.has(fromId)) continue;
+
+    const step = { fromId, toId, conditions: evolutionConditions(row) };
+    const key = JSON.stringify(step);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    steps.push(step);
+  }
+
+  return steps.sort((a, b) => a.fromId - b.fromId || a.toId - b.toId || JSON.stringify(a.conditions).localeCompare(JSON.stringify(b.conditions)));
 }
 
 export function buildPokemonDataset(bundle, existingPokemon = []) {
