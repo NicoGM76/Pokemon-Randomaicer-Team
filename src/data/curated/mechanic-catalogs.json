@@ -1,0 +1,13 @@
+[
+  {
+    "id": "megadex",
+    "name": "MegaDex",
+    "gameFamilyId": "legends-za",
+    "kind": "mechanic",
+    "mechanic": "mega_evolution",
+    "entryCount": 93,
+    "uniquePokemonCount": 87,
+    "sourceUrl": "https://www.wikidex.net/wiki/MegaDex",
+    "entryStatus": "pending"
+  }
+]

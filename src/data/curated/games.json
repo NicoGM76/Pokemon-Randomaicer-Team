@@ -1,0 +1,428 @@
+[
+  {
+    "id": "red",
+    "name": "Pokémon Rojo",
+    "generation": 1,
+    "releaseYear": 1996,
+    "pokeapiVersion": "red",
+    "familyId": "rby",
+    "dexIds": [
+      "kanto-classic"
+    ]
+  },
+  {
+    "id": "blue",
+    "name": "Pokémon Azul",
+    "generation": 1,
+    "releaseYear": 1996,
+    "pokeapiVersion": "blue",
+    "familyId": "rby",
+    "dexIds": [
+      "kanto-classic"
+    ]
+  },
+  {
+    "id": "yellow",
+    "name": "Pokémon Amarillo",
+    "generation": 1,
+    "releaseYear": 1998,
+    "pokeapiVersion": "yellow",
+    "familyId": "rby",
+    "dexIds": [
+      "kanto-classic"
+    ]
+  },
+  {
+    "id": "gold",
+    "name": "Pokémon Oro",
+    "generation": 2,
+    "releaseYear": 1999,
+    "pokeapiVersion": "gold",
+    "familyId": "gsc",
+    "dexIds": [
+      "johto-gsc"
+    ]
+  },
+  {
+    "id": "silver",
+    "name": "Pokémon Plata",
+    "generation": 2,
+    "releaseYear": 1999,
+    "pokeapiVersion": "silver",
+    "familyId": "gsc",
+    "dexIds": [
+      "johto-gsc"
+    ]
+  },
+  {
+    "id": "crystal",
+    "name": "Pokémon Cristal",
+    "generation": 2,
+    "releaseYear": 2000,
+    "pokeapiVersion": "crystal",
+    "familyId": "gsc",
+    "dexIds": [
+      "johto-gsc"
+    ]
+  },
+  {
+    "id": "ruby",
+    "name": "Pokémon Rubí",
+    "generation": 3,
+    "releaseYear": 2002,
+    "pokeapiVersion": "ruby",
+    "familyId": "rse",
+    "dexIds": [
+      "hoenn-rse"
+    ]
+  },
+  {
+    "id": "sapphire",
+    "name": "Pokémon Zafiro",
+    "generation": 3,
+    "releaseYear": 2002,
+    "pokeapiVersion": "sapphire",
+    "familyId": "rse",
+    "dexIds": [
+      "hoenn-rse"
+    ]
+  },
+  {
+    "id": "emerald",
+    "name": "Pokémon Esmeralda",
+    "generation": 3,
+    "releaseYear": 2004,
+    "pokeapiVersion": "emerald",
+    "familyId": "rse",
+    "dexIds": [
+      "hoenn-rse"
+    ]
+  },
+  {
+    "id": "firered",
+    "name": "Pokémon Rojo Fuego",
+    "generation": 3,
+    "releaseYear": 2004,
+    "pokeapiVersion": "firered",
+    "familyId": "frlg",
+    "dexIds": [
+      "kanto-classic"
+    ]
+  },
+  {
+    "id": "leafgreen",
+    "name": "Pokémon Verde Hoja",
+    "generation": 3,
+    "releaseYear": 2004,
+    "pokeapiVersion": "leafgreen",
+    "familyId": "frlg",
+    "dexIds": [
+      "kanto-classic"
+    ]
+  },
+  {
+    "id": "diamond",
+    "name": "Pokémon Diamante",
+    "generation": 4,
+    "releaseYear": 2006,
+    "pokeapiVersion": "diamond",
+    "familyId": "dppt",
+    "dexIds": [
+      "sinnoh-dp-bdsp"
+    ]
+  },
+  {
+    "id": "pearl",
+    "name": "Pokémon Perla",
+    "generation": 4,
+    "releaseYear": 2006,
+    "pokeapiVersion": "pearl",
+    "familyId": "dppt",
+    "dexIds": [
+      "sinnoh-dp-bdsp"
+    ]
+  },
+  {
+    "id": "platinum",
+    "name": "Pokémon Platinum",
+    "generation": 4,
+    "releaseYear": 2008,
+    "pokeapiVersion": "platinum",
+    "familyId": "dppt",
+    "dexIds": [
+      "sinnoh-platinum"
+    ]
+  },
+  {
+    "id": "heartgold",
+    "name": "Pokémon HeartGold",
+    "generation": 4,
+    "releaseYear": 2009,
+    "pokeapiVersion": "heartgold",
+    "familyId": "hgss",
+    "dexIds": [
+      "johto-hgss"
+    ]
+  },
+  {
+    "id": "soulsilver",
+    "name": "Pokémon SoulSilver",
+    "generation": 4,
+    "releaseYear": 2009,
+    "pokeapiVersion": "soulsilver",
+    "familyId": "hgss",
+    "dexIds": [
+      "johto-hgss"
+    ]
+  },
+  {
+    "id": "black",
+    "name": "Pokémon Negro",
+    "generation": 5,
+    "releaseYear": 2010,
+    "pokeapiVersion": "black",
+    "familyId": "bw",
+    "dexIds": [
+      "unova-bw"
+    ]
+  },
+  {
+    "id": "white",
+    "name": "Pokémon Blanco",
+    "generation": 5,
+    "releaseYear": 2010,
+    "pokeapiVersion": "white",
+    "familyId": "bw",
+    "dexIds": [
+      "unova-bw"
+    ]
+  },
+  {
+    "id": "black-2",
+    "name": "Pokémon Negro 2",
+    "generation": 5,
+    "releaseYear": 2012,
+    "pokeapiVersion": "black-2",
+    "familyId": "b2w2",
+    "dexIds": [
+      "unova-b2w2"
+    ]
+  },
+  {
+    "id": "white-2",
+    "name": "Pokémon Blanco 2",
+    "generation": 5,
+    "releaseYear": 2012,
+    "pokeapiVersion": "white-2",
+    "familyId": "b2w2",
+    "dexIds": [
+      "unova-b2w2"
+    ]
+  },
+  {
+    "id": "x",
+    "name": "Pokémon X",
+    "generation": 6,
+    "releaseYear": 2013,
+    "pokeapiVersion": "x",
+    "familyId": "xy",
+    "dexIds": [
+      "kalos-xy"
+    ]
+  },
+  {
+    "id": "y",
+    "name": "Pokémon Y",
+    "generation": 6,
+    "releaseYear": 2013,
+    "pokeapiVersion": "y",
+    "familyId": "xy",
+    "dexIds": [
+      "kalos-xy"
+    ]
+  },
+  {
+    "id": "omega-ruby",
+    "name": "Pokémon Rubí Omega",
+    "generation": 6,
+    "releaseYear": 2014,
+    "pokeapiVersion": "omega-ruby",
+    "familyId": "oras",
+    "dexIds": [
+      "hoenn-oras"
+    ]
+  },
+  {
+    "id": "alpha-sapphire",
+    "name": "Pokémon Zafiro Alfa",
+    "generation": 6,
+    "releaseYear": 2014,
+    "pokeapiVersion": "alpha-sapphire",
+    "familyId": "oras",
+    "dexIds": [
+      "hoenn-oras"
+    ]
+  },
+  {
+    "id": "sun",
+    "name": "Pokémon Sol",
+    "generation": 7,
+    "releaseYear": 2016,
+    "pokeapiVersion": "sun",
+    "familyId": "sm",
+    "dexIds": [
+      "alola-sm"
+    ]
+  },
+  {
+    "id": "moon",
+    "name": "Pokémon Luna",
+    "generation": 7,
+    "releaseYear": 2016,
+    "pokeapiVersion": "moon",
+    "familyId": "sm",
+    "dexIds": [
+      "alola-sm"
+    ]
+  },
+  {
+    "id": "ultra-sun",
+    "name": "Pokémon Ultrasol",
+    "generation": 7,
+    "releaseYear": 2017,
+    "pokeapiVersion": "ultra-sun",
+    "familyId": "usum",
+    "dexIds": [
+      "alola-usum"
+    ]
+  },
+  {
+    "id": "ultra-moon",
+    "name": "Pokémon Ultraluna",
+    "generation": 7,
+    "releaseYear": 2017,
+    "pokeapiVersion": "ultra-moon",
+    "familyId": "usum",
+    "dexIds": [
+      "alola-usum"
+    ]
+  },
+  {
+    "id": "lets-go-pikachu",
+    "name": "Pokémon: Let’s Go, Pikachu!",
+    "generation": 7,
+    "releaseYear": 2018,
+    "pokeapiVersion": "lets-go-pikachu",
+    "familyId": "lgpe",
+    "dexIds": [
+      "kanto-lgpe"
+    ]
+  },
+  {
+    "id": "lets-go-eevee",
+    "name": "Pokémon: Let’s Go, Eevee!",
+    "generation": 7,
+    "releaseYear": 2018,
+    "pokeapiVersion": "lets-go-eevee",
+    "familyId": "lgpe",
+    "dexIds": [
+      "kanto-lgpe"
+    ]
+  },
+  {
+    "id": "sword",
+    "name": "Pokémon Espada",
+    "generation": 8,
+    "releaseYear": 2019,
+    "pokeapiVersion": "sword",
+    "familyId": "swsh",
+    "dexIds": [
+      "galar-base",
+      "galar-armor",
+      "galar-crown"
+    ]
+  },
+  {
+    "id": "shield",
+    "name": "Pokémon Escudo",
+    "generation": 8,
+    "releaseYear": 2019,
+    "pokeapiVersion": "shield",
+    "familyId": "swsh",
+    "dexIds": [
+      "galar-base",
+      "galar-armor",
+      "galar-crown"
+    ]
+  },
+  {
+    "id": "brilliant-diamond",
+    "name": "Pokémon Diamante Brillante",
+    "generation": 8,
+    "releaseYear": 2021,
+    "pokeapiVersion": "brilliant-diamond",
+    "familyId": "bdsp",
+    "dexIds": [
+      "sinnoh-dp-bdsp"
+    ]
+  },
+  {
+    "id": "shining-pearl",
+    "name": "Pokémon Perla Reluciente",
+    "generation": 8,
+    "releaseYear": 2021,
+    "pokeapiVersion": "shining-pearl",
+    "familyId": "bdsp",
+    "dexIds": [
+      "sinnoh-dp-bdsp"
+    ]
+  },
+  {
+    "id": "legends-arceus",
+    "name": "Leyendas Pokémon: Arceus",
+    "generation": 8,
+    "releaseYear": 2022,
+    "pokeapiVersion": "legends-arceus",
+    "familyId": "legends-arceus",
+    "dexIds": [
+      "hisui"
+    ]
+  },
+  {
+    "id": "scarlet",
+    "name": "Pokémon Escarlata",
+    "generation": 9,
+    "releaseYear": 2022,
+    "pokeapiVersion": "scarlet",
+    "familyId": "sv",
+    "dexIds": [
+      "paldea-base",
+      "kitakami",
+      "blueberry"
+    ]
+  },
+  {
+    "id": "violet",
+    "name": "Pokémon Púrpura",
+    "generation": 9,
+    "releaseYear": 2022,
+    "pokeapiVersion": "violet",
+    "familyId": "sv",
+    "dexIds": [
+      "paldea-base",
+      "kitakami",
+      "blueberry"
+    ]
+  },
+  {
+    "id": "legends-za",
+    "name": "Leyendas Pokémon: Z-A",
+    "generation": 9,
+    "releaseYear": 2025,
+    "familyId": "legends-za",
+    "dexIds": [
+      "lumiose",
+      "dimensional"
+    ]
+  }
+]

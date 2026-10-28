@@ -1,0 +1,199 @@
+[
+  {
+    "pokemonId": 26,
+    "formId": "raichu-alola",
+    "gameId": "scarlet",
+    "contentPackId": "teal-mask",
+    "stage": "main_story",
+    "method": "wild"
+  },
+  {
+    "pokemonId": 810,
+    "gameId": "sword",
+    "contentPackId": "sword-base",
+    "stage": "main_story",
+    "method": "gift"
+  },
+  {
+    "pokemonId": 821,
+    "gameId": "sword",
+    "contentPackId": "sword-base",
+    "stage": "main_story",
+    "method": "wild"
+  },
+  {
+    "pokemonId": 833,
+    "gameId": "sword",
+    "contentPackId": "sword-base",
+    "stage": "main_story",
+    "method": "wild"
+  },
+  {
+    "pokemonId": 58,
+    "gameId": "sword",
+    "contentPackId": "sword-base",
+    "stage": "main_story",
+    "method": "wild"
+  },
+  {
+    "pokemonId": 848,
+    "gameId": "sword",
+    "contentPackId": "sword-base",
+    "stage": "main_story",
+    "method": "gift"
+  },
+  {
+    "pokemonId": 885,
+    "gameId": "sword",
+    "contentPackId": "sword-base",
+    "stage": "main_story",
+    "method": "wild"
+  },
+  {
+    "pokemonId": 835,
+    "gameId": "sword",
+    "contentPackId": "sword-base",
+    "stage": "main_story",
+    "method": "wild"
+  },
+  {
+    "pokemonId": 280,
+    "gameId": "sword",
+    "contentPackId": "sword-base",
+    "stage": "main_story",
+    "method": "wild"
+  },
+  {
+    "pokemonId": 888,
+    "gameId": "sword",
+    "contentPackId": "sword-base",
+    "stage": "postgame",
+    "method": "gift"
+  },
+  {
+    "pokemonId": 891,
+    "gameId": "sword",
+    "contentPackId": "isle-of-armor",
+    "stage": "main_story",
+    "method": "gift"
+  },
+  {
+    "pokemonId": 898,
+    "gameId": "sword",
+    "contentPackId": "crown-tundra",
+    "stage": "main_story",
+    "method": "gift"
+  },
+  {
+    "pokemonId": 389,
+    "gameId": "platinum",
+    "contentPackId": "platinum-base",
+    "stage": "main_story",
+    "method": "gift"
+  },
+  {
+    "pokemonId": 392,
+    "gameId": "platinum",
+    "contentPackId": "platinum-base",
+    "stage": "main_story",
+    "method": "gift"
+  },
+  {
+    "pokemonId": 395,
+    "gameId": "platinum",
+    "contentPackId": "platinum-base",
+    "stage": "main_story",
+    "method": "gift"
+  },
+  {
+    "pokemonId": 398,
+    "gameId": "platinum",
+    "contentPackId": "platinum-base",
+    "stage": "main_story",
+    "method": "evolution"
+  },
+  {
+    "pokemonId": 405,
+    "gameId": "platinum",
+    "contentPackId": "platinum-base",
+    "stage": "main_story",
+    "method": "evolution"
+  },
+  {
+    "pokemonId": 407,
+    "gameId": "platinum",
+    "contentPackId": "platinum-base",
+    "stage": "main_story",
+    "method": "evolution"
+  },
+  {
+    "pokemonId": 419,
+    "gameId": "platinum",
+    "contentPackId": "platinum-base",
+    "stage": "main_story",
+    "method": "evolution"
+  },
+  {
+    "pokemonId": 423,
+    "gameId": "platinum",
+    "contentPackId": "platinum-base",
+    "stage": "main_story",
+    "method": "evolution"
+  },
+  {
+    "pokemonId": 426,
+    "gameId": "platinum",
+    "contentPackId": "platinum-base",
+    "stage": "main_story",
+    "method": "evolution"
+  },
+  {
+    "pokemonId": 445,
+    "gameId": "platinum",
+    "contentPackId": "platinum-base",
+    "stage": "main_story",
+    "method": "evolution"
+  },
+  {
+    "pokemonId": 448,
+    "gameId": "platinum",
+    "contentPackId": "platinum-base",
+    "stage": "main_story",
+    "method": "gift"
+  },
+  {
+    "pokemonId": 78,
+    "gameId": "platinum",
+    "contentPackId": "platinum-base",
+    "stage": "main_story",
+    "method": "evolution"
+  },
+  {
+    "pokemonId": 94,
+    "gameId": "platinum",
+    "contentPackId": "platinum-base",
+    "stage": "main_story",
+    "method": "evolution"
+  },
+  {
+    "pokemonId": 134,
+    "gameId": "platinum",
+    "contentPackId": "platinum-base",
+    "stage": "main_story",
+    "method": "evolution"
+  },
+  {
+    "pokemonId": 135,
+    "gameId": "platinum",
+    "contentPackId": "platinum-base",
+    "stage": "main_story",
+    "method": "evolution"
+  },
+  {
+    "pokemonId": 282,
+    "gameId": "platinum",
+    "contentPackId": "platinum-base",
+    "stage": "main_story",
+    "method": "evolution"
+  }
+]

@@ -1,0 +1,226 @@
+[
+  {
+    "id": "rby",
+    "name": "Kanto original",
+    "generation": 1,
+    "gameIds": [
+      "red",
+      "blue",
+      "yellow"
+    ],
+    "dexIds": [
+      "kanto-classic"
+    ]
+  },
+  {
+    "id": "gsc",
+    "name": "Johto original",
+    "generation": 2,
+    "gameIds": [
+      "gold",
+      "silver",
+      "crystal"
+    ],
+    "dexIds": [
+      "johto-gsc"
+    ]
+  },
+  {
+    "id": "rse",
+    "name": "Hoenn original",
+    "generation": 3,
+    "gameIds": [
+      "ruby",
+      "sapphire",
+      "emerald"
+    ],
+    "dexIds": [
+      "hoenn-rse"
+    ]
+  },
+  {
+    "id": "frlg",
+    "name": "Remakes de Kanto",
+    "generation": 3,
+    "gameIds": [
+      "firered",
+      "leafgreen"
+    ],
+    "dexIds": [
+      "kanto-classic"
+    ]
+  },
+  {
+    "id": "dppt",
+    "name": "Sinnoh original",
+    "generation": 4,
+    "gameIds": [
+      "diamond",
+      "pearl",
+      "platinum"
+    ],
+    "dexIds": [
+      "sinnoh-dp-bdsp",
+      "sinnoh-platinum"
+    ]
+  },
+  {
+    "id": "hgss",
+    "name": "Remakes de Johto",
+    "generation": 4,
+    "gameIds": [
+      "heartgold",
+      "soulsilver"
+    ],
+    "dexIds": [
+      "johto-hgss"
+    ]
+  },
+  {
+    "id": "bw",
+    "name": "Teselia original",
+    "generation": 5,
+    "gameIds": [
+      "black",
+      "white"
+    ],
+    "dexIds": [
+      "unova-bw"
+    ]
+  },
+  {
+    "id": "b2w2",
+    "name": "Secuelas de Teselia",
+    "generation": 5,
+    "gameIds": [
+      "black-2",
+      "white-2"
+    ],
+    "dexIds": [
+      "unova-b2w2"
+    ]
+  },
+  {
+    "id": "xy",
+    "name": "Kalos",
+    "generation": 6,
+    "gameIds": [
+      "x",
+      "y"
+    ],
+    "dexIds": [
+      "kalos-xy"
+    ]
+  },
+  {
+    "id": "oras",
+    "name": "Remakes de Hoenn",
+    "generation": 6,
+    "gameIds": [
+      "omega-ruby",
+      "alpha-sapphire"
+    ],
+    "dexIds": [
+      "hoenn-oras"
+    ]
+  },
+  {
+    "id": "sm",
+    "name": "Alola",
+    "generation": 7,
+    "gameIds": [
+      "sun",
+      "moon"
+    ],
+    "dexIds": [
+      "alola-sm"
+    ]
+  },
+  {
+    "id": "usum",
+    "name": "Alola Ultra",
+    "generation": 7,
+    "gameIds": [
+      "ultra-sun",
+      "ultra-moon"
+    ],
+    "dexIds": [
+      "alola-usum"
+    ]
+  },
+  {
+    "id": "lgpe",
+    "name": "Let’s Go Kanto",
+    "generation": 7,
+    "gameIds": [
+      "lets-go-pikachu",
+      "lets-go-eevee"
+    ],
+    "dexIds": [
+      "kanto-lgpe"
+    ]
+  },
+  {
+    "id": "swsh",
+    "name": "Galar",
+    "generation": 8,
+    "gameIds": [
+      "sword",
+      "shield"
+    ],
+    "dexIds": [
+      "galar-base",
+      "galar-armor",
+      "galar-crown"
+    ]
+  },
+  {
+    "id": "bdsp",
+    "name": "Remakes de Sinnoh",
+    "generation": 8,
+    "gameIds": [
+      "brilliant-diamond",
+      "shining-pearl"
+    ],
+    "dexIds": [
+      "sinnoh-dp-bdsp"
+    ]
+  },
+  {
+    "id": "legends-arceus",
+    "name": "Hisui",
+    "generation": 8,
+    "gameIds": [
+      "legends-arceus"
+    ],
+    "dexIds": [
+      "hisui"
+    ]
+  },
+  {
+    "id": "sv",
+    "name": "Paldea",
+    "generation": 9,
+    "gameIds": [
+      "scarlet",
+      "violet"
+    ],
+    "dexIds": [
+      "paldea-base",
+      "kitakami",
+      "blueberry"
+    ]
+  },
+  {
+    "id": "legends-za",
+    "name": "Luminalia",
+    "generation": 9,
+    "gameIds": [
+      "legends-za"
+    ],
+    "dexIds": [
+      "lumiose",
+      "dimensional"
+    ]
+  }
+]

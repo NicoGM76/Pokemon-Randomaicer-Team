@@ -1,0 +1,171 @@
+[
+  {
+    "fromId": 92,
+    "toId": 93,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      }
+    ]
+  },
+  {
+    "fromId": 93,
+    "toId": 94,
+    "conditions": [
+      {
+        "type": "trade"
+      }
+    ]
+  },
+  {
+    "fromId": 133,
+    "toId": 134,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "water-stone"
+      }
+    ]
+  },
+  {
+    "fromId": 133,
+    "toId": 135,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "thunder-stone"
+      }
+    ]
+  },
+  {
+    "fromId": 810,
+    "toId": 811,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 16
+      }
+    ]
+  },
+  {
+    "fromId": 811,
+    "toId": 812,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 35
+      }
+    ]
+  },
+  {
+    "fromId": 821,
+    "toId": 822,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 18
+      }
+    ]
+  },
+  {
+    "fromId": 822,
+    "toId": 823,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 38
+      }
+    ]
+  },
+  {
+    "fromId": 833,
+    "toId": 834,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 22
+      }
+    ]
+  },
+  {
+    "fromId": 58,
+    "toId": 59,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "fire-stone"
+      }
+    ]
+  },
+  {
+    "fromId": 848,
+    "toId": 849,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 885,
+    "toId": 886,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 50
+      }
+    ]
+  },
+  {
+    "fromId": 886,
+    "toId": 887,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 60
+      }
+    ]
+  },
+  {
+    "fromId": 835,
+    "toId": 836,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      }
+    ]
+  },
+  {
+    "fromId": 280,
+    "toId": 281,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      }
+    ]
+  },
+  {
+    "fromId": 281,
+    "toId": 282,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 891,
+    "toId": 892,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "tower-of-two-fists"
+      }
+    ]
+  }
+]

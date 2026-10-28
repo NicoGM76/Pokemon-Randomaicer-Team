@@ -1,0 +1,47 @@
+[
+  {
+    "id": "gen-1",
+    "number": 1,
+    "name": "Generación 1"
+  },
+  {
+    "id": "gen-2",
+    "number": 2,
+    "name": "Generación 2"
+  },
+  {
+    "id": "gen-3",
+    "number": 3,
+    "name": "Generación 3"
+  },
+  {
+    "id": "gen-4",
+    "number": 4,
+    "name": "Generación 4"
+  },
+  {
+    "id": "gen-5",
+    "number": 5,
+    "name": "Generación 5"
+  },
+  {
+    "id": "gen-6",
+    "number": 6,
+    "name": "Generación 6"
+  },
+  {
+    "id": "gen-7",
+    "number": 7,
+    "name": "Generación 7"
+  },
+  {
+    "id": "gen-8",
+    "number": 8,
+    "name": "Generación 8"
+  },
+  {
+    "id": "gen-9",
+    "number": 9,
+    "name": "Generación 9"
+  }
+]

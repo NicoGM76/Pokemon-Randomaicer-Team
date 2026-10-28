@@ -1,0 +1,261 @@
+[
+  {
+    "id": "kanto-classic",
+    "name": "Pokédex de Kanto clásica",
+    "region": "Kanto",
+    "entryCount": 151,
+    "kind": "regional",
+    "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Kanto",
+    "entryStatus": "pending"
+  },
+  {
+    "id": "johto-gsc",
+    "name": "Pokédex de Johto (GSC)",
+    "region": "Johto",
+    "entryCount": 251,
+    "kind": "regional",
+    "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Johto",
+    "entryStatus": "pending"
+  },
+  {
+    "id": "hoenn-rse",
+    "name": "Pokédex de Hoenn (RSE)",
+    "region": "Hoenn",
+    "entryCount": 202,
+    "kind": "regional",
+    "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Hoenn",
+    "entryStatus": "pending"
+  },
+  {
+    "id": "sinnoh-dp-bdsp",
+    "name": "Pokédex de Sinnoh (DP/BDSP)",
+    "region": "Sinnoh",
+    "entryCount": 151,
+    "kind": "regional",
+    "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Sinnoh",
+    "entryStatus": "pending"
+  },
+  {
+    "id": "sinnoh-platinum",
+    "name": "Pokédex de Sinnoh (Platino)",
+    "region": "Sinnoh",
+    "entryCount": 210,
+    "kind": "regional",
+    "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Sinnoh",
+    "entryStatus": "pending"
+  },
+  {
+    "id": "johto-hgss",
+    "name": "Pokédex de Johto (HGSS)",
+    "region": "Johto",
+    "entryCount": 256,
+    "kind": "regional",
+    "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Johto",
+    "entryStatus": "pending"
+  },
+  {
+    "id": "unova-bw",
+    "name": "Pokédex de Teselia (BW)",
+    "region": "Teselia",
+    "entryCount": 156,
+    "kind": "regional",
+    "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Teselia",
+    "entryStatus": "pending"
+  },
+  {
+    "id": "unova-b2w2",
+    "name": "Pokédex de Teselia (B2W2)",
+    "region": "Teselia",
+    "entryCount": 301,
+    "kind": "regional",
+    "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Teselia",
+    "entryStatus": "pending"
+  },
+  {
+    "id": "kalos-xy",
+    "name": "Pokédex de Kalos",
+    "region": "Kalos",
+    "entryCount": 457,
+    "kind": "regional",
+    "subDexes": [
+      {
+        "id": "central",
+        "name": "Kalos Centro",
+        "entryCount": 153
+      },
+      {
+        "id": "coastal",
+        "name": "Kalos Costa",
+        "entryCount": 153
+      },
+      {
+        "id": "mountain",
+        "name": "Kalos Montaña",
+        "entryCount": 151
+      }
+    ],
+    "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Kalos",
+    "entryStatus": "pending"
+  },
+  {
+    "id": "hoenn-oras",
+    "name": "Pokédex de Hoenn (ORAS)",
+    "region": "Hoenn",
+    "entryCount": 211,
+    "kind": "regional",
+    "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Hoenn",
+    "entryStatus": "pending"
+  },
+  {
+    "id": "alola-sm",
+    "name": "Pokédex de Alola (SM)",
+    "region": "Alola",
+    "entryCount": 302,
+    "kind": "regional",
+    "subDexes": [
+      {
+        "id": "melemele",
+        "name": "Melemele",
+        "entryCount": 120
+      },
+      {
+        "id": "akala",
+        "name": "Akala",
+        "entryCount": 130
+      },
+      {
+        "id": "ulaula",
+        "name": "Ula-Ula",
+        "entryCount": 130
+      },
+      {
+        "id": "poni",
+        "name": "Poni",
+        "entryCount": 100
+      }
+    ],
+    "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Alola",
+    "entryStatus": "pending"
+  },
+  {
+    "id": "alola-usum",
+    "name": "Pokédex de Alola (USUM)",
+    "region": "Alola",
+    "entryCount": 403,
+    "kind": "regional",
+    "subDexes": [
+      {
+        "id": "melemele",
+        "name": "Melemele",
+        "entryCount": 150
+      },
+      {
+        "id": "akala",
+        "name": "Akala",
+        "entryCount": 160
+      },
+      {
+        "id": "ulaula",
+        "name": "Ula-Ula",
+        "entryCount": 160
+      },
+      {
+        "id": "poni",
+        "name": "Poni",
+        "entryCount": 130
+      }
+    ],
+    "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Alola",
+    "entryStatus": "pending"
+  },
+  {
+    "id": "kanto-lgpe",
+    "name": "Pokédex de Kanto (Let’s Go)",
+    "region": "Kanto",
+    "entryCount": 153,
+    "kind": "regional",
+    "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Kanto",
+    "entryStatus": "pending"
+  },
+  {
+    "id": "galar-base",
+    "name": "Pokédex de Galar",
+    "region": "Galar",
+    "entryCount": 400,
+    "kind": "regional",
+    "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Galar",
+    "entryStatus": "pending"
+  },
+  {
+    "id": "galar-armor",
+    "name": "Pokédex Armadura",
+    "region": "Galar",
+    "entryCount": 211,
+    "kind": "content",
+    "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_Armadura",
+    "entryStatus": "pending"
+  },
+  {
+    "id": "galar-crown",
+    "name": "Pokédex Corona",
+    "region": "Galar",
+    "entryCount": 210,
+    "kind": "content",
+    "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_Corona",
+    "entryStatus": "pending"
+  },
+  {
+    "id": "hisui",
+    "name": "Pokédex de Hisui",
+    "region": "Hisui",
+    "entryCount": 242,
+    "kind": "regional",
+    "sourceUrl": "https://www.wikidex.net/wiki/Lista_de_Pok%C3%A9mon_seg%C3%BAn_la_Pok%C3%A9dex_de_Hisui",
+    "entryStatus": "pending"
+  },
+  {
+    "id": "paldea-base",
+    "name": "Pokédex de Paldea",
+    "region": "Paldea",
+    "entryCount": 400,
+    "kind": "regional",
+    "sourceUrl": "https://www.wikidex.net/wiki/Lista_de_Pok%C3%A9mon_seg%C3%BAn_la_Pok%C3%A9dex_de_Paldea",
+    "entryStatus": "pending"
+  },
+  {
+    "id": "kitakami",
+    "name": "Pokédex de Noroteo",
+    "region": "Noroteo",
+    "entryCount": 200,
+    "kind": "content",
+    "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Noroteo",
+    "entryStatus": "pending"
+  },
+  {
+    "id": "blueberry",
+    "name": "Pokédex Arándano",
+    "region": "Arándano",
+    "entryCount": 243,
+    "kind": "content",
+    "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_Ar%C3%A1ndano",
+    "entryStatus": "pending"
+  },
+  {
+    "id": "lumiose",
+    "name": "Pokédex de Luminalia",
+    "region": "Luminalia",
+    "entryCount": 232,
+    "kind": "regional",
+    "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Luminalia",
+    "entryStatus": "pending"
+  },
+  {
+    "id": "dimensional",
+    "name": "Pokédex Dimensional",
+    "region": "Luminalia",
+    "entryCount": 132,
+    "kind": "content",
+    "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Luminalia",
+    "entryStatus": "pending"
+  }
+]

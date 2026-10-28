@@ -1,0 +1,4 @@
+[
+  {"id":"raichu-alola","pokemonId":26,"name":"Raichu de Alola","formType":"regional","types":["electric","psychic"],"countsAsSameSpecies":true},
+  {"id":"eevee-partner-look","pokemonId":133,"name":"Eevee aspecto compañero","formType":"cosmetic","countsAsSameSpecies":true}
+]

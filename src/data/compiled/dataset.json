@@ -1,0 +1,2806 @@
+{
+  "metadata": {
+    "schemaVersion": 2,
+    "datasetVersion": "0.2.0",
+    "generatedAt": "2026-10-24T05:06:56.056457+00:00"
+  },
+  "pokemon": [
+    {
+      "id": 26,
+      "name": "Raichu",
+      "types": [
+        "electric"
+      ],
+      "introducedGeneration": 1,
+      "evolutionFamilyId": "pichu-line",
+      "stats": {
+        "hp": 60,
+        "attack": 90,
+        "defense": 55,
+        "specialAttack": 90,
+        "specialDefense": 80,
+        "speed": 110
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 58,
+      "name": "Growlithe",
+      "types": [
+        "fire"
+      ],
+      "introducedGeneration": 1,
+      "evolutionFamilyId": "growlithe-line",
+      "stats": {
+        "hp": 55,
+        "attack": 70,
+        "defense": 45,
+        "specialAttack": 70,
+        "specialDefense": 50,
+        "speed": 60
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 59,
+      "name": "Arcanine",
+      "types": [
+        "fire"
+      ],
+      "introducedGeneration": 1,
+      "evolutionFamilyId": "growlithe-line",
+      "stats": {
+        "hp": 90,
+        "attack": 110,
+        "defense": 80,
+        "specialAttack": 100,
+        "specialDefense": 80,
+        "speed": 95
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 78,
+      "name": "Rapidash",
+      "types": [
+        "fire"
+      ],
+      "introducedGeneration": 1,
+      "evolutionFamilyId": "ponyta-line",
+      "stats": {
+        "hp": 65,
+        "attack": 100,
+        "defense": 70,
+        "specialAttack": 80,
+        "specialDefense": 80,
+        "speed": 105
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 92,
+      "name": "Gastly",
+      "types": [
+        "ghost",
+        "poison"
+      ],
+      "introducedGeneration": 1,
+      "evolutionFamilyId": "gastly-line",
+      "stats": {
+        "hp": 30,
+        "attack": 35,
+        "defense": 30,
+        "specialAttack": 100,
+        "specialDefense": 35,
+        "speed": 80
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 93,
+      "name": "Haunter",
+      "types": [
+        "ghost",
+        "poison"
+      ],
+      "introducedGeneration": 1,
+      "evolutionFamilyId": "gastly-line",
+      "stats": {
+        "hp": 45,
+        "attack": 50,
+        "defense": 45,
+        "specialAttack": 115,
+        "specialDefense": 55,
+        "speed": 95
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 94,
+      "name": "Gengar",
+      "types": [
+        "ghost",
+        "poison"
+      ],
+      "introducedGeneration": 1,
+      "evolutionFamilyId": "gastly-line",
+      "stats": {
+        "hp": 60,
+        "attack": 65,
+        "defense": 60,
+        "specialAttack": 130,
+        "specialDefense": 75,
+        "speed": 110
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 133,
+      "name": "Eevee",
+      "types": [
+        "normal"
+      ],
+      "introducedGeneration": 1,
+      "evolutionFamilyId": "eevee-line",
+      "stats": {
+        "hp": 55,
+        "attack": 55,
+        "defense": 50,
+        "specialAttack": 45,
+        "specialDefense": 65,
+        "speed": 55
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 134,
+      "name": "Vaporeon",
+      "types": [
+        "water"
+      ],
+      "introducedGeneration": 1,
+      "evolutionFamilyId": "eevee-line",
+      "stats": {
+        "hp": 130,
+        "attack": 65,
+        "defense": 60,
+        "specialAttack": 110,
+        "specialDefense": 95,
+        "speed": 65
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 135,
+      "name": "Jolteon",
+      "types": [
+        "electric"
+      ],
+      "introducedGeneration": 1,
+      "evolutionFamilyId": "eevee-line",
+      "stats": {
+        "hp": 65,
+        "attack": 65,
+        "defense": 60,
+        "specialAttack": 110,
+        "specialDefense": 95,
+        "speed": 130
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 280,
+      "name": "Ralts",
+      "types": [
+        "psychic",
+        "fairy"
+      ],
+      "introducedGeneration": 3,
+      "evolutionFamilyId": "ralts-line",
+      "stats": {
+        "hp": 28,
+        "attack": 25,
+        "defense": 25,
+        "specialAttack": 45,
+        "specialDefense": 35,
+        "speed": 40
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 281,
+      "name": "Kirlia",
+      "types": [
+        "psychic",
+        "fairy"
+      ],
+      "introducedGeneration": 3,
+      "evolutionFamilyId": "ralts-line",
+      "stats": {
+        "hp": 38,
+        "attack": 35,
+        "defense": 35,
+        "specialAttack": 65,
+        "specialDefense": 55,
+        "speed": 50
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 282,
+      "name": "Gardevoir",
+      "types": [
+        "psychic",
+        "fairy"
+      ],
+      "introducedGeneration": 3,
+      "evolutionFamilyId": "ralts-line",
+      "stats": {
+        "hp": 68,
+        "attack": 65,
+        "defense": 65,
+        "specialAttack": 125,
+        "specialDefense": 115,
+        "speed": 80
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 389,
+      "name": "Torterra",
+      "types": [
+        "grass",
+        "ground"
+      ],
+      "introducedGeneration": 4,
+      "evolutionFamilyId": "turtwig-line",
+      "stats": {
+        "hp": 95,
+        "attack": 109,
+        "defense": 105,
+        "specialAttack": 75,
+        "specialDefense": 85,
+        "speed": 56
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": true
+    },
+    {
+      "id": 392,
+      "name": "Infernape",
+      "types": [
+        "fire",
+        "fighting"
+      ],
+      "introducedGeneration": 4,
+      "evolutionFamilyId": "chimchar-line",
+      "stats": {
+        "hp": 76,
+        "attack": 104,
+        "defense": 71,
+        "specialAttack": 104,
+        "specialDefense": 71,
+        "speed": 108
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": true
+    },
+    {
+      "id": 395,
+      "name": "Empoleon",
+      "types": [
+        "water",
+        "steel"
+      ],
+      "introducedGeneration": 4,
+      "evolutionFamilyId": "piplup-line",
+      "stats": {
+        "hp": 84,
+        "attack": 86,
+        "defense": 88,
+        "specialAttack": 111,
+        "specialDefense": 101,
+        "speed": 60
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": true
+    },
+    {
+      "id": 398,
+      "name": "Staraptor",
+      "types": [
+        "normal",
+        "flying"
+      ],
+      "introducedGeneration": 4,
+      "evolutionFamilyId": "starly-line",
+      "stats": {
+        "hp": 85,
+        "attack": 120,
+        "defense": 70,
+        "specialAttack": 50,
+        "specialDefense": 60,
+        "speed": 100
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 405,
+      "name": "Luxray",
+      "types": [
+        "electric"
+      ],
+      "introducedGeneration": 4,
+      "evolutionFamilyId": "shinx-line",
+      "stats": {
+        "hp": 80,
+        "attack": 120,
+        "defense": 79,
+        "specialAttack": 95,
+        "specialDefense": 79,
+        "speed": 70
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 407,
+      "name": "Roserade",
+      "types": [
+        "grass",
+        "poison"
+      ],
+      "introducedGeneration": 4,
+      "evolutionFamilyId": "budew-line",
+      "stats": {
+        "hp": 60,
+        "attack": 70,
+        "defense": 65,
+        "specialAttack": 125,
+        "specialDefense": 105,
+        "speed": 90
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 419,
+      "name": "Floatzel",
+      "types": [
+        "water"
+      ],
+      "introducedGeneration": 4,
+      "evolutionFamilyId": "buizel-line",
+      "stats": {
+        "hp": 85,
+        "attack": 105,
+        "defense": 55,
+        "specialAttack": 85,
+        "specialDefense": 50,
+        "speed": 115
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 423,
+      "name": "Gastrodon",
+      "types": [
+        "water",
+        "ground"
+      ],
+      "introducedGeneration": 4,
+      "evolutionFamilyId": "shellos-line",
+      "stats": {
+        "hp": 111,
+        "attack": 83,
+        "defense": 68,
+        "specialAttack": 92,
+        "specialDefense": 82,
+        "speed": 39
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 426,
+      "name": "Drifblim",
+      "types": [
+        "ghost",
+        "flying"
+      ],
+      "introducedGeneration": 4,
+      "evolutionFamilyId": "drifloon-line",
+      "stats": {
+        "hp": 150,
+        "attack": 80,
+        "defense": 44,
+        "specialAttack": 90,
+        "specialDefense": 54,
+        "speed": 80
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 445,
+      "name": "Garchomp",
+      "types": [
+        "dragon",
+        "ground"
+      ],
+      "introducedGeneration": 4,
+      "evolutionFamilyId": "gible-line",
+      "stats": {
+        "hp": 108,
+        "attack": 130,
+        "defense": 95,
+        "specialAttack": 80,
+        "specialDefense": 85,
+        "speed": 102
+      },
+      "specialTags": [],
+      "isPseudoLegendary": true,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 448,
+      "name": "Lucario",
+      "types": [
+        "fighting",
+        "steel"
+      ],
+      "introducedGeneration": 4,
+      "evolutionFamilyId": "riolu-line",
+      "stats": {
+        "hp": 70,
+        "attack": 110,
+        "defense": 70,
+        "specialAttack": 115,
+        "specialDefense": 70,
+        "speed": 90
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 810,
+      "name": "Grookey",
+      "types": [
+        "grass"
+      ],
+      "introducedGeneration": 8,
+      "evolutionFamilyId": "grookey-line",
+      "stats": {
+        "hp": 50,
+        "attack": 65,
+        "defense": 50,
+        "specialAttack": 40,
+        "specialDefense": 40,
+        "speed": 69
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": true
+    },
+    {
+      "id": 811,
+      "name": "Thwackey",
+      "types": [
+        "grass"
+      ],
+      "introducedGeneration": 8,
+      "evolutionFamilyId": "grookey-line",
+      "stats": {
+        "hp": 70,
+        "attack": 85,
+        "defense": 70,
+        "specialAttack": 55,
+        "specialDefense": 60,
+        "speed": 80
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": true
+    },
+    {
+      "id": 812,
+      "name": "Rillaboom",
+      "types": [
+        "grass"
+      ],
+      "introducedGeneration": 8,
+      "evolutionFamilyId": "grookey-line",
+      "stats": {
+        "hp": 100,
+        "attack": 125,
+        "defense": 90,
+        "specialAttack": 60,
+        "specialDefense": 70,
+        "speed": 85
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": true
+    },
+    {
+      "id": 821,
+      "name": "Rookidee",
+      "types": [
+        "flying"
+      ],
+      "introducedGeneration": 8,
+      "evolutionFamilyId": "rookidee-line",
+      "stats": {
+        "hp": 38,
+        "attack": 47,
+        "defense": 35,
+        "specialAttack": 33,
+        "specialDefense": 35,
+        "speed": 57
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 822,
+      "name": "Corvisquire",
+      "types": [
+        "flying"
+      ],
+      "introducedGeneration": 8,
+      "evolutionFamilyId": "rookidee-line",
+      "stats": {
+        "hp": 68,
+        "attack": 67,
+        "defense": 55,
+        "specialAttack": 43,
+        "specialDefense": 55,
+        "speed": 77
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 823,
+      "name": "Corviknight",
+      "types": [
+        "flying",
+        "steel"
+      ],
+      "introducedGeneration": 8,
+      "evolutionFamilyId": "rookidee-line",
+      "stats": {
+        "hp": 98,
+        "attack": 87,
+        "defense": 105,
+        "specialAttack": 53,
+        "specialDefense": 85,
+        "speed": 67
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 833,
+      "name": "Chewtle",
+      "types": [
+        "water"
+      ],
+      "introducedGeneration": 8,
+      "evolutionFamilyId": "chewtle-line",
+      "stats": {
+        "hp": 50,
+        "attack": 64,
+        "defense": 50,
+        "specialAttack": 38,
+        "specialDefense": 38,
+        "speed": 44
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 834,
+      "name": "Drednaw",
+      "types": [
+        "water",
+        "rock"
+      ],
+      "introducedGeneration": 8,
+      "evolutionFamilyId": "chewtle-line",
+      "stats": {
+        "hp": 90,
+        "attack": 115,
+        "defense": 90,
+        "specialAttack": 48,
+        "specialDefense": 68,
+        "speed": 74
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 835,
+      "name": "Yamper",
+      "types": [
+        "electric"
+      ],
+      "introducedGeneration": 8,
+      "evolutionFamilyId": "yamper-line",
+      "stats": {
+        "hp": 59,
+        "attack": 45,
+        "defense": 50,
+        "specialAttack": 40,
+        "specialDefense": 50,
+        "speed": 26
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 836,
+      "name": "Boltund",
+      "types": [
+        "electric"
+      ],
+      "introducedGeneration": 8,
+      "evolutionFamilyId": "yamper-line",
+      "stats": {
+        "hp": 69,
+        "attack": 90,
+        "defense": 60,
+        "specialAttack": 90,
+        "specialDefense": 60,
+        "speed": 121
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 848,
+      "name": "Toxel",
+      "types": [
+        "electric",
+        "poison"
+      ],
+      "introducedGeneration": 8,
+      "evolutionFamilyId": "toxel-line",
+      "stats": {
+        "hp": 40,
+        "attack": 38,
+        "defense": 35,
+        "specialAttack": 54,
+        "specialDefense": 35,
+        "speed": 40
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 849,
+      "name": "Toxtricity",
+      "types": [
+        "electric",
+        "poison"
+      ],
+      "introducedGeneration": 8,
+      "evolutionFamilyId": "toxel-line",
+      "stats": {
+        "hp": 75,
+        "attack": 98,
+        "defense": 70,
+        "specialAttack": 114,
+        "specialDefense": 70,
+        "speed": 75
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 885,
+      "name": "Dreepy",
+      "types": [
+        "dragon",
+        "ghost"
+      ],
+      "introducedGeneration": 8,
+      "evolutionFamilyId": "dreepy-line",
+      "stats": {
+        "hp": 28,
+        "attack": 60,
+        "defense": 30,
+        "specialAttack": 40,
+        "specialDefense": 30,
+        "speed": 82
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 886,
+      "name": "Drakloak",
+      "types": [
+        "dragon",
+        "ghost"
+      ],
+      "introducedGeneration": 8,
+      "evolutionFamilyId": "dreepy-line",
+      "stats": {
+        "hp": 68,
+        "attack": 80,
+        "defense": 50,
+        "specialAttack": 60,
+        "specialDefense": 50,
+        "speed": 102
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 887,
+      "name": "Dragapult",
+      "types": [
+        "dragon",
+        "ghost"
+      ],
+      "introducedGeneration": 8,
+      "evolutionFamilyId": "dreepy-line",
+      "stats": {
+        "hp": 88,
+        "attack": 120,
+        "defense": 75,
+        "specialAttack": 100,
+        "specialDefense": 75,
+        "speed": 142
+      },
+      "specialTags": [],
+      "isPseudoLegendary": true,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 888,
+      "name": "Zacian",
+      "types": [
+        "fairy"
+      ],
+      "introducedGeneration": 8,
+      "evolutionFamilyId": "zacian-line",
+      "stats": {
+        "hp": 92,
+        "attack": 120,
+        "defense": 115,
+        "specialAttack": 80,
+        "specialDefense": 115,
+        "speed": 138
+      },
+      "specialTags": [
+        "legendary"
+      ],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 891,
+      "name": "Kubfu",
+      "types": [
+        "fighting"
+      ],
+      "introducedGeneration": 8,
+      "evolutionFamilyId": "kubfu-line",
+      "stats": {
+        "hp": 60,
+        "attack": 90,
+        "defense": 60,
+        "specialAttack": 53,
+        "specialDefense": 50,
+        "speed": 72
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 892,
+      "name": "Urshifu",
+      "types": [
+        "fighting",
+        "dark"
+      ],
+      "introducedGeneration": 8,
+      "evolutionFamilyId": "kubfu-line",
+      "stats": {
+        "hp": 100,
+        "attack": 130,
+        "defense": 100,
+        "specialAttack": 63,
+        "specialDefense": 60,
+        "speed": 97
+      },
+      "specialTags": [],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    },
+    {
+      "id": 898,
+      "name": "Calyrex",
+      "types": [
+        "psychic",
+        "grass"
+      ],
+      "introducedGeneration": 8,
+      "evolutionFamilyId": "calyrex-line",
+      "stats": {
+        "hp": 100,
+        "attack": 80,
+        "defense": 80,
+        "specialAttack": 80,
+        "specialDefense": 80,
+        "speed": 80
+      },
+      "specialTags": [
+        "legendary"
+      ],
+      "isPseudoLegendary": false,
+      "isFossil": false,
+      "isStarter": false
+    }
+  ],
+  "forms": [
+    {
+      "id": "raichu-alola",
+      "pokemonId": 26,
+      "name": "Raichu de Alola",
+      "formType": "regional",
+      "types": [
+        "electric",
+        "psychic"
+      ],
+      "countsAsSameSpecies": true
+    },
+    {
+      "id": "eevee-partner-look",
+      "pokemonId": 133,
+      "name": "Eevee aspecto compañero",
+      "formType": "cosmetic",
+      "countsAsSameSpecies": true
+    }
+  ],
+  "evolutions": [
+    {
+      "fromId": 92,
+      "toId": 93,
+      "conditions": [
+        {
+          "type": "level",
+          "minLevel": 25
+        }
+      ]
+    },
+    {
+      "fromId": 93,
+      "toId": 94,
+      "conditions": [
+        {
+          "type": "trade"
+        }
+      ]
+    },
+    {
+      "fromId": 133,
+      "toId": 134,
+      "conditions": [
+        {
+          "type": "item",
+          "itemId": "water-stone"
+        }
+      ]
+    },
+    {
+      "fromId": 133,
+      "toId": 135,
+      "conditions": [
+        {
+          "type": "item",
+          "itemId": "thunder-stone"
+        }
+      ]
+    },
+    {
+      "fromId": 810,
+      "toId": 811,
+      "conditions": [
+        {
+          "type": "level",
+          "minLevel": 16
+        }
+      ]
+    },
+    {
+      "fromId": 811,
+      "toId": 812,
+      "conditions": [
+        {
+          "type": "level",
+          "minLevel": 35
+        }
+      ]
+    },
+    {
+      "fromId": 821,
+      "toId": 822,
+      "conditions": [
+        {
+          "type": "level",
+          "minLevel": 18
+        }
+      ]
+    },
+    {
+      "fromId": 822,
+      "toId": 823,
+      "conditions": [
+        {
+          "type": "level",
+          "minLevel": 38
+        }
+      ]
+    },
+    {
+      "fromId": 833,
+      "toId": 834,
+      "conditions": [
+        {
+          "type": "level",
+          "minLevel": 22
+        }
+      ]
+    },
+    {
+      "fromId": 58,
+      "toId": 59,
+      "conditions": [
+        {
+          "type": "item",
+          "itemId": "fire-stone"
+        }
+      ]
+    },
+    {
+      "fromId": 848,
+      "toId": 849,
+      "conditions": [
+        {
+          "type": "level",
+          "minLevel": 30
+        }
+      ]
+    },
+    {
+      "fromId": 885,
+      "toId": 886,
+      "conditions": [
+        {
+          "type": "level",
+          "minLevel": 50
+        }
+      ]
+    },
+    {
+      "fromId": 886,
+      "toId": 887,
+      "conditions": [
+        {
+          "type": "level",
+          "minLevel": 60
+        }
+      ]
+    },
+    {
+      "fromId": 835,
+      "toId": 836,
+      "conditions": [
+        {
+          "type": "level",
+          "minLevel": 25
+        }
+      ]
+    },
+    {
+      "fromId": 280,
+      "toId": 281,
+      "conditions": [
+        {
+          "type": "level",
+          "minLevel": 20
+        }
+      ]
+    },
+    {
+      "fromId": 281,
+      "toId": 282,
+      "conditions": [
+        {
+          "type": "level",
+          "minLevel": 30
+        }
+      ]
+    },
+    {
+      "fromId": 891,
+      "toId": 892,
+      "conditions": [
+        {
+          "type": "special",
+          "conditionId": "tower-of-two-fists"
+        }
+      ]
+    }
+  ],
+  "generations": [
+    {
+      "id": "gen-1",
+      "number": 1,
+      "name": "Generación 1"
+    },
+    {
+      "id": "gen-2",
+      "number": 2,
+      "name": "Generación 2"
+    },
+    {
+      "id": "gen-3",
+      "number": 3,
+      "name": "Generación 3"
+    },
+    {
+      "id": "gen-4",
+      "number": 4,
+      "name": "Generación 4"
+    },
+    {
+      "id": "gen-5",
+      "number": 5,
+      "name": "Generación 5"
+    },
+    {
+      "id": "gen-6",
+      "number": 6,
+      "name": "Generación 6"
+    },
+    {
+      "id": "gen-7",
+      "number": 7,
+      "name": "Generación 7"
+    },
+    {
+      "id": "gen-8",
+      "number": 8,
+      "name": "Generación 8"
+    },
+    {
+      "id": "gen-9",
+      "number": 9,
+      "name": "Generación 9"
+    }
+  ],
+  "gameFamilies": [
+    {
+      "id": "rby",
+      "name": "Kanto original",
+      "generation": 1,
+      "gameIds": [
+        "red",
+        "blue",
+        "yellow"
+      ],
+      "dexIds": [
+        "kanto-classic"
+      ]
+    },
+    {
+      "id": "gsc",
+      "name": "Johto original",
+      "generation": 2,
+      "gameIds": [
+        "gold",
+        "silver",
+        "crystal"
+      ],
+      "dexIds": [
+        "johto-gsc"
+      ]
+    },
+    {
+      "id": "rse",
+      "name": "Hoenn original",
+      "generation": 3,
+      "gameIds": [
+        "ruby",
+        "sapphire",
+        "emerald"
+      ],
+      "dexIds": [
+        "hoenn-rse"
+      ]
+    },
+    {
+      "id": "frlg",
+      "name": "Remakes de Kanto",
+      "generation": 3,
+      "gameIds": [
+        "firered",
+        "leafgreen"
+      ],
+      "dexIds": [
+        "kanto-classic"
+      ]
+    },
+    {
+      "id": "dppt",
+      "name": "Sinnoh original",
+      "generation": 4,
+      "gameIds": [
+        "diamond",
+        "pearl",
+        "platinum"
+      ],
+      "dexIds": [
+        "sinnoh-dp-bdsp",
+        "sinnoh-platinum"
+      ]
+    },
+    {
+      "id": "hgss",
+      "name": "Remakes de Johto",
+      "generation": 4,
+      "gameIds": [
+        "heartgold",
+        "soulsilver"
+      ],
+      "dexIds": [
+        "johto-hgss"
+      ]
+    },
+    {
+      "id": "bw",
+      "name": "Teselia original",
+      "generation": 5,
+      "gameIds": [
+        "black",
+        "white"
+      ],
+      "dexIds": [
+        "unova-bw"
+      ]
+    },
+    {
+      "id": "b2w2",
+      "name": "Secuelas de Teselia",
+      "generation": 5,
+      "gameIds": [
+        "black-2",
+        "white-2"
+      ],
+      "dexIds": [
+        "unova-b2w2"
+      ]
+    },
+    {
+      "id": "xy",
+      "name": "Kalos",
+      "generation": 6,
+      "gameIds": [
+        "x",
+        "y"
+      ],
+      "dexIds": [
+        "kalos-xy"
+      ]
+    },
+    {
+      "id": "oras",
+      "name": "Remakes de Hoenn",
+      "generation": 6,
+      "gameIds": [
+        "omega-ruby",
+        "alpha-sapphire"
+      ],
+      "dexIds": [
+        "hoenn-oras"
+      ]
+    },
+    {
+      "id": "sm",
+      "name": "Alola",
+      "generation": 7,
+      "gameIds": [
+        "sun",
+        "moon"
+      ],
+      "dexIds": [
+        "alola-sm"
+      ]
+    },
+    {
+      "id": "usum",
+      "name": "Alola Ultra",
+      "generation": 7,
+      "gameIds": [
+        "ultra-sun",
+        "ultra-moon"
+      ],
+      "dexIds": [
+        "alola-usum"
+      ]
+    },
+    {
+      "id": "lgpe",
+      "name": "Let’s Go Kanto",
+      "generation": 7,
+      "gameIds": [
+        "lets-go-pikachu",
+        "lets-go-eevee"
+      ],
+      "dexIds": [
+        "kanto-lgpe"
+      ]
+    },
+    {
+      "id": "swsh",
+      "name": "Galar",
+      "generation": 8,
+      "gameIds": [
+        "sword",
+        "shield"
+      ],
+      "dexIds": [
+        "galar-base",
+        "galar-armor",
+        "galar-crown"
+      ]
+    },
+    {
+      "id": "bdsp",
+      "name": "Remakes de Sinnoh",
+      "generation": 8,
+      "gameIds": [
+        "brilliant-diamond",
+        "shining-pearl"
+      ],
+      "dexIds": [
+        "sinnoh-dp-bdsp"
+      ]
+    },
+    {
+      "id": "legends-arceus",
+      "name": "Hisui",
+      "generation": 8,
+      "gameIds": [
+        "legends-arceus"
+      ],
+      "dexIds": [
+        "hisui"
+      ]
+    },
+    {
+      "id": "sv",
+      "name": "Paldea",
+      "generation": 9,
+      "gameIds": [
+        "scarlet",
+        "violet"
+      ],
+      "dexIds": [
+        "paldea-base",
+        "kitakami",
+        "blueberry"
+      ]
+    },
+    {
+      "id": "legends-za",
+      "name": "Luminalia",
+      "generation": 9,
+      "gameIds": [
+        "legends-za"
+      ],
+      "dexIds": [
+        "lumiose",
+        "dimensional"
+      ]
+    }
+  ],
+  "games": [
+    {
+      "id": "red",
+      "name": "Pokémon Rojo",
+      "generation": 1,
+      "releaseYear": 1996,
+      "pokeapiVersion": "red",
+      "familyId": "rby",
+      "dexIds": [
+        "kanto-classic"
+      ]
+    },
+    {
+      "id": "blue",
+      "name": "Pokémon Azul",
+      "generation": 1,
+      "releaseYear": 1996,
+      "pokeapiVersion": "blue",
+      "familyId": "rby",
+      "dexIds": [
+        "kanto-classic"
+      ]
+    },
+    {
+      "id": "yellow",
+      "name": "Pokémon Amarillo",
+      "generation": 1,
+      "releaseYear": 1998,
+      "pokeapiVersion": "yellow",
+      "familyId": "rby",
+      "dexIds": [
+        "kanto-classic"
+      ]
+    },
+    {
+      "id": "gold",
+      "name": "Pokémon Oro",
+      "generation": 2,
+      "releaseYear": 1999,
+      "pokeapiVersion": "gold",
+      "familyId": "gsc",
+      "dexIds": [
+        "johto-gsc"
+      ]
+    },
+    {
+      "id": "silver",
+      "name": "Pokémon Plata",
+      "generation": 2,
+      "releaseYear": 1999,
+      "pokeapiVersion": "silver",
+      "familyId": "gsc",
+      "dexIds": [
+        "johto-gsc"
+      ]
+    },
+    {
+      "id": "crystal",
+      "name": "Pokémon Cristal",
+      "generation": 2,
+      "releaseYear": 2000,
+      "pokeapiVersion": "crystal",
+      "familyId": "gsc",
+      "dexIds": [
+        "johto-gsc"
+      ]
+    },
+    {
+      "id": "ruby",
+      "name": "Pokémon Rubí",
+      "generation": 3,
+      "releaseYear": 2002,
+      "pokeapiVersion": "ruby",
+      "familyId": "rse",
+      "dexIds": [
+        "hoenn-rse"
+      ]
+    },
+    {
+      "id": "sapphire",
+      "name": "Pokémon Zafiro",
+      "generation": 3,
+      "releaseYear": 2002,
+      "pokeapiVersion": "sapphire",
+      "familyId": "rse",
+      "dexIds": [
+        "hoenn-rse"
+      ]
+    },
+    {
+      "id": "emerald",
+      "name": "Pokémon Esmeralda",
+      "generation": 3,
+      "releaseYear": 2004,
+      "pokeapiVersion": "emerald",
+      "familyId": "rse",
+      "dexIds": [
+        "hoenn-rse"
+      ]
+    },
+    {
+      "id": "firered",
+      "name": "Pokémon Rojo Fuego",
+      "generation": 3,
+      "releaseYear": 2004,
+      "pokeapiVersion": "firered",
+      "familyId": "frlg",
+      "dexIds": [
+        "kanto-classic"
+      ]
+    },
+    {
+      "id": "leafgreen",
+      "name": "Pokémon Verde Hoja",
+      "generation": 3,
+      "releaseYear": 2004,
+      "pokeapiVersion": "leafgreen",
+      "familyId": "frlg",
+      "dexIds": [
+        "kanto-classic"
+      ]
+    },
+    {
+      "id": "diamond",
+      "name": "Pokémon Diamante",
+      "generation": 4,
+      "releaseYear": 2006,
+      "pokeapiVersion": "diamond",
+      "familyId": "dppt",
+      "dexIds": [
+        "sinnoh-dp-bdsp"
+      ]
+    },
+    {
+      "id": "pearl",
+      "name": "Pokémon Perla",
+      "generation": 4,
+      "releaseYear": 2006,
+      "pokeapiVersion": "pearl",
+      "familyId": "dppt",
+      "dexIds": [
+        "sinnoh-dp-bdsp"
+      ]
+    },
+    {
+      "id": "platinum",
+      "name": "Pokémon Platinum",
+      "generation": 4,
+      "releaseYear": 2008,
+      "pokeapiVersion": "platinum",
+      "familyId": "dppt",
+      "dexIds": [
+        "sinnoh-platinum"
+      ]
+    },
+    {
+      "id": "heartgold",
+      "name": "Pokémon HeartGold",
+      "generation": 4,
+      "releaseYear": 2009,
+      "pokeapiVersion": "heartgold",
+      "familyId": "hgss",
+      "dexIds": [
+        "johto-hgss"
+      ]
+    },
+    {
+      "id": "soulsilver",
+      "name": "Pokémon SoulSilver",
+      "generation": 4,
+      "releaseYear": 2009,
+      "pokeapiVersion": "soulsilver",
+      "familyId": "hgss",
+      "dexIds": [
+        "johto-hgss"
+      ]
+    },
+    {
+      "id": "black",
+      "name": "Pokémon Negro",
+      "generation": 5,
+      "releaseYear": 2010,
+      "pokeapiVersion": "black",
+      "familyId": "bw",
+      "dexIds": [
+        "unova-bw"
+      ]
+    },
+    {
+      "id": "white",
+      "name": "Pokémon Blanco",
+      "generation": 5,
+      "releaseYear": 2010,
+      "pokeapiVersion": "white",
+      "familyId": "bw",
+      "dexIds": [
+        "unova-bw"
+      ]
+    },
+    {
+      "id": "black-2",
+      "name": "Pokémon Negro 2",
+      "generation": 5,
+      "releaseYear": 2012,
+      "pokeapiVersion": "black-2",
+      "familyId": "b2w2",
+      "dexIds": [
+        "unova-b2w2"
+      ]
+    },
+    {
+      "id": "white-2",
+      "name": "Pokémon Blanco 2",
+      "generation": 5,
+      "releaseYear": 2012,
+      "pokeapiVersion": "white-2",
+      "familyId": "b2w2",
+      "dexIds": [
+        "unova-b2w2"
+      ]
+    },
+    {
+      "id": "x",
+      "name": "Pokémon X",
+      "generation": 6,
+      "releaseYear": 2013,
+      "pokeapiVersion": "x",
+      "familyId": "xy",
+      "dexIds": [
+        "kalos-xy"
+      ]
+    },
+    {
+      "id": "y",
+      "name": "Pokémon Y",
+      "generation": 6,
+      "releaseYear": 2013,
+      "pokeapiVersion": "y",
+      "familyId": "xy",
+      "dexIds": [
+        "kalos-xy"
+      ]
+    },
+    {
+      "id": "omega-ruby",
+      "name": "Pokémon Rubí Omega",
+      "generation": 6,
+      "releaseYear": 2014,
+      "pokeapiVersion": "omega-ruby",
+      "familyId": "oras",
+      "dexIds": [
+        "hoenn-oras"
+      ]
+    },
+    {
+      "id": "alpha-sapphire",
+      "name": "Pokémon Zafiro Alfa",
+      "generation": 6,
+      "releaseYear": 2014,
+      "pokeapiVersion": "alpha-sapphire",
+      "familyId": "oras",
+      "dexIds": [
+        "hoenn-oras"
+      ]
+    },
+    {
+      "id": "sun",
+      "name": "Pokémon Sol",
+      "generation": 7,
+      "releaseYear": 2016,
+      "pokeapiVersion": "sun",
+      "familyId": "sm",
+      "dexIds": [
+        "alola-sm"
+      ]
+    },
+    {
+      "id": "moon",
+      "name": "Pokémon Luna",
+      "generation": 7,
+      "releaseYear": 2016,
+      "pokeapiVersion": "moon",
+      "familyId": "sm",
+      "dexIds": [
+        "alola-sm"
+      ]
+    },
+    {
+      "id": "ultra-sun",
+      "name": "Pokémon Ultrasol",
+      "generation": 7,
+      "releaseYear": 2017,
+      "pokeapiVersion": "ultra-sun",
+      "familyId": "usum",
+      "dexIds": [
+        "alola-usum"
+      ]
+    },
+    {
+      "id": "ultra-moon",
+      "name": "Pokémon Ultraluna",
+      "generation": 7,
+      "releaseYear": 2017,
+      "pokeapiVersion": "ultra-moon",
+      "familyId": "usum",
+      "dexIds": [
+        "alola-usum"
+      ]
+    },
+    {
+      "id": "lets-go-pikachu",
+      "name": "Pokémon: Let’s Go, Pikachu!",
+      "generation": 7,
+      "releaseYear": 2018,
+      "pokeapiVersion": "lets-go-pikachu",
+      "familyId": "lgpe",
+      "dexIds": [
+        "kanto-lgpe"
+      ]
+    },
+    {
+      "id": "lets-go-eevee",
+      "name": "Pokémon: Let’s Go, Eevee!",
+      "generation": 7,
+      "releaseYear": 2018,
+      "pokeapiVersion": "lets-go-eevee",
+      "familyId": "lgpe",
+      "dexIds": [
+        "kanto-lgpe"
+      ]
+    },
+    {
+      "id": "sword",
+      "name": "Pokémon Espada",
+      "generation": 8,
+      "releaseYear": 2019,
+      "pokeapiVersion": "sword",
+      "familyId": "swsh",
+      "dexIds": [
+        "galar-base",
+        "galar-armor",
+        "galar-crown"
+      ]
+    },
+    {
+      "id": "shield",
+      "name": "Pokémon Escudo",
+      "generation": 8,
+      "releaseYear": 2019,
+      "pokeapiVersion": "shield",
+      "familyId": "swsh",
+      "dexIds": [
+        "galar-base",
+        "galar-armor",
+        "galar-crown"
+      ]
+    },
+    {
+      "id": "brilliant-diamond",
+      "name": "Pokémon Diamante Brillante",
+      "generation": 8,
+      "releaseYear": 2021,
+      "pokeapiVersion": "brilliant-diamond",
+      "familyId": "bdsp",
+      "dexIds": [
+        "sinnoh-dp-bdsp"
+      ]
+    },
+    {
+      "id": "shining-pearl",
+      "name": "Pokémon Perla Reluciente",
+      "generation": 8,
+      "releaseYear": 2021,
+      "pokeapiVersion": "shining-pearl",
+      "familyId": "bdsp",
+      "dexIds": [
+        "sinnoh-dp-bdsp"
+      ]
+    },
+    {
+      "id": "legends-arceus",
+      "name": "Leyendas Pokémon: Arceus",
+      "generation": 8,
+      "releaseYear": 2022,
+      "pokeapiVersion": "legends-arceus",
+      "familyId": "legends-arceus",
+      "dexIds": [
+        "hisui"
+      ]
+    },
+    {
+      "id": "scarlet",
+      "name": "Pokémon Escarlata",
+      "generation": 9,
+      "releaseYear": 2022,
+      "pokeapiVersion": "scarlet",
+      "familyId": "sv",
+      "dexIds": [
+        "paldea-base",
+        "kitakami",
+        "blueberry"
+      ]
+    },
+    {
+      "id": "violet",
+      "name": "Pokémon Púrpura",
+      "generation": 9,
+      "releaseYear": 2022,
+      "pokeapiVersion": "violet",
+      "familyId": "sv",
+      "dexIds": [
+        "paldea-base",
+        "kitakami",
+        "blueberry"
+      ]
+    },
+    {
+      "id": "legends-za",
+      "name": "Leyendas Pokémon: Z-A",
+      "generation": 9,
+      "releaseYear": 2025,
+      "familyId": "legends-za",
+      "dexIds": [
+        "lumiose",
+        "dimensional"
+      ]
+    }
+  ],
+  "contentPacks": [
+    {
+      "id": "red-base",
+      "gameId": "red",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "kanto-classic"
+      ]
+    },
+    {
+      "id": "blue-base",
+      "gameId": "blue",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "kanto-classic"
+      ]
+    },
+    {
+      "id": "yellow-base",
+      "gameId": "yellow",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "kanto-classic"
+      ]
+    },
+    {
+      "id": "gold-base",
+      "gameId": "gold",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "johto-gsc"
+      ]
+    },
+    {
+      "id": "silver-base",
+      "gameId": "silver",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "johto-gsc"
+      ]
+    },
+    {
+      "id": "crystal-base",
+      "gameId": "crystal",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "johto-gsc"
+      ]
+    },
+    {
+      "id": "ruby-base",
+      "gameId": "ruby",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "hoenn-rse"
+      ]
+    },
+    {
+      "id": "sapphire-base",
+      "gameId": "sapphire",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "hoenn-rse"
+      ]
+    },
+    {
+      "id": "emerald-base",
+      "gameId": "emerald",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "hoenn-rse"
+      ]
+    },
+    {
+      "id": "firered-base",
+      "gameId": "firered",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "kanto-classic"
+      ]
+    },
+    {
+      "id": "leafgreen-base",
+      "gameId": "leafgreen",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "kanto-classic"
+      ]
+    },
+    {
+      "id": "diamond-base",
+      "gameId": "diamond",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "sinnoh-dp-bdsp"
+      ]
+    },
+    {
+      "id": "pearl-base",
+      "gameId": "pearl",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "sinnoh-dp-bdsp"
+      ]
+    },
+    {
+      "id": "platinum-base",
+      "gameId": "platinum",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "sinnoh-platinum"
+      ]
+    },
+    {
+      "id": "heartgold-base",
+      "gameId": "heartgold",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "johto-hgss"
+      ]
+    },
+    {
+      "id": "soulsilver-base",
+      "gameId": "soulsilver",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "johto-hgss"
+      ]
+    },
+    {
+      "id": "black-base",
+      "gameId": "black",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "unova-bw"
+      ]
+    },
+    {
+      "id": "white-base",
+      "gameId": "white",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "unova-bw"
+      ]
+    },
+    {
+      "id": "black-2-base",
+      "gameId": "black-2",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "unova-b2w2"
+      ]
+    },
+    {
+      "id": "white-2-base",
+      "gameId": "white-2",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "unova-b2w2"
+      ]
+    },
+    {
+      "id": "x-base",
+      "gameId": "x",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "kalos-xy"
+      ]
+    },
+    {
+      "id": "y-base",
+      "gameId": "y",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "kalos-xy"
+      ]
+    },
+    {
+      "id": "omega-ruby-base",
+      "gameId": "omega-ruby",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "hoenn-oras"
+      ]
+    },
+    {
+      "id": "alpha-sapphire-base",
+      "gameId": "alpha-sapphire",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "hoenn-oras"
+      ]
+    },
+    {
+      "id": "sun-base",
+      "gameId": "sun",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "alola-sm"
+      ]
+    },
+    {
+      "id": "moon-base",
+      "gameId": "moon",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "alola-sm"
+      ]
+    },
+    {
+      "id": "ultra-sun-base",
+      "gameId": "ultra-sun",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "alola-usum"
+      ]
+    },
+    {
+      "id": "ultra-moon-base",
+      "gameId": "ultra-moon",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "alola-usum"
+      ]
+    },
+    {
+      "id": "lets-go-pikachu-base",
+      "gameId": "lets-go-pikachu",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "kanto-lgpe"
+      ]
+    },
+    {
+      "id": "lets-go-eevee-base",
+      "gameId": "lets-go-eevee",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "kanto-lgpe"
+      ]
+    },
+    {
+      "id": "sword-base",
+      "gameId": "sword",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "galar-base"
+      ]
+    },
+    {
+      "id": "shield-base",
+      "gameId": "shield",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "galar-base"
+      ]
+    },
+    {
+      "id": "brilliant-diamond-base",
+      "gameId": "brilliant-diamond",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "sinnoh-dp-bdsp"
+      ]
+    },
+    {
+      "id": "shining-pearl-base",
+      "gameId": "shining-pearl",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "sinnoh-dp-bdsp"
+      ]
+    },
+    {
+      "id": "legends-arceus-base",
+      "gameId": "legends-arceus",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "hisui"
+      ]
+    },
+    {
+      "id": "scarlet-base",
+      "gameId": "scarlet",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "paldea-base"
+      ]
+    },
+    {
+      "id": "violet-base",
+      "gameId": "violet",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "paldea-base"
+      ]
+    },
+    {
+      "id": "legends-za-base",
+      "gameId": "legends-za",
+      "name": "Juego base",
+      "type": "base",
+      "unlockCondition": "none",
+      "dexIds": [
+        "lumiose"
+      ]
+    },
+    {
+      "id": "isle-of-armor",
+      "gameId": "sword",
+      "name": "La Isla de la Armadura",
+      "type": "dlc",
+      "requiredContentPacks": [
+        "sword-base"
+      ],
+      "unlockCondition": "early_story",
+      "dexIds": [
+        "galar-armor"
+      ]
+    },
+    {
+      "id": "crown-tundra",
+      "gameId": "sword",
+      "name": "Las Nieves de la Corona",
+      "type": "dlc",
+      "requiredContentPacks": [
+        "sword-base"
+      ],
+      "unlockCondition": "early_story",
+      "dexIds": [
+        "galar-crown"
+      ]
+    },
+    {
+      "id": "shield-isle-of-armor",
+      "gameId": "shield",
+      "name": "La Isla de la Armadura",
+      "type": "dlc",
+      "requiredContentPacks": [
+        "shield-base"
+      ],
+      "unlockCondition": "early_story",
+      "dexIds": [
+        "galar-armor"
+      ]
+    },
+    {
+      "id": "shield-crown-tundra",
+      "gameId": "shield",
+      "name": "Las Nieves de la Corona",
+      "type": "dlc",
+      "requiredContentPacks": [
+        "shield-base"
+      ],
+      "unlockCondition": "early_story",
+      "dexIds": [
+        "galar-crown"
+      ]
+    },
+    {
+      "id": "teal-mask",
+      "gameId": "scarlet",
+      "name": "La Máscara Turquesa",
+      "type": "dlc",
+      "requiredContentPacks": [
+        "scarlet-base"
+      ],
+      "unlockCondition": "early_story",
+      "dexIds": [
+        "kitakami"
+      ]
+    },
+    {
+      "id": "indigo-disk",
+      "gameId": "scarlet",
+      "name": "El Disco Índigo",
+      "type": "dlc",
+      "requiredContentPacks": [
+        "scarlet-base",
+        "teal-mask"
+      ],
+      "unlockCondition": "main_story_completed",
+      "dexIds": [
+        "blueberry"
+      ]
+    },
+    {
+      "id": "violet-teal-mask",
+      "gameId": "violet",
+      "name": "La Máscara Turquesa",
+      "type": "dlc",
+      "requiredContentPacks": [
+        "violet-base"
+      ],
+      "unlockCondition": "early_story",
+      "dexIds": [
+        "kitakami"
+      ]
+    },
+    {
+      "id": "violet-indigo-disk",
+      "gameId": "violet",
+      "name": "El Disco Índigo",
+      "type": "dlc",
+      "requiredContentPacks": [
+        "violet-base",
+        "violet-teal-mask"
+      ],
+      "unlockCondition": "main_story_completed",
+      "dexIds": [
+        "blueberry"
+      ]
+    },
+    {
+      "id": "mega-dimension",
+      "gameId": "legends-za",
+      "name": "Megadimensión",
+      "type": "dlc",
+      "requiredContentPacks": [
+        "legends-za-base"
+      ],
+      "unlockCondition": "main_story_completed",
+      "dexIds": [
+        "dimensional"
+      ]
+    }
+  ],
+  "regionalDexes": [
+    {
+      "id": "kanto-classic",
+      "name": "Pokédex de Kanto clásica",
+      "region": "Kanto",
+      "entryCount": 151,
+      "kind": "regional",
+      "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Kanto",
+      "entryStatus": "pending"
+    },
+    {
+      "id": "johto-gsc",
+      "name": "Pokédex de Johto (GSC)",
+      "region": "Johto",
+      "entryCount": 251,
+      "kind": "regional",
+      "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Johto",
+      "entryStatus": "pending"
+    },
+    {
+      "id": "hoenn-rse",
+      "name": "Pokédex de Hoenn (RSE)",
+      "region": "Hoenn",
+      "entryCount": 202,
+      "kind": "regional",
+      "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Hoenn",
+      "entryStatus": "pending"
+    },
+    {
+      "id": "sinnoh-dp-bdsp",
+      "name": "Pokédex de Sinnoh (DP/BDSP)",
+      "region": "Sinnoh",
+      "entryCount": 151,
+      "kind": "regional",
+      "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Sinnoh",
+      "entryStatus": "pending"
+    },
+    {
+      "id": "sinnoh-platinum",
+      "name": "Pokédex de Sinnoh (Platino)",
+      "region": "Sinnoh",
+      "entryCount": 210,
+      "kind": "regional",
+      "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Sinnoh",
+      "entryStatus": "pending"
+    },
+    {
+      "id": "johto-hgss",
+      "name": "Pokédex de Johto (HGSS)",
+      "region": "Johto",
+      "entryCount": 256,
+      "kind": "regional",
+      "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Johto",
+      "entryStatus": "pending"
+    },
+    {
+      "id": "unova-bw",
+      "name": "Pokédex de Teselia (BW)",
+      "region": "Teselia",
+      "entryCount": 156,
+      "kind": "regional",
+      "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Teselia",
+      "entryStatus": "pending"
+    },
+    {
+      "id": "unova-b2w2",
+      "name": "Pokédex de Teselia (B2W2)",
+      "region": "Teselia",
+      "entryCount": 301,
+      "kind": "regional",
+      "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Teselia",
+      "entryStatus": "pending"
+    },
+    {
+      "id": "kalos-xy",
+      "name": "Pokédex de Kalos",
+      "region": "Kalos",
+      "entryCount": 457,
+      "kind": "regional",
+      "subDexes": [
+        {
+          "id": "central",
+          "name": "Kalos Centro",
+          "entryCount": 153
+        },
+        {
+          "id": "coastal",
+          "name": "Kalos Costa",
+          "entryCount": 153
+        },
+        {
+          "id": "mountain",
+          "name": "Kalos Montaña",
+          "entryCount": 151
+        }
+      ],
+      "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Kalos",
+      "entryStatus": "pending"
+    },
+    {
+      "id": "hoenn-oras",
+      "name": "Pokédex de Hoenn (ORAS)",
+      "region": "Hoenn",
+      "entryCount": 211,
+      "kind": "regional",
+      "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Hoenn",
+      "entryStatus": "pending"
+    },
+    {
+      "id": "alola-sm",
+      "name": "Pokédex de Alola (SM)",
+      "region": "Alola",
+      "entryCount": 302,
+      "kind": "regional",
+      "subDexes": [
+        {
+          "id": "melemele",
+          "name": "Melemele",
+          "entryCount": 120
+        },
+        {
+          "id": "akala",
+          "name": "Akala",
+          "entryCount": 130
+        },
+        {
+          "id": "ulaula",
+          "name": "Ula-Ula",
+          "entryCount": 130
+        },
+        {
+          "id": "poni",
+          "name": "Poni",
+          "entryCount": 100
+        }
+      ],
+      "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Alola",
+      "entryStatus": "pending"
+    },
+    {
+      "id": "alola-usum",
+      "name": "Pokédex de Alola (USUM)",
+      "region": "Alola",
+      "entryCount": 403,
+      "kind": "regional",
+      "subDexes": [
+        {
+          "id": "melemele",
+          "name": "Melemele",
+          "entryCount": 150
+        },
+        {
+          "id": "akala",
+          "name": "Akala",
+          "entryCount": 160
+        },
+        {
+          "id": "ulaula",
+          "name": "Ula-Ula",
+          "entryCount": 160
+        },
+        {
+          "id": "poni",
+          "name": "Poni",
+          "entryCount": 130
+        }
+      ],
+      "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Alola",
+      "entryStatus": "pending"
+    },
+    {
+      "id": "kanto-lgpe",
+      "name": "Pokédex de Kanto (Let’s Go)",
+      "region": "Kanto",
+      "entryCount": 153,
+      "kind": "regional",
+      "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Kanto",
+      "entryStatus": "pending"
+    },
+    {
+      "id": "galar-base",
+      "name": "Pokédex de Galar",
+      "region": "Galar",
+      "entryCount": 400,
+      "kind": "regional",
+      "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Galar",
+      "entryStatus": "pending"
+    },
+    {
+      "id": "galar-armor",
+      "name": "Pokédex Armadura",
+      "region": "Galar",
+      "entryCount": 211,
+      "kind": "content",
+      "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_Armadura",
+      "entryStatus": "pending"
+    },
+    {
+      "id": "galar-crown",
+      "name": "Pokédex Corona",
+      "region": "Galar",
+      "entryCount": 210,
+      "kind": "content",
+      "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_Corona",
+      "entryStatus": "pending"
+    },
+    {
+      "id": "hisui",
+      "name": "Pokédex de Hisui",
+      "region": "Hisui",
+      "entryCount": 242,
+      "kind": "regional",
+      "sourceUrl": "https://www.wikidex.net/wiki/Lista_de_Pok%C3%A9mon_seg%C3%BAn_la_Pok%C3%A9dex_de_Hisui",
+      "entryStatus": "pending"
+    },
+    {
+      "id": "paldea-base",
+      "name": "Pokédex de Paldea",
+      "region": "Paldea",
+      "entryCount": 400,
+      "kind": "regional",
+      "sourceUrl": "https://www.wikidex.net/wiki/Lista_de_Pok%C3%A9mon_seg%C3%BAn_la_Pok%C3%A9dex_de_Paldea",
+      "entryStatus": "pending"
+    },
+    {
+      "id": "kitakami",
+      "name": "Pokédex de Noroteo",
+      "region": "Noroteo",
+      "entryCount": 200,
+      "kind": "content",
+      "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Noroteo",
+      "entryStatus": "pending"
+    },
+    {
+      "id": "blueberry",
+      "name": "Pokédex Arándano",
+      "region": "Arándano",
+      "entryCount": 243,
+      "kind": "content",
+      "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_Ar%C3%A1ndano",
+      "entryStatus": "pending"
+    },
+    {
+      "id": "lumiose",
+      "name": "Pokédex de Luminalia",
+      "region": "Luminalia",
+      "entryCount": 232,
+      "kind": "regional",
+      "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Luminalia",
+      "entryStatus": "pending"
+    },
+    {
+      "id": "dimensional",
+      "name": "Pokédex Dimensional",
+      "region": "Luminalia",
+      "entryCount": 132,
+      "kind": "content",
+      "sourceUrl": "https://www.wikidex.net/wiki/Pok%C3%A9dex_de_Luminalia",
+      "entryStatus": "pending"
+    }
+  ],
+  "mechanicCatalogs": [
+    {
+      "id": "megadex",
+      "name": "MegaDex",
+      "gameFamilyId": "legends-za",
+      "kind": "mechanic",
+      "mechanic": "mega_evolution",
+      "entryCount": 93,
+      "uniquePokemonCount": 87,
+      "sourceUrl": "https://www.wikidex.net/wiki/MegaDex",
+      "entryStatus": "pending"
+    }
+  ],
+  "availability": [
+    {
+      "pokemonId": 26,
+      "formId": "raichu-alola",
+      "gameId": "scarlet",
+      "contentPackId": "teal-mask",
+      "stage": "main_story",
+      "method": "wild"
+    },
+    {
+      "pokemonId": 810,
+      "gameId": "sword",
+      "contentPackId": "sword-base",
+      "stage": "main_story",
+      "method": "gift"
+    },
+    {
+      "pokemonId": 821,
+      "gameId": "sword",
+      "contentPackId": "sword-base",
+      "stage": "main_story",
+      "method": "wild"
+    },
+    {
+      "pokemonId": 833,
+      "gameId": "sword",
+      "contentPackId": "sword-base",
+      "stage": "main_story",
+      "method": "wild"
+    },
+    {
+      "pokemonId": 58,
+      "gameId": "sword",
+      "contentPackId": "sword-base",
+      "stage": "main_story",
+      "method": "wild"
+    },
+    {
+      "pokemonId": 848,
+      "gameId": "sword",
+      "contentPackId": "sword-base",
+      "stage": "main_story",
+      "method": "gift"
+    },
+    {
+      "pokemonId": 885,
+      "gameId": "sword",
+      "contentPackId": "sword-base",
+      "stage": "main_story",
+      "method": "wild"
+    },
+    {
+      "pokemonId": 835,
+      "gameId": "sword",
+      "contentPackId": "sword-base",
+      "stage": "main_story",
+      "method": "wild"
+    },
+    {
+      "pokemonId": 280,
+      "gameId": "sword",
+      "contentPackId": "sword-base",
+      "stage": "main_story",
+      "method": "wild"
+    },
+    {
+      "pokemonId": 888,
+      "gameId": "sword",
+      "contentPackId": "sword-base",
+      "stage": "postgame",
+      "method": "gift"
+    },
+    {
+      "pokemonId": 891,
+      "gameId": "sword",
+      "contentPackId": "isle-of-armor",
+      "stage": "main_story",
+      "method": "gift"
+    },
+    {
+      "pokemonId": 898,
+      "gameId": "sword",
+      "contentPackId": "crown-tundra",
+      "stage": "main_story",
+      "method": "gift"
+    },
+    {
+      "pokemonId": 389,
+      "gameId": "platinum",
+      "contentPackId": "platinum-base",
+      "stage": "main_story",
+      "method": "gift"
+    },
+    {
+      "pokemonId": 392,
+      "gameId": "platinum",
+      "contentPackId": "platinum-base",
+      "stage": "main_story",
+      "method": "gift"
+    },
+    {
+      "pokemonId": 395,
+      "gameId": "platinum",
+      "contentPackId": "platinum-base",
+      "stage": "main_story",
+      "method": "gift"
+    },
+    {
+      "pokemonId": 398,
+      "gameId": "platinum",
+      "contentPackId": "platinum-base",
+      "stage": "main_story",
+      "method": "evolution"
+    },
+    {
+      "pokemonId": 405,
+      "gameId": "platinum",
+      "contentPackId": "platinum-base",
+      "stage": "main_story",
+      "method": "evolution"
+    },
+    {
+      "pokemonId": 407,
+      "gameId": "platinum",
+      "contentPackId": "platinum-base",
+      "stage": "main_story",
+      "method": "evolution"
+    },
+    {
+      "pokemonId": 419,
+      "gameId": "platinum",
+      "contentPackId": "platinum-base",
+      "stage": "main_story",
+      "method": "evolution"
+    },
+    {
+      "pokemonId": 423,
+      "gameId": "platinum",
+      "contentPackId": "platinum-base",
+      "stage": "main_story",
+      "method": "evolution"
+    },
+    {
+      "pokemonId": 426,
+      "gameId": "platinum",
+      "contentPackId": "platinum-base",
+      "stage": "main_story",
+      "method": "evolution"
+    },
+    {
+      "pokemonId": 445,
+      "gameId": "platinum",
+      "contentPackId": "platinum-base",
+      "stage": "main_story",
+      "method": "evolution"
+    },
+    {
+      "pokemonId": 448,
+      "gameId": "platinum",
+      "contentPackId": "platinum-base",
+      "stage": "main_story",
+      "method": "gift"
+    },
+    {
+      "pokemonId": 78,
+      "gameId": "platinum",
+      "contentPackId": "platinum-base",
+      "stage": "main_story",
+      "method": "evolution"
+    },
+    {
+      "pokemonId": 94,
+      "gameId": "platinum",
+      "contentPackId": "platinum-base",
+      "stage": "main_story",
+      "method": "evolution"
+    },
+    {
+      "pokemonId": 134,
+      "gameId": "platinum",
+      "contentPackId": "platinum-base",
+      "stage": "main_story",
+      "method": "evolution"
+    },
+    {
+      "pokemonId": 135,
+      "gameId": "platinum",
+      "contentPackId": "platinum-base",
+      "stage": "main_story",
+      "method": "evolution"
+    },
+    {
+      "pokemonId": 282,
+      "gameId": "platinum",
+      "contentPackId": "platinum-base",
+      "stage": "main_story",
+      "method": "evolution"
+    }
+  ]
+}

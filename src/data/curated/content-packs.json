@@ -1,0 +1,501 @@
+[
+  {
+    "id": "red-base",
+    "gameId": "red",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "kanto-classic"
+    ]
+  },
+  {
+    "id": "blue-base",
+    "gameId": "blue",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "kanto-classic"
+    ]
+  },
+  {
+    "id": "yellow-base",
+    "gameId": "yellow",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "kanto-classic"
+    ]
+  },
+  {
+    "id": "gold-base",
+    "gameId": "gold",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "johto-gsc"
+    ]
+  },
+  {
+    "id": "silver-base",
+    "gameId": "silver",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "johto-gsc"
+    ]
+  },
+  {
+    "id": "crystal-base",
+    "gameId": "crystal",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "johto-gsc"
+    ]
+  },
+  {
+    "id": "ruby-base",
+    "gameId": "ruby",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "hoenn-rse"
+    ]
+  },
+  {
+    "id": "sapphire-base",
+    "gameId": "sapphire",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "hoenn-rse"
+    ]
+  },
+  {
+    "id": "emerald-base",
+    "gameId": "emerald",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "hoenn-rse"
+    ]
+  },
+  {
+    "id": "firered-base",
+    "gameId": "firered",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "kanto-classic"
+    ]
+  },
+  {
+    "id": "leafgreen-base",
+    "gameId": "leafgreen",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "kanto-classic"
+    ]
+  },
+  {
+    "id": "diamond-base",
+    "gameId": "diamond",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "sinnoh-dp-bdsp"
+    ]
+  },
+  {
+    "id": "pearl-base",
+    "gameId": "pearl",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "sinnoh-dp-bdsp"
+    ]
+  },
+  {
+    "id": "platinum-base",
+    "gameId": "platinum",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "sinnoh-platinum"
+    ]
+  },
+  {
+    "id": "heartgold-base",
+    "gameId": "heartgold",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "johto-hgss"
+    ]
+  },
+  {
+    "id": "soulsilver-base",
+    "gameId": "soulsilver",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "johto-hgss"
+    ]
+  },
+  {
+    "id": "black-base",
+    "gameId": "black",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "unova-bw"
+    ]
+  },
+  {
+    "id": "white-base",
+    "gameId": "white",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "unova-bw"
+    ]
+  },
+  {
+    "id": "black-2-base",
+    "gameId": "black-2",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "unova-b2w2"
+    ]
+  },
+  {
+    "id": "white-2-base",
+    "gameId": "white-2",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "unova-b2w2"
+    ]
+  },
+  {
+    "id": "x-base",
+    "gameId": "x",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "kalos-xy"
+    ]
+  },
+  {
+    "id": "y-base",
+    "gameId": "y",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "kalos-xy"
+    ]
+  },
+  {
+    "id": "omega-ruby-base",
+    "gameId": "omega-ruby",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "hoenn-oras"
+    ]
+  },
+  {
+    "id": "alpha-sapphire-base",
+    "gameId": "alpha-sapphire",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "hoenn-oras"
+    ]
+  },
+  {
+    "id": "sun-base",
+    "gameId": "sun",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "alola-sm"
+    ]
+  },
+  {
+    "id": "moon-base",
+    "gameId": "moon",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "alola-sm"
+    ]
+  },
+  {
+    "id": "ultra-sun-base",
+    "gameId": "ultra-sun",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "alola-usum"
+    ]
+  },
+  {
+    "id": "ultra-moon-base",
+    "gameId": "ultra-moon",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "alola-usum"
+    ]
+  },
+  {
+    "id": "lets-go-pikachu-base",
+    "gameId": "lets-go-pikachu",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "kanto-lgpe"
+    ]
+  },
+  {
+    "id": "lets-go-eevee-base",
+    "gameId": "lets-go-eevee",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "kanto-lgpe"
+    ]
+  },
+  {
+    "id": "sword-base",
+    "gameId": "sword",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "galar-base"
+    ]
+  },
+  {
+    "id": "shield-base",
+    "gameId": "shield",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "galar-base"
+    ]
+  },
+  {
+    "id": "brilliant-diamond-base",
+    "gameId": "brilliant-diamond",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "sinnoh-dp-bdsp"
+    ]
+  },
+  {
+    "id": "shining-pearl-base",
+    "gameId": "shining-pearl",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "sinnoh-dp-bdsp"
+    ]
+  },
+  {
+    "id": "legends-arceus-base",
+    "gameId": "legends-arceus",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "hisui"
+    ]
+  },
+  {
+    "id": "scarlet-base",
+    "gameId": "scarlet",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "paldea-base"
+    ]
+  },
+  {
+    "id": "violet-base",
+    "gameId": "violet",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "paldea-base"
+    ]
+  },
+  {
+    "id": "legends-za-base",
+    "gameId": "legends-za",
+    "name": "Juego base",
+    "type": "base",
+    "unlockCondition": "none",
+    "dexIds": [
+      "lumiose"
+    ]
+  },
+  {
+    "id": "isle-of-armor",
+    "gameId": "sword",
+    "name": "La Isla de la Armadura",
+    "type": "dlc",
+    "requiredContentPacks": [
+      "sword-base"
+    ],
+    "unlockCondition": "early_story",
+    "dexIds": [
+      "galar-armor"
+    ]
+  },
+  {
+    "id": "crown-tundra",
+    "gameId": "sword",
+    "name": "Las Nieves de la Corona",
+    "type": "dlc",
+    "requiredContentPacks": [
+      "sword-base"
+    ],
+    "unlockCondition": "early_story",
+    "dexIds": [
+      "galar-crown"
+    ]
+  },
+  {
+    "id": "shield-isle-of-armor",
+    "gameId": "shield",
+    "name": "La Isla de la Armadura",
+    "type": "dlc",
+    "requiredContentPacks": [
+      "shield-base"
+    ],
+    "unlockCondition": "early_story",
+    "dexIds": [
+      "galar-armor"
+    ]
+  },
+  {
+    "id": "shield-crown-tundra",
+    "gameId": "shield",
+    "name": "Las Nieves de la Corona",
+    "type": "dlc",
+    "requiredContentPacks": [
+      "shield-base"
+    ],
+    "unlockCondition": "early_story",
+    "dexIds": [
+      "galar-crown"
+    ]
+  },
+  {
+    "id": "teal-mask",
+    "gameId": "scarlet",
+    "name": "La Máscara Turquesa",
+    "type": "dlc",
+    "requiredContentPacks": [
+      "scarlet-base"
+    ],
+    "unlockCondition": "early_story",
+    "dexIds": [
+      "kitakami"
+    ]
+  },
+  {
+    "id": "indigo-disk",
+    "gameId": "scarlet",
+    "name": "El Disco Índigo",
+    "type": "dlc",
+    "requiredContentPacks": [
+      "scarlet-base",
+      "teal-mask"
+    ],
+    "unlockCondition": "main_story_completed",
+    "dexIds": [
+      "blueberry"
+    ]
+  },
+  {
+    "id": "violet-teal-mask",
+    "gameId": "violet",
+    "name": "La Máscara Turquesa",
+    "type": "dlc",
+    "requiredContentPacks": [
+      "violet-base"
+    ],
+    "unlockCondition": "early_story",
+    "dexIds": [
+      "kitakami"
+    ]
+  },
+  {
+    "id": "violet-indigo-disk",
+    "gameId": "violet",
+    "name": "El Disco Índigo",
+    "type": "dlc",
+    "requiredContentPacks": [
+      "violet-base",
+      "violet-teal-mask"
+    ],
+    "unlockCondition": "main_story_completed",
+    "dexIds": [
+      "blueberry"
+    ]
+  },
+  {
+    "id": "mega-dimension",
+    "gameId": "legends-za",
+    "name": "Megadimensión",
+    "type": "dlc",
+    "requiredContentPacks": [
+      "legends-za-base"
+    ],
+    "unlockCondition": "main_story_completed",
+    "dexIds": [
+      "dimensional"
+    ]
+  }
+]

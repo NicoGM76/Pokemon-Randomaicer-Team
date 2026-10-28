@@ -1,0 +1,33 @@
+{
+  "name": "pokemon-adventure-team-generator",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "data:sync-game": "node scripts/sync-game-data.mjs",
+    "data:validate-catalog": "node scripts/validate-catalog.mjs",
+    "data:sync-all": "node scripts/sync-all-data.mjs",
+    "data:sync-all:refresh": "node scripts/sync-all-data.mjs --refresh",
+    "data:validate-all": "node scripts/validate-catalog.mjs && node scripts/validate-all-data.mjs",
+    "data:sync-availability": "node scripts/sync-all-availability.mjs",
+    "data:sync-availability:refresh": "node scripts/sync-all-availability.mjs --refresh",
+    "data:validate-availability": "node scripts/validate-availability.mjs",
+    "data:sync-everything": "npm run data:sync-all && npm run data:sync-availability && npm run data:validate-all && npm run data:validate-availability"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest",
+    "typescript": "latest",
+    "vitest": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@types/react": "latest",
+    "@types/react-dom": "latest"
+  }
+}
