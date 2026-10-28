@@ -32,11 +32,14 @@ export function buildCandidates(dataset: CompiledDataset, config: GeneratorConfi
   const grouped = new Map<string, PokemonCandidate>();
   const dexFallback = usesRegionalDexFallback(dataset, config);
   const fallbackIds = dexFallback ? buildDexFallbackIds(dataset, config) : new Set<number>();
+  const fallbackEvolutionSteps = dexFallback
+    ? dataset.evolutions.filter(step => fallbackIds.has(step.fromId) && fallbackIds.has(step.toId))
+    : dataset.evolutions;
 
   for (const source of dataset.pokemon) {
     if (dexFallback) {
       if (!fallbackIds.has(source.id)) continue;
-      const finals = resolveReachableEvolutions(source.id, dataset.evolutions, config);
+      const finals = resolveReachableEvolutions(source.id, fallbackEvolutionSteps, config);
       for (const final of finals) {
         const resolvedPokemon = dataset.pokemon.find(p => p.id === final.pokemonId);
         if (!resolvedPokemon) continue;
