@@ -10,12 +10,54 @@ function withForm(base: Pokemon, form?: PokemonForm): Pokemon {
   return { ...base, types: form.types ?? base.types, stats: form.stats ?? base.stats };
 }
 
+function buildDexFallbackIds(dataset: CompiledDataset, config: GeneratorConfig): Set<number> {
+  const enabledPacks = dataset.contentPacks.filter(pack =>
+    pack.gameId === config.gameId && config.enabledContentPacks.includes(pack.id)
+  );
+  const dexIds = new Set(enabledPacks.flatMap(pack => pack.dexIds ?? []));
+  return new Set(
+    dataset.regionalDexEntries
+      .filter(entry => dexIds.has(entry.dexId))
+      .map(entry => entry.pokemonId)
+  );
+}
+
+export function usesRegionalDexFallback(dataset: CompiledDataset, config: GeneratorConfig): boolean {
+  return !dataset.availability.some(rule => rule.gameId === config.gameId);
+}
+
 export function buildCandidates(dataset: CompiledDataset, config: GeneratorConfig): PokemonCandidate[] {
   const game = dataset.games.find(g => g.id === config.gameId);
   if (!game) return [];
   const grouped = new Map<string, PokemonCandidate>();
+  const dexFallback = usesRegionalDexFallback(dataset, config);
+  const fallbackIds = dexFallback ? buildDexFallbackIds(dataset, config) : new Set<number>();
 
   for (const source of dataset.pokemon) {
+    if (dexFallback) {
+      if (!fallbackIds.has(source.id)) continue;
+      const finals = resolveReachableEvolutions(source.id, dataset.evolutions, config);
+      for (const final of finals) {
+        const resolvedPokemon = dataset.pokemon.find(p => p.id === final.pokemonId);
+        if (!resolvedPokemon) continue;
+        const candidate: PokemonCandidate = {
+          candidateKey: `${resolvedPokemon.id}:base`,
+          sourcePokemon: source,
+          resolvedPokemon,
+          evolutionPath: final.path,
+          evolutionFamilyId: source.evolutionFamilyId,
+          speciesGroupId: String(resolvedPokemon.id),
+          acquisitionOptions: []
+        };
+        if (!passesCandidateFilters(candidate, config, game)) continue;
+        const existing = grouped.get(candidate.candidateKey);
+        if (!existing || candidate.evolutionPath.length < existing.evolutionPath.length) {
+          grouped.set(candidate.candidateKey, candidate);
+        }
+      }
+      continue;
+    }
+
     const availability = dataset.availability.filter(rule => rule.pokemonId === source.id && matchesAvailability(rule, config, dataset.contentPacks));
     if (!availability.length) continue;
 
