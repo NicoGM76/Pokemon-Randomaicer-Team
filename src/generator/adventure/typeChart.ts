@@ -14,3 +14,31 @@ export const typeChart: Record<PokemonType, Sparse> = {
  dragon:{dragon:2,steel:.5,fairy:0}, dark:{fighting:.5,psychic:2,ghost:2,dark:.5,fairy:.5},
  steel:{fire:.5,water:.5,electric:.5,ice:2,rock:2,steel:.5,fairy:2}, fairy:{fire:.5,fighting:2,poison:.5,dragon:2,dark:2,steel:.5}
 };
+
+export function pokemonTypesForGeneration(generation?: number): PokemonType[] {
+  if (generation === 1) return pokemonTypes.filter(type => !['dark', 'steel', 'fairy'].includes(type));
+  if (generation && generation <= 5) return pokemonTypes.filter(type => type !== 'fairy');
+  return pokemonTypes;
+}
+
+export function normalizePokemonTypesForGeneration(types: PokemonType[], generation?: number): PokemonType[] {
+  if (!generation) return types;
+  let normalized = [...types];
+  if (generation <= 5) normalized = normalized.filter(type => type !== 'fairy');
+  if (generation === 1) normalized = normalized.filter(type => type !== 'dark' && type !== 'steel');
+  return normalized.length ? normalized : ['normal'];
+}
+
+export function typeMultiplierForGeneration(attackType: PokemonType, defendType: PokemonType, generation?: number): number {
+  if (generation === 1) {
+    if (attackType === 'bug' && defendType === 'poison') return 2;
+    if (attackType === 'poison' && defendType === 'bug') return 2;
+    if (attackType === 'ghost' && defendType === 'psychic') return 0;
+    if (attackType === 'ice' && defendType === 'fire') return 1;
+  }
+  if (generation && generation >= 2 && generation <= 5) {
+    if (attackType === 'ghost' && defendType === 'steel') return .5;
+    if (attackType === 'dark' && defendType === 'steel') return .5;
+  }
+  return typeChart[attackType][defendType] ?? 1;
+}
