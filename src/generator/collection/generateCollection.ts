@@ -1,10 +1,11 @@
 import type { CompiledDataset } from '../../data/types';
 import type { CollectionConfig, CollectionEntryConfig, CollectionResult, CollectionTeam } from '../../domain/collections/types';
-import type { PokemonCandidate, TeamSlot } from '../../domain/teams/types';
+import type { GeneratorConfig, PokemonCandidate, TeamSlot } from '../../domain/teams/types';
 import { generateAdventureTeam } from '../adventure/generateAdventureTeam';
 import { buildCandidates } from '../candidates/buildCandidates';
 import { passesCandidateFilters } from '../filters/passesCandidateFilters';
 import { generateRandomTeam } from '../random/generateRandomTeam';
+import { familyOriginGeneration } from './familyOriginGeneration';
 
 function keyOf(slot: TeamSlot): string {
   return slot.candidate.candidateKey;
@@ -25,6 +26,24 @@ function reserve(team: TeamSlot[], species: Set<string>, families: Set<string>):
   }
 }
 
+function relaxedOriginConfig(config: GeneratorConfig): GeneratorConfig {
+  if (!config.customRules?.onlyCurrentGeneration) return config;
+  return {
+    ...config,
+    customRules: { ...config.customRules, onlyCurrentGeneration: false }
+  };
+}
+
+function gameCandidates(dataset: CompiledDataset, entry: CollectionEntryConfig): PokemonCandidate[] {
+  return buildCandidates(dataset, relaxedOriginConfig(entry.generator));
+}
+
+function normalCandidates(dataset: CompiledDataset, entry: CollectionEntryConfig): PokemonCandidate[] {
+  return gameCandidates(dataset, entry).filter(
+    candidate => familyOriginGeneration(dataset, candidate.evolutionFamilyId) === entry.targetGeneration
+  );
+}
+
 function availableForCollection(
   candidates: PokemonCandidate[],
   species: Set<string>,
@@ -41,24 +60,16 @@ function availableForCollection(
   });
 }
 
-function bonusCandidates(
+function legalGlobalBonusCandidates(
   dataset: CompiledDataset,
   entry: CollectionEntryConfig,
-  normalCandidates: PokemonCandidate[],
   species: Set<string>,
   families: Set<string>,
   collection: CollectionConfig
 ): PokemonCandidate[] {
   const game = dataset.games.find(item => item.id === entry.generator.gameId);
   if (!game) return [];
-
-  const normalSpecies = new Set(normalCandidates.map(candidate => candidate.speciesGroupId));
-  const bonusConfig = {
-    ...entry.generator,
-    customRules: entry.generator.customRules
-      ? { ...entry.generator.customRules, onlyCurrentGeneration: false, onlyRegionalForms: false }
-      : undefined
-  };
+  const bonusConfig = relaxedOriginConfig(entry.generator);
 
   return dataset.pokemon
     .map<PokemonCandidate>(pokemon => ({
@@ -70,10 +81,28 @@ function bonusCandidates(
       speciesGroupId: String(pokemon.id),
       acquisitionOptions: []
     }))
-    .filter(candidate => !normalSpecies.has(candidate.speciesGroupId))
+    .filter(candidate => familyOriginGeneration(dataset, candidate.evolutionFamilyId) !== entry.targetGeneration)
     .filter(candidate => !collection.avoidRepeatedSpecies || !species.has(candidate.speciesGroupId))
     .filter(candidate => !collection.avoidRepeatedFamilies || !families.has(candidate.evolutionFamilyId))
     .filter(candidate => passesCandidateFilters(candidate, bonusConfig, game));
+}
+
+function bonusCandidates(
+  dataset: CompiledDataset,
+  entry: CollectionEntryConfig,
+  allGameCandidates: PokemonCandidate[],
+  species: Set<string>,
+  families: Set<string>,
+  collection: CollectionConfig
+): PokemonCandidate[] {
+  const fromSelectedGame = availableForCollection(
+    allGameCandidates.filter(candidate => familyOriginGeneration(dataset, candidate.evolutionFamilyId) !== entry.targetGeneration),
+    species,
+    families,
+    collection
+  );
+  if (fromSelectedGame.length) return fromSelectedGame;
+  return legalGlobalBonusCandidates(dataset, entry, species, families, collection);
 }
 
 function generateOne(
@@ -88,22 +117,25 @@ function generateOne(
   if (current?.locked) return current;
 
   const lockedSlots = current?.team.filter(slot => slot.locked) ?? [];
-  const baseCandidates = buildCandidates(dataset, entry.generator);
-  const legalCandidates = availableForCollection(baseCandidates, reservedSpecies, reservedFamilies, collection, lockedSlots);
+  const allGameCandidates = gameCandidates(dataset, entry);
+  const localCandidates = allGameCandidates.filter(
+    candidate => familyOriginGeneration(dataset, candidate.evolutionFamilyId) === entry.targetGeneration
+  );
+  const legalCandidates = availableForCollection(localCandidates, reservedSpecies, reservedFamilies, collection, lockedSlots);
   const generator = entry.generator.mode === 'adventure' ? generateAdventureTeam : generateRandomTeam;
   const generated = generator(legalCandidates, entry.generator, lockedSlots, rng);
   let team = generated.team;
-  const bonusKeys: string[] = [];
+  const bonusKeys: string[] = current?.bonusCandidateKeys.filter(key => lockedSlots.some(slot => slot.candidate.candidateKey === key)) ?? [];
 
   if (
     team.length < entry.generator.teamSize &&
     entry.allowBonus &&
-    collection.maxBonusPerTeam > 0
+    bonusKeys.length < collection.maxBonusPerTeam
   ) {
     const localSpecies = new Set(reservedSpecies);
     const localFamilies = new Set(reservedFamilies);
     reserve(team, localSpecies, localFamilies);
-    const pool = bonusCandidates(dataset, entry, baseCandidates, localSpecies, localFamilies, collection);
+    const pool = bonusCandidates(dataset, entry, allGameCandidates, localSpecies, localFamilies, collection);
     if (pool.length) {
       const picked = pool[Math.floor(rng() * pool.length)];
       const slot: TeamSlot = { candidate: picked, locked: false };
@@ -115,6 +147,7 @@ function generateOne(
   return {
     entryId: entry.id,
     label: entry.label,
+    targetGeneration: entry.targetGeneration,
     gameId: entry.generator.gameId,
     team,
     complete: team.length === entry.generator.teamSize,
@@ -169,7 +202,7 @@ function attempt(
 
   const pending = config.entries
     .filter(entry => !resultByEntry.has(entry.id))
-    .map(entry => ({ entry, poolSize: buildCandidates(dataset, entry.generator).length }))
+    .map(entry => ({ entry, poolSize: normalCandidates(dataset, entry).length }))
     .sort((a, b) => a.poolSize - b.poolSize || rng() - 0.5);
 
   for (const { entry } of pending) {
