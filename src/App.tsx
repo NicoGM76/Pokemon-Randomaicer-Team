@@ -6,13 +6,14 @@ import type { PokemonType } from './domain/pokemon/types';
 import { generateTeam } from './generator/generateTeam';
 import { buildCandidates, usesRegionalDexFallback } from './generator/candidates/buildCandidates';
 import { regenerateSlot } from './generator/regeneration/regenerateSlot';
+import { defaultOnlyCurrentGeneration } from './generator/config/gamePreferences';
 import { LocalStorageTeamRepository } from './storage/LocalStorageTeamRepository';
 
 const dataset = loadDataset();
 const repository = new LocalStorageTeamRepository();
 
 const methodLabels: Record<AcquisitionMethod, string> = {
-  wild: 'Captura', gift: 'Regalo', evolution: 'Evolución', trade: 'Intercambio',
+  wild: 'Captura', gift: 'Regalo', evolution: 'Evolución', trade: 'Obtener por intercambio',
   other_version: 'Otra versión', transfer: 'Transferencia', home: 'HOME'
 };
 
@@ -30,6 +31,7 @@ function basePackFor(gameId: string): string {
 
 function initialConfig(): GeneratorConfig {
   const firstGame = dataset.games.find(game => game.id === 'sword') ?? dataset.games[0];
+  const onlyCurrentGeneration = defaultOnlyCurrentGeneration(firstGame.id, firstGame.generation);
   return {
     gameId: firstGame.id,
     enabledContentPacks: [basePackFor(firstGame.id)].filter(Boolean),
@@ -39,7 +41,8 @@ function initialConfig(): GeneratorConfig {
     allowedMethods: ['wild', 'gift', 'evolution'],
     allowTradeEvolution: false,
     starterRule: 'require_one',
-    legendaryRule: 'exclude'
+    legendaryRule: 'exclude',
+    customRules: onlyCurrentGeneration ? { onlyCurrentGeneration: true } : undefined
   };
 }
 
@@ -79,7 +82,18 @@ function App() {
   const hasGameData = gameAvailabilityRows > 0 || availableCount > 0;
 
   const changeGame = (gameId: string) => {
-    setConfig(previous => ({ ...previous, gameId, enabledContentPacks: [basePackFor(gameId)].filter(Boolean) }));
+    const nextGame = dataset.games.find(item => item.id === gameId);
+    if (!nextGame) return;
+    const onlyCurrentGeneration = defaultOnlyCurrentGeneration(nextGame.id, nextGame.generation);
+    setConfig(previous => ({
+      ...previous,
+      gameId,
+      enabledContentPacks: [basePackFor(gameId)].filter(Boolean),
+      customRules: {
+        ...(previous.customRules ?? {}),
+        onlyCurrentGeneration
+      }
+    }));
     setResult(null);
   };
 
@@ -110,14 +124,26 @@ function App() {
     setResult(null);
   };
 
+  const setOnlyCurrentGeneration = (checked: boolean) => {
+    setConfig(previous => ({
+      ...previous,
+      customRules: {
+        ...(previous.customRules ?? {}),
+        onlyCurrentGeneration: checked
+      }
+    }));
+    setResult(null);
+  };
+
   const setMode = (mode: GeneratorMode) => {
     setConfig(previous => ({
       ...previous,
       mode,
-      customRules: mode === 'custom' ? (previous.customRules ?? {
+      customRules: mode === 'custom' ? {
         mythicalRule: 'exclude', ultraBeastRule: 'exclude', paradoxRule: 'exclude',
-        pseudoLegendaryRule: 'allow', fossilRule: 'allow'
-      }) : previous.customRules
+        pseudoLegendaryRule: 'allow', fossilRule: 'allow',
+        ...(previous.customRules ?? {})
+      } : previous.customRules
     }));
     setResult(null);
   };
@@ -279,6 +305,7 @@ function App() {
 
                       <div className="field-block"><span className="field-label">Etapa de la aventura</span><div className="segmented">{([['main_story','Historia'],['postgame','Postgame'],['all','Todo']] as [AdventureStage,string][]).map(([value,label]) => <button key={value} className={config.stage === value ? 'active' : ''} onClick={() => {setConfig({...config,stage:value});setResult(null)}}>{label}</button>)}</div></div>
                       <div className="field-block"><span className="field-label">Equipo</span><div className="team-size">{[1,2,3,4,5,6].map(size => <button key={size} className={config.teamSize === size ? 'active' : ''} onClick={() => {setConfig({...config,teamSize:size});setResult(null)}}>{size}</button>)}</div><small>{config.teamSize} {config.teamSize === 1 ? 'compañero' : 'compañeros'}, una nueva historia.</small></div>
+                      {game.generation > 1 && <div className="field-block"><CheckOption label="Solo Pokémon introducidos en esta generación" checked={Boolean(config.customRules?.onlyCurrentGeneration)} onChange={setOnlyCurrentGeneration} /><small>Limita el equipo a especies estrenadas en la Generación {generationLabel(game.generation)}.</small></div>}
                     </div>
                   </details>
 
@@ -295,7 +322,7 @@ function App() {
                     <summary>Opciones avanzadas</summary>
                     <div className="config-content section-divider">
                       <RuleSelector label="Inicial" value={config.starterRule} onChange={value => {setConfig({...config,starterRule:value});setResult(null)}} />
-                      <RuleSelector label="Legendarios" value={config.legendaryRule} onChange={value => {setConfig({...config,legendaryRule:value});setResult(null)}} />
+                      <RuleSelector label="Legendarios y míticos" value={config.legendaryRule} onChange={value => {setConfig({...config,legendaryRule:value});setResult(null)}} />
 
                       {config.mode === 'custom' && <div className="custom-panel">
                         <h3>Filtros personalizados</h3>
@@ -304,7 +331,6 @@ function App() {
                           <label>Máximo compartiendo tipo<select value={config.customRules?.maxSharedType ?? ''} onChange={(e: { target: { value: string } }) => setConfig({...config,customRules:{...(config.customRules ?? {}),maxSharedType:e.target.value ? Number(e.target.value) : undefined}})}><option value="">Sin límite</option>{[1,2,3,4,5,6].map(n => <option key={n} value={n}>{n}</option>)}</select></label>
                         </div>
                         <div className="custom-checks">
-                          <CheckOption label="Solo Pokémon de esta generación" checked={Boolean(config.customRules?.onlyCurrentGeneration)} onChange={checked => setConfig({...config,customRules:{...(config.customRules ?? {}),onlyCurrentGeneration:checked}})} />
                           <CheckOption label="Solo formas regionales" checked={Boolean(config.customRules?.onlyRegionalForms)} onChange={checked => setConfig({...config,customRules:{...(config.customRules ?? {}),onlyRegionalForms:checked}})} />
                           <CheckOption label="Permitir pseudo-legendarios" checked={config.customRules?.pseudoLegendaryRule !== 'exclude'} onChange={checked => setConfig({...config,customRules:{...(config.customRules ?? {}),pseudoLegendaryRule:checked ? 'allow' : 'exclude'}})} />
                           <CheckOption label="Permitir fósiles" checked={config.customRules?.fossilRule !== 'exclude'} onChange={checked => setConfig({...config,customRules:{...(config.customRules ?? {}),fossilRule:checked ? 'allow' : 'exclude'}})} />
@@ -316,7 +342,7 @@ function App() {
 
                 <aside className="journey-aside">
                   <div className="destination-card"><div className="destination-art"><span>DESTINO · GENERACIÓN {generationLabel(game.generation)}</span><div>✦</div></div><h2>Un mundo por recorrer.</h2><p>Cada partida puede empezar con compañeros distintos.</p></div>
-                  <div className="summary-card"><h3>Tu punto de partida</h3><p><b>⚑ {game.name}</b><small>Juego base · Generación {generationLabel(game.generation)}</small></p><p><b>♧ {config.teamSize} compañeros</b><small>{config.starterRule === 'require_one' ? 'Un inicial' : 'Inicial libre'} · {config.legendaryRule === 'exclude' ? 'Sin legendarios' : 'Legendarios permitidos'}</small></p><p><b>◉ Modo {config.mode === 'adventure' ? 'Aventura' : config.mode === 'random' ? 'Full Random' : 'Personalizado'}</b><small>{availableCount} candidatos disponibles ahora</small></p></div>
+                  <div className="summary-card"><h3>Tu punto de partida</h3><p><b>⚑ {game.name}</b><small>Juego base · Generación {generationLabel(game.generation)}</small></p><p><b>♧ {config.teamSize} compañeros</b><small>{config.starterRule === 'require_one' ? 'Un inicial' : 'Inicial libre'} · {config.legendaryRule === 'exclude' ? 'Sin legendarios ni míticos' : 'Legendarios/míticos permitidos'}</small></p><p><b>◉ Modo {config.mode === 'adventure' ? 'Aventura' : config.mode === 'random' ? 'Full Random' : 'Personalizado'}</b><small>{availableCount} candidatos disponibles ahora</small></p></div>
                   {!hasGameData ? <div className="data-warning">⚠ <span><b>Sin candidatos importados.</b> Este juego aún no tiene una Pokédex utilizable en la build actual.</span></div> : usingDexFallback ? <div className="data-warning">⚠ <span><b>Cobertura Pokédex para pruebas.</b> Puedes generar equipos con la Pokédex regional completa. Historia/Postgame y métodos exactos aún están pendientes de curación.</span></div> : <div className="respect-card">♢ <span>Tus filtros se respetan siempre. Si no hay suficientes Pokémon, tú decides cómo continuar.</span></div>}
                 </aside>
               </div>
