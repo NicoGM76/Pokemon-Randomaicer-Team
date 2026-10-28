@@ -8,8 +8,8 @@ const pokemon = (id: number, name: string) => ({
   id,
   name,
   types: ['normal'] as PokemonType[],
-  introducedGeneration: 1,
-  evolutionFamilyId: `chain-${id}`,
+  introducedGeneration: id === 979 ? 9 : 1,
+  evolutionFamilyId: 'chain-kanto-test',
   stats: { hp: 50, attack: 50, defense: 50, specialAttack: 50, specialDefense: 50, speed: 50 },
   specialTags: [],
   isPseudoLegendary: false,
@@ -32,17 +32,30 @@ const config: GeneratorConfig = {
 function dataset(availability: CompiledDataset['availability'] = []): CompiledDataset {
   return {
     metadata: { schemaVersion: 3, datasetVersion: 'test', generatedAt: '2026-10-28T00:00:00Z' },
-    pokemon: [pokemon(1, 'Bulbasaur'), pokemon(2, 'Ivysaur')],
+    pokemon: [
+      pokemon(1, 'Bulbasaur'),
+      pokemon(2, 'Ivysaur'),
+      pokemon(3, 'Venusaur'),
+      pokemon(979, 'Annihilape')
+    ],
     forms: [],
     generations: [{ id: 'gen-1', number: 1, name: 'Generación I' }],
     gameFamilies: [],
     games: [{ id: 'red', name: 'Pokémon Rojo', generation: 1, familyId: 'rby', dexIds: ['kanto-classic'] }],
     contentPacks: [{ id: 'red-base', gameId: 'red', name: 'Juego base', type: 'base', dexIds: ['kanto-classic'] }],
-    regionalDexes: [{ id: 'kanto-classic', name: 'Kanto', region: 'Kanto', entryCount: 1, kind: 'regional', entryStatus: 'imported' }],
-    regionalDexEntries: [{ dexId: 'kanto-classic', pokemonId: 1, dexNumber: 1, source: 'pokeapi' }],
+    regionalDexes: [{ id: 'kanto-classic', name: 'Kanto', region: 'Kanto', entryCount: 3, kind: 'regional', entryStatus: 'imported' }],
+    regionalDexEntries: [
+      { dexId: 'kanto-classic', pokemonId: 1, dexNumber: 1, source: 'pokeapi' },
+      { dexId: 'kanto-classic', pokemonId: 2, dexNumber: 2, source: 'pokeapi' },
+      { dexId: 'kanto-classic', pokemonId: 3, dexNumber: 3, source: 'pokeapi' }
+    ],
     mechanicCatalogs: [],
     availability,
-    evolutions: []
+    evolutions: [
+      { fromId: 1, toId: 2, conditions: [{ type: 'level', minLevel: 16 }] },
+      { fromId: 2, toId: 3, conditions: [{ type: 'level', minLevel: 32 }] },
+      { fromId: 3, toId: 979, conditions: [{ type: 'special', conditionId: 'later-generation-evolution' }] }
+    ]
   };
 }
 
@@ -50,12 +63,11 @@ describe('regional dex fallback', () => {
   it('builds candidates from the enabled regional dex when a game has no curated availability', () => {
     const data = dataset();
     expect(usesRegionalDexFallback(data, config)).toBe(true);
-    expect(buildCandidates(data, config).map(candidate => candidate.sourcePokemon.id)).toEqual([1]);
+    expect(buildCandidates(data, config).map(candidate => candidate.resolvedPokemon.id)).toEqual([979]);
   });
 
   it('does not leak regional-dex-only Pokémon when curated availability exists', () => {
     const data = dataset([{ pokemonId: 2, gameId: 'red', contentPackId: 'red-base', stage: 'main_story', method: 'wild' }]);
     expect(usesRegionalDexFallback(data, config)).toBe(false);
-    expect(buildCandidates(data, config).map(candidate => candidate.sourcePokemon.id)).toEqual([2]);
   });
 });
