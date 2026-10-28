@@ -29,7 +29,10 @@ const config: GeneratorConfig = {
   legendaryRule: 'allow'
 };
 
-function dataset(availability: CompiledDataset['availability'] = []): CompiledDataset {
+function dataset(
+  availability: CompiledDataset['availability'] = [],
+  availabilityCoverage: CompiledDataset['availabilityCoverage'] = []
+): CompiledDataset {
   return {
     metadata: { schemaVersion: 3, datasetVersion: 'test', generatedAt: '2026-10-28T00:00:00Z' },
     pokemon: [
@@ -51,6 +54,7 @@ function dataset(availability: CompiledDataset['availability'] = []): CompiledDa
     ],
     mechanicCatalogs: [],
     availability,
+    availabilityCoverage,
     evolutions: [
       { fromId: 1, toId: 2, conditions: [{ type: 'level', minLevel: 16 }] },
       { fromId: 2, toId: 3, conditions: [{ type: 'level', minLevel: 32 }] },
@@ -66,8 +70,19 @@ describe('regional dex fallback', () => {
     expect(buildCandidates(data, config).map(candidate => candidate.resolvedPokemon.id)).toEqual([3]);
   });
 
-  it('does not leak regional-dex-only Pokémon when curated availability exists', () => {
-    const data = dataset([{ pokemonId: 2, gameId: 'red', contentPackId: 'red-base', stage: 'main_story', method: 'wild' }]);
+  it('keeps using the regional dex when curated availability is only partial', () => {
+    const data = dataset(
+      [{ pokemonId: 2, gameId: 'red', contentPackId: 'red-base', stage: 'main_story', method: 'wild' }],
+      [{ gameId: 'red', status: 'partial' }]
+    );
+    expect(usesRegionalDexFallback(data, config)).toBe(true);
+  });
+
+  it('trusts curated availability only when coverage is explicitly complete', () => {
+    const data = dataset(
+      [{ pokemonId: 2, gameId: 'red', contentPackId: 'red-base', stage: 'main_story', method: 'wild' }],
+      [{ gameId: 'red', status: 'complete' }]
+    );
     expect(usesRegionalDexFallback(data, config)).toBe(false);
   });
 });
