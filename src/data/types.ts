@@ -8,6 +8,11 @@ export interface DatasetMetadata {
   generatedAt: string;
 }
 
+export interface AvailabilityCoverage {
+  gameId: string;
+  status: 'partial' | 'complete';
+}
+
 export interface CompiledDataset {
   metadata: DatasetMetadata;
   pokemon: Pokemon[];
@@ -20,5 +25,6 @@ export interface CompiledDataset {
   regionalDexEntries: RegionalDexEntry[];
   mechanicCatalogs: MechanicCatalog[];
   availability: Availability[];
+  availabilityCoverage?: AvailabilityCoverage[];
   evolutions: EvolutionStep[];
 }
