@@ -11,8 +11,9 @@ function shuffled<T>(items: T[], rng: () => number): T[] {
   return copy;
 }
 
-function isLegendary(candidate: PokemonCandidate): boolean {
-  return candidate.resolvedPokemon.specialTags.includes('legendary');
+function isLegendaryOrMythical(candidate: PokemonCandidate): boolean {
+  return candidate.resolvedPokemon.specialTags.includes('legendary') ||
+    candidate.resolvedPokemon.specialTags.includes('mythical');
 }
 
 export function generateRandomTeam(
@@ -40,8 +41,8 @@ export function generateRandomTeam(
   if (config.starterRule === 'require_one' && !current().some(c => c.resolvedPokemon.isStarter)) {
     tryAdd(c => c.resolvedPokemon.isStarter);
   }
-  if (config.legendaryRule === 'require_one' && !current().some(isLegendary)) {
-    tryAdd(isLegendary);
+  if (config.legendaryRule === 'require_one' && !current().some(isLegendaryOrMythical)) {
+    tryAdd(isLegendaryOrMythical);
   }
 
   for (const candidate of shuffled(candidates, rng)) {
