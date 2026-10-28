@@ -8,6 +8,7 @@ const read = file => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
 const dexes = read('src/data/curated/regional-dexes.json');
 const entries = read('src/data/generated/regional-dex-entries.json');
 const pokemon = read('src/data/generated/pokemon.json');
+const evolutions = read('src/data/generated/evolutions.json');
 
 const dexIds = new Set(dexes.map(dex => dex.id));
 const pokemonIds = new Set(pokemon.map(mon => mon.id));
@@ -20,6 +21,18 @@ for (const entry of entries) {
   if (!isValidRegionalDexNumber(entry.dexNumber)) errors.push(`${entry.dexId}: invalid dex number ${entry.dexNumber}`);
 }
 
+const evolutionKeys = new Set();
+for (const step of evolutions) {
+  if (!pokemonIds.has(step.fromId)) errors.push(`evolution: unknown source pokemon ${step.fromId}`);
+  if (!pokemonIds.has(step.toId)) errors.push(`evolution: unknown target pokemon ${step.toId}`);
+  if (step.fromId === step.toId) errors.push(`evolution: self-cycle ${step.fromId}`);
+  if (!Array.isArray(step.conditions) || step.conditions.length === 0) errors.push(`evolution: ${step.fromId}>${step.toId} has no conditions`);
+  const key = JSON.stringify(step);
+  if (evolutionKeys.has(key)) errors.push(`evolution: duplicate step ${step.fromId}>${step.toId}`);
+  evolutionKeys.add(key);
+}
+if (evolutions.length < 500) errors.push(`evolution dataset suspiciously small: ${evolutions.length} steps`);
+
 const byDex = new Map();
 for (const entry of entries) byDex.set(entry.dexId, (byDex.get(entry.dexId) ?? 0) + 1);
 const countMismatches = dexes
@@ -31,7 +44,7 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Data references OK: ${dexes.length} dexes, ${entries.length} dex entries, ${pokemon.length} Pokémon records.`);
+console.log(`Data references OK: ${dexes.length} dexes, ${entries.length} dex entries, ${pokemon.length} Pokémon records, ${evolutions.length} evolution steps.`);
 if (countMismatches.length) {
   console.log(`Count review needed for ${countMismatches.length} dexes:`);
   for (const item of countMismatches) console.log(`- ${item.id}: ${item.actual}/${item.expected}`);
