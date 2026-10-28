@@ -23,7 +23,8 @@ function buildDexFallbackIds(dataset: CompiledDataset, config: GeneratorConfig):
 }
 
 export function usesRegionalDexFallback(dataset: CompiledDataset, config: GeneratorConfig): boolean {
-  return !dataset.availability.some(rule => rule.gameId === config.gameId);
+  const coverage = dataset.availabilityCoverage?.find(item => item.gameId === config.gameId);
+  return coverage?.status !== 'complete';
 }
 
 export function buildCandidates(dataset: CompiledDataset, config: GeneratorConfig): PokemonCandidate[] {
