@@ -4,7 +4,7 @@ import type { AcquisitionMethod, AdventureStage } from './domain/games/types';
 import type { GeneratorConfig, GeneratorMode, GenerationResult, RequiredOneRule, SavedTeam, TeamSlot } from './domain/teams/types';
 import type { PokemonType } from './domain/pokemon/types';
 import { generateTeam } from './generator/generateTeam';
-import { buildCandidates } from './generator/candidates/buildCandidates';
+import { buildCandidates, usesRegionalDexFallback } from './generator/candidates/buildCandidates';
 import { regenerateSlot } from './generator/regeneration/regenerateSlot';
 import { LocalStorageTeamRepository } from './storage/LocalStorageTeamRepository';
 
@@ -59,7 +59,7 @@ function mechanicFor(id: number): string | null {
 
 function acquisitionLabel(slot: TeamSlot): string {
   const method = slot.candidate.acquisitionOptions[0]?.method;
-  return method ? methodLabels[method] : 'Disponible';
+  return method ? methodLabels[method] : 'Pokédex regional';
 }
 
 function App() {
@@ -74,8 +74,9 @@ function App() {
   const gamesForGeneration = dataset.games.filter(item => item.generation === game.generation);
   const contentPacks = dataset.contentPacks.filter(pack => pack.gameId === config.gameId);
   const availableCount = useMemo(() => buildCandidates(dataset, config).length, [config]);
+  const usingDexFallback = usesRegionalDexFallback(dataset, config);
   const gameAvailabilityRows = dataset.availability.filter(rule => rule.gameId === config.gameId).length;
-  const hasGameData = gameAvailabilityRows > 0;
+  const hasGameData = gameAvailabilityRows > 0 || availableCount > 0;
 
   const changeGame = (gameId: string) => {
     setConfig(previous => ({ ...previous, gameId, enabledContentPacks: [basePackFor(gameId)].filter(Boolean) }));
@@ -123,12 +124,18 @@ function App() {
 
   const runGenerator = () => {
     if (!hasGameData) {
-      setNotice('Este juego ya está en el catálogo, pero su disponibilidad todavía no ha sido importada/curada.');
+      setNotice('No hay candidatos importados para este juego todavía.');
       return;
     }
     const generated = generateTeam(dataset, config, result?.team ?? []);
     setResult(generated);
-    setNotice(generated.complete ? 'Equipo generado respetando tus reglas.' : `${generated.generatedSize}/${generated.requestedSize} disponibles con esta configuración.`);
+    if (usingDexFallback) {
+      setNotice(generated.complete
+        ? 'Equipo de prueba generado desde la Pokédex regional. Métodos y etapa todavía son provisionales para este juego.'
+        : `${generated.generatedSize}/${generated.requestedSize} disponibles desde la Pokédex regional con estos filtros.`);
+    } else {
+      setNotice(generated.complete ? 'Equipo generado respetando tus reglas.' : `${generated.generatedSize}/${generated.requestedSize} disponibles con esta configuración.`);
+    }
     window.setTimeout(() => document.getElementById('team-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
   };
 
@@ -280,6 +287,7 @@ function App() {
                     <div className="config-content section-divider">
                       <div className="chip-row method-row">{(Object.keys(methodLabels) as AcquisitionMethod[]).map(method => <label key={method} className={config.allowedMethods.includes(method) ? 'check-chip checked' : 'check-chip'}><input type="checkbox" checked={config.allowedMethods.includes(method)} onChange={() => toggleMethod(method)} /> {methodLabels[method]}</label>)}</div>
                       <div className="toggle-line"><div><strong>Evolución por intercambio</strong><small>Permite evoluciones que necesitan un intercambio.</small></div><button className={config.allowTradeEvolution ? 'switch on' : 'switch'} onClick={() => {setConfig({...config,allowTradeEvolution:!config.allowTradeEvolution});setResult(null)}}><span /></button></div>
+                      {usingDexFallback && <small>Modo de prueba por Pokédex: estos métodos todavía no reducen el pool hasta completar la availability específica del juego.</small>}
                     </div>
                   </details>
 
@@ -308,12 +316,12 @@ function App() {
 
                 <aside className="journey-aside">
                   <div className="destination-card"><div className="destination-art"><span>DESTINO · GENERACIÓN {generationLabel(game.generation)}</span><div>✦</div></div><h2>Un mundo por recorrer.</h2><p>Cada partida puede empezar con compañeros distintos.</p></div>
-                  <div className="summary-card"><h3>Tu punto de partida</h3><p><b>⚑ {game.name}</b><small>Juego base · Generación {generationLabel(game.generation)}</small></p><p><b>♧ {config.teamSize} compañeros</b><small>{config.starterRule === 'require_one' ? 'Un inicial' : 'Inicial libre'} · {config.legendaryRule === 'exclude' ? 'Sin legendarios' : 'Legendarios permitidos'}</small></p><p><b>◉ Modo {config.mode === 'adventure' ? 'Aventura' : config.mode === 'random' ? 'Full Random' : 'Personalizado'}</b><small>{availableCount} candidatos legales ahora</small></p></div>
-                  {hasGameData ? <div className="respect-card">♢ <span>Tus filtros se respetan siempre. Si no hay suficientes Pokémon, tú decides cómo continuar.</span></div> : <div className="data-warning">⚠ <span><b>Datos de disponibilidad pendientes.</b> El juego está en el catálogo, pero aún necesita importar/curar su pool antes de generar.</span></div>}
+                  <div className="summary-card"><h3>Tu punto de partida</h3><p><b>⚑ {game.name}</b><small>Juego base · Generación {generationLabel(game.generation)}</small></p><p><b>♧ {config.teamSize} compañeros</b><small>{config.starterRule === 'require_one' ? 'Un inicial' : 'Inicial libre'} · {config.legendaryRule === 'exclude' ? 'Sin legendarios' : 'Legendarios permitidos'}</small></p><p><b>◉ Modo {config.mode === 'adventure' ? 'Aventura' : config.mode === 'random' ? 'Full Random' : 'Personalizado'}</b><small>{availableCount} candidatos disponibles ahora</small></p></div>
+                  {!hasGameData ? <div className="data-warning">⚠ <span><b>Sin candidatos importados.</b> Este juego aún no tiene una Pokédex utilizable en la build actual.</span></div> : usingDexFallback ? <div className="data-warning">⚠ <span><b>Cobertura Pokédex para pruebas.</b> Puedes generar equipos con la Pokédex regional completa. Historia/Postgame y métodos exactos aún están pendientes de curación.</span></div> : <div className="respect-card">♢ <span>Tus filtros se respetan siempre. Si no hay suficientes Pokémon, tú decides cómo continuar.</span></div>}
                 </aside>
               </div>
 
-              <div className="generate-row"><span>{hasGameData ? 'Una selección nueva en cada aventura.' : 'Catálogo listo; disponibilidad del juego pendiente.'}</span><button className="primary large" disabled={!hasGameData} onClick={runGenerator}>⤨ Generar equipo</button></div>
+              <div className="generate-row"><span>{usingDexFallback ? 'Modo de prueba: pool basado en la Pokédex regional.' : 'Una selección nueva en cada aventura.'}</span><button className="primary large" disabled={!hasGameData} onClick={runGenerator}>⤨ Generar equipo</button></div>
             </>
           ) : (
             <TeamResult
