@@ -35,6 +35,15 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Sync all regional Pokédex data
+        run: npm run data:sync-all
+
+      - name: Validate catalog and generated data
+        run: npm run data:validate-all
+
+      - name: Run tests
+        run: npm run test:run
+
       - name: Build
         run: npm run build
 
