@@ -23,7 +23,7 @@ function mon(id: number, generation: number): Pokemon {
 const dataset = {
   metadata: { schemaVersion: 3, datasetVersion: 'test', generatedAt: '2026-10-28' },
   pokemon: [mon(1, 1), mon(2, 1), mon(3, 1), mon(4, 2), mon(5, 2), mon(6, 2), mon(7, 2)],
-  forms: [], generations: [], gameFamilies: [], mechanicCatalogs: [], availability: [], availabilityCoverage: {}, evolutions: [], regionalDexes: [],
+  forms: [], generations: [], gameFamilies: [], mechanicCatalogs: [], availability: [], availabilityCoverage: [], evolutions: [], regionalDexes: [],
   games: [
     { id: 'red', name: 'Red', generation: 1, familyId: 'rby', dexIds: ['red-dex'] },
     { id: 'gold', name: 'Gold', generation: 2, familyId: 'gsc', dexIds: ['gold-dex'] }
