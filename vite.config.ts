@@ -5,6 +5,12 @@ export default defineConfig({
   base: '/Pokemon-Randomaicer-Team/',
   plugins: [react()],
   test: {
-    environment: 'node'
+    environment: 'node',
+    exclude: [
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/*.node.test.ts',
+      'scripts/**/*.test.mjs'
+    ]
   }
 });
