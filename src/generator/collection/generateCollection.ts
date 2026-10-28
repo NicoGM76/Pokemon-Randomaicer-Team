@@ -195,9 +195,13 @@ function attempt(
 
   for (const entry of config.entries) {
     const existing = currentByEntry.get(entry.id);
-    if (!existing?.locked) continue;
-    resultByEntry.set(entry.id, existing);
-    reserve(existing.team, reservedSpecies, reservedFamilies);
+    if (!existing) continue;
+    if (existing.locked) {
+      resultByEntry.set(entry.id, existing);
+      reserve(existing.team, reservedSpecies, reservedFamilies);
+      continue;
+    }
+    reserve(existing.team.filter(slot => slot.locked), reservedSpecies, reservedFamilies);
   }
 
   const pending = config.entries
