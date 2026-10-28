@@ -8,7 +8,12 @@ The generator has two top-level lines:
 - Individual team: Adventure / Full Random / Custom.
 - Team collection: Multiregion challenge.
 
-Each collection entry selects a concrete game and team size. The collection is generated jointly so later teams know what earlier teams consumed.
+Each collection entry selects:
+- a target generation/region identity used to decide which evolution families naturally belong to that team;
+- a concrete game used as the playable candidate pool;
+- a team size.
+
+The target generation and the game's technical generation are intentionally separate. This allows cases such as a Kanto team played in FireRed or Let's Go while still treating later evolutions by the origin of their family.
 
 ## Global collection rules
 - No repeated Pokémon across teams.
@@ -16,10 +21,10 @@ Each collection entry selects a concrete game and team size. The collection is g
 - Prefer type diversity inside each team, but type repetition is a penalty rather than a hard ban.
 - Prefer offensive coverage and physical/special balance through the existing Adventure scoring.
 - Maximum one bonus Pokémon per team.
-- Bonus is optional and should only be used if needed to complete/improve a team.
+- Bonus is optional and should only be used if needed to complete a team.
 - A later evolution belongs to the origin generation of its evolution family. Family origin generation is the minimum `introducedGeneration` among members of that family.
-- Use each selected game's own candidate pool first.
-- For bonus candidates, allow a Pokémon outside that game's normal pool while still respecting global duplicate/family rules. Bonus candidates are clearly marked.
+- Normal members come from the selected game's candidate pool and from families whose origin matches the target generation.
+- Bonus candidates first come from the selected game's other families; if that cannot fill the team, the challenge may use a wider global candidate as the single clearly marked bonus.
 - Generation-specific type-chart refinements remain an engine-quality follow-up; V1 collection reuses the current Adventure scorer rather than pretending generation-specific move coverage is already curated.
 
 ## Hybrid interaction
@@ -32,7 +37,7 @@ Each collection entry selects a concrete game and team size. The collection is g
 ## V1 boundaries
 Included:
 - 2-9 collection entries.
-- Concrete game selection per entry.
+- Target generation/region plus concrete game selection per entry.
 - 1-6 members per team.
 - Global no-duplicate species/family.
 - Optional one-bonus maximum per team.
