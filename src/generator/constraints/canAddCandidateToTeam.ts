@@ -1,7 +1,8 @@
 import type { GeneratorConfig, PokemonCandidate } from '../../domain/teams/types';
 
-function isLegendary(candidate: PokemonCandidate): boolean {
-  return candidate.resolvedPokemon.specialTags.includes('legendary');
+function isLegendaryOrMythical(candidate: PokemonCandidate): boolean {
+  return candidate.resolvedPokemon.specialTags.includes('legendary') ||
+    candidate.resolvedPokemon.specialTags.includes('mythical');
 }
 
 export function canAddCandidateToTeam(candidate: PokemonCandidate, currentTeam: PokemonCandidate[], config: GeneratorConfig): boolean {
@@ -19,8 +20,8 @@ export function canAddCandidateToTeam(candidate: PokemonCandidate, currentTeam: 
   if (config.starterRule === 'require_one' && candidate.resolvedPokemon.isStarter) {
     if (currentTeam.some(item => item.resolvedPokemon.isStarter)) return false;
   }
-  if (config.legendaryRule === 'require_one' && isLegendary(candidate)) {
-    if (currentTeam.some(isLegendary)) return false;
+  if (config.legendaryRule === 'require_one' && isLegendaryOrMythical(candidate)) {
+    if (currentTeam.some(isLegendaryOrMythical)) return false;
   }
 
   return true;
