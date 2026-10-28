@@ -28,6 +28,7 @@ export interface GeneratorConfig {
   allowTradeEvolution: boolean;
   starterRule: RequiredOneRule;
   legendaryRule: RequiredOneRule;
+  typeChartGeneration?: number;
   customRules?: CustomRules;
 }
 
