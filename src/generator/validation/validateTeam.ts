@@ -7,9 +7,14 @@ const messageByCode = {
   too_many_shared_types: 'El equipo supera el límite de tipos compartidos.',
   missing_required_starter: 'Falta el Pokémon inicial requerido.',
   too_many_starters: 'El equipo contiene más de un Pokémon inicial.',
-  missing_required_legendary: 'Falta el Pokémon legendario requerido.',
-  too_many_legendaries: 'El equipo contiene más de un Pokémon legendario.'
+  missing_required_legendary: 'Falta el Pokémon legendario o mítico requerido.',
+  too_many_legendaries: 'El equipo contiene más de un Pokémon legendario o mítico.'
 } as const;
+
+function isLegendaryOrMythical(candidate: PokemonCandidate): boolean {
+  return candidate.resolvedPokemon.specialTags.includes('legendary') ||
+    candidate.resolvedPokemon.specialTags.includes('mythical');
+}
 
 export function validateTeam(team: PokemonCandidate[], config: GeneratorConfig): TeamValidationResult {
   const issues: ValidationIssue[] = [];
@@ -34,10 +39,10 @@ export function validateTeam(team: PokemonCandidate[], config: GeneratorConfig):
     if (starters > 1) add('too_many_starters');
   }
 
-  const legendaries = team.filter(x => x.resolvedPokemon.specialTags.includes('legendary')).length;
+  const rareCount = team.filter(isLegendaryOrMythical).length;
   if (config.legendaryRule === 'require_one') {
-    if (legendaries === 0) add('missing_required_legendary');
-    if (legendaries > 1) add('too_many_legendaries');
+    if (rareCount === 0) add('missing_required_legendary');
+    if (rareCount > 1) add('too_many_legendaries');
   }
 
   return { valid: issues.length === 0, issues };
