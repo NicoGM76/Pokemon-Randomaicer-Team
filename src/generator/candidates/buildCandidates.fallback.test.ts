@@ -60,10 +60,10 @@ function dataset(availability: CompiledDataset['availability'] = []): CompiledDa
 }
 
 describe('regional dex fallback', () => {
-  it('builds candidates from the enabled regional dex when a game has no curated availability', () => {
+  it('builds candidates from the enabled regional dex and stops before later-generation evolutions', () => {
     const data = dataset();
     expect(usesRegionalDexFallback(data, config)).toBe(true);
-    expect(buildCandidates(data, config).map(candidate => candidate.resolvedPokemon.id)).toEqual([979]);
+    expect(buildCandidates(data, config).map(candidate => candidate.resolvedPokemon.id)).toEqual([3]);
   });
 
   it('does not leak regional-dex-only Pokémon when curated availability exists', () => {
