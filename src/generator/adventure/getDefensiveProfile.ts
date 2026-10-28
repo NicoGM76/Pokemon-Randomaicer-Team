@@ -1,5 +1,5 @@
 import type { PokemonType } from '../../domain/pokemon/types';
-import { pokemonTypes, typeChart } from './typeChart';
+import { normalizePokemonTypesForGeneration, pokemonTypesForGeneration, typeMultiplierForGeneration } from './typeChart';
 
 export interface DefensiveProfile {
   multipliers: Record<PokemonType, number>;
@@ -9,16 +9,26 @@ export interface DefensiveProfile {
   severeWeaknesses: PokemonType[];
 }
 
-export function getDefensiveProfile(defenderTypes: PokemonType[]): DefensiveProfile {
+export function getDefensiveProfile(defenderTypes: PokemonType[], generation?: number): DefensiveProfile {
+  const activeTypes = pokemonTypesForGeneration(generation);
+  const normalizedDefenderTypes = normalizePokemonTypesForGeneration(defenderTypes, generation);
   const multipliers = {} as Record<PokemonType, number>;
-  for (const attackType of pokemonTypes) {
-    multipliers[attackType] = defenderTypes.reduce((total, defendType) => total * (typeChart[attackType][defendType] ?? 1), 1);
+
+  for (const attackType of activeTypes) {
+    multipliers[attackType] = normalizedDefenderTypes.reduce(
+      (total, defendType) => total * typeMultiplierForGeneration(attackType, defendType, generation),
+      1
+    );
   }
+  for (const attackType of pokemonTypesForGeneration()) {
+    if (!(attackType in multipliers)) multipliers[attackType] = 1;
+  }
+
   return {
     multipliers,
-    immunities: pokemonTypes.filter(t => multipliers[t] === 0),
-    resistances: pokemonTypes.filter(t => multipliers[t] > 0 && multipliers[t] < 1),
-    weaknesses: pokemonTypes.filter(t => multipliers[t] > 1),
-    severeWeaknesses: pokemonTypes.filter(t => multipliers[t] >= 4)
+    immunities: activeTypes.filter(type => multipliers[type] === 0),
+    resistances: activeTypes.filter(type => multipliers[type] > 0 && multipliers[type] < 1),
+    weaknesses: activeTypes.filter(type => multipliers[type] > 1),
+    severeWeaknesses: activeTypes.filter(type => multipliers[type] >= 4)
   };
 }
