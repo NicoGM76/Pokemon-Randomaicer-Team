@@ -65,8 +65,8 @@ const baseGenerator = (gameId: string, pack: string) => ({
 
 const config: CollectionConfig = {
   entries: [
-    { id: 'kanto', label: 'Kanto', generator: baseGenerator('red', 'red-base'), allowBonus: false },
-    { id: 'johto', label: 'Johto', generator: baseGenerator('gold', 'gold-base'), allowBonus: false }
+    { id: 'kanto', label: 'Kanto', targetGeneration: 1, generator: baseGenerator('red', 'red-base'), allowBonus: false },
+    { id: 'johto', label: 'Johto', targetGeneration: 2, generator: baseGenerator('gold', 'gold-base'), allowBonus: false }
   ],
   avoidRepeatedSpecies: true,
   avoidRepeatedFamilies: true,
@@ -93,10 +93,10 @@ describe('generateCollection', () => {
     expect(result.duplicateFamilies).toBe(0);
   });
 
-  it('uses at most one bonus per team when a normal pool cannot complete it', () => {
+  it('uses at most one bonus per team when a regional-origin pool cannot complete it', () => {
     const bonusConfig: CollectionConfig = {
       ...config,
-      entries: [{ id: 'kanto', label: 'Kanto', generator: { ...baseGenerator('red', 'red-base'), teamSize: 4 }, allowBonus: true }]
+      entries: [{ id: 'kanto', label: 'Kanto', targetGeneration: 1, generator: { ...baseGenerator('red', 'red-base'), teamSize: 4 }, allowBonus: true }]
     };
     const result = generateCollection(dataset, bonusConfig, undefined, fixedRng);
     expect(result.teams[0].bonusCandidateKeys.length).toBeLessThanOrEqual(1);
