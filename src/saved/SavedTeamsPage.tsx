@@ -1,11 +1,9 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loadDataset } from '../data/loadDataset';
+import games from '../data/curated/games.json';
 import type { GenerationResult, SavedTeam } from '../domain/teams/types';
 import { saveAdventureDraft } from '../adventure/adventureDraft';
 import { LocalStorageTeamRepository } from '../storage/LocalStorageTeamRepository';
-
-const dataset = loadDataset();
 
 function spriteUrl(id: number): string {
   return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
@@ -60,7 +58,7 @@ export default function SavedTeamsPage() {
               <div>
                 <span className="mini-badge">{saved.config.mode === 'adventure' ? 'Aventura' : saved.config.mode === 'random' ? 'Full Random' : 'Personalizado'}</span>
                 <h2>{saved.name}</h2>
-                <p>{dataset.games.find(game => game.id === saved.gameId)?.name ?? saved.gameId}</p>
+                <p>{games.find(game => game.id === saved.gameId)?.name ?? saved.gameId}</p>
               </div>
               <div className="saved-sprites">
                 {saved.team.slice(0, 6).map(slot => (
