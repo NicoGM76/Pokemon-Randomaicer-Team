@@ -18,7 +18,8 @@ function browserStorage(): Storage | null {
 export class LocalDraftStore<T> {
   constructor(
     private readonly key: string,
-    private readonly version: number
+    private readonly version: number,
+    private readonly isValid?: (value: unknown) => value is T
   ) {}
 
   load(): T | null {
@@ -27,8 +28,9 @@ export class LocalDraftStore<T> {
       const raw = storage?.getItem(this.key) ?? memoryFallback.get(this.key) ?? null;
       if (!raw) return null;
 
-      const parsed = JSON.parse(raw) as Partial<DraftEnvelope<T>> | null;
+      const parsed = JSON.parse(raw) as Partial<DraftEnvelope<unknown>> | null;
       if (!parsed || parsed.version !== this.version || !('value' in parsed)) return null;
+      if (this.isValid && !this.isValid(parsed.value)) return null;
       return parsed.value as T;
     } catch {
       return null;
