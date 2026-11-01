@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { loadDataset } from './data/loadDataset';
 import type { AcquisitionMethod, AdventureStage } from './domain/games/types';
 import type { GeneratorConfig, GeneratorMode, GenerationResult, RequiredOneRule, SavedTeam, TeamSlot } from './domain/teams/types';
@@ -8,6 +8,7 @@ import { buildCandidates, usesRegionalDexFallback } from './generator/candidates
 import { regenerateSlot } from './generator/regeneration/regenerateSlot';
 import { defaultOnlyCurrentGeneration } from './generator/config/gamePreferences';
 import { LocalStorageTeamRepository } from './storage/LocalStorageTeamRepository';
+import { loadAdventureDraft, saveAdventureDraft } from './adventure/adventureDraft';
 
 const dataset = loadDataset();
 const repository = new LocalStorageTeamRepository();
@@ -66,11 +67,14 @@ function acquisitionLabel(slot: TeamSlot): string {
 }
 
 function App() {
-  const [page, setPage] = useState<'generator' | 'saved'>('generator');
-  const [config, setConfig] = useState<GeneratorConfig>(initialConfig);
-  const [result, setResult] = useState<GenerationResult | null>(null);
-  const [savedTeams, setSavedTeams] = useState<SavedTeam[]>(() => repository.getAll());
-  const [notice, setNotice] = useState<string>('');
+  const restoredDraft = useMemo(() => loadAdventureDraft(), []);
+  const [config, setConfig] = useState<GeneratorConfig>(() => restoredDraft?.config ?? initialConfig());
+  const [result, setResult] = useState<GenerationResult | null>(() => restoredDraft?.result ?? null);
+  const [notice, setNotice] = useState<string>(() => restoredDraft?.notice ?? '');
+
+  useEffect(() => {
+    saveAdventureDraft({ config, result, notice });
+  }, [config, result, notice]);
 
   const game = dataset.games.find(item => item.id === config.gameId) ?? dataset.games[0];
   const generations = [...new Set(dataset.games.map(item => item.generation))].sort((a, b) => a - b);
@@ -89,10 +93,7 @@ function App() {
       ...previous,
       gameId,
       enabledContentPacks: [basePackFor(gameId)].filter(Boolean),
-      customRules: {
-        ...(previous.customRules ?? {}),
-        onlyCurrentGeneration
-      }
+      customRules: { ...(previous.customRules ?? {}), onlyCurrentGeneration }
     }));
     setResult(null);
   };
@@ -127,10 +128,7 @@ function App() {
   const setOnlyCurrentGeneration = (checked: boolean) => {
     setConfig(previous => ({
       ...previous,
-      customRules: {
-        ...(previous.customRules ?? {}),
-        onlyCurrentGeneration: checked
-      }
+      customRules: { ...(previous.customRules ?? {}), onlyCurrentGeneration: checked }
     }));
     setResult(null);
   };
@@ -220,148 +218,94 @@ function App() {
       team: result.team
     };
     repository.save(saved);
-    setSavedTeams(repository.getAll());
     setNotice('Equipo guardado en este navegador.');
   };
 
-  const loadSaved = (saved: SavedTeam) => {
-    setConfig(saved.config);
-    setResult({
-      team: saved.team, requestedSize: saved.config.teamSize, generatedSize: saved.team.length,
-      complete: saved.team.length === saved.config.teamSize, validation: { valid: true, issues: [] }, warnings: []
-    });
-    setPage('generator');
-    setNotice(`Equipo “${saved.name}” cargado.`);
-  };
-
-  const deleteSaved = (id: string) => {
-    repository.delete(id);
-    setSavedTeams(repository.getAll());
-  };
-
   return (
-    <div className="site-shell">
-      <header className="topbar">
-        <button className="brand" onClick={() => setPage('generator')}>
-          <span className="brand-mark">◉</span>
-          <span><strong>Pokémon Adventure</strong><small>TEAM GENERATOR</small></span>
-        </button>
-        <nav>
-          <button className={page === 'generator' ? 'nav-link active' : 'nav-link'} onClick={() => setPage('generator')}>Generador</button>
-          <button className={page === 'saved' ? 'nav-pill active' : 'nav-pill'} onClick={() => setPage('saved')}>▱ Mis equipos</button>
-        </nav>
-        <span className="header-note">Sin cuentas. Solo aventura.</span>
-      </header>
+    <main className="page">
+      {!result ? (
+        <>
+          <section className="hero">
+            <div className="section-kicker">EL PRÓXIMO VIAJE EMPIEZA AQUÍ</div>
+            <h1>Tu aventura. Tus reglas.</h1>
+            <p className="hero-copy">Elige tu juego, marca tus límites y descubre a tus próximos compañeros.</p>
+          </section>
 
-      {page === 'saved' ? (
-        <main className="page saved-page">
-          <div className="section-kicker">TU MOCHILA DE EQUIPOS</div>
-          <h1>Mis equipos</h1>
-          <p className="hero-copy">Guardados en este navegador. Puedes volver a cualquiera cuando quieras.</p>
-          {savedTeams.length === 0 ? (
-            <div className="empty-state"><span>◇</span><h2>Aún no guardaste equipos</h2><p>Genera una expedición y usa “Guardar equipo”.</p><button className="primary" onClick={() => setPage('generator')}>Ir al generador</button></div>
-          ) : (
-            <div className="saved-grid">
-              {savedTeams.map(saved => (
-                <article className="saved-card" key={saved.id}>
-                  <div><span className="mini-badge">{saved.config.mode === 'adventure' ? 'Aventura' : saved.config.mode === 'random' ? 'Full Random' : 'Personalizado'}</span><h2>{saved.name}</h2><p>{dataset.games.find(g => g.id === saved.gameId)?.name ?? saved.gameId}</p></div>
-                  <div className="saved-sprites">{saved.team.slice(0,6).map(slot => <img key={slot.candidate.candidateKey} src={spriteUrl(slot.candidate.resolvedPokemon.id)} alt="" />)}</div>
-                  <small>{new Date(saved.createdAt).toLocaleDateString('es-CO')} · {saved.team.length} compañeros</small>
-                  <div className="saved-actions"><button className="secondary" onClick={() => loadSaved(saved)}>Cargar</button><button className="danger" onClick={() => deleteSaved(saved.id)}>Eliminar</button></div>
-                </article>
-              ))}
-            </div>
-          )}
-        </main>
+          <div className="mode-tabs">
+            <button className={config.mode === 'adventure' ? 'active' : ''} onClick={() => setMode('adventure')}>◉ Aventura</button>
+            <button className={config.mode === 'random' ? 'active' : ''} onClick={() => setMode('random')}>⤨ Full Random</button>
+            <button className={config.mode === 'custom' ? 'active' : ''} onClick={() => setMode('custom')}>☷ Personalizado</button>
+          </div>
+          <p className="mode-help">{config.mode === 'adventure' ? 'Aventura · Compañeros que puedes conseguir en el juego elegido, con equilibrio moderado.' : config.mode === 'random' ? 'Full Random · Azar total dentro de todas tus reglas legales.' : 'Personalizado · Combina filtros avanzados para definir exactamente tu pool.'}</p>
+
+          <div className="generator-layout">
+            <section className="config-card">
+              <div className="config-title"><h2>Prepara tu expedición</h2><span>CONFIGURACIÓN GENERAL</span></div>
+              <details open className="mobile-group">
+                <summary>Juego y aventura</summary>
+                <div className="config-content">
+                  <div className="field-grid">
+                    <label>Generación<select value={game.generation} onChange={(e: { target: { value: string } }) => changeGeneration(Number(e.target.value))}>{generations.map(gen => <option key={gen} value={gen}>{generationLabel(gen)} · Generación {gen}</option>)}</select></label>
+                    <label>Juego<select value={config.gameId} onChange={(e: { target: { value: string } }) => changeGame(e.target.value)}>{gamesForGeneration.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}</select></label>
+                  </div>
+
+                  {contentPacks.length > 1 && <div className="field-block"><span className="field-label">Contenido</span><div className="chip-row">{contentPacks.map(pack => <label className={config.enabledContentPacks.includes(pack.id) ? 'check-chip checked' : 'check-chip'} key={pack.id}><input type="checkbox" checked={config.enabledContentPacks.includes(pack.id)} disabled={pack.type === 'base'} onChange={() => togglePack(pack.id)} /> {pack.name}</label>)}</div><small>Juego base siempre activo. Marca solo las expansiones que tengas.</small></div>}
+
+                  <div className="field-block"><span className="field-label">Etapa de la aventura</span><div className="segmented">{([['main_story','Historia'],['postgame','Postgame'],['all','Todo']] as [AdventureStage,string][]).map(([value,label]) => <button key={value} className={config.stage === value ? 'active' : ''} onClick={() => {setConfig({...config,stage:value});setResult(null)}}>{label}</button>)}</div></div>
+                  <div className="field-block"><span className="field-label">Equipo</span><div className="team-size">{[1,2,3,4,5,6].map(size => <button key={size} className={config.teamSize === size ? 'active' : ''} onClick={() => {setConfig({...config,teamSize:size});setResult(null)}}>{size}</button>)}</div><small>{config.teamSize} {config.teamSize === 1 ? 'compañero' : 'compañeros'}, una nueva historia.</small></div>
+                  {game.generation > 1 && <div className="field-block"><CheckOption label="Solo Pokémon introducidos en esta generación" checked={Boolean(config.customRules?.onlyCurrentGeneration)} onChange={setOnlyCurrentGeneration} /><small>Limita el equipo a especies estrenadas en la Generación {generationLabel(game.generation)}.</small></div>}
+                </div>
+              </details>
+
+              <details open className="mobile-group">
+                <summary>Métodos disponibles</summary>
+                <div className="config-content section-divider">
+                  <div className="chip-row method-row">{(Object.keys(methodLabels) as AcquisitionMethod[]).map(method => <label key={method} className={config.allowedMethods.includes(method) ? 'check-chip checked' : 'check-chip'}><input type="checkbox" checked={config.allowedMethods.includes(method)} onChange={() => toggleMethod(method)} /> {methodLabels[method]}</label>)}</div>
+                  <div className="toggle-line"><div><strong>Evolución por intercambio</strong><small>Permite evoluciones que necesitan un intercambio.</small></div><button className={config.allowTradeEvolution ? 'switch on' : 'switch'} onClick={() => {setConfig({...config,allowTradeEvolution:!config.allowTradeEvolution});setResult(null)}}><span /></button></div>
+                  {usingDexFallback && <small>Modo de prueba por Pokédex: estos métodos todavía no reducen el pool hasta completar la availability específica del juego.</small>}
+                </div>
+              </details>
+
+              <details open className="mobile-group">
+                <summary>Opciones avanzadas</summary>
+                <div className="config-content section-divider">
+                  <RuleSelector label="Inicial" value={config.starterRule} onChange={value => {setConfig({...config,starterRule:value});setResult(null)}} />
+                  <RuleSelector label="Legendarios y míticos" value={config.legendaryRule} onChange={value => {setConfig({...config,legendaryRule:value});setResult(null)}} />
+
+                  {config.mode === 'custom' && <div className="custom-panel">
+                    <h3>Filtros personalizados</h3>
+                    <div className="field-grid">
+                      <label>Monotipo<select value={config.customRules?.monotype ?? ''} onChange={(e: { target: { value: string } }) => setConfig({...config,customRules:{...(config.customRules ?? {}),monotype:(e.target.value || undefined) as PokemonType | undefined}})}><option value="">Sin restricción</option>{pokemonTypes.map(type => <option key={type} value={type}>{typeLabels[type]}</option>)}</select></label>
+                      <label>Máximo compartiendo tipo<select value={config.customRules?.maxSharedType ?? ''} onChange={(e: { target: { value: string } }) => setConfig({...config,customRules:{...(config.customRules ?? {}),maxSharedType:e.target.value ? Number(e.target.value) : undefined}})}><option value="">Sin límite</option>{[1,2,3,4,5,6].map(n => <option key={n} value={n}>{n}</option>)}</select></label>
+                    </div>
+                    <div className="custom-checks">
+                      <CheckOption label="Solo formas regionales" checked={Boolean(config.customRules?.onlyRegionalForms)} onChange={checked => setConfig({...config,customRules:{...(config.customRules ?? {}),onlyRegionalForms:checked}})} />
+                      <CheckOption label="Permitir pseudo-legendarios" checked={config.customRules?.pseudoLegendaryRule !== 'exclude'} onChange={checked => setConfig({...config,customRules:{...(config.customRules ?? {}),pseudoLegendaryRule:checked ? 'allow' : 'exclude'}})} />
+                      <CheckOption label="Permitir fósiles" checked={config.customRules?.fossilRule !== 'exclude'} onChange={checked => setConfig({...config,customRules:{...(config.customRules ?? {}),fossilRule:checked ? 'allow' : 'exclude'}})} />
+                    </div>
+                  </div>}
+                </div>
+              </details>
+            </section>
+
+            <aside className="journey-aside">
+              <div className="destination-card"><div className="destination-art"><span>DESTINO · GENERACIÓN {generationLabel(game.generation)}</span><div>✦</div></div><h2>Un mundo por recorrer.</h2><p>Cada partida puede empezar con compañeros distintos.</p></div>
+              <div className="summary-card"><h3>Tu punto de partida</h3><p><b>⚑ {game.name}</b><small>Juego base · Generación {generationLabel(game.generation)}</small></p><p><b>♧ {config.teamSize} compañeros</b><small>{config.starterRule === 'require_one' ? 'Un inicial' : 'Inicial libre'} · {config.legendaryRule === 'exclude' ? 'Sin legendarios ni míticos' : 'Legendarios/míticos permitidos'}</small></p><p><b>◉ Modo {config.mode === 'adventure' ? 'Aventura' : config.mode === 'random' ? 'Full Random' : 'Personalizado'}</b><small>{availableCount} candidatos disponibles ahora</small></p></div>
+              {!hasGameData ? <div className="data-warning">⚠ <span><b>Sin candidatos importados.</b> Este juego aún no tiene una Pokédex utilizable en la build actual.</span></div> : usingDexFallback ? <div className="data-warning">⚠ <span><b>Cobertura Pokédex para pruebas.</b> Puedes generar equipos con la Pokédex regional completa. Historia/Postgame y métodos exactos aún están pendientes de curación.</span></div> : <div className="respect-card">♢ <span>Tus filtros se respetan siempre. Si no hay suficientes Pokémon, tú decides cómo continuar.</span></div>}
+            </aside>
+          </div>
+
+          <div className="generate-row"><span>{usingDexFallback ? 'Modo de prueba: pool basado en la Pokédex regional.' : 'Una selección nueva en cada aventura.'}</span><button className="primary large" disabled={!hasGameData} onClick={runGenerator}>⤨ Generar equipo</button></div>
+        </>
       ) : (
-        <main className="page">
-          {!result ? (
-            <>
-              <section className="hero">
-                <div className="section-kicker">EL PRÓXIMO VIAJE EMPIEZA AQUÍ</div>
-                <h1>Tu aventura. Tus reglas.</h1>
-                <p className="hero-copy">Elige tu juego, marca tus límites y descubre a tus próximos compañeros.</p>
-              </section>
-
-              <div className="mode-tabs">
-                <button className={config.mode === 'adventure' ? 'active' : ''} onClick={() => setMode('adventure')}>◉ Aventura</button>
-                <button className={config.mode === 'random' ? 'active' : ''} onClick={() => setMode('random')}>⤨ Full Random</button>
-                <button className={config.mode === 'custom' ? 'active' : ''} onClick={() => setMode('custom')}>☷ Personalizado</button>
-              </div>
-              <p className="mode-help">{config.mode === 'adventure' ? 'Aventura · Compañeros que puedes conseguir en el juego elegido, con equilibrio moderado.' : config.mode === 'random' ? 'Full Random · Azar total dentro de todas tus reglas legales.' : 'Personalizado · Combina filtros avanzados para definir exactamente tu pool.'}</p>
-
-              <div className="generator-layout">
-                <section className="config-card">
-                  <div className="config-title"><h2>Prepara tu expedición</h2><span>CONFIGURACIÓN GENERAL</span></div>
-                  <details open className="mobile-group">
-                    <summary>Juego y aventura</summary>
-                    <div className="config-content">
-                      <div className="field-grid">
-                        <label>Generación<select value={game.generation} onChange={(e: { target: { value: string } }) => changeGeneration(Number(e.target.value))}>{generations.map(gen => <option key={gen} value={gen}>{generationLabel(gen)} · Generación {gen}</option>)}</select></label>
-                        <label>Juego<select value={config.gameId} onChange={(e: { target: { value: string } }) => changeGame(e.target.value)}>{gamesForGeneration.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}</select></label>
-                      </div>
-
-                      {contentPacks.length > 1 && <div className="field-block"><span className="field-label">Contenido</span><div className="chip-row">{contentPacks.map(pack => <label className={config.enabledContentPacks.includes(pack.id) ? 'check-chip checked' : 'check-chip'} key={pack.id}><input type="checkbox" checked={config.enabledContentPacks.includes(pack.id)} disabled={pack.type === 'base'} onChange={() => togglePack(pack.id)} /> {pack.name}</label>)}</div><small>Juego base siempre activo. Marca solo las expansiones que tengas.</small></div>}
-
-                      <div className="field-block"><span className="field-label">Etapa de la aventura</span><div className="segmented">{([['main_story','Historia'],['postgame','Postgame'],['all','Todo']] as [AdventureStage,string][]).map(([value,label]) => <button key={value} className={config.stage === value ? 'active' : ''} onClick={() => {setConfig({...config,stage:value});setResult(null)}}>{label}</button>)}</div></div>
-                      <div className="field-block"><span className="field-label">Equipo</span><div className="team-size">{[1,2,3,4,5,6].map(size => <button key={size} className={config.teamSize === size ? 'active' : ''} onClick={() => {setConfig({...config,teamSize:size});setResult(null)}}>{size}</button>)}</div><small>{config.teamSize} {config.teamSize === 1 ? 'compañero' : 'compañeros'}, una nueva historia.</small></div>
-                      {game.generation > 1 && <div className="field-block"><CheckOption label="Solo Pokémon introducidos en esta generación" checked={Boolean(config.customRules?.onlyCurrentGeneration)} onChange={setOnlyCurrentGeneration} /><small>Limita el equipo a especies estrenadas en la Generación {generationLabel(game.generation)}.</small></div>}
-                    </div>
-                  </details>
-
-                  <details open className="mobile-group">
-                    <summary>Métodos disponibles</summary>
-                    <div className="config-content section-divider">
-                      <div className="chip-row method-row">{(Object.keys(methodLabels) as AcquisitionMethod[]).map(method => <label key={method} className={config.allowedMethods.includes(method) ? 'check-chip checked' : 'check-chip'}><input type="checkbox" checked={config.allowedMethods.includes(method)} onChange={() => toggleMethod(method)} /> {methodLabels[method]}</label>)}</div>
-                      <div className="toggle-line"><div><strong>Evolución por intercambio</strong><small>Permite evoluciones que necesitan un intercambio.</small></div><button className={config.allowTradeEvolution ? 'switch on' : 'switch'} onClick={() => {setConfig({...config,allowTradeEvolution:!config.allowTradeEvolution});setResult(null)}}><span /></button></div>
-                      {usingDexFallback && <small>Modo de prueba por Pokédex: estos métodos todavía no reducen el pool hasta completar la availability específica del juego.</small>}
-                    </div>
-                  </details>
-
-                  <details open className="mobile-group">
-                    <summary>Opciones avanzadas</summary>
-                    <div className="config-content section-divider">
-                      <RuleSelector label="Inicial" value={config.starterRule} onChange={value => {setConfig({...config,starterRule:value});setResult(null)}} />
-                      <RuleSelector label="Legendarios y míticos" value={config.legendaryRule} onChange={value => {setConfig({...config,legendaryRule:value});setResult(null)}} />
-
-                      {config.mode === 'custom' && <div className="custom-panel">
-                        <h3>Filtros personalizados</h3>
-                        <div className="field-grid">
-                          <label>Monotipo<select value={config.customRules?.monotype ?? ''} onChange={(e: { target: { value: string } }) => setConfig({...config,customRules:{...(config.customRules ?? {}),monotype:(e.target.value || undefined) as PokemonType | undefined}})}><option value="">Sin restricción</option>{pokemonTypes.map(type => <option key={type} value={type}>{typeLabels[type]}</option>)}</select></label>
-                          <label>Máximo compartiendo tipo<select value={config.customRules?.maxSharedType ?? ''} onChange={(e: { target: { value: string } }) => setConfig({...config,customRules:{...(config.customRules ?? {}),maxSharedType:e.target.value ? Number(e.target.value) : undefined}})}><option value="">Sin límite</option>{[1,2,3,4,5,6].map(n => <option key={n} value={n}>{n}</option>)}</select></label>
-                        </div>
-                        <div className="custom-checks">
-                          <CheckOption label="Solo formas regionales" checked={Boolean(config.customRules?.onlyRegionalForms)} onChange={checked => setConfig({...config,customRules:{...(config.customRules ?? {}),onlyRegionalForms:checked}})} />
-                          <CheckOption label="Permitir pseudo-legendarios" checked={config.customRules?.pseudoLegendaryRule !== 'exclude'} onChange={checked => setConfig({...config,customRules:{...(config.customRules ?? {}),pseudoLegendaryRule:checked ? 'allow' : 'exclude'}})} />
-                          <CheckOption label="Permitir fósiles" checked={config.customRules?.fossilRule !== 'exclude'} onChange={checked => setConfig({...config,customRules:{...(config.customRules ?? {}),fossilRule:checked ? 'allow' : 'exclude'}})} />
-                        </div>
-                      </div>}
-                    </div>
-                  </details>
-                </section>
-
-                <aside className="journey-aside">
-                  <div className="destination-card"><div className="destination-art"><span>DESTINO · GENERACIÓN {generationLabel(game.generation)}</span><div>✦</div></div><h2>Un mundo por recorrer.</h2><p>Cada partida puede empezar con compañeros distintos.</p></div>
-                  <div className="summary-card"><h3>Tu punto de partida</h3><p><b>⚑ {game.name}</b><small>Juego base · Generación {generationLabel(game.generation)}</small></p><p><b>♧ {config.teamSize} compañeros</b><small>{config.starterRule === 'require_one' ? 'Un inicial' : 'Inicial libre'} · {config.legendaryRule === 'exclude' ? 'Sin legendarios ni míticos' : 'Legendarios/míticos permitidos'}</small></p><p><b>◉ Modo {config.mode === 'adventure' ? 'Aventura' : config.mode === 'random' ? 'Full Random' : 'Personalizado'}</b><small>{availableCount} candidatos disponibles ahora</small></p></div>
-                  {!hasGameData ? <div className="data-warning">⚠ <span><b>Sin candidatos importados.</b> Este juego aún no tiene una Pokédex utilizable en la build actual.</span></div> : usingDexFallback ? <div className="data-warning">⚠ <span><b>Cobertura Pokédex para pruebas.</b> Puedes generar equipos con la Pokédex regional completa. Historia/Postgame y métodos exactos aún están pendientes de curación.</span></div> : <div className="respect-card">♢ <span>Tus filtros se respetan siempre. Si no hay suficientes Pokémon, tú decides cómo continuar.</span></div>}
-                </aside>
-              </div>
-
-              <div className="generate-row"><span>{usingDexFallback ? 'Modo de prueba: pool basado en la Pokédex regional.' : 'Una selección nueva en cada aventura.'}</span><button className="primary large" disabled={!hasGameData} onClick={runGenerator}>⤨ Generar equipo</button></div>
-            </>
-          ) : (
-            <TeamResult
-              result={result} config={config} gameName={game.name} notice={notice}
-              onBack={() => setResult(null)} onRegenerate={runGenerator} onCopy={copyTeam} onSave={saveTeam}
-              onToggleLock={toggleLock} onRerollSlot={rerollSlot} onClearLocks={clearLocks}
-              onGenerateAvailable={generateAvailable}
-            />
-          )}
-        </main>
+        <TeamResult
+          result={result} config={config} gameName={game.name} notice={notice}
+          onBack={() => setResult(null)} onRegenerate={runGenerator} onCopy={copyTeam} onSave={saveTeam}
+          onToggleLock={toggleLock} onRerollSlot={rerollSlot} onClearLocks={clearLocks}
+          onGenerateAvailable={generateAvailable}
+        />
       )}
-
-      <footer><span>Proyecto fan · Pokémon pertenece a sus respectivos propietarios.</span><span>Cada equipo, una nueva historia.</span></footer>
-    </div>
+    </main>
   );
 }
 
