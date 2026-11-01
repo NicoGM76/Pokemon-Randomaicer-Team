@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import RootApp from './RootApp';
 import './styles.css';
+import './v2.css';
 
 const root = document.getElementById('root');
 
