@@ -5,6 +5,7 @@ import AppShell from './AppShell';
 const AdventurePage = lazy(() => import('../App'));
 const CollectionPage = lazy(() => import('../collection/CollectionPage'));
 const CompetitiveLandingPage = lazy(() => import('../competitive/CompetitiveLandingPage'));
+const SavedTeamsPage = lazy(() => import('../saved/SavedTeamsPage'));
 
 function RouteLoading() {
   return (
@@ -25,7 +26,7 @@ export default function AppRouter() {
             <Route path="/adventure" element={<AdventurePage />} />
             <Route path="/collection" element={<CollectionPage />} />
             <Route path="/competitive" element={<CompetitiveLandingPage />} />
-            <Route path="/saved" element={<Navigate to="/adventure" replace />} />
+            <Route path="/saved" element={<SavedTeamsPage />} />
             <Route path="*" element={<Navigate to="/adventure" replace />} />
           </Route>
         </Routes>
