@@ -1,7 +1,7 @@
 {
   "name": "pokemon-adventure-team-generator",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -24,10 +24,13 @@
     "typescript": "latest",
     "vitest": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-router-dom": "latest"
   },
   "devDependencies": {
     "@types/react": "latest",
-    "@types/react-dom": "latest"
+    "@types/react-dom": "latest",
+    "@testing-library/react": "latest",
+    "jsdom": "latest"
   }
 }
