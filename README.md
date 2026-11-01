@@ -1,23 +1,36 @@
 # Pokémon Adventure Team Generator
 
-Generador web de equipos Pokémon pensado para **aventuras**, no para competitivo estricto.
+Generador web de equipos Pokémon para **aventura**, con una base modular preparada para incorporar competitivo sin convertir toda la aplicación en una sola pantalla pesada.
 
-Permite construir equipos según el juego elegido, la generación, el contenido disponible y distintas reglas de aventura. Además, la V1 incluye un modo de **colección multirregión** para coordinar varios equipos sin repetir Pokémon o familias evolutivas.
+La V1 cubre generación individual y colecciones multirregión. La **V2.0** reorganiza la aplicación con navegación real, progreso persistente y carga por módulos.
 
 ## 🌐 Probar la página
 
 **Web publicada:**  
 https://nicogm76.github.io/Pokemon-Randomaicer-Team/
 
-La interfaz es responsive y puede usarse tanto en computador como en dispositivos móviles.
+La interfaz es responsive y puede usarse en computador y dispositivos móviles.
+
+### Rutas de la V2.0
+
+La aplicación usa navegación hash para funcionar correctamente en GitHub Pages:
+
+```text
+/#/adventure    Generador individual
+/#/collection   Colección multirregión
+/#/competitive  Entrada al futuro módulo competitivo
+/#/saved        Equipos guardados
+```
+
+Esto permite utilizar **Atrás / Adelante** del navegador y recargar una sección sin depender de un único estado interno de React.
 
 ---
 
-## ✨ Funciones principales de la V1
+## ✨ V1 · Generador de aventura
 
-### Generador de equipo individual
+### Equipo individual
 
-Tres modos de generación:
+Tres modos:
 
 - **Aventura:** busca equipos variados y cómodos para completar una partida.
 - **Full Random:** genera un equipo legal de forma aleatoria.
@@ -37,13 +50,11 @@ Configuración disponible:
 - Filtros de tipos y categorías especiales.
 - Bloqueo de Pokémon individuales.
 - Regeneración de slots o del equipo completo.
-- Guardado de equipos en el navegador mediante `localStorage`.
+- Guardado de equipos en el navegador.
 
 ### 🗃️ Colección de equipos
 
-Modo pensado para retos de varias regiones o generaciones.
-
-Permite configurar entre **2 y 9 equipos** y generarlos de forma coordinada.
+Modo para retos de varias regiones o generaciones. Permite configurar entre **2 y 9 equipos** y generarlos coordinadamente.
 
 Incluye:
 
@@ -52,60 +63,114 @@ Incluye:
 - 1 a 6 miembros por equipo.
 - No repetir especies entre equipos.
 - No repetir familias evolutivas.
-- Evoluciones posteriores asociadas al origen de su línea evolutiva.
+- Evoluciones posteriores asociadas al origen de su línea.
 - Hasta un Pokémon bonus opcional por equipo.
 - Generación conjunta de toda la colección.
-- Bloqueo de equipos completos.
-- Bloqueo de Pokémon individuales.
-- Regeneración de una sola región respetando los Pokémon ya utilizados.
+- Bloqueo de equipos completos o miembros individuales.
+- Regeneración de una sola región respetando el resto de la colección.
 - Resumen global de miembros, bonus y duplicados.
 
-Ejemplo de la lógica de origen:
+Ejemplos de origen de línea:
 
-- Crobat puede contar como Kanto por pertenecer a la línea de Zubat.
-- Scizor puede contar como Kanto por la línea de Scyther.
-- Rhyperior puede contar como Kanto por la línea de Rhyhorn.
+- Crobat puede contar como Kanto por Zubat.
+- Scizor puede contar como Kanto por Scyther.
+- Rhyperior puede contar como Kanto por Rhyhorn.
+
+---
+
+## ⚙️ V2.0 · Navegación, persistencia y rendimiento
+
+Antes de añadir EVs, movesets y análisis competitivo, la aplicación se reorganizó para soportar un producto más grande.
+
+### Navegación real
+
+Las secciones principales son rutas independientes. Los cambios de sección quedan en el historial del navegador en lugar de vivir únicamente en un `useState`.
+
+### Borradores persistentes
+
+El generador de Aventura conserva automáticamente:
+
+- configuración actual;
+- equipo generado;
+- bloqueos;
+- avisos de la sesión.
+
+La Colección conserva:
+
+- configuración de todos los equipos;
+- resultado generado;
+- bloqueos de equipos y Pokémon.
+
+Al recargar la página, el borrador compatible se restaura. Los datos corruptos o de versiones incompatibles se descartan de forma segura y la aplicación vuelve a sus valores iniciales.
+
+### Guardados separados de borradores
+
+Los equipos guardados siguen siendo permanentes en el navegador mediante el repositorio existente. Cargar uno escribe ese equipo como borrador de Aventura y navega a `/#/adventure`.
+
+### Carga modular
+
+Las páginas principales se cargan con `React.lazy` y `Suspense`:
+
+```text
+shell / router
+├── adventure chunk
+├── collection chunk
+├── saved chunk
+└── competitive chunk
+```
+
+Por ejemplo, visitar la página competitiva no obliga a montar el generador de Colección. El módulo Guardados tampoco carga el dataset Pokémon completo solo para mostrar el nombre de un juego.
+
+### IndexedDB preparado para V2
+
+V2.0 añade un adaptador de clave/valor para **IndexedDB**. Todavía no migra los pequeños datos de V1, pero queda preparado para futuros datasets competitivos más pesados, como:
+
+- snapshots de metagame;
+- estadísticas de uso;
+- matchups;
+- resultados de torneos;
+- sets frecuentes.
 
 ---
 
 ## 🎮 Juegos y datos
 
-El catálogo actual cubre las generaciones **I a IX** e incluye juegos principales, terceras versiones, remakes, Let's Go y Legends configurados en el proyecto.
+El catálogo cubre las generaciones **I a IX** e incluye juegos principales, terceras versiones, remakes, Let's Go y Legends configurados en el proyecto.
 
-El pipeline de datos trabaja con:
+El pipeline trabaja con:
 
-- Pokédex regionales.
-- Especies Pokémon.
-- Líneas evolutivas.
-- Juegos y familias de juegos.
-- Content packs y DLC.
-- Availability curada por juego cuando existe.
+- Pokédex regionales;
+- especies Pokémon;
+- líneas evolutivas;
+- juegos y familias de juegos;
+- content packs y DLC;
+- availability curada por juego cuando existe.
 
-Cuando la disponibilidad detallada de un juego todavía es parcial, el generador utiliza su **Pokédex regional** como fallback en lugar de dejar el juego inutilizable.
+Cuando la disponibilidad detallada todavía es parcial, el generador utiliza la **Pokédex regional** como fallback.
 
-La V1 contiene actualmente:
+Estado del dataset base:
 
-- **38 juegos configurados**.
-- **22 Pokédex regionales** sincronizadas.
-- Más de **1000 especies** en el dataset generado.
-- Grafo de evoluciones generado desde datos estructurados.
+- **38 juegos configurados**;
+- **22 Pokédex regionales** sincronizadas;
+- más de **1000 especies**;
+- grafo de evoluciones generado desde datos estructurados.
 
 ---
 
 ## 🧠 Reglas de aventura
 
-El modo Aventura prioriza una composición práctica para jugar la historia:
+Aventura prioriza:
 
-- Diversidad de tipos.
-- Menor acumulación de debilidades compartidas.
-- Balance entre daño físico y especial.
-- Variedad dentro del equipo.
-- Evitar repetir innecesariamente el mismo tipo.
+- diversidad de tipos;
+- menor acumulación de debilidades compartidas;
+- balance físico/especial;
+- variedad dentro del equipo;
+- evitar repeticiones innecesarias.
 
-Para los retos multirregión también se tiene en cuenta la tabla de tipos histórica:
+Para los retos multirregión se utiliza la tabla de tipos histórica:
 
 - **Generación I:** tabla correspondiente a la primera generación.
-- **Generaciones II a V:** sin tipo Hada y con las resistencias históricas de Acero.
+- **Generaciones II a V:** sin Hada y con resistencias históricas de Acero.
 - **Generación VI en adelante:** tabla moderna de 18 tipos.
 
 ---
@@ -113,43 +178,41 @@ Para los retos multirregión también se tiene en cuenta la tabla de tipos hist�
 ## 🛠️ Tecnologías
 
 - **React**
+- **React Router**
 - **TypeScript**
 - **Vite**
 - **Vitest**
+- **Testing Library**
+- **localStorage** para datos pequeños y borradores actuales
+- **IndexedDB** preparado para cachés competitivas futuras
 - **GitHub Actions**
 - **GitHub Pages**
-- Datos locales preprocesados a partir de fuentes estructuradas y capas curadas del proyecto.
 
-Arquitectura general:
+Arquitectura simplificada:
 
 ```text
 fuentes externas
       ↓
 importadores
       ↓
-datos generados + datos curados
+datos generados + curados
       ↓
-validación
-      ↓
-tests
-      ↓
-dataset local
+validación + tests
       ↓
 motor TypeScript
       ↓
-React
+router / shell
+ ┌────┼────────┬───────────┐
+aventura  colección  guardados  competitivo
 ```
 
-El motor de generación está separado de la interfaz para poder evolucionar las reglas sin acoplarlas a React.
+El motor de generación permanece separado de la interfaz.
 
 ---
 
 ## 💻 Ejecutar localmente
 
-### Requisitos
-
-- Node.js 22 o compatible.
-- npm.
+Requisitos: Node.js 22 o compatible y npm.
 
 En Windows PowerShell:
 
@@ -158,11 +221,7 @@ npm.cmd install
 npm.cmd run dev
 ```
 
-Vite mostrará la URL local, normalmente:
-
-```text
-http://localhost:5173/
-```
+Vite mostrará la URL local, normalmente `http://localhost:5173/`.
 
 ### Tests
 
@@ -176,14 +235,14 @@ npm.cmd run test:run
 npm.cmd run build
 ```
 
-### Sincronizar los datos
+### Datos
 
 ```powershell
 npm.cmd run data:sync-all
 npm.cmd run data:validate-all
 ```
 
-Para forzar una descarga nueva de los datos estructurados:
+Para forzar una descarga nueva:
 
 ```powershell
 npm.cmd run data:sync-all:refresh
@@ -193,9 +252,7 @@ npm.cmd run data:sync-all:refresh
 
 ## 🧪 Calidad y CI
 
-El repositorio usa GitHub Actions para validar los cambios antes del despliegue.
-
-El pipeline ejecuta:
+GitHub Actions valida ramas de trabajo y pull requests con:
 
 ```text
 instalar dependencias
@@ -203,10 +260,11 @@ instalar dependencias
 → validar catálogo y referencias
 → ejecutar tests
 → compilar
-→ publicar en GitHub Pages
 ```
 
-También existen smoke tests para comprobar que los juegos configurados puedan generar equipos válidos con una configuración base.
+El despliegue de `main` añade la publicación en GitHub Pages.
+
+También existen smoke tests para los **38 juegos** y pruebas específicas de routing, borradores, guardados, colección y evolución.
 
 ---
 
@@ -214,48 +272,64 @@ También existen smoke tests para comprobar que los juegos configurados puedan g
 
 ### V1 ✅
 
-- Generador de aventura.
-- Full Random.
-- Personalizado.
+- Aventura / Full Random / Personalizado.
 - Generaciones I–IX.
 - Juegos, DLC y Pokédex regionales.
-- Evoluciones.
-- Filtros y reglas de aventura.
-- Equipos guardados.
-- Locks y rerolls.
+- Evoluciones y filtros.
+- Guardados, locks y rerolls.
 - Colección multirregión híbrida.
+- Tabla histórica de tipos.
 - Diseño responsive.
-- Deploy público con GitHub Pages.
 
-### V2 · Competitivo
+### V2.0 · Base de aplicación
 
-Planeado para una futura versión:
+- Navegación por rutas.
+- Historial Atrás / Adelante.
+- Borradores persistentes.
+- Recuperación después de recargar.
+- Carga modular por página.
+- Separación de Guardados.
+- Adaptador IndexedDB para datos grandes.
+- Entrada ligera para Competitivo.
 
+### V2.1 · Núcleo competitivo
+
+Planeado:
+
+- Singles 6v6 y Dobles/VGC.
 - Naturalezas.
-- EVs.
-- IVs.
-- Objetos equipados.
-- Movesets competitivos.
-- Roles de equipo.
-- Formatos competitivos.
-- Sinergia y análisis avanzado.
+- EVs e IVs.
+- Objetos.
+- Movesets.
+- Roles.
+- Generación + edición manual híbrida.
+- Modo aprendizaje.
+
+### V2.2 · Inteligencia competitiva
+
+Planeado:
+
+- matchups;
+- estadísticas de uso;
+- metagame por formato/regulación;
+- resultados de Championships y torneos;
+- compañeros y sets frecuentes;
+- snapshots actualizables.
 
 ### V3 · Posible aplicación móvil
 
-Una posible evolución posterior del proyecto sería convertir la experiencia en una app para **Android/iOS**, reutilizando el motor del generador y la lógica construida para la web.
+Posible app Android/iOS reutilizando el motor y la arquitectura modular de la web.
 
 ---
 
 ## 📌 Estado del proyecto
 
-**V1 publicada y funcional.**
+**V1 publicada. V2.0 en desarrollo sobre una rama dedicada antes de integrarse a `main`.**
 
 👉 https://nicogm76.github.io/Pokemon-Randomaicer-Team/
-
-El proyecto sigue abierto a mejoras de datos, reglas, experiencia móvil y nuevas versiones del generador.
 
 ---
 
 ## Aviso
 
-Proyecto independiente creado con fines educativos y de entretenimiento. Pokémon y sus nombres, criaturas y marcas relacionadas pertenecen a sus respectivos propietarios.
+Proyecto independiente con fines educativos y de entretenimiento. Pokémon y sus nombres, criaturas y marcas relacionadas pertenecen a sus respectivos propietarios.
