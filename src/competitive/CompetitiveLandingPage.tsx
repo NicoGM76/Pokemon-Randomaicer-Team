@@ -3,7 +3,7 @@ export default function CompetitiveLandingPage() {
     <main className="page competitive-landing">
       <section className="hero">
         <div className="section-kicker">V2 · COMPETITIVO</div>
-        <h1>Competitivo</h1>
+        <h1>Tu laboratorio competitivo</h1>
         <p className="hero-copy">
           La siguiente etapa del proyecto combinará generación de equipos, edición manual y explicaciones para aprender por qué funciona cada decisión.
         </p>
@@ -28,7 +28,7 @@ export default function CompetitiveLandingPage() {
       </section>
 
       <div className="data-warning competitive-roadmap-note">
-        ⚙️ <span><b>V2.0 en construcción.</b> Esta etapa prepara navegación, persistencia y carga modular antes de activar el motor competitivo.</span>
+        ⚙️ <span><b>Base competitiva en construcción.</b> Esta etapa prepara navegación, persistencia y carga modular antes de activar el motor competitivo.</span>
       </div>
     </main>
   );
