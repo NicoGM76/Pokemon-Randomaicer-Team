@@ -31,6 +31,10 @@ export default function AppShell() {
         </div>
       </nav>
       <Outlet />
+      <footer>
+        <span>Proyecto fan · Pokémon pertenece a sus respectivos propietarios.</span>
+        <span>V2 · navegación modular y progreso persistente.</span>
+      </footer>
     </div>
   );
 }
