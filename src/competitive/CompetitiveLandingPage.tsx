@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import pokemonCatalog from '../data/generated/pokemon.json';
 import type { Pokemon, PokemonStats } from '../domain/pokemon/types';
 import { analyzeCompetitiveTeam } from './core/analysis';
@@ -15,6 +15,8 @@ import {
   loadCompetitiveDraft, removeUnknownPokemon, saveCompetitiveDraft
 } from './competitiveDraft';
 import './competitive.css';
+
+const MetaInsightsPanel = lazy(() => import('./meta/MetaInsightsPanel'));
 
 const pokemon = pokemonCatalog as unknown as Pokemon[];
 const sortedPokemon = [...pokemon].sort((a, b) => a.id - b.id);
@@ -61,6 +63,7 @@ export default function CompetitiveLandingPage() {
   );
   const [notice, setNotice] = useState('');
   const [showIvs, setShowIvs] = useState(false);
+  const [showMeta, setShowMeta] = useState(false);
   const format = workspace.format;
   const team = workspace.teams[format];
   const member = team[workspace.selectedSlot];
@@ -214,6 +217,26 @@ export default function CompetitiveLandingPage() {
           })}
         </div>
       </section>
+
+      <section className="comp-meta-launch">
+        <div>
+          <span className="section-kicker">V2.2 · DATOS DEL METAGAME</span>
+          <h2>Descubre qué se juega y prepara respuestas</h2>
+          <p className="comp-subdued">Consulta estadísticas mensuales reales y compara tipos con tu equipo. Este módulo se carga solo cuando lo abres.</p>
+        </div>
+        <button type="button" className={showMeta ? 'secondary' : 'primary'}
+          aria-expanded={showMeta} aria-controls="competitive-meta-panel"
+          onClick={() => setShowMeta(previous => !previous)}>
+          {showMeta ? 'Ocultar metagame' : 'Ver metagame y matchups'}
+        </button>
+      </section>
+      {showMeta && <div id="competitive-meta-panel">
+        <Suspense fallback={<p className="comp-subdued" role="status">Preparando estadísticas competitivas…</p>}>
+          <MetaInsightsPanel format={format} pokemon={pokemon}
+            teamIds={team.filter((slot): slot is CompetitivePokemonSet => slot !== null).map(slot => slot.pokemonId)}
+            showLearning={workspace.showLearning} />
+        </Suspense>
+      </div>}
 
       <div className="comp-main-grid">
         <section className="config-card comp-editor" aria-label="Editor del miembro">
