@@ -76,12 +76,14 @@ export default function CollectionPage() {
   const restoredDraft = useMemo(() => loadCollectionDraft(), []);
   const [config, setConfig] = useState<CollectionConfig>(() => restoredDraft?.config ?? initialConfig());
   const [result, setResult] = useState<CollectionResult | null>(() => restoredDraft?.result ?? null);
+  const [resultEngineVersion, setResultEngineVersion] = useState<number>(() =>
+    restoredDraft?.result ? (restoredDraft.resultEngineVersion ?? 1) : 2);
   const [notice, setNotice] = useState('');
   const generations = useMemo(() => [...new Set(dataset.games.map(game => game.generation))].sort((a, b) => a - b), []);
 
   useEffect(() => {
-    saveCollectionDraft({ config, result });
-  }, [config, result]);
+    saveCollectionDraft({ config, result, resultEngineVersion });
+  }, [config, result, resultEngineVersion]);
 
   const updateEntry = (id: string, updater: (entry: CollectionEntryConfig) => CollectionEntryConfig) => {
     setConfig(previous => ({
@@ -146,6 +148,7 @@ export default function CollectionPage() {
 
   const generateAll = () => {
     setResult(generateCollection(dataset, config, result ?? undefined));
+    setResultEngineVersion(2);
     setNotice(result
       ? 'Se respetaron los Pokémon y equipos bloqueados.'
       : 'Colección generada con las reglas elegidas.');
@@ -155,6 +158,7 @@ export default function CollectionPage() {
     if (!result) return;
     if (!window.confirm('¿Regenerar toda la colección ignorando los bloqueos actuales?')) return;
     setResult(generateCollection(dataset, config));
+    setResultEngineVersion(2);
     setNotice('Colección completamente regenerada. Los bloqueos anteriores se descartaron.');
   };
 
@@ -162,6 +166,7 @@ export default function CollectionPage() {
     if (!window.confirm('¿Restablecer la configuración y eliminar el resultado actual de la colección?')) return;
     setConfig(initialConfig());
     setResult(null);
+    setResultEngineVersion(2);
     setNotice('Colección restablecida. Puedes comenzar otra vez.');
   };
 
@@ -396,6 +401,15 @@ export default function CollectionPage() {
       </div>
 
       {result && <section className="team-section">
+        {resultEngineVersion < 2 && <div className="data-warning collection-legacy-warning" role="note">
+          <span>⚠️</span>
+          <div>
+            <strong>Resultado generado con lógica anterior.</strong>
+            <p>Conservamos tu colección guardada. Para aplicar las evoluciones nuevas, pulsa
+            «Regenerar desbloqueados». Los miembros bloqueados seguirán igual;
+            usa «Regenerar todo» si quieres reconstruir los equipos desde cero.</p>
+          </div>
+        </div>}
         <div className={result.complete ? 'result-badge success' : 'result-badge warning'}>{result.complete ? 'COLECCIÓN LISTA' : 'COLECCIÓN PARCIAL'}</div>
         <div className="result-heading">
           <div><h1>{result.teams.length} equipos. Una sola colección.</h1><p className="hero-copy">Los bloqueos sobreviven a las regeneraciones y ahora también a una recarga de la página.</p></div>
