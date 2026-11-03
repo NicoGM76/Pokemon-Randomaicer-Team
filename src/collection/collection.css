@@ -1,0 +1,300 @@
+/* Collection-only controls: clearer affordances without affecting Adventure or V2.1. */
+.collection-page .collection-entry-card,
+.collection-page .collection-result-card {
+  background:linear-gradient(160deg,#10233a 0%,#0d1c30 100%);
+  border-color:#315173;
+}
+
+.collection-page .config-title {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+.collection-page .collection-entry-card .config-title,
+.collection-page .collection-result-card .config-title {
+  padding-bottom:15px;
+  border-bottom:1px solid rgba(113,167,214,.15);
+}
+
+.collection-page .config-title > div:first-child {
+  min-width:0;
+}
+
+.collection-action {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  min-height:44px;
+  padding:11px 16px;
+  border-radius:12px;
+  border:1px solid #386083;
+  background:linear-gradient(160deg,#1a3856,#12283f);
+  color:#d6edff;
+  font:inherit;
+  font-size:13px;
+  font-weight:750;
+  letter-spacing:.005em;
+  line-height:1.3;
+  white-space:normal;
+  cursor:pointer;
+  transition:background .16s, border-color .16s, transform .16s, box-shadow .16s;
+}
+
+.collection-action svg {
+  flex:0 0 18px;
+}
+
+/* The legacy .config-title span selector is for subtitles, not button labels. */
+.collection-page .config-title .collection-action > span {
+  color:inherit;
+  font-size:inherit;
+  font-weight:inherit;
+}
+
+.collection-action:enabled:hover {
+  border-color:#80caff;
+  background:linear-gradient(160deg,#275277,#173b5c);
+  box-shadow:0 5px 20px rgba(7,26,49,.25);
+  transform:translateY(-1px);
+}
+
+.collection-action:enabled:active {
+  transform:translateY(0);
+  box-shadow:none;
+}
+
+.collection-action:focus-visible,
+.collection-toggle:focus-within {
+  outline:2px solid #a5dfff;
+  outline-offset:3px;
+}
+
+.collection-action:disabled {
+  opacity:.48;
+  cursor:not-allowed;
+  transform:none;
+  box-shadow:none;
+}
+
+.collection-action--primary {
+  color:#072039;
+  border-color:#89d8ff;
+  background:linear-gradient(125deg,#a0e2ff,#66c4ff 60%,#67aefe);
+  box-shadow:0 6px 18px rgba(58,160,233,.15);
+}
+
+.collection-action--primary:enabled:hover {
+  background:linear-gradient(125deg,#c2eeff,#84d4ff 60%,#80bcff);
+  border-color:#d0f2ff;
+  box-shadow:0 8px 25px rgba(65,166,238,.28);
+}
+
+.collection-action--lock {
+  color:#ffe5ac;
+  border-color:#c89444;
+  background:linear-gradient(125deg,#47351f,#2a2b31);
+}
+
+.collection-action--lock:enabled:hover {
+  border-color:#f1c277;
+  background:linear-gradient(125deg,#5d4524,#33313a);
+}
+
+.collection-action--danger {
+  color:#ffacb6;
+  border-color:#654250;
+  background:#2d1c2b;
+}
+
+.collection-action--danger:enabled:hover {
+  background:#4b2435;
+  border-color:#ee8e9f;
+}
+
+.collection-page .generate-row {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin:22px 0 28px;
+}
+
+.collection-page .generate-row .collection-action--primary {
+  min-height:49px;
+  padding:13px 21px;
+}
+
+.collection-team-actions {
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:9px;
+  flex-wrap:wrap;
+}
+
+.collection-options {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-top:23px;
+}
+
+.collection-toggle {
+  display:grid;
+  grid-template-columns:46px minmax(0,1fr);
+  align-items:center;
+  gap:12px;
+  position:relative;
+  padding:15px 16px;
+  border:1px solid #34516f;
+  border-radius:14px;
+  background:rgba(15,39,65,.72);
+  cursor:pointer;
+  transition:border-color .18s, background .18s;
+}
+
+.collection-toggle:hover {
+  background:#18324c;
+  border-color:#5685ae;
+}
+
+.collection-toggle input {
+  position:absolute;
+  width:1px;
+  height:1px;
+  opacity:0;
+  margin:0;
+}
+
+.collection-toggle__track {
+  position:relative;
+  display:block;
+  width:44px;
+  height:25px;
+  border-radius:99px;
+  background:#41556d;
+  border:1px solid #637a92;
+  transition:background .18s,border-color .18s;
+}
+
+.collection-toggle__track::before {
+  content:'';
+  position:absolute;
+  top:3px;
+  left:3px;
+  width:17px;
+  height:17px;
+  border-radius:50%;
+  background:#f1f6ff;
+  box-shadow:0 1px 4px rgba(0,0,0,.25);
+  transition:transform .18s;
+}
+
+.collection-toggle input:checked + .collection-toggle__track {
+  background:#419fda;
+  border-color:#80d6ff;
+}
+
+.collection-toggle input:checked + .collection-toggle__track::before {
+  transform:translateX(19px);
+}
+
+.collection-toggle__text {
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  min-width:0;
+}
+
+.collection-toggle__text strong {
+  color:#e4f3ff;
+  font-size:13px;
+  line-height:1.35;
+}
+
+.collection-toggle__text small {
+  color:#9cb0c6;
+  font-size:11px;
+  line-height:1.55;
+}
+
+.collection-page .collection-result-card .pokemon-card {
+  background:linear-gradient(170deg,#122640,#0e1e32);
+  border-color:#345574;
+  border-radius:17px;
+  transition:border-color .17s, box-shadow .17s, transform .17s;
+}
+
+.collection-page .collection-result-card .pokemon-card:hover {
+  border-color:#5488b6;
+  transform:translateY(-2px);
+}
+
+.collection-page .collection-result-card .pokemon-card.locked {
+  border-color:#efbf75;
+  box-shadow:inset 0 0 0 1px rgba(239,191,117,.3),0 8px 24px rgba(0,0,0,.13);
+}
+
+.collection-page .collection-card-footer {
+  justify-content:stretch;
+  margin-top:20px;
+}
+
+.collection-page .collection-card-footer .collection-action {
+  display:flex;
+  width:100%;
+  min-height:43px;
+  padding:10px 12px;
+  font-size:13px;
+}
+
+.collection-page .collection-card-footer .collection-action--lock {
+  color:#ffe0a0;
+  border-color:#c9964e;
+}
+
+@media(max-width:900px) {
+  /* General V1 CSS hides .config-title at this breakpoint; do not hide collection actions. */
+  .collection-page .config-title {
+    display:flex;
+  }
+  .collection-page .collection-entry-card .config-title,
+  .collection-page .collection-result-card .config-title {
+    gap:14px;
+  }
+  .collection-page .collection-result-card .config-title > div:first-child {
+    width:100%;
+  }
+  .collection-team-actions {
+    width:100%;
+    justify-content:flex-start;
+  }
+}
+
+@media(max-width:690px) {
+  .collection-options {grid-template-columns:1fr;}
+  .collection-page .generate-row .collection-action {
+    flex:1 1 180px;
+  }
+  .collection-page .generate-row .collection-action--primary {
+    flex:1 1 100%;
+  }
+  .collection-team-actions .collection-action {
+    flex:1 1 155px;
+  }
+}
+
+@media(max-width:390px) {
+  .collection-toggle {
+    padding:13px 12px;
+    grid-template-columns:44px minmax(0,1fr);
+    gap:10px;
+  }
+  .collection-page .config-title h2 {font-size:16px;}
+  .collection-page .collection-result-card .pokemon-card {padding:13px;}
+}
