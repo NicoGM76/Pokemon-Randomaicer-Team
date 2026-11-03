@@ -86,3 +86,10 @@
   .comp-stat-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .comp-two-fields { grid-template-columns:1fr; }
 }
+
+/* V2.2 keeps live meta data behind an explicit opt-in, especially on mobile. */
+.comp-meta-launch{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px;margin:25px 0 20px;border:1px solid #3c6685;border-radius:16px;background:linear-gradient(125deg,#163451,#122a42)}
+.comp-meta-launch h2{margin:7px 0 8px;font-size:22px}
+.comp-meta-launch p{max-width:580px}
+.comp-meta-launch button{min-height:46px;flex-shrink:0}
+@media(max-width:700px){.comp-meta-launch{flex-direction:column;align-items:stretch;padding:16px}.comp-meta-launch button{width:100%}}
