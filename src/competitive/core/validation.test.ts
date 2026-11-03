@@ -21,7 +21,7 @@ describe('competitive validation', () => {
   it('rejects out-of-range EVs, total EVs and IVs', () => {
     const invalid = {
       ...completed(1),
-      evs: { hp: 252, attack: 252, defense: 252, specialAttack: 0, specialDefense: 0, speed: 0 },
+      evs: { hp: 253, attack: 252, defense: 252, specialAttack: 0, specialDefense: 0, speed: 0 },
       ivs: { hp: 31, attack: 32, defense: 31, specialAttack: 31, specialDefense: 31, speed: 31 }
     };
     const issues = validateCompetitiveTeam('singles', [invalid]);
