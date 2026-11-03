@@ -2,7 +2,7 @@
 
 Generador web de equipos Pokémon para **aventura**, con una base modular preparada para incorporar competitivo sin convertir toda la aplicación en una sola pantalla pesada.
 
-La V1 cubre generación individual y colecciones multirregión. La **V2.0** reorganiza la aplicación con navegación real, progreso persistente y carga por módulos.
+La V1 cubre generación individual y colecciones multirregión. La **V2.0** añade navegación real, progreso persistente y carga por módulos. La **V2.1** activa un taller competitivo educativo para construir, editar y analizar equipos.
 
 ## 🌐 Probar la página
 
@@ -292,7 +292,7 @@ También existen smoke tests para los **38 juegos** y pruebas específicas de ro
 - Adaptador IndexedDB para datos grandes.
 - Entrada ligera para Competitivo.
 
-### V2.1 · Núcleo competitivo educativo (implementado en rama)
+### V2.1 · Núcleo competitivo educativo ✅
 
 - Singles 6v6 libre y Dobles estilo VGC como **entornos de aprendizaje**, no reglamentos oficiales validados.
 - Generación de seis sets de ejemplo a partir de plantillas didácticas curadas.
@@ -305,6 +305,21 @@ También existen smoke tests para los **38 juegos** y pruebas específicas de ro
 - Exportación a texto con aviso de legalidad no verificada.
 
 **Importante:** la V2.1 no certifica legalidad de tiers, reglamentos, movesets, habilidades ni formas; no ofrece estadísticas reales de torneos o porcentajes de matchup. Ese trabajo requiere datos competitivos normalizados y actualizables de V2.2.
+
+### Ajustes de Colección · Evoluciones y controles globales (en revisión)
+
+Esta mejora, implementada en una rama independiente antes del merge, incluye:
+
+- Resolver evoluciones posteriores a la Pokédex regional hasta el límite de la generación del **juego seleccionado**, manteniendo la generación de origen de la familia para el reto.
+- Respetar el interruptor de evoluciones por intercambio; en HeartGold/SoulSilver se respetan limitaciones conocidas de objetos cuando se selecciona solo Historia.
+- Evitar expansiones automáticas no compatibles con títulos restringidos como Let's Go y BDSP.
+- Activar/desactivar intercambios y bonus en todos los equipos sin perder el ajuste individual.
+- Bloquear/desbloquear equipos, limpiar bloqueos, regenerar los desbloqueados o regenerar toda la colección con confirmación.
+- Regenerar un Pokémon específico sin modificar los demás, si existe alternativa.
+- Tarjetas con tipos y generación de origen en lugar de identificadores internos; interfaz responsive más ordenada.
+- Reutilizar candidatos ya calculados a lo largo de los intentos de generación para reducir trabajo repetido.
+
+**Límite actual:** para los juegos con cobertura de disponibilidad parcial, no se pueden certificar todos los objetos, momentos de obtención o métodos exactos de evolución. La interfaz lo advierte; la curación exhaustiva queda pendiente.
 
 ### V2.2 · Inteligencia competitiva
 
@@ -325,7 +340,7 @@ Posible app Android/iOS reutilizando el motor y la arquitectura modular de la we
 
 ## 📌 Estado del proyecto
 
-**V1 y V2.0 fusionadas a `main`. V2.1 implementada en rama de desarrollo, pendiente de revisión y merge.**
+**V1, V2.0 y V2.1 ya integradas en `main`. Las mejoras de Colección se preparan en una rama independiente y todavía no están publicadas.**
 
 👉 https://nicogm76.github.io/Pokemon-Randomaicer-Team/
 

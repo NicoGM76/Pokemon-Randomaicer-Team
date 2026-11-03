@@ -4,6 +4,8 @@ import { LocalDraftStore } from '../storage/drafts/LocalDraftStore';
 export interface CollectionDraft {
   config: CollectionConfig;
   result: CollectionResult | null;
+  /** Optional for drafts saved by older versions of Collection. */
+  resultEngineVersion?: number;
 }
 
 function isCollectionConfig(value: unknown): value is CollectionConfig {
@@ -37,7 +39,9 @@ function isCollectionDraft(value: unknown): value is CollectionDraft {
   if (!value || typeof value !== 'object') return false;
   const draft = value as Partial<CollectionDraft>;
   return isCollectionConfig(draft.config)
-    && (draft.result === null || isCollectionResult(draft.result));
+    && (draft.result === null || isCollectionResult(draft.result))
+    && (draft.resultEngineVersion === undefined
+      || (Number.isInteger(draft.resultEngineVersion) && draft.resultEngineVersion > 0));
 }
 
 export const COLLECTION_DRAFT_KEY = 'pokemon-team-generator:draft:collection';

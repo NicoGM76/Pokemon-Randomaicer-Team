@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
-export type CollectionActionIconName = 'add' | 'generate' | 'refresh' | 'lock' | 'unlock' | 'delete';
+export type CollectionActionIconName = 'add' | 'generate' | 'refresh' | 'lock' | 'unlock' | 'delete' | 'copy';
 
 function CollectionActionIcon({ name }: { name: CollectionActionIconName }) {
   const common = {
@@ -26,6 +26,8 @@ function CollectionActionIcon({ name }: { name: CollectionActionIconName }) {
       return <svg {...common}><rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3" /></svg>;
     case 'unlock':
       return <svg {...common}><rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 7-2.6M12 14v3" /></svg>;
+    case 'copy':
+      return <svg {...common}><rect x="8" y="8" width="12" height="12" rx="2" /><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3" /></svg>;
     case 'delete':
       return <svg {...common}><path d="M4 7h16M10 4h4M6 7l1 13h10l1-13M10 11v5M14 11v5" /></svg>;
   }

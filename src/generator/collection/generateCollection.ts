@@ -2,7 +2,7 @@ import type { CompiledDataset } from '../../data/types';
 import type { CollectionConfig, CollectionEntryConfig, CollectionResult, CollectionTeam } from '../../domain/collections/types';
 import type { GeneratorConfig, PokemonCandidate, TeamSlot } from '../../domain/teams/types';
 import { generateAdventureTeam } from '../adventure/generateAdventureTeam';
-import { buildCandidates } from '../candidates/buildCandidates';
+import { buildCollectionCandidates } from './collectionCandidates';
 import { passesCandidateFilters } from '../filters/passesCandidateFilters';
 import { generateRandomTeam } from '../random/generateRandomTeam';
 import { familyOriginGeneration } from './familyOriginGeneration';
@@ -38,11 +38,11 @@ function effectiveGeneratorConfig(entry: CollectionEntryConfig): GeneratorConfig
 }
 
 function gameCandidates(dataset: CompiledDataset, entry: CollectionEntryConfig): PokemonCandidate[] {
-  return buildCandidates(dataset, effectiveGeneratorConfig(entry));
+  return buildCollectionCandidates(dataset, entry);
 }
 
-function normalCandidates(dataset: CompiledDataset, entry: CollectionEntryConfig): PokemonCandidate[] {
-  return gameCandidates(dataset, entry).filter(
+function normalCandidates(dataset: CompiledDataset, entry: CollectionEntryConfig, candidates: PokemonCandidate[]): PokemonCandidate[] {
+  return candidates.filter(
     candidate => familyOriginGeneration(dataset, candidate.evolutionFamilyId) === entry.targetGeneration
   );
 }
@@ -115,13 +115,13 @@ function generateOne(
   current: CollectionTeam | undefined,
   reservedSpecies: Set<string>,
   reservedFamilies: Set<string>,
-  rng: () => number
+  rng: () => number,
+  allGameCandidates: PokemonCandidate[]
 ): CollectionTeam {
   if (current?.locked) return current;
 
   const effectiveConfig = effectiveGeneratorConfig(entry);
   const lockedSlots = current?.team.filter(slot => slot.locked) ?? [];
-  const allGameCandidates = gameCandidates(dataset, entry);
   const localCandidates = allGameCandidates.filter(
     candidate => familyOriginGeneration(dataset, candidate.evolutionFamilyId) === entry.targetGeneration
   );
@@ -160,7 +160,7 @@ function generateOne(
   };
 }
 
-function summarize(teams: CollectionTeam[], config: CollectionConfig): CollectionResult {
+export function summarizeCollection(teams: CollectionTeam[], config: CollectionConfig): CollectionResult {
   const speciesCounts = new Map<string, number>();
   const familyCounts = new Map<string, number>();
   for (const team of teams) {
@@ -192,7 +192,8 @@ function attempt(
   dataset: CompiledDataset,
   config: CollectionConfig,
   current: CollectionResult | undefined,
-  rng: () => number
+  rng: () => number,
+  cachedCandidates: Map<string, PokemonCandidate[]>
 ): CollectionResult {
   const currentByEntry = new Map(current?.teams.map(team => [team.entryId, team]) ?? []);
   const reservedSpecies = new Set<string>();
@@ -212,7 +213,10 @@ function attempt(
 
   const pending = config.entries
     .filter(entry => !resultByEntry.has(entry.id))
-    .map(entry => ({ entry, poolSize: normalCandidates(dataset, entry).length }))
+    .map(entry => ({
+      entry,
+      poolSize: normalCandidates(dataset, entry, cachedCandidates.get(entry.id) ?? []).length
+    }))
     .sort((a, b) => a.poolSize - b.poolSize || rng() - 0.5);
 
   for (const { entry } of pending) {
@@ -223,13 +227,14 @@ function attempt(
       currentByEntry.get(entry.id),
       reservedSpecies,
       reservedFamilies,
-      rng
+      rng,
+      cachedCandidates.get(entry.id) ?? []
     );
     resultByEntry.set(entry.id, team);
     reserve(team.team, reservedSpecies, reservedFamilies);
   }
 
-  return summarize(config.entries.map(entry => resultByEntry.get(entry.id)!).filter(Boolean), config);
+  return summarizeCollection(config.entries.map(entry => resultByEntry.get(entry.id)!).filter(Boolean), config);
 }
 
 function score(result: CollectionResult, config: CollectionConfig): number {
@@ -244,12 +249,17 @@ export function generateCollection(
   current?: CollectionResult,
   rng: () => number = Math.random
 ): CollectionResult {
+  // Candidate resolution scans the Pokédex and evolutionary graph. Cache it
+  // once per requested generation action instead of recomputing per attempt.
+  const cachedCandidates = new Map<string, PokemonCandidate[]>(
+    config.entries.map(entry => [entry.id, gameCandidates(dataset, entry)])
+  );
   let best: CollectionResult | undefined;
   const attempts = current ? 8 : 16;
   for (let index = 0; index < attempts; index++) {
-    const next = attempt(dataset, config, current, rng);
+    const next = attempt(dataset, config, current, rng, cachedCandidates);
     if (!best || score(next, config) > score(best, config)) best = next;
     if (next.complete && next.bonusesUsed === 0) break;
   }
-  return best ?? summarize([], config);
+  return best ?? summarizeCollection([], config);
 }

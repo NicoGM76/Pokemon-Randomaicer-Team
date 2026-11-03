@@ -298,3 +298,262 @@
   .collection-page .config-title h2 {font-size:16px;}
   .collection-page .collection-result-card .pokemon-card {padding:13px;}
 }
+
+
+/* V2.1.1: a clear control center instead of loose checkboxes and buttons. */
+.collection-page .collection-rules-card {
+  margin-bottom:18px;
+  background:linear-gradient(135deg,#10233a 0%,#10243c 50%,#0c1c30 100%);
+  border:1px solid #365a7c;
+  box-shadow:0 8px 28px rgba(0,9,23,.12);
+}
+
+.collection-page .collection-rules-card .config-title {
+  display:flex;
+  align-items:center;
+  margin-bottom:20px;
+  gap:12px;
+}
+
+.collection-page .collection-rules-card .config-title h2 {
+  margin:8px 0 0;
+  font-size:24px;
+  letter-spacing:-.02em;
+}
+
+.collection-page .collection-rule-count {
+  font-size:12px;
+  font-weight:700;
+  color:#a9d8fa;
+  background:#19334c;
+  border:1px solid #386382;
+  border-radius:30px;
+  padding:9px 13px;
+}
+
+.collection-global-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:24px;
+}
+
+.collection-global-group {
+  display:flex;
+  flex-direction:column;
+  gap:11px;
+  min-width:0;
+}
+
+.collection-global-group h3 {
+  margin:0;
+  font-size:17px;
+  color:#f0f8ff;
+}
+
+.collection-global-group > p {
+  color:#9fb5ce;
+  font-size:12px;
+  line-height:1.55;
+  margin:0 0 4px;
+}
+
+.collection-page .collection-global-toggle {
+  margin:0;
+  min-height:73px;
+  background:#0c1b30;
+  border-color:#2f4f6d;
+}
+
+.collection-page .collection-global-toggle:hover {
+  background:#142d47;
+  border-color:#5889b4;
+}
+
+.collection-page .collection-global-toggle .collection-toggle__text strong {
+  font-size:13px;
+  color:#e9f5ff;
+}
+
+.collection-page .collection-global-toggle .collection-toggle__text small {
+  font-size:11px;
+}
+
+.collection-global-hint {
+  margin:20px 0 0;
+  padding:13px 16px;
+  border:1px solid rgba(92,161,205,.22);
+  border-radius:11px;
+  color:#a9bfd4;
+  background:rgba(18,52,79,.5);
+  line-height:1.6;
+  font-size:12px;
+}
+
+.collection-quick-actions {
+  margin:22px 0 28px;
+  padding:23px 26px;
+  border:1px solid #3a688b;
+  border-radius:18px;
+  background:linear-gradient(130deg,#142c46,#0e2137);
+  box-shadow:0 10px 26px rgba(0,8,22,.16);
+}
+
+.collection-toolbar-heading {
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+  padding-bottom:17px;
+  margin-bottom:16px;
+  border-bottom:1px solid rgba(135,181,216,.17);
+}
+
+.collection-toolbar-heading h2 {
+  font-size:22px;
+  line-height:1.1;
+  letter-spacing:-.025em;
+  margin:7px 0 0;
+}
+
+.collection-toolbar-heading small {
+  color:#90b2ce;
+  font-size:12px;
+}
+
+.collection-toolbar-actions {
+  display:flex;
+  align-items:stretch;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.collection-toolbar-actions .collection-action {
+  flex:0 1 auto;
+  min-height:45px;
+  padding:12px 15px;
+}
+
+.collection-toolbar-actions .collection-action--primary {
+  min-height:48px;
+  padding:12px 19px;
+  font-size:14px;
+  box-shadow:0 5px 19px rgba(65,167,237,.22);
+}
+
+.collection-toolbar-actions .collection-action--danger {
+  margin-left:auto;
+}
+
+.collection-status {
+  color:#b7e3ff;
+  background:#112a41;
+  border:1px solid #356789;
+  border-radius:11px;
+  padding:13px 16px;
+  margin:-8px 0 19px;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.collection-species-info {
+  margin-top:8px;
+  color:#a9c0d7;
+  font-size:12px;
+  line-height:1.5;
+}
+
+.collection-species-info p {
+  margin:8px 0 0;
+}
+
+.collection-species-info p strong {
+  color:#d7eaff;
+  font-weight:700;
+}
+
+.collection-type-pills {
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-bottom:11px;
+}
+
+.collection-type {
+  border:1px solid #426480;
+  color:#d7eafa;
+  background:#28425f;
+  border-radius:7px;
+  padding:5px 9px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.collection-type--water { background:#143d61; }
+.collection-type--fire { background:#57342c; }
+.collection-type--grass { background:#214b36; }
+.collection-type--psychic { background:#52354e; }
+.collection-type--ghost { background:#3c335c; }
+.collection-type--electric { background:#534b25; }
+.collection-type--fairy { background:#58384d; }
+.collection-type--steel { background:#394957; }
+.collection-type--poison { background:#473657; }
+.collection-type--dark { background:#37394c; }
+
+.collection-page .collection-card-footer {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+}
+
+.collection-page .collection-card-footer .collection-action {
+  min-width:0;
+  padding:10px 9px;
+  font-size:12px;
+  border:1px solid #365979;
+  background:#173653;
+  color:#a8ddff;
+  font-weight:700;
+  box-shadow:none;
+}
+
+.collection-page .collection-card-footer .collection-action--lock {
+  border-color:#ba8942;
+  background:linear-gradient(145deg,#413322,#2c2d32);
+  color:#ffe1a6;
+}
+
+.collection-page .collection-card-footer .collection-action:enabled:hover {
+  border-color:#83cfff;
+  background:#255278;
+  transform:translateY(-1px);
+}
+
+.collection-page .collection-card-footer .collection-action--lock:enabled:hover {
+  border-color:#e7b971;
+  background:#59432b;
+}
+
+@media(max-width:980px) {
+  .collection-global-grid {gap:15px;}
+  .collection-page .collection-quick-actions {padding:20px;}
+  .collection-toolbar-actions .collection-action--danger {margin-left:0;}
+}
+
+@media(max-width:700px) {
+  .collection-global-grid {grid-template-columns:1fr;}
+  .collection-quick-actions {padding:18px 14px;}
+  .collection-toolbar-heading {align-items:flex-start;flex-direction:column;}
+  .collection-toolbar-actions .collection-action {flex:1 1 170px;}
+  .collection-toolbar-actions .collection-action--primary {flex:1 1 100%;}
+  .collection-page .collection-rules-card .config-title {align-items:flex-start;flex-direction:column;}
+  .collection-page .collection-rules-card .config-title h2 {font-size:21px;}
+}
+
+@media(max-width:420px) {
+  .collection-toolbar-actions .collection-action {flex:1 1 100%;}
+  .collection-page .collection-card-footer {grid-template-columns:1fr;}
+  .collection-page .collection-card-footer .collection-action {min-height:42px;}
+  .collection-page .collection-card-footer .collection-action svg {width:16px;height:16px;}
+}
