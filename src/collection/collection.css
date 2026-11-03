@@ -48,6 +48,13 @@
   flex:0 0 18px;
 }
 
+/* The legacy .config-title span selector is for subtitles, not button labels. */
+.collection-page .config-title .collection-action > span {
+  color:inherit;
+  font-size:inherit;
+  font-weight:inherit;
+}
+
 .collection-action:enabled:hover {
   border-color:#80caff;
   background:linear-gradient(160deg,#275277,#173b5c);
