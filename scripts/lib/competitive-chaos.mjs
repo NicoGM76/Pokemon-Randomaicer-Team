@@ -10,9 +10,9 @@ export const META_TARGETS = [
     description: 'Escalera OU de Pokémon Showdown (Gen 9)'
   },
   {
-    key: 'doubles', ladderId: 'gen9championsvgc2026regmc', cutoff: 1630,
-    label: 'Dobles · Pokémon Champions VGC 2026 Reg M-C',
-    description: 'Escalera de Pokémon Champions estilo VGC, regulación M-C'
+    key: 'doubles', ladderId: 'gen9championsvgc2026regmcbo3', cutoff: 1630,
+    label: 'Dobles · Pokémon Champions VGC 2026 Reg M-C (BO3)',
+    description: 'Escalera Pokémon Champions VGC en partidas al mejor de tres, regulación M-C'
   }
 ];
 
