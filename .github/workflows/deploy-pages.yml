@@ -5,6 +5,9 @@ on:
     branches:
       - main
   workflow_dispatch:
+  schedule:
+    # Monday 12:00 UTC; rebuilds dated metagame snapshots without touching code.
+    - cron: '0 12 * * 1'
 
 permissions:
   contents: read
@@ -40,6 +43,12 @@ jobs:
 
       - name: Validate catalog and generated data
         run: npm run data:validate-all
+
+      - name: Sync verified competitive metagame snapshots
+        run: npm run data:sync-meta
+
+      - name: Test competitive source converter
+        run: npm run meta:test
 
       - name: Run tests
         run: npm run test:run
