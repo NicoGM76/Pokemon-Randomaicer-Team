@@ -23,6 +23,7 @@ const pokemon = [
   mon(134, 'Vaporeon', 1, 'eevee'),
   mon(135, 'Jolteon', 1, 'eevee'),
   mon(470, 'Leafeon', 4, 'eevee'),
+  mon(700, 'Sylveon', 6, 'eevee'),
   mon(42, 'Golbat', 1, 'zubat'),
   mon(169, 'Crobat', 2, 'zubat')
 ];
@@ -35,16 +36,20 @@ const dataset = {
   games: [
     { id: 'red', name: 'Red', generation: 1, familyId: 'rby', dexIds: ['red-dex'] },
     { id: 'gold', name: 'Gold', generation: 2, familyId: 'gsc', dexIds: ['johto-dex'] },
-    { id: 'heartgold', name: 'HeartGold', generation: 4, familyId: 'hgss', dexIds: ['hgss-dex'] }
+    { id: 'heartgold', name: 'HeartGold', generation: 4, familyId: 'hgss', dexIds: ['hgss-dex'] },
+    { id: 'lets-go-eevee', name: "Let's Go Eevee", generation: 7, familyId: 'lgpe', dexIds: ['lgpe-dex'] },
+    { id: 'brilliant-diamond', name: 'Brilliant Diamond', generation: 8, familyId: 'bdsp', dexIds: ['bdsp-dex'] }
   ],
-  contentPacks: ['red', 'gold', 'heartgold'].map(id => ({
-    id: id + '-base', gameId: id, name: 'Base', type: 'base', dexIds: [id === 'red' ? 'red-dex' : id === 'gold' ? 'johto-dex' : 'hgss-dex']
+  contentPacks: ['red', 'gold', 'heartgold', 'lets-go-eevee', 'brilliant-diamond'].map(id => ({
+    id: id + '-base', gameId: id, name: 'Base', type: 'base', dexIds: [id === 'red' ? 'red-dex' : id === 'gold' ? 'johto-dex' : id === 'heartgold' ? 'hgss-dex' : id === 'lets-go-eevee' ? 'lgpe-dex' : 'bdsp-dex']
   })),
   regionalDexes: [],
   regionalDexEntries: [
     ...baseIds.map(id => ({ dexId: 'red-dex', pokemonId: id, dexNumber: id, source: 'pokeapi' })),
     ...baseIds.map(id => ({ dexId: 'johto-dex', pokemonId: id, dexNumber: id, source: 'pokeapi' })),
-    ...baseIds.map(id => ({ dexId: 'hgss-dex', pokemonId: id, dexNumber: id, source: 'pokeapi' }))
+    ...baseIds.map(id => ({ dexId: 'hgss-dex', pokemonId: id, dexNumber: id, source: 'pokeapi' })),
+    ...[133, 42].map(id => ({ dexId: 'lgpe-dex', pokemonId: id, dexNumber: id, source: 'pokeapi' })),
+    ...[133, 42].map(id => ({ dexId: 'bdsp-dex', pokemonId: id, dexNumber: id, source: 'pokeapi' }))
   ],
   evolutions: [
     { fromId: 200, toId: 429, conditions: [{ type: 'item', itemId: 'dusk-stone' }] },
@@ -53,6 +58,7 @@ const dataset = {
     { fromId: 133, toId: 134, conditions: [{ type: 'item', itemId: 'water-stone' }] },
     { fromId: 133, toId: 135, conditions: [{ type: 'item', itemId: 'thunder-stone' }] },
     { fromId: 133, toId: 470, conditions: [{ type: 'special', conditionId: 'near_special_rock:1' }] },
+    { fromId: 133, toId: 700, conditions: [{ type: 'friendship' }] },
     { fromId: 42, toId: 169, conditions: [{ type: 'friendship' }] }
   ]
 } as unknown as CompiledDataset;
@@ -99,12 +105,29 @@ describe('Collection evolutionary line resolution', () => {
     expect(has('heartgold', 94, 1, true)).toBe(true);
   });
 
-  it('preserves valid branched Eevee evolutions within the game', () => {
+  it('preserves valid branched Eevee evolutions but blocks location-only mechanics absent from the game', () => {
     const eeveeFamily = candidates('heartgold', 1).filter(item => item.evolutionFamilyId === 'eevee').map(item => item.resolvedPokemon.id);
-    expect(eeveeFamily).toEqual(expect.arrayContaining([134,135,470]));
+    expect(eeveeFamily).toEqual(expect.arrayContaining([134,135]));
+    expect(eeveeFamily).not.toContain(470);
     expect(eeveeFamily).not.toContain(133);
     const older = candidates('red', 1).filter(item => item.evolutionFamilyId === 'eevee').map(item => item.resolvedPokemon.id);
     expect(older).toEqual(expect.arrayContaining([134,135]));
     expect(older).not.toContain(470);
+  });
+
+  it('does not infer Gen VII/VIII evolutions in remake titles with restricted native dexes', () => {
+    expect(has('lets-go-eevee', 169, 1)).toBe(false);
+    expect(has('lets-go-eevee', 700, 1)).toBe(false);
+    expect(has('brilliant-diamond', 700, 1)).toBe(false);
+  });
+
+  it('respects known HeartGold item unlocks when stage is main story', () => {
+    const mainStory = entry('heartgold', 2, false);
+    mainStory.generator.stage = 'main_story';
+    const ids = buildCollectionCandidates(dataset, mainStory).map(item => item.resolvedPokemon.id);
+    expect(ids).toContain(215);
+    expect(ids).toContain(200);
+    expect(ids).not.toContain(461);
+    expect(ids).not.toContain(429);
   });
 });
