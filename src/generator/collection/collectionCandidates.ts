@@ -31,13 +31,38 @@ export function buildCollectionCandidates(
   if (!usesRegionalDexFallback(dataset, config)) return initial;
 
   const byId = new Map(dataset.pokemon.map(pokemon => [pokemon.id, pokemon]));
+  // The remakes use later engine generations but do not contain every
+  // evolution introduced before that engine. Legends have distinct methods.
+  const gameCeiling = game.familyId === 'lgpe' ? 1
+    : game.familyId === 'bdsp' ? 4
+    : game.generation;
+  const supportedGame = !['legends-arceus', 'legends-za'].includes(game.familyId);
   const gameSteps = dataset.evolutions.filter(step => {
     const target = byId.get(step.toId);
     const origin = byId.get(step.fromId);
-    return Boolean(target && origin
-      && target.introducedGeneration <= game.generation
-      && origin.introducedGeneration <= game.generation
-      && origin.evolutionFamilyId === target.evolutionFamilyId);
+    if (!supportedGame || !target || !origin) return false;
+    if (target.introducedGeneration > gameCeiling
+      || origin.introducedGeneration > gameCeiling
+      || origin.evolutionFamilyId !== target.evolutionFamilyId) return false;
+
+    // PokeAPI's location-specific / unknown conditions do not prove that
+    // their locations or mechanics exist in this game. Held-item evolution
+    // can be assessed as a possible path, but still needs item curation.
+    const unknownPrerequisite = step.conditions.some(condition =>
+      condition.type === 'special'
+        && !condition.conditionId.startsWith('held_item_id:')
+    );
+    if (unknownPrerequisite) return false;
+
+    // HeartGold/SoulSilver: Razor Claw is obtained at Battle Frontier and
+    // Dusk Stone after National Dex. Do not show those as story evolutions.
+    // https://www.serebii.net/heartgoldsoulsilver/items.shtml
+    // https://www.serebii.net/heartgoldsoulsilver/evolution.shtml
+    if (game.familyId === 'hgss' && config.stage === 'main_story') {
+      if ((step.fromId === 215 && step.toId === 461)
+        || (step.fromId === 200 && step.toId === 429)) return false;
+    }
+    return true;
   });
   const grouped = new Map<string, PokemonCandidate>();
 
