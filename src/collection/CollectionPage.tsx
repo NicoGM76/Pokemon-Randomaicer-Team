@@ -5,6 +5,8 @@ import type { GeneratorConfig } from '../domain/teams/types';
 import { generateCollection } from '../generator/collection/generateCollection';
 import { regenerateCollectionTeam } from '../generator/collection/regenerateCollectionTeam';
 import { loadCollectionDraft, saveCollectionDraft } from './collectionDraft';
+import { CollectionActionButton } from './CollectionActionButton';
+import './collection.css';
 
 const dataset = loadDataset();
 
@@ -84,7 +86,10 @@ export default function CollectionPage() {
       ...entry,
       label: `Generación ${roman[generation] ?? generation}`,
       targetGeneration: generation,
-      generator: makeGenerator(gameId, entry.generator.teamSize)
+      generator: {
+        ...makeGenerator(gameId, entry.generator.teamSize),
+        allowTradeEvolution: entry.generator.allowTradeEvolution
+      }
     }));
   };
 
@@ -140,14 +145,14 @@ export default function CollectionPage() {
   };
 
   return (
-    <main className="page">
+    <main className="page collection-page">
       <section className="hero">
         <div className="section-kicker">UNA COLECCIÓN · MUCHAS AVENTURAS</div>
         <h1>Arma todos tus equipos como una sola estrategia.</h1>
         <p className="hero-copy">Elige la generación o región objetivo y el juego que jugarás. El motor reparte las familias entre todos los equipos para evitar repetir siempre a los mismos favoritos.</p>
       </section>
 
-      <section className="config-card" style={{ marginBottom: 24 }}>
+      <section className="config-card collection-rules-card" style={{ marginBottom: 24 }}>
         <div className="config-title"><h2>Reglas globales</h2><span>COLECCIÓN</span></div>
         <div className="config-content">
           <div className="custom-checks">
@@ -160,10 +165,14 @@ export default function CollectionPage() {
 
       <div style={{ display: 'grid', gap: 16 }}>
         {config.entries.map((entry, index) => (
-          <section className="config-card" key={entry.id}>
+          <section className="config-card collection-entry-card" key={entry.id}>
             <div className="config-title">
               <h2>Equipo {index + 1} · {entry.label}</h2>
-              {config.entries.length > 2 && <button className="danger" onClick={() => removeEntry(entry.id)}>Eliminar</button>}
+              {config.entries.length > 2 && (
+                <CollectionActionButton icon="delete" tone="danger" onClick={() => removeEntry(entry.id)}>
+                  Eliminar equipo
+                </CollectionActionButton>
+              )}
             </div>
             <div className="config-content">
               <div className="field-grid">
@@ -188,15 +197,49 @@ export default function CollectionPage() {
                   </select>
                 </label>
               </div>
-              <label className="custom-check"><input type="checkbox" checked={entry.allowBonus} onChange={event => updateEntry(entry.id, value => ({ ...value, allowBonus: event.target.checked }))} /><span>Permitir 1 Pokémon bonus si hace falta</span></label>
+              <div className="collection-options">
+                <label className="collection-toggle">
+                  <input
+                    type="checkbox"
+                    aria-label="Permitir evoluciones por intercambio"
+                    checked={entry.generator.allowTradeEvolution}
+                    onChange={event => updateEntry(entry.id, value => ({
+                      ...value,
+                      generator: { ...value.generator, allowTradeEvolution: event.target.checked }
+                    }))}
+                  />
+                  <span className="collection-toggle__track" aria-hidden="true" />
+                  <span className="collection-toggle__text">
+                    <strong>Permitir evoluciones por intercambio</strong>
+                    <small>Activa rutas como Haunter → Gengar cuando el juego y los datos las permiten.</small>
+                  </span>
+                </label>
+                <label className="collection-toggle">
+                  <input
+                    type="checkbox"
+                    aria-label="Permitir un Pokémon bonus"
+                    checked={entry.allowBonus}
+                    onChange={event => updateEntry(entry.id, value => ({ ...value, allowBonus: event.target.checked }))}
+                  />
+                  <span className="collection-toggle__track" aria-hidden="true" />
+                  <span className="collection-toggle__text">
+                    <strong>Permitir un Pokémon bonus</strong>
+                    <small>Hasta uno fuera de la generación objetivo si necesitas completar el equipo.</small>
+                  </span>
+                </label>
+              </div>
             </div>
           </section>
         ))}
       </div>
 
       <div className="generate-row">
-        <button className="secondary" disabled={config.entries.length >= 9} onClick={addEntry}>＋ Añadir equipo</button>
-        <button className="primary large" onClick={generateAll}>⤨ {result ? 'Regenerar colección' : 'Generar colección'}</button>
+        <CollectionActionButton icon="add" disabled={config.entries.length >= 9} onClick={addEntry}>
+          Añadir equipo
+        </CollectionActionButton>
+        <CollectionActionButton icon={result ? 'refresh' : 'generate'} tone="primary" onClick={generateAll}>
+          {result ? 'Regenerar colección' : 'Generar colección'}
+        </CollectionActionButton>
       </div>
 
       {result && <section className="team-section">
@@ -216,12 +259,22 @@ export default function CollectionPage() {
         <div style={{ display: 'grid', gap: 24 }}>
           {result.teams.map(team => {
             const game = dataset.games.find(item => item.id === team.gameId);
-            return <section className="config-card" key={team.entryId}>
+            return <section className="config-card collection-result-card" key={team.entryId}>
               <div className="config-title">
                 <div><h2>{team.label}</h2><span>{game?.name ?? team.gameId} · Gen objetivo {roman[team.targetGeneration] ?? team.targetGeneration} · {team.team.length} miembros</span></div>
-                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                  <button className="secondary" onClick={() => toggleTeamLock(team.entryId)}>{team.locked ? '▣ Equipo bloqueado' : '▢ Bloquear equipo'}</button>
-                  <button className="secondary" disabled={team.locked} onClick={() => rerollTeam(team.entryId)}>⟳ Regenerar región</button>
+                <div className="collection-team-actions">
+                  <CollectionActionButton
+                    icon={team.locked ? 'unlock' : 'lock'}
+                    tone={team.locked ? 'lock' : 'secondary'}
+                    aria-pressed={team.locked}
+                    aria-label={team.locked ? 'Desbloquear equipo' : 'Bloquear equipo'}
+                    onClick={() => toggleTeamLock(team.entryId)}
+                  >
+                    {team.locked ? 'Desbloquear equipo' : 'Bloquear equipo'}
+                  </CollectionActionButton>
+                  <CollectionActionButton icon="refresh" disabled={team.locked} onClick={() => rerollTeam(team.entryId)}>
+                    Regenerar región
+                  </CollectionActionButton>
                 </div>
               </div>
 
@@ -234,7 +287,18 @@ export default function CollectionPage() {
                     <div className="pokemon-art"><img src={spriteUrl(pokemon.id)} alt={pokemon.name} loading="lazy" /></div>
                     <h2>{pokemon.name}</h2>
                     <span className="form-label">Familia: {slot.candidate.evolutionFamilyId}</span>
-                    <div className="card-footer"><button disabled={team.locked} onClick={() => toggleMemberLock(team.entryId, index)}>{slot.locked ? '▣ Bloqueado' : '▢ Bloquear'}</button></div>
+                    <div className="card-footer collection-card-footer">
+                      <CollectionActionButton
+                        icon={slot.locked ? 'unlock' : 'lock'}
+                        tone={slot.locked ? 'lock' : 'secondary'}
+                        disabled={team.locked}
+                        aria-pressed={slot.locked}
+                        aria-label={slot.locked ? 'Desbloquear Pokémon' : 'Bloquear Pokémon'}
+                        onClick={() => toggleMemberLock(team.entryId, index)}
+                      >
+                        {slot.locked ? 'Desbloquear' : 'Bloquear Pokémon'}
+                      </CollectionActionButton>
+                    </div>
                   </article>;
                 })}
               </div>
