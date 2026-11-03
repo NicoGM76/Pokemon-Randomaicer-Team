@@ -251,5 +251,5 @@ export function generateCollection(
     if (!best || score(next, config) > score(best, config)) best = next;
     if (next.complete && next.bonusesUsed === 0) break;
   }
-  return best ?? summarize([], config);
+  return best ?? summarizeCollection([], config);
 }
