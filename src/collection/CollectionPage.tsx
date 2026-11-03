@@ -4,13 +4,23 @@ import type { CollectionConfig, CollectionEntryConfig, CollectionResult } from '
 import type { GeneratorConfig } from '../domain/teams/types';
 import { generateCollection } from '../generator/collection/generateCollection';
 import { regenerateCollectionTeam } from '../generator/collection/regenerateCollectionTeam';
+import { regenerateCollectionMember } from '../generator/collection/regenerateCollectionMember';
+import { familyOriginGeneration } from '../generator/collection/familyOriginGeneration';
 import { loadCollectionDraft, saveCollectionDraft } from './collectionDraft';
 import { CollectionActionButton } from './CollectionActionButton';
+import { clearAllLocks, setAllBonus, setAllTradeEvolution, setTeamLocks } from './collectionActions';
 import './collection.css';
 
 const dataset = loadDataset();
 
 const roman: Record<number, string> = { 1: 'I', 2: 'II', 3: 'III', 4: 'IV', 5: 'V', 6: 'VI', 7: 'VII', 8: 'VIII', 9: 'IX' };
+const typeLabels: Record<string, string> = {
+  normal: 'Normal', fire: 'Fuego', water: 'Agua', electric: 'Eléctrico',
+  grass: 'Planta', ice: 'Hielo', fighting: 'Lucha', poison: 'Veneno',
+  ground: 'Tierra', flying: 'Volador', psychic: 'Psíquico', bug: 'Bicho',
+  rock: 'Roca', ghost: 'Fantasma', dragon: 'Dragón', dark: 'Siniestro',
+  steel: 'Acero', fairy: 'Hada'
+};
 
 function basePackFor(gameId: string): string {
   return dataset.contentPacks.find(pack => pack.gameId === gameId && pack.type === 'base')?.id ?? '';
@@ -66,6 +76,7 @@ export default function CollectionPage() {
   const restoredDraft = useMemo(() => loadCollectionDraft(), []);
   const [config, setConfig] = useState<CollectionConfig>(() => restoredDraft?.config ?? initialConfig());
   const [result, setResult] = useState<CollectionResult | null>(() => restoredDraft?.result ?? null);
+  const [notice, setNotice] = useState('');
   const generations = useMemo(() => [...new Set(dataset.games.map(game => game.generation))].sort((a, b) => a - b), []);
 
   useEffect(() => {
@@ -118,8 +129,56 @@ export default function CollectionPage() {
     setResult(null);
   };
 
+  const allTradeEnabled = config.entries.every(entry => entry.generator.allowTradeEvolution);
+  const allBonusEnabled = config.entries.every(entry => entry.allowBonus);
+
+  const changeTradeForAll = (enabled: boolean) => {
+    setConfig(previous => setAllTradeEvolution(previous, enabled));
+    setResult(null);
+    setNotice('Intercambios actualizados en todos los equipos. Genera otra vez para aplicar las reglas.');
+  };
+
+  const changeBonusForAll = (enabled: boolean) => {
+    setConfig(previous => setAllBonus(previous, enabled));
+    setResult(null);
+    setNotice('Bonus actualizados en todos los equipos. Genera otra vez para aplicar las reglas.');
+  };
+
   const generateAll = () => {
     setResult(generateCollection(dataset, config, result ?? undefined));
+    setNotice(result
+      ? 'Se respetaron los Pokémon y equipos bloqueados.'
+      : 'Colección generada con las reglas elegidas.');
+  };
+
+  const regenerateEverything = () => {
+    if (!result) return;
+    if (!window.confirm('¿Regenerar toda la colección ignorando los bloqueos actuales?')) return;
+    setResult(generateCollection(dataset, config));
+    setNotice('Colección completamente regenerada. Los bloqueos anteriores se descartaron.');
+  };
+
+  const resetCollection = () => {
+    if (!window.confirm('¿Restablecer la configuración y eliminar el resultado actual de la colección?')) return;
+    setConfig(initialConfig());
+    setResult(null);
+    setNotice('Colección restablecida. Puedes comenzar otra vez.');
+  };
+
+  const copySummary = async () => {
+    if (!result) return;
+    const content = result.teams.map(team => {
+      const gameName = dataset.games.find(game => game.id === team.gameId)?.name ?? team.gameId;
+      const members = team.team.map(slot => slot.candidate.resolvedPokemon.name).join(', ');
+      return team.label + ' (' + gameName + '): ' + members;
+    }).join('\n');
+    try {
+      if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+      await navigator.clipboard.writeText(content);
+      setNotice('Resumen copiado al portapapeles.');
+    } catch {
+      setNotice('No se pudo copiar: revisa los permisos del navegador.');
+    }
   };
 
   const toggleTeamLock = (entryId: string) => {
@@ -144,6 +203,17 @@ export default function CollectionPage() {
     setResult(regenerateCollectionTeam(dataset, config, result, entryId));
   };
 
+  const rerollMember = (entryId: string, index: number) => {
+    if (!result) return;
+    const next = regenerateCollectionMember(dataset, config, result, entryId, index);
+    if (next === result) {
+      setNotice('No hay otra alternativa compatible para ese espacio sin romper las reglas.');
+    } else {
+      setResult(next);
+      setNotice('Pokémon regenerado; los demás miembros permanecen iguales.');
+    }
+  };
+
   return (
     <main className="page collection-page">
       <section className="hero">
@@ -152,16 +222,108 @@ export default function CollectionPage() {
         <p className="hero-copy">Elige la generación o región objetivo y el juego que jugarás. El motor reparte las familias entre todos los equipos para evitar repetir siempre a los mismos favoritos.</p>
       </section>
 
-      <section className="config-card collection-rules-card" style={{ marginBottom: 24 }}>
-        <div className="config-title"><h2>Reglas globales</h2><span>COLECCIÓN</span></div>
-        <div className="config-content">
-          <div className="custom-checks">
-            <label className="custom-check"><input type="checkbox" checked={config.avoidRepeatedSpecies} onChange={event => { setConfig({ ...config, avoidRepeatedSpecies: event.target.checked }); setResult(null); }} /><span>No repetir Pokémon entre equipos</span></label>
-            <label className="custom-check"><input type="checkbox" checked={config.avoidRepeatedFamilies} onChange={event => { setConfig({ ...config, avoidRepeatedFamilies: event.target.checked }); setResult(null); }} /><span>No repetir familias evolutivas</span></label>
+      <section className="config-card collection-rules-card">
+        <div className="config-title">
+          <div>
+            <span className="section-kicker">TUS REGLAS · UNA SOLA COLECCIÓN</span>
+            <h2>Reglas globales</h2>
           </div>
-          <small>Las evoluciones posteriores cuentan por la generación de origen de su línea. Cada equipo puede usar como máximo 1 bonus si lo necesita.</small>
+          <span className="collection-rule-count">{config.entries.length} regiones configuradas</span>
+        </div>
+        <div className="collection-global-grid">
+          <div className="collection-global-group">
+            <h3>Diversidad de equipos</h3>
+            <p>Evita repetir siempre los mismos Pokémon en las diferentes regiones.</p>
+            <label className="collection-toggle collection-global-toggle">
+              <input type="checkbox" checked={config.avoidRepeatedSpecies}
+                onChange={event => {
+                  setConfig(previous => ({ ...previous, avoidRepeatedSpecies: event.target.checked }));
+                  setResult(null);
+                }} />
+              <span className="collection-toggle__track" aria-hidden="true" />
+              <span className="collection-toggle__text">
+                <strong>No repetir Pokémon entre equipos</strong>
+                <small>Evita especies duplicadas en la colección.</small>
+              </span>
+            </label>
+            <label className="collection-toggle collection-global-toggle">
+              <input type="checkbox" checked={config.avoidRepeatedFamilies}
+                onChange={event => {
+                  setConfig(previous => ({ ...previous, avoidRepeatedFamilies: event.target.checked }));
+                  setResult(null);
+                }} />
+              <span className="collection-toggle__track" aria-hidden="true" />
+              <span className="collection-toggle__text">
+                <strong>No repetir familias evolutivas</strong>
+                <small>Evita distintas evoluciones de una misma línea.</small>
+              </span>
+            </label>
+          </div>
+          <div className="collection-global-group">
+            <h3>Aplicar a todos</h3>
+            <p>Configura los intercambios y Pokémon bonus de todas las regiones a la vez.</p>
+            <label className="collection-toggle collection-global-toggle">
+              <input type="checkbox" aria-label="Intercambios en todos los equipos"
+                checked={allTradeEnabled} onChange={event => changeTradeForAll(event.target.checked)} />
+              <span className="collection-toggle__track" aria-hidden="true" />
+              <span className="collection-toggle__text">
+                <strong>Evoluciones por intercambio</strong>
+                <small>{allTradeEnabled ? 'Activadas en todos los equipos.' : 'Pulsa para activarlas en todos los equipos.'}</small>
+              </span>
+            </label>
+            <label className="collection-toggle collection-global-toggle">
+              <input type="checkbox" aria-label="Bonus en todos los equipos"
+                checked={allBonusEnabled} onChange={event => changeBonusForAll(event.target.checked)} />
+              <span className="collection-toggle__track" aria-hidden="true" />
+              <span className="collection-toggle__text">
+                <strong>Un Pokémon bonus por región</strong>
+                <small>{allBonusEnabled ? 'Permitido en todos los equipos.' : 'Pulsa para permitirlo en todos los equipos.'}</small>
+              </span>
+            </label>
+          </div>
+        </div>
+        <p className="collection-global-hint">
+          Las familias cuentan por su generación de origen, pero las evoluciones dependen del juego elegido.
+          La disponibilidad exacta de objetos, historia y postgame sigue siendo provisional cuando usamos la Pokédex regional.
+          Cambiar reglas requiere generar de nuevo.
+        </p>
+      </section>
+
+      <section className="collection-quick-actions" aria-label="Acciones generales de colección">
+        <div className="collection-toolbar-heading">
+          <div>
+            <span className="section-kicker">CENTRO DE CONTROL</span>
+            <h2>Gestiona toda tu colección</h2>
+          </div>
+          <small>{result ? result.totalPokemon + ' Pokémon en ' + result.teams.length + ' equipos' : 'Configura tus regiones y genera tu colección'}</small>
+        </div>
+        <div className="collection-toolbar-actions">
+          <CollectionActionButton icon={result ? 'refresh' : 'generate'} tone="primary"
+            onClick={generateAll} disabled={Boolean(result && result.teams.every(team => team.locked))}>
+            {result ? 'Regenerar desbloqueados' : 'Generar colección'}
+          </CollectionActionButton>
+          <CollectionActionButton icon="add" disabled={config.entries.length >= 9} onClick={addEntry}>
+            Añadir equipo
+          </CollectionActionButton>
+          {result && <>
+            <CollectionActionButton icon="refresh" onClick={regenerateEverything}>Regenerar todo</CollectionActionButton>
+            <CollectionActionButton icon="lock" onClick={() => setResult(previous => previous && setTeamLocks(previous, true))}>
+              Bloquear todos los equipos
+            </CollectionActionButton>
+            <CollectionActionButton icon="unlock" onClick={() => setResult(previous => previous && setTeamLocks(previous, false))}>
+              Desbloquear equipos
+            </CollectionActionButton>
+            <CollectionActionButton icon="unlock" onClick={() => setResult(previous => previous && clearAllLocks(previous))}>
+              Limpiar bloqueos
+            </CollectionActionButton>
+            <CollectionActionButton icon="copy" onClick={copySummary}>Copiar resumen</CollectionActionButton>
+          </>}
+          <CollectionActionButton icon="delete" tone="danger" onClick={resetCollection}>
+            Restablecer colección
+          </CollectionActionButton>
         </div>
       </section>
+      {notice && <div className="collection-status" role="status">{notice}</div>}
 
       <div style={{ display: 'grid', gap: 16 }}>
         {config.entries.map((entry, index) => (
@@ -233,15 +395,6 @@ export default function CollectionPage() {
         ))}
       </div>
 
-      <div className="generate-row">
-        <CollectionActionButton icon="add" disabled={config.entries.length >= 9} onClick={addEntry}>
-          Añadir equipo
-        </CollectionActionButton>
-        <CollectionActionButton icon={result ? 'refresh' : 'generate'} tone="primary" onClick={generateAll}>
-          {result ? 'Regenerar colección' : 'Generar colección'}
-        </CollectionActionButton>
-      </div>
-
       {result && <section className="team-section">
         <div className={result.complete ? 'result-badge success' : 'result-badge warning'}>{result.complete ? 'COLECCIÓN LISTA' : 'COLECCIÓN PARCIAL'}</div>
         <div className="result-heading">
@@ -286,7 +439,14 @@ export default function CollectionPage() {
                     <div className="card-number">N.º {String(pokemon.id).padStart(4, '0')}<span>{isBonus ? '★ BONUS' : ''}</span></div>
                     <div className="pokemon-art"><img src={spriteUrl(pokemon.id)} alt={pokemon.name} loading="lazy" /></div>
                     <h2>{pokemon.name}</h2>
-                    <span className="form-label">Familia: {slot.candidate.evolutionFamilyId}</span>
+                    <div className="collection-species-info">
+                      <div className="collection-type-pills">
+                        {pokemon.types.map(type => <span key={type} className={'collection-type collection-type--' + type}>{typeLabels[type] ?? type}</span>)}
+                      </div>
+                      <p>Origen de la línea: <strong>Gen {roman[familyOriginGeneration(dataset, slot.candidate.evolutionFamilyId)] ?? familyOriginGeneration(dataset, slot.candidate.evolutionFamilyId)}</strong></p>
+                      {slot.candidate.sourcePokemon.id !== pokemon.id &&
+                        <p>Evolución desde: <strong>{slot.candidate.sourcePokemon.name}</strong></p>}
+                    </div>
                     <div className="card-footer collection-card-footer">
                       <CollectionActionButton
                         icon={slot.locked ? 'unlock' : 'lock'}
@@ -297,6 +457,14 @@ export default function CollectionPage() {
                         onClick={() => toggleMemberLock(team.entryId, index)}
                       >
                         {slot.locked ? 'Desbloquear' : 'Bloquear Pokémon'}
+                      </CollectionActionButton>
+                      <CollectionActionButton
+                        icon="refresh"
+                        disabled={slot.locked || team.locked}
+                        aria-label="Regenerar Pokémon"
+                        onClick={() => rerollMember(team.entryId, index)}
+                      >
+                        Regenerar
                       </CollectionActionButton>
                     </div>
                   </article>;
