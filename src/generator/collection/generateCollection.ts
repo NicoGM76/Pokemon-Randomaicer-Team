@@ -160,7 +160,7 @@ function generateOne(
   };
 }
 
-function summarize(teams: CollectionTeam[], config: CollectionConfig): CollectionResult {
+export function summarizeCollection(teams: CollectionTeam[], config: CollectionConfig): CollectionResult {
   const speciesCounts = new Map<string, number>();
   const familyCounts = new Map<string, number>();
   for (const team of teams) {
@@ -229,7 +229,7 @@ function attempt(
     reserve(team.team, reservedSpecies, reservedFamilies);
   }
 
-  return summarize(config.entries.map(entry => resultByEntry.get(entry.id)!).filter(Boolean), config);
+  return summarizeCollection(config.entries.map(entry => resultByEntry.get(entry.id)!).filter(Boolean), config);
 }
 
 function score(result: CollectionResult, config: CollectionConfig): number {
