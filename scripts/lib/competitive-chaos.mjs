@@ -89,8 +89,8 @@ export function convertChaosSnapshot(raw, pokemonCatalog, target, month) {
   }
 
   result.sort((a, b) => b.usagePercent - a.usagePercent || a.pokemonId - b.pokemonId);
-  if (result.length < 8) {
-    throw new Error('Smogon snapshot has fewer than 8 recognizable species');
+  if (result.length < 1) {
+    throw new Error('Smogon snapshot has no recognizable species');
   }
 
   return {
