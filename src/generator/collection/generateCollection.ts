@@ -2,7 +2,7 @@ import type { CompiledDataset } from '../../data/types';
 import type { CollectionConfig, CollectionEntryConfig, CollectionResult, CollectionTeam } from '../../domain/collections/types';
 import type { GeneratorConfig, PokemonCandidate, TeamSlot } from '../../domain/teams/types';
 import { generateAdventureTeam } from '../adventure/generateAdventureTeam';
-import { buildCandidates } from '../candidates/buildCandidates';
+import { buildCollectionCandidates } from './collectionCandidates';
 import { passesCandidateFilters } from '../filters/passesCandidateFilters';
 import { generateRandomTeam } from '../random/generateRandomTeam';
 import { familyOriginGeneration } from './familyOriginGeneration';
@@ -38,7 +38,7 @@ function effectiveGeneratorConfig(entry: CollectionEntryConfig): GeneratorConfig
 }
 
 function gameCandidates(dataset: CompiledDataset, entry: CollectionEntryConfig): PokemonCandidate[] {
-  return buildCandidates(dataset, effectiveGeneratorConfig(entry));
+  return buildCollectionCandidates(dataset, entry);
 }
 
 function normalCandidates(dataset: CompiledDataset, entry: CollectionEntryConfig): PokemonCandidate[] {
