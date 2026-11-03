@@ -292,18 +292,19 @@ También existen smoke tests para los **38 juegos** y pruebas específicas de ro
 - Adaptador IndexedDB para datos grandes.
 - Entrada ligera para Competitivo.
 
-### V2.1 · Núcleo competitivo
+### V2.1 · Núcleo competitivo educativo (implementado en rama)
 
-Planeado:
+- Singles 6v6 libre y Dobles estilo VGC como **entornos de aprendizaje**, no reglamentos oficiales validados.
+- Generación de seis sets de ejemplo a partir de plantillas didácticas curadas.
+- Editor manual que permite escoger cualquiera de las especies presentes en el dataset.
+- Naturalezas (incluidas sus modificaciones), EVs, IVs, habilidades, objetos, movimientos y roles.
+- Bloqueo y regeneración individual; conserva Pokémon bloqueados al generar de nuevo.
+- Validación de EVs/IVs, especie duplicada, objeto duplicado en Dobles y movimientos incompletos o repetidos.
+- Análisis de roles y debilidades de tipos compartidas, con explicaciones que pueden ocultarse.
+- Borradores separados para Singles y Dobles, restaurados al recargar.
+- Exportación a texto con aviso de legalidad no verificada.
 
-- Singles 6v6 y Dobles/VGC.
-- Naturalezas.
-- EVs e IVs.
-- Objetos.
-- Movesets.
-- Roles.
-- Generación + edición manual híbrida.
-- Modo aprendizaje.
+**Importante:** la V2.1 no certifica legalidad de tiers, reglamentos, movesets, habilidades ni formas; no ofrece estadísticas reales de torneos o porcentajes de matchup. Ese trabajo requiere datos competitivos normalizados y actualizables de V2.2.
 
 ### V2.2 · Inteligencia competitiva
 
@@ -324,7 +325,7 @@ Posible app Android/iOS reutilizando el motor y la arquitectura modular de la we
 
 ## 📌 Estado del proyecto
 
-**V1 publicada. V2.0 en desarrollo sobre una rama dedicada antes de integrarse a `main`.**
+**V1 y V2.0 fusionadas a `main`. V2.1 implementada en rama de desarrollo, pendiente de revisión y merge.**
 
 👉 https://nicogm76.github.io/Pokemon-Randomaicer-Team/
 
