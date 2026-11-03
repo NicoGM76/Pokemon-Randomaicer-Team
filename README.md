@@ -321,16 +321,34 @@ Esta mejora, implementada en una rama independiente antes del merge, incluye:
 
 **Límite actual:** para los juegos con cobertura de disponibilidad parcial, no se pueden certificar todos los objetos, momentos de obtención o métodos exactos de evolución. La interfaz lo advierte; la curación exhaustiva queda pendiente.
 
-### V2.2 · Inteligencia competitiva
+### V2.2 · Inteligencia competitiva (en revisión)
 
-Planeado:
+La ruta `/#/competitive` ofrece un panel **optativo, cargado bajo demanda** para consultar:
 
-- matchups;
-- estadísticas de uso;
-- metagame por formato/regulación;
-- resultados de Championships y torneos;
-- compañeros y sets frecuentes;
-- snapshots actualizables.
+- estadísticas reales de uso de la escalera de Pokémon Showdown/Smogon, con mes, corte de rating, volumen de partidas y fuente enlazada;
+- Singles **Gen 9 OU**, corte 1695, y Dobles **Pokémon Champions VGC 2026 Reg M-C BO3**, corte 1630 (este identificador no se cambia automáticamente por uno de otra regulación);
+- movimientos, objetos, habilidades y asociaciones positivas de compañeros para especies que coinciden exactamente con el catálogo local;
+- comparación básica de tipos del Pokémon rival con los miembros del equipo actual: vulnerables a STAB y miembros con STAB supereficaz;
+- mensajes explícitos si los datos no están disponibles, sin inventar estadísticas;
+- acceso separado a los resultados oficiales de la Championship Series (sin afirmar que fueron importados).
+
+**Limitaciones:** el porcentaje de uso ponderado no es tasa de victorias, los datos de escalera no equivalen a torneos oficiales, los nombres de formas alternativas sin equivalencia exacta se omiten y el análisis de tipos **no calcula daño ni probabilidad de victoria**. No valida la legalidad de equipos ni actualiza automáticamente la regulación vigente.
+
+**Actualización:** el flujo de despliegue regenera snapshots desde los archivos mensuales `chaos/*.json` de Smogon; además GitHub Actions ejecuta un despliegue los lunes a las 12:00 UTC. Intenta el último mes terminado y retrocede hasta cuatro meses. Si las fuentes fallan, se detiene ese despliegue antes de modificar el sitio público. Para cambiar a una nueva regulación de VGC hay que revisar el identificador de formato y sus reglas.
+
+**Comandos de datos:**
+
+```powershell
+npm.cmd run data:sync-all
+npm.cmd run data:sync-meta
+npm.cmd run meta:test
+npm.cmd run test:run
+npm.cmd run build
+```
+
+Los archivos ligeros se sirven desde `/meta/singles.json` y `/meta/doubles.json`, cargados cuando el usuario abre el panel. Un clon local que aún no ejecutó `data:sync-meta` mostrará "sin estadísticas sincronizadas".
+
+**Pendiente de V2.2+**: importación diferenciada de resultados y rosters reales de torneos, cambios verificables entre meses, daño con sets legales, ranking de contrarrestos y evolución automática de las regulaciones.
 
 ### V3 · Posible aplicación móvil
 
@@ -340,7 +358,7 @@ Posible app Android/iOS reutilizando el motor y la arquitectura modular de la we
 
 ## 📌 Estado del proyecto
 
-**V1, V2.0 y V2.1 ya integradas en `main`. Las mejoras de Colección se preparan en una rama independiente y todavía no están publicadas.**
+**V1, V2.0, V2.1 y las mejoras de Colección están publicadas. V2.2 se encuentra en una rama de desarrollo a la espera de revisión y merge.**
 
 👉 https://nicogm76.github.io/Pokemon-Randomaicer-Team/
 
