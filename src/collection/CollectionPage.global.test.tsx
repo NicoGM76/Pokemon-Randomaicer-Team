@@ -24,13 +24,14 @@ describe('Collection global action bar', () => {
     expect(allTrade.checked).toBe(false);
 
     const allBonus = screen.getByRole('checkbox', { name: 'Bonus en todos los equipos' }) as HTMLInputElement;
-    fireEvent.click(allBonus);
-    expect(screen.getAllByRole('checkbox', { name: 'Permitir un Pokémon bonus' })
-      .every(checkbox => (checkbox as HTMLInputElement).checked)).toBe(true);
+    expect(allBonus.checked).toBe(true); // Bonus is on by default for both new teams.
     fireEvent.click(allBonus);
     expect(screen.getAllByRole('checkbox', { name: 'Permitir un Pokémon bonus' })
       .every(checkbox => !(checkbox as HTMLInputElement).checked)).toBe(true);
     await waitFor(() => expect(loadCollectionDraft()?.config.entries.every(entry => !entry.allowBonus)).toBe(true));
+    fireEvent.click(allBonus);
+    expect(screen.getAllByRole('checkbox', { name: 'Permitir un Pokémon bonus' })
+      .every(checkbox => (checkbox as HTMLInputElement).checked)).toBe(true);
   });
 
   it('locks and unlocks all regions and clears member locks without regenerating', () => {
