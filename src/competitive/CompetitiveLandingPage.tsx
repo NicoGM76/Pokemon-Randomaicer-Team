@@ -232,7 +232,7 @@ export default function CompetitiveLandingPage() {
       </section>
       {showMeta && <div id="competitive-meta-panel">
         <Suspense fallback={<p className="comp-subdued" role="status">Preparando estadísticas competitivas…</p>}>
-          <MetaInsightsPanel format={format} pokemon={pokemon}
+          <MetaInsightsPanel key={format} format={format} pokemon={pokemon}
             teamIds={team.filter((slot): slot is CompetitivePokemonSet => slot !== null).map(slot => slot.pokemonId)}
             showLearning={workspace.showLearning} />
         </Suspense>
