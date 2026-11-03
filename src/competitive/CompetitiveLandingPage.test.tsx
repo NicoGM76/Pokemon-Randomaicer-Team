@@ -1,12 +1,13 @@
 /** @vitest-environment jsdom */
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import RootApp from '../RootApp';
 
 afterEach(() => {
   cleanup();
   window.location.hash = '';
   localStorage.clear();
+  vi.unstubAllGlobals();
 });
 
 describe('V2.1 competitive interactive workspace', () => {
@@ -25,6 +26,25 @@ describe('V2.1 competitive interactive workspace', () => {
     view.unmount();
     render(<RootApp />);
     expect(await screen.findByText('6 / 6 Pokémon')).toBeTruthy();
+  });
+
+  it('does not fetch metagame data until the user opens V2.2', async () => {
+    const fetcher = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        schemaVersion: 1, status: 'unavailable', format: 'singles',
+        message: 'Aún sin datos en esta instalación.'
+      })
+    });
+    vi.stubGlobal('fetch', fetcher);
+    window.location.hash = '#/competitive';
+    render(<RootApp />);
+    expect(await screen.findByRole('heading', { name: 'Tu laboratorio competitivo' })).toBeTruthy();
+    expect(fetcher).not.toHaveBeenCalled();
+    fireEvent.click(screen.getByRole('button', { name: 'Ver metagame y matchups' }));
+    expect(await screen.findByText('Aún sin datos en esta instalación.')).toBeTruthy();
+    expect(fetcher).toHaveBeenCalledTimes(1);
+    expect(fetcher.mock.calls[0][0]).toMatch(/meta\/singles\.json/);
   });
 
   it('edits a manual species and keeps its move after leaving the page', async () => {
