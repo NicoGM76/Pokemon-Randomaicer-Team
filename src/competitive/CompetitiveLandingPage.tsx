@@ -25,6 +25,10 @@ function niceName(name: string): string {
   return name.split('-').map(part => part.length ? part[0].toUpperCase() + part.slice(1) : '').join(' ');
 }
 
+const pokemonOptions = sortedPokemon.map(entry => (
+  <option key={entry.id} value={entry.id}>#{entry.id} · {niceName(entry.name)}</option>
+));
+
 function spriteUrl(id: number): string {
   return 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' + id + '.png';
 }
@@ -221,7 +225,7 @@ export default function CompetitiveLandingPage() {
           <label className="comp-field">Pokémon del espacio seleccionado
             <select value={member?.pokemonId ?? ''} onChange={event => changePokemon(Number(event.target.value))}>
               <option value="">Vacío, elige una especie</option>
-              {sortedPokemon.map(entry => <option key={entry.id} value={entry.id}>#{entry.id} · {niceName(entry.name)}</option>)}
+              {pokemonOptions}
             </select>
           </label>
 
