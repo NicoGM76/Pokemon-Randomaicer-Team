@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useLocale } from '../i18n/LocaleProvider';
 import { loadDataset } from '../data/loadDataset';
 import type { CollectionConfig, CollectionEntryConfig, CollectionResult } from '../domain/collections/types';
 import type { GeneratorConfig } from '../domain/teams/types';
@@ -73,6 +74,7 @@ function nextEntryId(): string {
 }
 
 export default function CollectionPage() {
+  const { t } = useLocale();
   const restoredDraft = useMemo(() => loadCollectionDraft(), []);
   const [config, setConfig] = useState<CollectionConfig>(() => restoredDraft?.config ?? initialConfig());
   const [result, setResult] = useState<CollectionResult | null>(() => restoredDraft?.result ?? null);
@@ -231,13 +233,13 @@ export default function CollectionPage() {
         <div className="config-title">
           <div>
             <span className="section-kicker">TUS REGLAS · UNA SOLA COLECCIÓN</span>
-            <h2>Reglas globales</h2>
+            <h2>{t('Reglas globales')}</h2>
           </div>
           <span className="collection-rule-count">{config.entries.length} regiones configuradas</span>
         </div>
         <div className="collection-global-grid">
           <div className="collection-global-group">
-            <h3>Diversidad de equipos</h3>
+            <h3>{t('Diversidad de equipos')}</h3>
             <p>Evita repetir siempre los mismos Pokémon en las diferentes regiones.</p>
             <label className="collection-toggle collection-global-toggle">
               <input type="checkbox" checked={config.avoidRepeatedSpecies}
@@ -265,7 +267,7 @@ export default function CollectionPage() {
             </label>
           </div>
           <div className="collection-global-group">
-            <h3>Aplicar a todos</h3>
+            <h3>{t('Aplicar a todos')}</h3>
             <p>Configura los intercambios y Pokémon bonus de todas las regiones a la vez.</p>
             <label className="collection-toggle collection-global-toggle">
               <input type="checkbox" aria-label="Intercambios en todos los equipos"
@@ -297,15 +299,15 @@ export default function CollectionPage() {
       <section className="collection-quick-actions" aria-label="Acciones generales de colección">
         <div className="collection-toolbar-heading">
           <div>
-            <span className="section-kicker">CENTRO DE CONTROL</span>
-            <h2>Gestiona toda tu colección</h2>
+            <span className="section-kicker">{t('CENTRO DE CONTROL')}</span>
+            <h2>{t('Gestiona toda tu colección')}</h2>
           </div>
-          <small>{result ? result.totalPokemon + ' Pokémon en ' + result.teams.length + ' equipos' : 'Configura tus regiones y genera tu colección'}</small>
+          <small>{result ? result.totalPokemon + ' Pokémon en ' + result.teams.length + ' equipos' : t('Configura tus regiones y genera tu colección')}</small>
         </div>
         <div className="collection-toolbar-actions">
           <CollectionActionButton icon={result ? 'refresh' : 'generate'} tone="primary"
             onClick={generateAll} disabled={Boolean(result && result.teams.every(team => team.locked))}>
-            {result ? 'Regenerar desbloqueados' : 'Generar colección'}
+            {result ? 'Regenerar desbloqueados' : t('Generar colección')}
           </CollectionActionButton>
           <CollectionActionButton icon="add" disabled={config.entries.length >= 9} onClick={addEntry}>
             Añadir equipo
@@ -343,22 +345,22 @@ export default function CollectionPage() {
             </div>
             <div className="config-content">
               <div className="field-grid">
-                <label>Región / generación objetivo
+                <label>{t('Región / generación objetivo')}
                   <select value={entry.targetGeneration} onChange={event => changeTargetGeneration(entry.id, Number(event.target.value))}>
                     {generations.map(generation => <option value={generation} key={generation}>Generación {roman[generation] ?? generation}</option>)}
                   </select>
                 </label>
-                <label>Juego que jugarás
+                <label>{t('Juego que jugarás')}
                   <select value={entry.generator.gameId} onChange={event => changeGame(entry.id, event.target.value)}>
                     {dataset.games.map(game => <option value={game.id} key={game.id}>{game.name} · Gen {roman[game.generation] ?? game.generation}</option>)}
                   </select>
                 </label>
               </div>
               <div className="field-grid">
-                <label>Nombre del equipo
+                <label>{t('Nombre del equipo')}
                   <input value={entry.label} onChange={event => updateEntry(entry.id, value => ({ ...value, label: event.target.value }))} />
                 </label>
-                <label>Tamaño
+                <label>{t('Tamaño')}
                   <select value={entry.generator.teamSize} onChange={event => updateEntry(entry.id, value => ({ ...value, generator: { ...value.generator, teamSize: Number(event.target.value) } }))}>
                     {[1, 2, 3, 4, 5, 6].map(size => <option value={size} key={size}>{size}</option>)}
                   </select>
