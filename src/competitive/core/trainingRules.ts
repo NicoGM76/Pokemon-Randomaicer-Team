@@ -1,4 +1,4 @@
-import type { PokemonStats } from '../../domain/pokemon/types';
+import type { PokemonStats, PokemonType } from '../../domain/pokemon/types';
 import type { CompetitiveEnvironment, CompetitivePokemonSet, StatKey } from './types';
 import { statKeys } from './types';
 
@@ -33,8 +33,8 @@ export function pointsFor(member: CompetitivePokemonSet, environment: Competitiv
 }
 
 /**
- * Curated, confirmed classic Mega pairs, not a purported full 2026
- * Champions legal-mega list. Newer Z-A mega forms need dedicated curation.
+ * Curated Mega Stone pairs, including the three officially available
+ * Mega Z forms in Champions Regulation M-C. Not an exhaustive mega roster.
  */
 export const MEGA_STONES: Record<string, { pokemonId: number; stone: string; label: string }> = {
   'venusaur-mega': { pokemonId: 3, stone: 'Venusaurite', label: 'Mega-Venusaur' },
@@ -43,14 +43,30 @@ export const MEGA_STONES: Record<string, { pokemonId: number; stone: string; lab
   'blastoise-mega': { pokemonId: 9, stone: 'Blastoisinite', label: 'Mega-Blastoise' },
   'gengar-mega': { pokemonId: 94, stone: 'Gengarite', label: 'Mega-Gengar' },
   'gardevoir-mega': { pokemonId: 282, stone: 'Gardevoirite', label: 'Mega-Gardevoir' },
+  'absol-mega': { pokemonId: 359, stone: 'Absolite', label: 'Mega-Absol' },
+  'absol-mega-z': { pokemonId: 359, stone: 'Absolite Z', label: 'Mega-Absol Z' },
   'lucario-mega': { pokemonId: 448, stone: 'Lucarionite', label: 'Mega-Lucario' },
   'lucario-mega-z': { pokemonId: 448, stone: 'Lucarionite Z', label: 'Mega-Lucario Z' },
   'garchomp-mega': { pokemonId: 445, stone: 'Garchompite', label: 'Mega-Garchomp' },
+  'garchomp-mega-z': { pokemonId: 445, stone: 'Garchompite Z', label: 'Mega-Garchomp Z' },
   'salamence-mega': { pokemonId: 373, stone: 'Salamencite', label: 'Mega-Salamence' },
   'scizor-mega': { pokemonId: 212, stone: 'Scizorite', label: 'Mega-Scizor' },
   'ampharos-mega': { pokemonId: 181, stone: 'Ampharosite', label: 'Mega-Ampharos' },
   'tyranitar-mega': { pokemonId: 248, stone: 'Tyranitarite', label: 'Mega-Tyranitar' },
   'gyarados-mega': { pokemonId: 130, stone: 'Gyaradosite', label: 'Mega-Gyarados' }
+};
+ 
+/** Effective types after Z Mega Evolution. Other Megas retain base-type analysis for now. */
+export const MEGA_Z_TYPES: Record<string, PokemonType[]> = {
+  'absol-mega-z': ['dark', 'ghost'],
+  'garchomp-mega-z': ['dragon'],
+  'lucario-mega-z': ['fighting', 'steel']
+};
+
+const MEGA_Z_ABILITIES: Record<string, string> = {
+  'absol-mega-z': 'Sharpness',
+  'garchomp-mega-z': 'Levitate',
+  'lucario-mega-z': 'Aura Guard'
 };
 
 export function megaOptions(pokemonId: number, environment: CompetitiveEnvironment) {
@@ -66,7 +82,7 @@ export function applyFormSelection(
 ): CompetitivePokemonSet {
   const mega = MEGA_STONES[formId];
   if (mega && environment === 'champions' && mega.pokemonId === member.pokemonId) {
-    return { ...member, formId, item: mega.stone, ability: formId === 'lucario-mega-z' ? 'Aura Guard' : '' };
+    return { ...member, formId, item: mega.stone, ability: MEGA_Z_ABILITIES[formId] ?? '' };
   }
   const currentMega = member.formId ? MEGA_STONES[member.formId] : null;
   return {
