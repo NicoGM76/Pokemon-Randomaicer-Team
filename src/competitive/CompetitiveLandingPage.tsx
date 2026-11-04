@@ -1,16 +1,15 @@
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import pokemonCatalog from '../data/generated/pokemon.json';
 import { useLocale } from '../i18n/LocaleProvider';
-import type { Pokemon, PokemonStats } from '../domain/pokemon/types';
+import type { Pokemon } from '../domain/pokemon/types';
 import { analyzeCompetitiveTeam } from './core/analysis';
 import PokemonSpeciesPicker from './PokemonSpeciesPicker';
 import { createManualSet, generateCompetitiveTeam, regenerateCompetitiveSlot } from './core/teamBuilder';
-import { SAMPLE_TEMPLATES } from './core/templates';
-import {
-  natureEffects, roleDescriptions, roleLabels, statKeys, statLabels
-} from './core/types';
+import GuidedSetEditor from './assist/GuidedSetEditor';
+import { getTrainingRules, pointsFor } from './core/trainingRules';
+import { roleLabels, statKeys, statLabels } from './core/types';
 import type {
-  CompetitiveFormat, CompetitivePokemonSet, CompetitiveTeam, CompetitiveWorkspace, StatKey
+  CompetitiveEnvironment, CompetitiveFormat, CompetitivePokemonSet, CompetitiveTeam, CompetitiveWorkspace
 } from './core/types';
 import { validateCompetitiveTeam } from './core/validation';
 import {
@@ -41,18 +40,21 @@ function formatTitle(format: CompetitiveFormat): string {
   return format === 'singles' ? 'Singles 6v6' : 'Dobles estilo VGC';
 }
 
-function showText(team: CompetitiveTeam): string {
+function showText(team: CompetitiveTeam, environment: CompetitiveEnvironment): string {
   return team.filter((member): member is CompetitivePokemonSet => member !== null).map(member => {
     const entry = lookup.get(member.pokemonId);
-    const evs = statKeys.filter(stat => member.evs[stat] > 0)
-      .map(stat => member.evs[stat] + ' ' + statLabels[stat]).join(' / ');
+    const assigned = pointsFor(member, environment);
+    const evs = statKeys.filter(stat => assigned[stat] > 0)
+      .map(stat => assigned[stat] + ' ' + statLabels[stat]).join(' / ');
     const ivs = statKeys.filter(stat => member.ivs[stat] !== 31)
       .map(stat => member.ivs[stat] + ' ' + statLabels[stat]).join(' / ');
     return [
       (entry ? niceName(entry.name) : '#' + member.pokemonId) + (member.item ? ' @ ' + member.item : ''),
       'Ability: ' + member.ability,
-      'EVs: ' + evs,
-      ...(ivs ? ['IVs: ' + ivs] : []),
+      (environment === 'champions' ? 'PC: ' : 'EVs: ') + evs,
+      ...(environment === 'mainline' && ivs ? ['IVs: ' + ivs] : []),
+      ...(member.formId ? ['Form: ' + member.formId] : []),
+      ...(environment === 'mainline' && member.teraType ? ['Tera Type: ' + member.teraType] : []),
       member.nature + ' Nature',
       ...member.moves.filter(Boolean).map(move => '- ' + move)
     ].join('\n');
@@ -65,16 +67,17 @@ export default function CompetitiveLandingPage() {
     removeUnknownPokemon(loadCompetitiveDraft(), knownIds)
   );
   const [notice, setNotice] = useState('');
-  const [showIvs, setShowIvs] = useState(false);
   const [showMeta, setShowMeta] = useState(false);
   const format = workspace.format;
+  const environment = workspace.environmentByFormat?.[format]
+    ?? (format === 'singles' ? 'mainline' : 'champions');
+  const training = getTrainingRules(environment);
   const team = workspace.teams[format];
   const member = team[workspace.selectedSlot];
   const chosenPokemon = member ? lookup.get(member.pokemonId) : null;
   const completed = team.filter(Boolean).length;
   const analysis = useMemo(() => analyzeCompetitiveTeam(team, pokemon), [team]);
-  const issues = useMemo(() => validateCompetitiveTeam(format, team), [format, team]);
-  const sample = member?.templateId ? SAMPLE_TEMPLATES.find(template => template.id === member.templateId) : undefined;
+  const issues = useMemo(() => validateCompetitiveTeam(format, team, environment), [format, team, environment]);
 
   useEffect(() => {
     saveCompetitiveDraft(workspace);
@@ -118,7 +121,7 @@ export default function CompetitiveLandingPage() {
   }
 
   async function copy(): Promise<void> {
-    const text = showText(team);
+    const text = showText(team, environment);
     if (!text) {
       setNotice('Primero añade algún Pokémon.');
       return;
@@ -136,19 +139,6 @@ export default function CompetitiveLandingPage() {
     updateTeam(() => [null, null, null, null, null, null]);
     setNotice('Formato vaciado. El otro formato conserva sus Pokémon.');
   }
-
-  function editStat(which: 'evs' | 'ivs', stat: StatKey, value: string): void {
-    const numeric = Number(value);
-    editMember(current => ({
-      ...current,
-      [which]: { ...current[which], [stat]: Number.isFinite(numeric) ? numeric : 0 } as PokemonStats
-    }));
-  }
-
-  const natureEffect = member ? natureEffects[member.nature] : undefined;
-  const natureDescription = !natureEffect || !natureEffect[0] || !natureEffect[1]
-    ? 'Esta naturaleza no modifica estadísticas.'
-    : 'Sube ' + statLabels[natureEffect[0]] + ' y baja ' + statLabels[natureEffect[1]] + '.';
 
   return (
     <main className="page competitive-workspace">
@@ -172,9 +162,44 @@ export default function CompetitiveLandingPage() {
         </label>
       </section>
 
+      <section className="comp-environment" aria-label="Juego competitivo de referencia">
+        <div>
+          <span className="section-kicker">REGLAS SEGÚN EL JUEGO</span>
+          <p className="comp-subdued">Singles y Dobles son formatos. El videojuego determina los puntos de entrenamiento y mecánicas permitidas.</p>
+        </div>
+        <div className="comp-environment-buttons">
+          <button type="button" aria-pressed={environment === 'mainline'}
+            className={environment === 'mainline' ? 'is-active' : ''}
+            onClick={() => setWorkspace(previous => ({
+              ...previous,
+              environmentByFormat: {
+                singles: previous.environmentByFormat?.singles ?? 'mainline',
+                doubles: previous.environmentByFormat?.doubles ?? 'champions',
+                [previous.format]: 'mainline'
+              }
+            }))}>Saga principal · Escarlata/Púrpura</button>
+          <button type="button" aria-pressed={environment === 'champions'}
+            className={environment === 'champions' ? 'is-active' : ''}
+            onClick={() => setWorkspace(previous => ({
+              ...previous,
+              environmentByFormat: {
+                singles: previous.environmentByFormat?.singles ?? 'mainline',
+                doubles: previous.environmentByFormat?.doubles ?? 'champions',
+                [previous.format]: 'champions'
+              }
+            }))}>Pokémon Champions</button>
+        </div>
+        <small className="comp-environment-rules">
+          {training.label}: máximo {training.statMax} por estadística y {training.totalMax} en total.
+          {training.canTera ? ' Tera disponible; no hay Megaevolución.' : ' Mega disponible; no hay Tera ni ajuste manual de IVs.'}
+        </small>
+      </section>
+
       <div className="comp-disclaimer" role="note">
         <strong>Laboratorio educativo, no validador de torneos.</strong>
-        {' '}Los sets son ejemplos editables. Todavía no verificamos legalidad de movimientos, habilidades, formas, tiers o reglamentos vigentes. {format === 'doubles' ? 'En VGC se registran hasta 6 Pokémon y normalmente se eligen 4 para cada combate; las regulaciones cambian.' : 'Singles libre 6v6 no equivale a legalidad comprobada en OU.'}
+        {' '}La edición y las recomendaciones son orientativas. No se certifica legalidad por torneo, regulación, objeto, forma o set. {environment === 'champions'
+          ? 'Pokémon Champions tiene sus propias reglas de puntos, mecánicas y listas de especies.'
+          : 'Escarlata/Púrpura usa EVs, IVs y tipo Tera; la generación de sets sigue siendo didáctica.'}
       </div>
 
       <section className="comp-actions">
@@ -261,79 +286,13 @@ export default function CompetitiveLandingPage() {
               <h3>Este espacio está libre</h3>
               <p>Puedes elegir cualquier Pokémon del catálogo para construirlo desde cero, o generar seis ejemplos de golpe.</p>
             </div>
+          ) : chosenPokemon ? (
+            <GuidedSetEditor key={format + '-' + workspace.selectedSlot}
+              member={member} pokemon={chosenPokemon} format={format}
+              environment={environment} showLearning={workspace.showLearning}
+              onEdit={editMember} />
           ) : (
-            <>
-              <div className="comp-two-fields">
-                <label className="comp-field">Rol
-                  <select value={member.role} onChange={event =>
-                    editMember(previous => ({ ...previous, role: event.target.value as CompetitivePokemonSet['role'] }))}>
-                    {Object.entries(roleLabels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
-                  </select>
-                </label>
-                <label className="comp-field">Naturaleza
-                  <select value={member.nature} onChange={event =>
-                    editMember(previous => ({ ...previous, nature: event.target.value }))}>
-                    {Object.keys(natureEffects).map(name => <option key={name} value={name}>{name}</option>)}
-                  </select>
-                </label>
-                <label className="comp-field">Habilidad
-                  <input value={member.ability} placeholder="Escribe una habilidad"
-                    onChange={event => editMember(previous => ({ ...previous, ability: event.target.value }))} />
-                </label>
-                <label className="comp-field">Objeto equipado
-                  <input value={member.item} placeholder="Ej. Leftovers"
-                    onChange={event => editMember(previous => ({ ...previous, item: event.target.value }))} />
-                </label>
-              </div>
-
-              <h3 className="comp-mini-heading">Movimientos</h3>
-              <div className="comp-two-fields">
-                {member.moves.map((move, index) => (
-                  <label className="comp-field" key={index}>Movimiento {index + 1}
-                    <input value={move} placeholder="Escribe un movimiento"
-                      onChange={event => editMember(previous => ({
-                        ...previous,
-                        moves: previous.moves.map((value, i) =>
-                          i === index ? event.target.value : value
-                        ) as CompetitivePokemonSet['moves']
-                      }))} />
-                  </label>
-                ))}
-              </div>
-              <h3 className="comp-mini-heading">EVs <small>{statKeys.reduce((sum, stat) => sum + member.evs[stat], 0)} / 510</small></h3>
-              <div className="comp-stat-grid">
-                {statKeys.map(stat => (
-                  <label className="comp-field" key={stat}>{statLabels[stat]}
-                    <input aria-label={'EV ' + statLabels[stat]} type="number" min="0" max="252" step="1"
-                      value={member.evs[stat]} onChange={event => editStat('evs', stat, event.target.value)} />
-                  </label>
-                ))}
-              </div>
-
-              <button type="button" className="comp-subheading-toggle" aria-expanded={showIvs}
-                onClick={() => setShowIvs(value => !value)}>
-                {showIvs ? '▾ Ocultar IVs' : '▸ Ajustar IVs (0 a 31)'}
-              </button>
-              {showIvs && <div className="comp-stat-grid">
-                {statKeys.map(stat => (
-                  <label className="comp-field" key={stat}>{statLabels[stat]}
-                    <input aria-label={'IV ' + statLabels[stat]} type="number" min="0" max="31" step="1"
-                      value={member.ivs[stat]} onChange={event => editStat('ivs', stat, event.target.value)} />
-                  </label>
-                ))}
-              </div>}
-
-              {workspace.showLearning && <div className="comp-lesson">
-                <span className="section-kicker">¿POR QUÉ ESTA CONFIGURACIÓN?</span>
-                <p><strong>Rol:</strong> {roleDescriptions[member.role]}</p>
-                <p><strong>Naturaleza:</strong> {natureDescription}</p>
-                <p><strong>EVs:</strong> distribuyen entrenamiento entre estadísticas. Máximo 252 por estadística y 510 total. No siempre conviene gastar todo en Velocidad.</p>
-                <p><strong>IVs:</strong> potencial individual de 0 a 31. Un valor bajo a veces es intencional, por ejemplo en Trick Room.</p>
-                {sample && <p><strong>Ejemplo:</strong> {sample.lesson}</p>}
-                {chosenPokemon && <p><strong>Stats base:</strong> {statKeys.map(stat =>
-                  statLabels[stat] + ' ' + chosenPokemon.stats[stat]).join(' · ')}</p>}
-              </div>}
-            </>
+            <p className="comp-subdued">Pokémon no encontrado en el catálogo.</p>
           )}
         </section>
 
