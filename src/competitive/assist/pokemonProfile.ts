@@ -75,7 +75,7 @@ export function getPokemonProfile(
     return Promise.reject(new Error('La forma no corresponde a esta especie.'));
   }
   const name = curated ? String(pokemonId) : (formId ?? String(pokemonId));
-  const key = pokemonId + ':' + name;
+  const key = pokemonId + ':' + (formId ?? 'base');
   const cached = memoryCache.get(key);
   if (cached) return cached;
 
