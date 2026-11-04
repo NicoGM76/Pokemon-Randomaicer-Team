@@ -100,4 +100,32 @@ describe('guided competitive editor', () => {
     expect(item.value).toBe('Charizardite X');
     expect(item.disabled).toBe(true);
   });
+
+  it('selects Absol Z and Garchomp Z with locked stones, correct ability and edited typings', async () => {
+    mockPokemonApi();
+    window.location.hash = '#/competitive';
+    render(<RootApp />);
+    fireEvent.click(await screen.findByRole('button', { name: 'Pokémon Champions' }));
+    for (const { id, formId, label, stone, ability, type } of [
+      { id: 359, formId: 'absol-mega-z', label: 'Mega-Absol Z', stone: 'Absolite Z',
+        ability: 'sharpness', type: 'Siniestro / Fantasma' },
+      { id: 445, formId: 'garchomp-mega-z', label: 'Mega-Garchomp Z', stone: 'Garchompite Z',
+        ability: 'levitate', type: 'Dragón' }
+    ]) {
+      fireEvent.change(screen.getByLabelText('Pokémon del espacio seleccionado'), {
+        target: { value: String(id) }
+      });
+      const form = screen.getByRole('combobox', { name: 'Forma del Pokémon' });
+      expect(screen.getByRole('option', { name: label + ' · ' + stone })).toBeTruthy();
+      fireEvent.change(form, { target: { value: formId } });
+      const item = screen.getByRole('searchbox', { name: 'Objeto equipado' }) as HTMLInputElement;
+      expect(item.value).toBe(stone);
+      expect(item.disabled).toBe(true);
+      const abilities = screen.getByRole('combobox', { name: 'Habilidad' }) as HTMLSelectElement;
+      await waitFor(() => expect(abilities.value).toBe(ability));
+      expect(screen.getByText(new RegExp(type))).toBeTruthy();
+    }
+    expect(screen.queryByText('Mecánica de Champions')).toBeNull();
+  });
+
 });
