@@ -8,6 +8,19 @@ export interface PokemonAssistProfile {
   source: string;
 }
 
+/**
+ * Small, source-checked overrides for forms introduced in Champions which
+ * may not yet exist in PokeAPI. Move suggestions still use the BASE
+ * Scarlet/Violet learnset and are not a Champions legality guarantee.
+ */
+const curatedChampionsForms: Record<string, { pokemonId: number; abilities: string[]; source: string }> = {
+  'lucario-mega-z': {
+    pokemonId: 448,
+    abilities: ['aura-guard'],
+    source: 'https://champions-news.pokemon-home.com/en/page/816.html'
+  }
+};
+
 const memoryCache = new Map<string, Promise<PokemonAssistProfile>>();
 
 function normalize(value: string): string {
@@ -54,10 +67,14 @@ export function getPokemonProfile(
   if (!Number.isInteger(pokemonId) || pokemonId < 1 || pokemonId > 1500) {
     return Promise.reject(new Error('Pokémon inválido'));
   }
-  const name = formId ?? String(pokemonId);
   if (formId && !/^[a-z0-9-]+$/.test(formId)) {
     return Promise.reject(new Error('Forma inválida'));
   }
+  const curated = formId ? curatedChampionsForms[formId] : undefined;
+  if (curated && curated.pokemonId !== pokemonId) {
+    return Promise.reject(new Error('La forma no corresponde a esta especie.'));
+  }
+  const name = curated ? String(pokemonId) : (formId ?? String(pokemonId));
   const key = pokemonId + ':' + name;
   const cached = memoryCache.get(key);
   if (cached) return cached;
@@ -69,10 +86,12 @@ export function getPokemonProfile(
       json<ApiSpecies>(base + 'pokemon-species/' + pokemonId, client)
     ]);
     const varieties = species.varieties?.map(v => v.pokemon.name) ?? [];
-    if (formId && !varieties.includes(formId)) {
+    if (formId && !curated && !varieties.includes(formId)) {
       throw new Error('La forma no está registrada para esa especie.');
     }
-    const abilities = [...new Set((details.abilities ?? []).map(a => a.ability?.name).filter(Boolean))];
+    const abilities = curated
+      ? curated.abilities
+      : [...new Set((details.abilities ?? []).map(a => a.ability?.name).filter(Boolean))];
     const moves = [...new Set((details.moves ?? [])
       .filter(move => move.version_group_details?.some(v => v.version_group.name === 'scarlet-violet'))
       .map(move => move.move.name).filter(Boolean))];
@@ -82,8 +101,9 @@ export function getPokemonProfile(
       formId,
       abilities,
       scarletVioletMoves: moves.sort(),
-      availableVarieties: varieties,
-      source: base + 'pokemon/' + encodeURIComponent(name)
+      availableVarieties: curated && formId
+        ? [...new Set([...varieties, formId])] : varieties,
+      source: curated?.source ?? base + 'pokemon/' + encodeURIComponent(name)
     };
   })().catch(error => {
     memoryCache.delete(key);
