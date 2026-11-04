@@ -66,7 +66,7 @@ export function applyFormSelection(
 ): CompetitivePokemonSet {
   const mega = MEGA_STONES[formId];
   if (mega && environment === 'champions' && mega.pokemonId === member.pokemonId) {
-    return { ...member, formId, item: mega.stone, ability: '' };
+    return { ...member, formId, item: mega.stone, ability: formId === 'lucario-mega-z' ? 'Aura Guard' : '' };
   }
   const currentMega = member.formId ? MEGA_STONES[member.formId] : null;
   return {
