@@ -58,10 +58,10 @@ describe('guided competitive editor', () => {
     render(<RootApp />);
     expect(await screen.findByRole('button', { name: 'Saga principal · Escarlata/Púrpura' })).toBeTruthy();
     fireEvent.change(screen.getByLabelText('Pokémon del espacio seleccionado'), { target: { value: '6' } });
-    expect(screen.getByText(/EVs/)).toBeTruthy();
+    expect(screen.getByRole('heading', { name: /EVs/ })).toBeTruthy();
     expect(screen.getByRole('combobox', { name: 'Tipo Tera' })).toBeTruthy();
     fireEvent.click(screen.getByRole('button', { name: 'Pokémon Champions' }));
-    expect(screen.getByText(/PC.*66/)).toBeTruthy();
+    expect(screen.getByRole('heading', { name: /PC.*66/ })).toBeTruthy();
     expect(screen.queryByRole('combobox', { name: 'Tipo Tera' })).toBeNull();
     fireEvent.change(screen.getByRole('combobox', { name: 'Forma del Pokémon' }), {
       target: { value: 'charizard-mega-x' }
