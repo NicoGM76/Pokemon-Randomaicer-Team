@@ -72,4 +72,34 @@ describe('species-restricted PokeAPI assist', () => {
     expect(fetcher).toHaveBeenCalledTimes(4);
   });
 
+
+  it('curates Mega Absol Z and Mega Garchomp Z from the base species without mixing profile cache', async () => {
+    const fetcher = vi.fn().mockImplementation(async (url: string) => ({
+      ok: true,
+      json: async () => url.includes('/pokemon-species/')
+        ? { varieties: [{ pokemon: { name: 'absol' } }, { pokemon: { name: 'garchomp' } }] }
+        : {
+          abilities: [{ ability: { name: 'pressure' } }],
+          moves: [{ move: { name: 'night-slash' },
+            version_group_details: [{ version_group: { name: 'scarlet-violet' } }] }]
+        }
+    }));
+    for (const { id, form, ability } of [
+      { id: 359, form: 'absol-mega-z', ability: 'sharpness' },
+      { id: 445, form: 'garchomp-mega-z', ability: 'levitate' }
+    ]) {
+      expect((await getPokemonProfile(id, undefined, fetcher)).abilities).toEqual(['pressure']);
+      const profile = await getPokemonProfile(id, form, fetcher);
+      expect(profile.abilities).toEqual([ability]);
+      expect(profile.scarletVioletMoves).toContain('night-slash');
+      expect(profile.availableVarieties).toContain(form);
+      expect(profile.source).toContain('bulbapedia.bulbagarden.net');
+      await expect(getPokemonProfile(id + 1, form, fetcher))
+        .rejects.toThrow(/no corresponde/);
+      expect((await getPokemonProfile(id, form, fetcher)).abilities).toEqual([ability]);
+      expect(fetcher.mock.calls.some(([url]) => String(url).endsWith('/pokemon/' + form))).toBe(false);
+    }
+    expect(fetcher).toHaveBeenCalledTimes(8);
+  });
+
 });
