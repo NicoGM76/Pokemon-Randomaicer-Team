@@ -35,7 +35,7 @@ describe('global locale', () => {
   it('offers a global language switch and localizes Adventure and Saved across navigation', async () => {
     window.location.hash = '#/adventure';
     render(<RootApp />);
-    const switcher = screen.getByRole('combobox', { name: 'Idioma de la página' });
+    const switcher = await screen.findByRole('combobox', { name: 'Idioma de la página' });
     fireEvent.change(switcher, { target: { value: 'es-ES' } });
     expect(await screen.findByText(/Escoge tu juego, fija tus límites/)).toBeTruthy();
     expect(screen.getByRole('link', { name: 'Equipos guardados' })).toBeTruthy();
