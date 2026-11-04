@@ -44,6 +44,7 @@ export const MEGA_STONES: Record<string, { pokemonId: number; stone: string; lab
   'gengar-mega': { pokemonId: 94, stone: 'Gengarite', label: 'Mega-Gengar' },
   'gardevoir-mega': { pokemonId: 282, stone: 'Gardevoirite', label: 'Mega-Gardevoir' },
   'lucario-mega': { pokemonId: 448, stone: 'Lucarionite', label: 'Mega-Lucario' },
+  'lucario-mega-z': { pokemonId: 448, stone: 'Lucarionite Z', label: 'Mega-Lucario Z' },
   'garchomp-mega': { pokemonId: 445, stone: 'Garchompite', label: 'Mega-Garchomp' },
   'salamence-mega': { pokemonId: 373, stone: 'Salamencite', label: 'Mega-Salamence' },
   'scizor-mega': { pokemonId: 212, stone: 'Scizorite', label: 'Mega-Scizor' },
