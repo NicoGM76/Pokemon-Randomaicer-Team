@@ -296,7 +296,7 @@ También existen smoke tests para los **38 juegos** y pruebas específicas de ro
 
 - Singles 6v6 libre y Dobles estilo VGC como **entornos de aprendizaje**, no reglamentos oficiales validados.
 - Generación de seis sets de ejemplo a partir de plantillas didácticas curadas.
-- Editor manual que permite escoger cualquiera de las especies presentes en el dataset.
+- Editor manual con **búsqueda por nombre o número de Pokédex**, sugerencias rápidas y selector completo como alternativa. Admite variantes sencillas como «Goldengo» → «Gholdengo» sin recorrer la lista de más de mil especies.
 - Naturalezas (incluidas sus modificaciones), EVs, IVs, habilidades, objetos, movimientos y roles.
 - Bloqueo y regeneración individual; conserva Pokémon bloqueados al generar de nuevo.
 - Validación de EVs/IVs, especie duplicada, objeto duplicado en Dobles y movimientos incompletos o repetidos.
