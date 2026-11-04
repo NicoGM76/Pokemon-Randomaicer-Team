@@ -14,6 +14,16 @@ export interface PokemonAssistProfile {
  * Scarlet/Violet learnset and are not a Champions legality guarantee.
  */
 const curatedChampionsForms: Record<string, { pokemonId: number; abilities: string[]; source: string }> = {
+  'absol-mega-z': {
+    pokemonId: 359,
+    abilities: ['sharpness'],
+    source: 'https://bulbapedia.bulbagarden.net/wiki/Mega_Evolution'
+  },
+  'garchomp-mega-z': {
+    pokemonId: 445,
+    abilities: ['levitate'],
+    source: 'https://bulbapedia.bulbagarden.net/wiki/Mega_Evolution'
+  },
   'lucario-mega-z': {
     pokemonId: 448,
     abilities: ['aura-guard'],
