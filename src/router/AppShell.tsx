@@ -1,3 +1,4 @@
+import { useLocale } from '../i18n/LocaleProvider';
 import { NavLink, Outlet } from 'react-router-dom';
 
 const navItems = [
@@ -8,6 +9,7 @@ const navItems = [
 ];
 
 export default function AppShell() {
+  const { locale, setLocale, t } = useLocale();
   return (
     <div className="route-shell">
       <nav className="route-nav" aria-label="Navegación principal">
@@ -25,10 +27,18 @@ export default function AppShell() {
               to={item.to}
               className={({ isActive }) => `route-link${isActive ? ' active' : ''}`}
             >
-              {item.label}
+              {t(item.label)}
             </NavLink>
           ))}
         </div>
+        <label className="site-language">
+          <span>Idioma</span>
+          <select aria-label="Idioma de la página" value={locale}
+            onChange={event => setLocale(event.target.value as 'es-419' | 'es-ES')}>
+            <option value="es-419">Español (Latinoamérica)</option>
+            <option value="es-ES">Español (España)</option>
+          </select>
+        </label>
       </nav>
       <Outlet />
       <footer>
