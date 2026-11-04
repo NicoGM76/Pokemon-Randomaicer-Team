@@ -47,6 +47,25 @@ describe('V2.1 competitive interactive workspace', () => {
     expect(fetcher.mock.calls[0][0]).toMatch(/meta\/singles\.json/);
   });
 
+  it('finds Gholdengo by Goldengo and preserves its set after reloading', async () => {
+    window.location.hash = '#/competitive';
+    const view = render(<RootApp />);
+    expect(await screen.findByRole('heading', { name: 'Tu laboratorio competitivo' })).toBeTruthy();
+
+    fireEvent.change(screen.getByRole('searchbox', { name: 'Buscar Pokémon por nombre o número' }), {
+      target: { value: 'Goldengo' }
+    });
+    fireEvent.click(screen.getByRole('button', { name: 'Elegir Gholdengo número 1000' }));
+    expect((screen.getByLabelText('Pokémon del espacio seleccionado') as HTMLSelectElement).value).toBe('1000');
+
+    fireEvent.change(screen.getByLabelText('Movimiento 1'), { target: { value: 'Make It Rain' } });
+    view.unmount();
+    render(<RootApp />);
+    expect(await screen.findByRole('heading', { name: 'Tu laboratorio competitivo' })).toBeTruthy();
+    expect((screen.getByLabelText('Pokémon del espacio seleccionado') as HTMLSelectElement).value).toBe('1000');
+    expect((screen.getByLabelText('Movimiento 1') as HTMLInputElement).value).toBe('Make It Rain');
+  });
+
   it('edits a manual species and keeps its move after leaving the page', async () => {
     window.location.hash = '#/competitive';
     const view = render(<RootApp />);

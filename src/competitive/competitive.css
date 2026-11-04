@@ -93,3 +93,47 @@
 .comp-meta-launch p{max-width:580px}
 .comp-meta-launch button{min-height:46px;flex-shrink:0}
 @media(max-width:700px){.comp-meta-launch{flex-direction:column;align-items:stretch;padding:16px}.comp-meta-launch button{width:100%}}
+
+
+/* Fast name/dex search, with the full native dropdown retained below. */
+.comp-species-picker { display:flex; flex-direction:column; gap:11px; min-width:0; margin:4px 0 17px; }
+.comp-species-picker input[type="search"] {
+  width:100%; min-height:46px; padding:12px 14px;
+  background:#10263c; border:1px solid #477da2; border-radius:11px;
+  color:#e7f5ff; font:inherit; font-size:14px;
+}
+.comp-species-picker input[type="search"]::placeholder { color:#8eaec6; }
+.comp-species-picker input[type="search"]:focus-visible {
+  outline:2px solid #8ad7ff; outline-offset:2px; border-color:#82d0ff;
+}
+.comp-species-help { margin:0; color:#98b8ce; font-size:12px; line-height:1.5; }
+.comp-species-select { margin-top:6px; }
+.comp-species-matches {
+  border:1px solid #416987; background:#0b1e31;
+  border-radius:12px; padding:10px; min-width:0;
+}
+.comp-species-match-count {
+  margin:0; padding:3px 6px 8px; color:#b5d3e6;
+  font-size:12px; line-height:1.5;
+}
+.comp-species-suggestions {
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:7px; margin:0; padding:0; list-style:none;
+}
+.comp-species-suggestions li { min-width:0; }
+.comp-species-suggestions button {
+  width:100%; display:flex; align-items:center; justify-content:space-between;
+  gap:12px; min-height:44px; border:1px solid #345c7b;
+  background:#19354f; color:#ecf6ff; border-radius:9px; padding:11px 12px;
+  font:inherit; font-weight:650; font-size:13px; text-align:left; cursor:pointer;
+}
+.comp-species-suggestions button span {
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.comp-species-suggestions button small { color:#8db8d7; font-size:11px; flex-shrink:0; }
+.comp-species-suggestions button:hover { background:#245578; border-color:#77c3f0; }
+.comp-species-suggestions button:focus-visible { outline:2px solid #9edfff; outline-offset:2px; }
+@media(max-width:500px) {
+  .comp-species-suggestions { grid-template-columns:1fr; }
+  .comp-species-picker input[type="search"] { font-size:16px; }
+}

@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import pokemonCatalog from '../data/generated/pokemon.json';
 import type { Pokemon, PokemonStats } from '../domain/pokemon/types';
 import { analyzeCompetitiveTeam } from './core/analysis';
+import PokemonSpeciesPicker from './PokemonSpeciesPicker';
 import { createManualSet, generateCompetitiveTeam, regenerateCompetitiveSlot } from './core/teamBuilder';
 import { SAMPLE_TEMPLATES } from './core/templates';
 import {
@@ -245,12 +246,13 @@ export default function CompetitiveLandingPage() {
             <button type="button" className="secondary" disabled={Boolean(member?.locked)} onClick={reroll}>⟳ Regenerar espacio</button>
           </div>
 
-          <label className="comp-field">Pokémon del espacio seleccionado
-            <select value={member?.pokemonId ?? ''} onChange={event => changePokemon(Number(event.target.value))}>
-              <option value="">Vacío, elige una especie</option>
-              {pokemonOptions}
-            </select>
-          </label>
+          <PokemonSpeciesPicker
+            key={format + '-' + workspace.selectedSlot}
+            pokemon={sortedPokemon}
+            selectedId={member?.pokemonId ?? null}
+            onSelect={changePokemon}
+            options={pokemonOptions}
+          />
 
           {!member ? (
             <div className="comp-editor-empty">
