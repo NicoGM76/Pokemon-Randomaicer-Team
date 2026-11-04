@@ -52,6 +52,16 @@ describe('guided competitive editor', () => {
     expect((move as HTMLInputElement).value).toBe('Thunderbolt');
   });
 
+  it('does not mix OU ladder data with a Champions Singles editor', async () => {
+    mockPokemonApi();
+    window.location.hash = '#/competitive';
+    render(<RootApp />);
+    fireEvent.click(await screen.findByRole('button', { name: 'Pokémon Champions' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Ver metagame y matchups' }));
+    expect(screen.getByText(/No hay un snapshot verificado de metagame/)).toBeTruthy();
+    expect((fetch as unknown as ReturnType<typeof vi.fn>)).not.toHaveBeenCalled();
+  });
+
   it('keeps mainline EVs + Tera distinct from Champions PC + Mega stone', async () => {
     mockPokemonApi();
     window.location.hash = '#/competitive';
