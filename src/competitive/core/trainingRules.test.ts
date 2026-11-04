@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import type { Pokemon } from '../../domain/pokemon/types';
-import { championsPointsFromEVs, getTrainingRules, applyFormSelection, pointsFor, megaOptions } from './trainingRules';
+import { championsPointsFromEVs, getTrainingRules, applyFormSelection, pointsFor, megaOptions, MEGA_Z_TYPES } from './trainingRules';
 import { createManualSet } from './teamBuilder';
 import { validateCompetitiveTeam } from './validation';
+import { analyzeCompetitiveTeam } from './analysis';
 
 const pokemon = { id: 6, name: 'Charizard', stats: {
   hp: 78, attack: 84, defense: 78, specialAttack: 109, specialDefense: 85, speed: 100
@@ -62,6 +63,37 @@ describe('mainline vs Champions training', () => {
     expect(validateCompetitiveTeam('doubles', [{ ...megaZ, item: 'Lucarionite' }], 'champions')
       .some(issue => issue.code === 'mega_stone')).toBe(true);
     expect(megaOptions(448, 'mainline')).toEqual([]);
+  });
+
+  it('covers every official Reg M-C Mega Z, both regular variants, stones, ability and typing', () => {
+    const cases = [
+      { id: 359, name: 'Absol', form: 'absol-mega-z', regular: 'absol-mega', stone: 'Absolite Z',
+        ability: 'Sharpness', baseTypes: ['dark'], types: ['dark','ghost'] },
+      { id: 445, name: 'Garchomp', form: 'garchomp-mega-z', regular: 'garchomp-mega',
+        stone: 'Garchompite Z', ability: 'Levitate', baseTypes: ['dragon','ground'], types: ['dragon'] },
+      { id: 448, name: 'Lucario', form: 'lucario-mega-z', regular: 'lucario-mega',
+        stone: 'Lucarionite Z', ability: 'Aura Guard', baseTypes: ['fighting','steel'], types: ['fighting','steel'] }
+    ];
+    for (const entry of cases) {
+      const species = { ...pokemon, id: entry.id, name: entry.name, types: entry.baseTypes } as Pokemon;
+      const selected = applyFormSelection(createManualSet(species), entry.form, 'champions');
+      expect(megaOptions(entry.id, 'champions').map(option => option.id))
+        .toEqual(expect.arrayContaining([entry.regular, entry.form]));
+      expect(megaOptions(entry.id, 'mainline')).toEqual([]);
+      expect(selected.formId).toBe(entry.form);
+      expect(selected.item).toBe(entry.stone);
+      expect(selected.ability).toBe(entry.ability);
+      expect(MEGA_Z_TYPES[entry.form]).toEqual(entry.types);
+      expect(analyzeCompetitiveTeam([selected], [species]).uniqueTypes).toBe(entry.types.length);
+      expect(validateCompetitiveTeam('doubles', [selected], 'champions')
+        .some(issue => issue.code === 'mega_stone')).toBe(false);
+      expect(validateCompetitiveTeam('doubles', [{ ...selected, item: 'Leftovers' }], 'champions')
+        .some(issue => issue.code === 'mega_stone')).toBe(true);
+      const reset = applyFormSelection(selected, '', 'champions');
+      expect(reset.item).toBe('');
+      expect(reset.ability).toBe('');
+      expect(reset.formId).toBeUndefined();
+    }
   });
 
 });
