@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import pokemonCatalog from '../data/generated/pokemon.json';
+import { useLocale } from '../i18n/LocaleProvider';
 import type { Pokemon, PokemonStats } from '../domain/pokemon/types';
 import { analyzeCompetitiveTeam } from './core/analysis';
 import PokemonSpeciesPicker from './PokemonSpeciesPicker';
@@ -59,6 +60,7 @@ function showText(team: CompetitiveTeam): string {
 }
 
 export default function CompetitiveLandingPage() {
+  const { t } = useLocale();
   const [workspace, setWorkspace] = useState<CompetitiveWorkspace>(() =>
     removeUnknownPokemon(loadCompetitiveDraft(), knownIds)
   );
@@ -179,7 +181,7 @@ export default function CompetitiveLandingPage() {
         <div>
           <span className="section-kicker">{formatTitle(format).toUpperCase()}</span>
           <h2>Tu equipo de trabajo</h2>
-          <p className="comp-subdued">Cada formato conserva su propio borrador en este navegador.</p>
+          <p className="comp-subdued">{t('Cada formato conserva su propio borrador en este navegador.')}</p>
         </div>
         <div className="comp-buttons">
           <button type="button" className="primary" onClick={generate}>Generar equipo de ejemplo</button>
