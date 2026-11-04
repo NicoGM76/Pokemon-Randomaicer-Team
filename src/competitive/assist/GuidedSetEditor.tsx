@@ -111,7 +111,7 @@ export default function GuidedSetEditor({
         </label>
       </div>
 
-      <div className="comp-two-fields">
+      <div className={training.canTera ? 'comp-two-fields' : 'comp-two-fields comp-form-only'}>
         <label className="comp-field">Forma del Pokémon
           <select aria-label="Forma del Pokémon" value={member.formId ?? ''}
             onChange={event => onEdit(prev => applyFormSelection(prev,event.target.value,environment))}>
@@ -135,10 +135,7 @@ export default function GuidedSetEditor({
               {TERA_TYPES.map(type => <option key={type} value={type}>{name(type)}</option>)}
             </select>
           </label>
-        ) : <div className="comp-rule-note">
-          <strong>Mecánica de Champions</strong>
-          <small>Megaevolución con objeto compatible. No hay tipo Tera.</small>
-        </div>}
+        ) : null}
       </div>
 
       <div className="comp-two-fields">
@@ -157,7 +154,7 @@ export default function GuidedSetEditor({
               {member.ability} (no coincide con esta especie)
             </option>}
             {profile?.abilities.map(ability => <option key={ability} value={ability}>
-              {name(ability)}
+              {ability === 'aura-guard' ? 'Aura Protectora (Aura Guard)' : name(ability)}
             </option>)}
           </select>
         </label>
@@ -174,9 +171,11 @@ export default function GuidedSetEditor({
           ? 'Consultando habilidades y movimientos de PokéAPI…'
           : profileStatus === 'error'
             ? 'Datos de especie no disponibles. Conservamos tu set, pero no podemos verificar habilidad ni movimientos.'
-            : environment === 'mainline'
-              ? 'Habilidades de esta especie y movimientos registrados para Escarlata/Púrpura según PokéAPI. No incluye validación de reglamentos.'
-              : 'Habilidades de la especie según PokéAPI. Los movimientos recomendados usan referencias de Escarlata/Púrpura, NO una lista legal certificada de Champions.'}
+            : member.formId === 'lucario-mega-z'
+              ? 'Mega-Lucario Z: Aura Protectora (Aura Guard) verificada para Champions. Los movimientos sugeridos proceden de la referencia de Escarlata/Púrpura y no certifican legalidad en Champions.'
+              : environment === 'mainline'
+                ? 'Habilidades de esta especie y movimientos registrados para Escarlata/Púrpura según PokéAPI. No incluye validación de reglamentos.'
+                : 'Habilidades de la especie según PokéAPI. Los movimientos recomendados usan referencias de Escarlata/Púrpura, NO una lista legal certificada de Champions.'}
       </p>
 
       <h3 className="comp-mini-heading">Movimientos</h3>
