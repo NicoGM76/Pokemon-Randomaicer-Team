@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Pokemon } from '../../domain/pokemon/types';
-import { championsPointsFromEVs, getTrainingRules, applyFormSelection, pointsFor } from './trainingRules';
+import { championsPointsFromEVs, getTrainingRules, applyFormSelection, pointsFor, megaOptions } from './trainingRules';
 import { createManualSet } from './teamBuilder';
 import { validateCompetitiveTeam } from './validation';
 
@@ -49,4 +49,18 @@ describe('mainline vs Champions training', () => {
     expect(validateCompetitiveTeam('singles', [set], 'mainline')
       .some(issue => issue.code === 'ev_total')).toBe(false);
   });
+  it('offers both Mega Lucario forms in Champions and assigns the distinct Z stone', () => {
+    const lucario = createManualSet({ ...pokemon, id: 448, name: 'Lucario' } as Pokemon);
+    const options = megaOptions(448, 'champions');
+    expect(options.map(option => option.id)).toEqual(['lucario-mega', 'lucario-mega-z']);
+    const megaZ = applyFormSelection(lucario, 'lucario-mega-z', 'champions');
+    expect(megaZ.item).toBe('Lucarionite Z');
+    expect(megaZ.formId).toBe('lucario-mega-z');
+    expect(validateCompetitiveTeam('doubles', [megaZ], 'champions')
+      .some(issue => issue.code === 'mega_stone')).toBe(false);
+    expect(validateCompetitiveTeam('doubles', [{ ...megaZ, item: 'Lucarionite' }], 'champions')
+      .some(issue => issue.code === 'mega_stone')).toBe(true);
+    expect(megaOptions(448, 'mainline')).toEqual([]);
+  });
+
 });
