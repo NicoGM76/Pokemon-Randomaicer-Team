@@ -385,3 +385,17 @@ Posible app Android/iOS reutilizando el motor y la arquitectura modular de la we
 ## Aviso
 
 Proyecto independiente con fines educativos y de entretenimiento. Pokémon y sus nombres, criaturas y marcas relacionadas pertenecen a sus respectivos propietarios.
+
+
+### Mega Z completas en Champions (Regulación M-C, septiembre a diciembre de 2026)
+
+La selección de formas incluye **las tres Mega Z oficiales**:
+- Mega-Absol Z: Absolite Z, habilidad Sharpness (Cortante), Siniestro/Fantasma.
+- Mega-Garchomp Z: Garchompite Z, habilidad Levitate (Levitación), tipo Dragón.
+- Mega-Lucario Z: Lucarionite Z, habilidad Aura Guard (Aura Protectora), Lucha/Acero.
+
+Cada forma Z tiene piedra asignada y bloqueada automáticamente; el selector también conserva la Mega clásica de esas especies. Los tipos Z se reflejan en el análisis defensivo inicial. Para **otras Megas**, el análisis de tipos todavía utiliza los tipos base y no calcula sus cambios de estadísticas ni habilidades.
+
+Las habilidades de estas Mega Z están curadas porque PokéAPI puede no incluirlas todavía. Las sugerencias de movimientos derivan de Escarlata/Púrpura y **no certifican legalidad en Champions**, igual que el resto del editor educativo. El panel redundante «Mecánica de Champions» fue eliminado.
+
+Fuentes: [Pokémon Champions, Regulación M-C](https://champions-news.pokemon-home.com/en/page/816.html), [The Pokémon Company (Mega Z anunciadas)](https://press.pokemon.com/en/Pokemon-Celebrates-30-Years-with-New-Announcements-at-Inaugural-Pokemo), [Bulbapedia, Megaevoluciones y habilidades](https://bulbapedia.bulbagarden.net/wiki/Mega_Evolution), [Smogon, megapiedras en Champions](https://www.smogon.com/dex/champions/items/).
