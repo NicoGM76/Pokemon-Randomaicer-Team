@@ -60,13 +60,16 @@ describe('species-restricted PokeAPI assist', () => {
             version_group_details: [{ version_group: { name: 'scarlet-violet' } }] }]
         }
     }));
+    const original = await getPokemonProfile(448, undefined, fetcher);
+    expect(original.abilities).toEqual(['inner-focus']);
+    // Form-specific data must not be replaced by the cached base species.
     const profile = await getPokemonProfile(448, 'lucario-mega-z', fetcher);
     expect(profile.abilities).toEqual(['aura-guard']);
     expect(profile.scarletVioletMoves).toContain('aura-sphere');
     expect(profile.source).toContain('champions-news.pokemon-home.com');
     expect(fetcher.mock.calls.some(([url]) => String(url).endsWith('/pokemon/lucario-mega-z'))).toBe(false);
     expect((await getPokemonProfile(448, 'lucario-mega-z', fetcher)).abilities).toEqual(['aura-guard']);
-    expect(fetcher).toHaveBeenCalledTimes(2);
+    expect(fetcher).toHaveBeenCalledTimes(4);
   });
 
 });
