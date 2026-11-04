@@ -72,6 +72,9 @@ export default function CompetitiveLandingPage() {
   const environment = workspace.environmentByFormat?.[format]
     ?? (format === 'singles' ? 'mainline' : 'champions');
   const training = getTrainingRules(environment);
+  const metaMatchesEnvironment =
+    (format === 'singles' && environment === 'mainline')
+    || (format === 'doubles' && environment === 'champions');
   const team = workspace.teams[format];
   const member = team[workspace.selectedSlot];
   const chosenPokemon = member ? lookup.get(member.pokemonId) : null;
@@ -259,11 +262,19 @@ export default function CompetitiveLandingPage() {
         </button>
       </section>
       {showMeta && <div id="competitive-meta-panel">
-        <Suspense fallback={<p className="comp-subdued" role="status">Preparando estadísticas competitivas…</p>}>
-          <MetaInsightsPanel key={format} format={format} pokemon={pokemon}
-            teamIds={team.filter((slot): slot is CompetitivePokemonSet => slot !== null).map(slot => slot.pokemonId)}
-            showLearning={workspace.showLearning} />
-        </Suspense>
+        {!metaMatchesEnvironment ? (
+          <div className="comp-disclaimer" role="note">
+            No hay un snapshot verificado de metagame para esta combinación de formato y juego.
+            Los datos OU disponibles corresponden a Singles de saga principal y los datos Reg M-C
+            a Dobles de Pokémon Champions. No se mezclarán estadísticas de juegos distintos.
+          </div>
+        ) : (
+          <Suspense fallback={<p className="comp-subdued" role="status">Preparando estadísticas competitivas…</p>}>
+            <MetaInsightsPanel key={format + environment} format={format} pokemon={pokemon}
+              teamIds={team.filter((slot): slot is CompetitivePokemonSet => slot !== null).map(slot => slot.pokemonId)}
+              showLearning={workspace.showLearning} />
+          </Suspense>
+        )}
       </div>}
 
       <div className="comp-main-grid">
