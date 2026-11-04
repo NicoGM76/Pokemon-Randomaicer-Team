@@ -1,5 +1,6 @@
 import { LocalDraftStore } from '../storage/drafts/LocalDraftStore';
 import { natureEffects, roleLabels, statKeys } from './core/types';
+import { TERA_TYPES } from './core/trainingRules';
 import type { CompetitivePokemonSet, CompetitiveTeam, CompetitiveWorkspace } from './core/types';
 
 export const COMPETITIVE_DRAFT_KEY = 'pokemon-team-generator:draft:competitive';
@@ -13,7 +14,8 @@ export function createEmptyWorkspace(): CompetitiveWorkspace {
     teams: {
       singles: [null, null, null, null, null, null],
       doubles: [null, null, null, null, null, null]
-    }
+    },
+    environmentByFormat: { singles: 'mainline', doubles: 'champions' }
   };
 }
 
@@ -38,7 +40,10 @@ function isSet(value: unknown): value is CompetitivePokemonSet {
     && Array.isArray(set.moves) && set.moves.length === 4
     && set.moves.every(move => typeof move === 'string')
     && isStats(set.evs) && isStats(set.ivs)
-    && (set.templateId === undefined || typeof set.templateId === 'string');
+    && (set.templateId === undefined || typeof set.templateId === 'string')
+    && (set.championsPoints === undefined || isStats(set.championsPoints))
+    && (set.formId === undefined || (typeof set.formId === 'string' && set.formId.length < 100))
+    && (set.teraType === undefined || TERA_TYPES.some(type => type === set.teraType));
 }
 
 function isTeam(value: unknown): value is CompetitiveTeam {
@@ -55,7 +60,11 @@ function isWorkspace(value: unknown): value is CompetitiveWorkspace {
     && Number.isInteger(state.selectedSlot)
     && (state.selectedSlot ?? -1) >= 0 && (state.selectedSlot ?? 6) <= 5
     && Boolean(state.teams)
-    && isTeam(state.teams?.singles) && isTeam(state.teams?.doubles);
+    && isTeam(state.teams?.singles) && isTeam(state.teams?.doubles)
+    && (state.environmentByFormat === undefined || (
+      (state.environmentByFormat.singles === 'mainline' || state.environmentByFormat.singles === 'champions') &&
+      (state.environmentByFormat.doubles === 'mainline' || state.environmentByFormat.doubles === 'champions')
+    ));
 }
 
 const store = new LocalDraftStore<CompetitiveWorkspace>(COMPETITIVE_DRAFT_KEY, VERSION, isWorkspace);

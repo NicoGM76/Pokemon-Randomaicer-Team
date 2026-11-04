@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useLocale } from './i18n/LocaleProvider';
 import { loadDataset } from './data/loadDataset';
 import type { AcquisitionMethod, AdventureStage } from './domain/games/types';
 import type { GeneratorConfig, GeneratorMode, GenerationResult, RequiredOneRule, SavedTeam, TeamSlot } from './domain/teams/types';
@@ -67,6 +68,7 @@ function acquisitionLabel(slot: TeamSlot): string {
 }
 
 function App() {
+  const { t } = useLocale();
   const restoredDraft = useMemo(() => loadAdventureDraft(), []);
   const [config, setConfig] = useState<GeneratorConfig>(() => restoredDraft?.config ?? initialConfig());
   const [result, setResult] = useState<GenerationResult | null>(() => restoredDraft?.result ?? null);
@@ -227,8 +229,8 @@ function App() {
         <>
           <section className="hero">
             <div className="section-kicker">EL PRÓXIMO VIAJE EMPIEZA AQUÍ</div>
-            <h1>Tu aventura. Tus reglas.</h1>
-            <p className="hero-copy">Elige tu juego, marca tus límites y descubre a tus próximos compañeros.</p>
+            <h1>{t('Tu aventura. Tus reglas.')}</h1>
+            <p className="hero-copy">{t('Elige tu juego, marca tus límites y descubre a tus próximos compañeros.')}</p>
           </section>
 
           <div className="mode-tabs">
@@ -240,25 +242,25 @@ function App() {
 
           <div className="generator-layout">
             <section className="config-card">
-              <div className="config-title"><h2>Prepara tu expedición</h2><span>CONFIGURACIÓN GENERAL</span></div>
+              <div className="config-title"><h2>{t('Prepara tu expedición')}</h2><span>CONFIGURACIÓN GENERAL</span></div>
               <details open className="mobile-group">
-                <summary>Juego y aventura</summary>
+                <summary>{t('Juego y aventura')}</summary>
                 <div className="config-content">
                   <div className="field-grid">
                     <label>Generación<select value={game.generation} onChange={(e: { target: { value: string } }) => changeGeneration(Number(e.target.value))}>{generations.map(gen => <option key={gen} value={gen}>{generationLabel(gen)} · Generación {gen}</option>)}</select></label>
                     <label>Juego<select value={config.gameId} onChange={(e: { target: { value: string } }) => changeGame(e.target.value)}>{gamesForGeneration.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}</select></label>
                   </div>
 
-                  {contentPacks.length > 1 && <div className="field-block"><span className="field-label">Contenido</span><div className="chip-row">{contentPacks.map(pack => <label className={config.enabledContentPacks.includes(pack.id) ? 'check-chip checked' : 'check-chip'} key={pack.id}><input type="checkbox" checked={config.enabledContentPacks.includes(pack.id)} disabled={pack.type === 'base'} onChange={() => togglePack(pack.id)} /> {pack.name}</label>)}</div><small>Juego base siempre activo. Marca solo las expansiones que tengas.</small></div>}
+                  {contentPacks.length > 1 && <div className="field-block"><span className="field-label">{t('Contenido')}</span><div className="chip-row">{contentPacks.map(pack => <label className={config.enabledContentPacks.includes(pack.id) ? 'check-chip checked' : 'check-chip'} key={pack.id}><input type="checkbox" checked={config.enabledContentPacks.includes(pack.id)} disabled={pack.type === 'base'} onChange={() => togglePack(pack.id)} /> {pack.name}</label>)}</div><small>Juego base siempre activo. Marca solo las expansiones que tengas.</small></div>}
 
-                  <div className="field-block"><span className="field-label">Etapa de la aventura</span><div className="segmented">{([['main_story','Historia'],['postgame','Postgame'],['all','Todo']] as [AdventureStage,string][]).map(([value,label]) => <button key={value} className={config.stage === value ? 'active' : ''} onClick={() => {setConfig({...config,stage:value});setResult(null)}}>{label}</button>)}</div></div>
-                  <div className="field-block"><span className="field-label">Equipo</span><div className="team-size">{[1,2,3,4,5,6].map(size => <button key={size} className={config.teamSize === size ? 'active' : ''} onClick={() => {setConfig({...config,teamSize:size});setResult(null)}}>{size}</button>)}</div><small>{config.teamSize} {config.teamSize === 1 ? 'compañero' : 'compañeros'}, una nueva historia.</small></div>
+                  <div className="field-block"><span className="field-label">{t('Etapa de la aventura')}</span><div className="segmented">{([['main_story','Historia'],['postgame','Postgame'],['all','Todo']] as [AdventureStage,string][]).map(([value,label]) => <button key={value} className={config.stage === value ? 'active' : ''} onClick={() => {setConfig({...config,stage:value});setResult(null)}}>{label}</button>)}</div></div>
+                  <div className="field-block"><span className="field-label">{t('Equipo')}</span><div className="team-size">{[1,2,3,4,5,6].map(size => <button key={size} className={config.teamSize === size ? 'active' : ''} onClick={() => {setConfig({...config,teamSize:size});setResult(null)}}>{size}</button>)}</div><small>{config.teamSize} {config.teamSize === 1 ? 'compañero' : 'compañeros'}, una nueva historia.</small></div>
                   {game.generation > 1 && <div className="field-block"><CheckOption label="Solo Pokémon introducidos en esta generación" checked={Boolean(config.customRules?.onlyCurrentGeneration)} onChange={setOnlyCurrentGeneration} /><small>Limita el equipo a especies estrenadas en la Generación {generationLabel(game.generation)}.</small></div>}
                 </div>
               </details>
 
               <details open className="mobile-group">
-                <summary>Métodos disponibles</summary>
+                <summary>{t('Métodos disponibles')}</summary>
                 <div className="config-content section-divider">
                   <div className="chip-row method-row">{(Object.keys(methodLabels) as AcquisitionMethod[]).map(method => <label key={method} className={config.allowedMethods.includes(method) ? 'check-chip checked' : 'check-chip'}><input type="checkbox" checked={config.allowedMethods.includes(method)} onChange={() => toggleMethod(method)} /> {methodLabels[method]}</label>)}</div>
                   <div className="toggle-line"><div><strong>Evolución por intercambio</strong><small>Permite evoluciones que necesitan un intercambio.</small></div><button className={config.allowTradeEvolution ? 'switch on' : 'switch'} onClick={() => {setConfig({...config,allowTradeEvolution:!config.allowTradeEvolution});setResult(null)}}><span /></button></div>
