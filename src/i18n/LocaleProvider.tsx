@@ -67,8 +67,14 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   return <LocaleContext.Provider value={value}>{children}</LocaleContext.Provider>;
 }
 
+// Standalone page embeds and old unit tests can render without the app shell.
+// Keep a stable, neutral default instead of crashing the generator.
+const FALLBACK_LOCALE: LocaleContextValue = {
+  locale: 'es-419',
+  setLocale: () => undefined,
+  t: (key: string) => key
+};
+
 export function useLocale(): LocaleContextValue {
-  const context = useContext(LocaleContext);
-  if (!context) throw new Error('useLocale requires LocaleProvider');
-  return context;
+  return useContext(LocaleContext) ?? FALLBACK_LOCALE;
 }
