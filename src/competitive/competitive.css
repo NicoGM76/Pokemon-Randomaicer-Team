@@ -137,3 +137,26 @@
   .comp-species-suggestions { grid-template-columns:1fr; }
   .comp-species-picker input[type="search"] { font-size:16px; }
 }
+
+/* Game rules and verified set-assist controls, shared desktop / Android. */
+.comp-environment{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px 18px;background:#122d47;border:1px solid #396280;border-radius:16px;padding:20px 22px;margin:18px 0}
+.comp-environment .section-kicker{font-size:11px}
+.comp-environment .comp-subdued{margin:7px 0 0;max-width:610px}
+.comp-environment-buttons{display:flex;gap:7px;flex-wrap:wrap}
+.comp-environment-buttons button{border:1px solid #426482;background:#152840;color:#c1d9eb;border-radius:10px;font-size:13px;font-weight:700;padding:12px 16px;min-height:45px;cursor:pointer}
+.comp-environment-buttons button.is-active{background:#68c6ff;color:#10253e;border-color:#9fe3ff}
+.comp-environment-buttons button:focus-visible{outline:2px solid #a2dcff;outline-offset:2px}
+.comp-environment-rules{grid-column:1/-1;color:#a9d7ed;line-height:1.5;font-size:12px}
+.comp-assist-field{position:relative;min-width:0;display:flex;flex-direction:column;gap:5px}
+.comp-assist-hint{font-size:11px;color:#97bad1;line-height:1.5}
+.comp-assist-field input[type=search]{width:100%;min-height:43px;color:#e6f4ff;background:#0b1b2f;border:1px solid #36577a;border-radius:10px;padding:11px 12px}
+.comp-assist-field input[type=search]:focus-visible{outline:2px solid #8ad2fd;outline-offset:1px}
+.comp-assist-suggestions{z-index:15;position:relative;max-height:265px;overflow:auto;margin:3px 0;padding:5px;list-style:none;background:#122b45;border:1px solid #44779b;border-radius:11px;box-shadow:0 12px 22px #0004}
+.comp-assist-suggestions button{width:100%;display:flex;text-align:left;align-items:center;border:0;background:transparent;border-radius:7px;color:#eaf7ff;padding:10px;min-height:42px;font-size:13px;cursor:pointer}
+.comp-assist-suggestions button:hover,.comp-assist-suggestions button:focus-visible{background:#265a7b;outline:1px solid #7ccaff}
+.comp-assist-source{font-size:11px;color:#a5c7dc;line-height:1.6;padding:12px;margin:15px 0 0;border-radius:10px;background:#0f283e;border:1px solid #315875}
+.comp-rule-note{min-height:66px;padding:12px;background:#112a43;border:1px solid #385e7d;border-radius:10px;display:flex;flex-direction:column;gap:7px}
+.comp-rule-note strong{color:#e1effb;font-size:12px}
+.comp-rule-note small{color:#9cb9d1;line-height:1.6}
+@media(max-width:900px){.comp-environment{grid-template-columns:1fr}.comp-environment-buttons{width:100%}.comp-environment-buttons button{flex:1 1 170px}}
+@media(max-width:600px){.comp-environment{padding:16px}.comp-environment-buttons button{flex:1 1 100%}.comp-assist-field input[type=search]{font-size:16px}}
