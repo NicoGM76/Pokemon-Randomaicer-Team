@@ -30,6 +30,9 @@ export default function SearchAssistInput({
       })
       .slice(0,8);
   },[options,value]);
+  const exactChoice = options.some(option =>
+    norm(option.id) === norm(value) || norm(option.label) === norm(value));
+  const showSuggestions = isFocused || (value.trim().length > 0 && !exactChoice);
   return (
     <div className="comp-assist-field">
       <label className="comp-field">{label}
@@ -48,7 +51,7 @@ export default function SearchAssistInput({
           }}/>
       </label>
       {hint && <small className="comp-assist-hint">{hint}</small>}
-      {isFocused && !disabled && matches.length > 0 &&
+      {showSuggestions && !disabled && matches.length > 0 &&
         <ul className="comp-assist-suggestions" aria-label={'Opciones para ' + label}>
           {matches.map(option => <li key={option.id}>
             <button type="button" onMouseDown={event=>event.preventDefault()}
