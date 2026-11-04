@@ -56,6 +56,7 @@ describe('mainline vs Champions training', () => {
     const megaZ = applyFormSelection(lucario, 'lucario-mega-z', 'champions');
     expect(megaZ.item).toBe('Lucarionite Z');
     expect(megaZ.formId).toBe('lucario-mega-z');
+    expect(megaZ.ability).toBe('Aura Guard');
     expect(validateCompetitiveTeam('doubles', [megaZ], 'champions')
       .some(issue => issue.code === 'mega_stone')).toBe(false);
     expect(validateCompetitiveTeam('doubles', [{ ...megaZ, item: 'Lucarionite' }], 'champions')
