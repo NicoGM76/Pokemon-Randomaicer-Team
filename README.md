@@ -350,6 +350,23 @@ Los archivos ligeros se sirven desde `/meta/singles.json` y `/meta/doubles.json`
 
 **Pendiente de V2.2+**: importación diferenciada de resultados y rosters reales de torneos, cambios verificables entre meses, daño con sets legales, ranking de contrarrestos y evolución automática de las regulaciones.
 
+### V2.2.x · Editor competitivo guiado e idioma global (en rama)
+
+Esta actualización mantiene el constructor anterior y añade:
+
+- **Selector global de idioma** en el encabezado, compartido por Aventura, Colección, Competitivo y Guardados. Incluye Español (Latinoamérica) y Español (España); conserva el ajuste al navegar y recargar. Los nombres propios y términos del juego que no cambian entre ambas variedades siguen siendo comunes.
+- **Separación entre formato de batalla y videojuego**: Singles/Dobles se eligen independientemente de Escarlata/Púrpura o Pokémon Champions.
+- Saga principal: EVs 510/252, IVs 0–31 y tipo Tera, sin Megaevolución.
+- Champions: PC 66/32, sin edición de IVs ni Tera. Los EVs de la saga principal se conservan como borrador independiente al alternar el juego.
+- Habilidades por especie obtenidas bajo demanda desde PokéAPI. La lista no permite seleccionar habilidades ajenas a la especie (ej. Intimidate en Pikachu). Una habilidad antigua ajena a la lista se conserva, pero se señala como no validada.
+- Movimientos sugeridos a partir de la lista de Escarlata/Púrpura que PokéAPI registra para esa especie, priorizando sets didácticos existentes. **No se equiparan esos movimientos a los legales en Pokémon Champions**.
+- Objetos con buscador bilingüe de opciones frecuentes, p. ej. `res` sugiere **Restos** y guarda el ID canónico `Leftovers`. El catálogo es parcial y los objetos no listados no se consideran ilegales por defecto.
+- Formas Mega curadas de ejemplo en Champions con megapiedra asignada automáticamente. Otras formas que devuelve la API se presentan como referencia, no como legalidad confirmada.
+- El panel de metagame de V2.2 solo muestra estadísticas cuando el formato **y** juego coinciden con el snapshot de origen.
+- Todo sigue guardándose localmente y la información adicional de PokéAPI solo se consulta al seleccionar un Pokémon en Competitivo.
+
+**Límites actuales:** no es un validador oficial de equipos ni de regulaciones vigentes; el catálogo de formas y objetos no es exhaustivo. Los nombres ingleses de Pokémon y algunos términos técnicos de PokéAPI aún pueden aparecer en las recomendaciones aunque la interfaz esté en español.
+
 ### V3 · Posible aplicación móvil
 
 Posible app Android/iOS reutilizando el motor y la arquitectura modular de la web.
@@ -358,7 +375,7 @@ Posible app Android/iOS reutilizando el motor y la arquitectura modular de la we
 
 ## 📌 Estado del proyecto
 
-**V1, V2.0, V2.1 y las mejoras de Colección están publicadas. V2.2 se encuentra en una rama de desarrollo a la espera de revisión y merge.**
+**V1, V2.0, V2.1 y V2.2 están publicadas. El editor guiado y la localización general están en una rama de revisión, sin merge todavía.**
 
 👉 https://nicogm76.github.io/Pokemon-Randomaicer-Team/
 
