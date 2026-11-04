@@ -1,6 +1,7 @@
-import type { PokemonStats } from '../../domain/pokemon/types';
+import type { PokemonStats, PokemonType } from '../../domain/pokemon/types';
 
 export type CompetitiveFormat = 'singles' | 'doubles';
+export type CompetitiveEnvironment = 'mainline' | 'champions';
 export type CompetitiveRole = 'physical' | 'special' | 'wall' | 'support' | 'pivot' | 'speed_control';
 export type StatKey = keyof PokemonStats;
 
@@ -15,6 +16,10 @@ export interface CompetitivePokemonSet {
   ivs: PokemonStats;
   locked: boolean;
   templateId?: string;
+  /** Champions PC are independent of mainline EVs, so switching never loses data. */
+  championsPoints?: PokemonStats;
+  formId?: string;
+  teraType?: PokemonType;
 }
 
 export type CompetitiveTeam = (CompetitivePokemonSet | null)[];
@@ -24,6 +29,7 @@ export interface CompetitiveWorkspace {
   showLearning: boolean;
   selectedSlot: number;
   teams: Record<CompetitiveFormat, CompetitiveTeam>;
+  environmentByFormat?: Record<CompetitiveFormat, CompetitiveEnvironment>;
 }
 
 export interface CompetitiveTemplate {
