@@ -49,4 +49,24 @@ describe('species-restricted PokeAPI assist', () => {
     await expect(getPokemonProfile(25, undefined, fetcher)).rejects.toThrow(/503/);
     expect(optionNames([],'attack')).toEqual([]);
   });
+  it('provides curated Aura Guard for Mega Lucario Z even when PokeAPI has no Z variety', async () => {
+    const fetcher = vi.fn().mockImplementation(async (url: string) => ({
+      ok: true,
+      json: async () => url.includes('/pokemon-species/')
+        ? { varieties: [{ pokemon: { name: 'lucario' } }, { pokemon: { name: 'lucario-mega' } }] }
+        : {
+          abilities: [{ ability: { name: 'inner-focus' } }],
+          moves: [{ move: { name: 'aura-sphere' },
+            version_group_details: [{ version_group: { name: 'scarlet-violet' } }] }]
+        }
+    }));
+    const profile = await getPokemonProfile(448, 'lucario-mega-z', fetcher);
+    expect(profile.abilities).toEqual(['aura-guard']);
+    expect(profile.scarletVioletMoves).toContain('aura-sphere');
+    expect(profile.source).toContain('champions-news.pokemon-home.com');
+    expect(fetcher.mock.calls.some(([url]) => String(url).endsWith('/pokemon/lucario-mega-z'))).toBe(false);
+    expect((await getPokemonProfile(448, 'lucario-mega-z', fetcher)).abilities).toEqual(['aura-guard']);
+    expect(fetcher).toHaveBeenCalledTimes(2);
+  });
+
 });
