@@ -14,6 +14,9 @@ const MetaHistoryComparisonPanel = lazy(() => import('./MetaHistoryComparisonPan
 
 const memoryCache = new Map<MetaFormat, MetaSnapshot>();
 
+/** Allows independent browser-test cases without leaked module cache. */
+export function clearMetaMemoryCache(): void { memoryCache.clear(); }
+
 function niceName(name: string): string {
   return name.replace(/-/g, ' ').replace(/\b\w/g, letter => letter.toUpperCase());
 }
