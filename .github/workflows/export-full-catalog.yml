@@ -1,0 +1,79 @@
+name: V2.5 Full Pokemon Catalog Export
+
+on:
+  push:
+    branches:
+      - feature/v2-5-data-backups
+    paths:
+      - .github/workflows/export-full-catalog.yml
+      - scripts/db/**
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-full-snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install
+        run: npm install
+
+      - name: Sync verified Pokemon sources
+        run: npm run data:sync-all
+
+      - name: Validate all 22 regional dexes and catalog
+        run: npm run data:validate-all
+
+      - name: Require full-sized species snapshot
+        run: |
+          node --input-type=module -e "
+            import fs from 'node:fs';
+            const p = JSON.parse(fs.readFileSync('src/data/generated/pokemon.json','utf8'));
+            if (!Array.isArray(p) || p.length < 1000) process.exit(1);
+            const ids = new Set(p.map(x => x.id));
+            if (ids.size !== p.length) process.exit(1);
+            console.log('Validated Pokémon species:',p.length);
+          "
+
+      - name: Produce transactional PostgreSQL SQL as private-run artifact
+        run: |
+          mkdir -p export
+          node scripts/db/emit-catalog-sql.mjs --full > export/catalog-import.sql
+          sha256sum export/catalog-import.sql > export/catalog-import.sha256
+          cp src/data/generated/pokemon.json export/pokemon.json
+          cp src/data/generated/forms.json export/forms.json
+          cp src/data/generated/evolutions.json export/evolutions.json
+          cp src/data/generated/regional-dex-entries.json export/regional-dex-entries.json
+
+      - name: Upload catalog artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-5-validated-full-catalog
+          path: export/
+          retention-days: 7
+          if-no-files-found: error
+
+      # Initial bootstrap only. The bot commit is not part of public history until
+      # reviewed/merged through PR. No DB password or API key is involved.
+      - name: Publish verified catalog to the bootstrap branch
+        if: github.ref_name == 'feature/v2-5-data-backups'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/data/generated/pokemon.json src/data/generated/evolutions.json src/data/generated/regional-dex-entries.json src/data/generated/dex-import-report.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(data): check in validated full Pokemon catalog [skip ci]"
+            git push origin HEAD:feature/v2-5-data-backups
+          fi
