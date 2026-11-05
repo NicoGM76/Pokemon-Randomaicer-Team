@@ -291,7 +291,7 @@ export default function CompetitiveLandingPage() {
           </div>
 
           <PokemonSpeciesPicker
-            key={format + '-' + workspace.selectedSlot}
+            selectionKey={format + '-' + workspace.selectedSlot}
             pokemon={sortedPokemon}
             selectedId={member?.pokemonId ?? null}
             onSelect={changePokemon}
