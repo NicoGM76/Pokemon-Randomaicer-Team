@@ -410,6 +410,8 @@ Elegida la fase de bajo costo: **Supabase Free para PostgreSQL**, **copias cifra
 
 [Diseño, seguridad, política de retención, escenarios de caída y criterios de aceptación](docs/v2-5-postgres-backup-free.md).
 
+[PostgreSQL V2.5: esquema implementado, migraciones y carga de catálogo](db/README.md).
+
 ### V3 · Posible aplicación móvil
 
 Posible app Android/iOS reutilizando el motor y la arquitectura modular de la web.
