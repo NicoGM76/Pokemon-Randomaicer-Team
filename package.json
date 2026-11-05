@@ -18,7 +18,8 @@
     "data:validate-availability": "node scripts/validate-availability.mjs",
     "data:sync-everything": "npm run data:sync-all && npm run data:sync-availability && npm run data:validate-all && npm run data:validate-availability",
     "data:sync-meta": "node scripts/sync-competitive-meta.mjs",
-    "meta:test": "node --test scripts/tests/*.test.mjs"
+    "meta:test": "node --test scripts/tests/*.test.mjs",
+    "data:sync-locales": "node scripts/sync-pokemon-localizations.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
