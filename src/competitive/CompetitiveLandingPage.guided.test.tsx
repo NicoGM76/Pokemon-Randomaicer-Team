@@ -30,12 +30,18 @@ function mockPokemonApi() {
   })));
 }
 
+async function selectSpecies(id: number): Promise<void> {
+  const input = await screen.findByRole('searchbox', { name: 'Buscar Pokémon por nombre o número' });
+  fireEvent.change(input, { target: { value: '#' + id } });
+  fireEvent.keyDown(input, { key: 'Enter', code: 'Enter' });
+}
+
 describe('guided competitive editor', () => {
   it('only offers Pikachu abilities and suggests Restos plus legal mainline moves', async () => {
     mockPokemonApi();
     window.location.hash = '#/competitive';
     render(<RootApp />);
-    fireEvent.change(await screen.findByLabelText('Pokémon del espacio seleccionado'), { target: { value: '25' } });
+    await selectSpecies(25);
     const ability = await screen.findByRole('combobox', { name: 'Habilidad' });
     await waitFor(() => expect((ability as HTMLSelectElement).options.length).toBeGreaterThan(1));
     expect(screen.getByRole('option', { name: 'Electricidad Estática' })).toBeTruthy();
@@ -72,7 +78,7 @@ describe('guided competitive editor', () => {
     window.location.hash = '#/competitive';
     render(<RootApp />);
     fireEvent.click(await screen.findByRole('button', { name: 'Pokémon Champions' }));
-    fireEvent.change(screen.getByLabelText('Pokémon del espacio seleccionado'), { target: { value: '448' } });
+    await selectSpecies(448);
 
     expect(screen.queryByText('Mecánica de Champions')).toBeNull();
     const form = screen.getByRole('combobox', { name: 'Forma del Pokémon' });
@@ -92,7 +98,7 @@ describe('guided competitive editor', () => {
     window.location.hash = '#/competitive';
     render(<RootApp />);
     expect(await screen.findByRole('button', { name: 'Saga principal · Escarlata/Púrpura' })).toBeTruthy();
-    fireEvent.change(screen.getByLabelText('Pokémon del espacio seleccionado'), { target: { value: '6' } });
+    await selectSpecies(6);
     expect(screen.getByRole('heading', { name: /EVs/ })).toBeTruthy();
     expect(screen.getByRole('combobox', { name: 'Tipo Tera' })).toBeTruthy();
     fireEvent.click(screen.getByRole('button', { name: 'Pokémon Champions' }));
@@ -117,9 +123,7 @@ describe('guided competitive editor', () => {
       { id: 445, formId: 'garchomp-mega-z', label: 'Mega-Garchomp Z', stone: 'Garchompite Z',
         ability: 'levitate', type: 'Dragón' }
     ]) {
-      fireEvent.change(screen.getByLabelText('Pokémon del espacio seleccionado'), {
-        target: { value: String(id) }
-      });
+      await selectSpecies(id);
       const form = screen.getByRole('combobox', { name: 'Forma del Pokémon' });
       expect(screen.getByRole('option', { name: label + ' · ' + stone })).toBeTruthy();
       fireEvent.change(form, { target: { value: formId } });
@@ -148,9 +152,7 @@ describe('guided competitive editor', () => {
     window.location.hash = '#/competitive';
     render(<RootApp />);
     fireEvent.click(await screen.findByRole('button', { name: 'Pokémon Champions' }));
-    fireEvent.change(screen.getByLabelText('Pokémon del espacio seleccionado'), {
-      target: { value: '448' }
-    });
+    await selectSpecies(448);
     fireEvent.change(screen.getByRole('combobox', { name: 'Forma del Pokémon' }), {
       target: { value: 'lucario-mega-z' }
     });

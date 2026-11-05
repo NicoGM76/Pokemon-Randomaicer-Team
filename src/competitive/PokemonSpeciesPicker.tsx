@@ -1,10 +1,11 @@
-import { useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import type { Pokemon } from '../domain/pokemon/types';
 import { searchPokemon } from './searchPokemon';
 
 interface Props {
   pokemon: Pokemon[];
   selectedId: number | null;
+  selectionKey: string;
   onSelect: (id: number) => void;
   options: ReactNode;
 }
@@ -17,10 +18,17 @@ function niceName(name: string): string {
  * Hybrid picker: a small typeahead for fast selection and the original
  * native dropdown for full browse/touch/keyboard accessibility.
  */
-export default function PokemonSpeciesPicker({ pokemon, selectedId, onSelect, options }: Props) {
+export default function PokemonSpeciesPicker({ pokemon, selectedId, selectionKey, onSelect, options }: Props) {
   const [query, setQuery] = useState('');
   const [browseAll, setBrowseAll] = useState(false);
   const suggestions = useMemo(() => searchPokemon(pokemon, query), [pokemon, query]);
+
+  // The picker stays mounted when editing another roster slot. Reset its
+  // local query, rather than accumulating stale search UIs during updates.
+  useEffect(() => {
+    setQuery('');
+    setBrowseAll(false);
+  }, [selectionKey]);
   const isSearching = query.trim().length > 0;
 
   function choose(id: number) {
@@ -80,14 +88,14 @@ export default function PokemonSpeciesPicker({ pokemon, selectedId, onSelect, op
         onClick={() => setBrowseAll(open => !open)}>
         {browseAll ? 'Ocultar lista completa' : 'Explorar Pokédex completa'}
       </button>
-      <label id="comp-species-complete-catalog" className="comp-field comp-species-select"
-        hidden={!browseAll}>
-        Pokémon del espacio seleccionado
-        <select value={selectedId ?? ''} onChange={event => choose(Number(event.target.value))}>
+      {browseAll && <label id="comp-species-complete-catalog" className="comp-field comp-species-select">
+        Explorar por número de Pokédex
+        <select aria-label="Pokémon del espacio seleccionado"
+          value={selectedId ?? ''} onChange={event => choose(Number(event.target.value))}>
           <option value="">Vacío, elige una especie</option>
           {options}
         </select>
-      </label>
+      </label>}
     </div>
   );
 }

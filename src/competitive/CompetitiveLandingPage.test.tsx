@@ -56,13 +56,13 @@ describe('V2.1 competitive interactive workspace', () => {
       target: { value: 'Goldengo' }
     });
     fireEvent.click(screen.getByRole('button', { name: 'Elegir Gholdengo número 1000' }));
-    expect((screen.getByLabelText('Pokémon del espacio seleccionado') as HTMLSelectElement).value).toBe('1000');
+    expect(screen.getByRole('button', { name: 'Editar espacio 1' }).textContent).toContain('Gholdengo');
 
     fireEvent.change(screen.getByLabelText('Movimiento 1'), { target: { value: 'Make It Rain' } });
     view.unmount();
     render(<RootApp />);
     expect(await screen.findByRole('heading', { name: 'Tu laboratorio competitivo' })).toBeTruthy();
-    expect((screen.getByLabelText('Pokémon del espacio seleccionado') as HTMLSelectElement).value).toBe('1000');
+    expect(screen.getByRole('button', { name: 'Editar espacio 1' }).textContent).toContain('Gholdengo');
     expect((screen.getByLabelText('Movimiento 1') as HTMLInputElement).value).toBe('Fiebre Dorada');
   });
 
@@ -70,7 +70,9 @@ describe('V2.1 competitive interactive workspace', () => {
     window.location.hash = '#/competitive';
     const view = render(<RootApp />);
     expect(await screen.findByRole('heading', { name: 'Tu laboratorio competitivo' })).toBeTruthy();
-    fireEvent.change(screen.getByLabelText('Pokémon del espacio seleccionado'), { target: { value: '25' } });
+    const pokemonSearch = screen.getByRole('searchbox', { name: 'Buscar Pokémon por nombre o número' });
+    fireEvent.change(pokemonSearch, { target: { value: '#25' } });
+    fireEvent.keyDown(pokemonSearch, { key: 'Enter', code: 'Enter' });
     fireEvent.change(screen.getByLabelText('Movimiento 1'), { target: { value: 'Thunderbolt' } });
     await waitFor(() => expect((screen.getByLabelText('Movimiento 1') as HTMLInputElement).value).toBe('Atactrueno'));
     view.unmount();
@@ -135,6 +137,34 @@ describe('V2.1 competitive interactive workspace', () => {
     expectCard(1, 'Mega-Salamence', 10089);
     expectCard(2, 'Mega-Lucario Z', 10310);
     expectCard(3, 'Rotom Lavado', 10009);
+  });
+
+  it('never duplicates species search controls across all six roster spaces', async () => {
+    window.location.hash = '#/competitive';
+    render(<RootApp />);
+    expect(await screen.findByRole('heading', { name: 'Tu laboratorio competitivo' })).toBeTruthy();
+
+    function expectOnlyOneSearch() {
+      expect(screen.getAllByRole('searchbox', {
+        name: 'Buscar Pokémon por nombre o número'
+      })).toHaveLength(1);
+      expect(screen.getAllByRole('button', { name: 'Explorar Pokédex completa' })).toHaveLength(1);
+      expect(screen.queryByLabelText('Pokémon del espacio seleccionado')).toBeNull();
+    }
+
+    expectOnlyOneSearch();
+    for (let slot = 1; slot <= 6; slot++) {
+      fireEvent.click(screen.getByRole('button', { name: 'Editar espacio ' + slot }));
+      expectOnlyOneSearch();
+    }
+    fireEvent.click(screen.getByRole('button', { name: 'Explorar Pokédex completa' }));
+    expect(screen.getAllByLabelText('Pokémon del espacio seleccionado')).toHaveLength(1);
+    fireEvent.click(screen.getByRole('button', { name: 'Editar espacio 2' }));
+    expectOnlyOneSearch();
+    fireEvent.click(screen.getByRole('button', { name: 'Dobles estilo VGC' }));
+    expectOnlyOneSearch();
+    fireEvent.click(screen.getByRole('button', { name: 'Singles 6v6' }));
+    expectOnlyOneSearch();
   });
 
 });
