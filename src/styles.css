@@ -17,3 +17,11 @@ button:disabled {
   opacity: .48;
   cursor: not-allowed;
 }
+
+/* Visible and actionable recovery when a lazy route or metagame chunk fails. */
+.app-load-error { padding:24px; border:1px solid #3b6584; background:#0e2034; border-radius:14px; color:#e5f3ff; max-width:780px; margin:24px auto; }
+.app-load-error h2 { font-size:clamp(19px,2.7vw,25px); margin:0 0 12px; }
+.app-load-error p { font-size:14px; line-height:1.65; color:#b9d4e7; }
+.app-load-error button { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:10px 17px; border-radius:9px; border:1px solid #68c8ff; background:#173c59; color:#f1faff; font-weight:700; }
+.app-load-error button:hover { background:#22557b; }
+.app-load-error button:focus-visible { outline:2px solid #9bdeff; outline-offset:3px; }
