@@ -34,9 +34,11 @@ export function assertValidCatalog({ pokemon, forms, evolutions }) {
   const pairs = new Set();
   for (const step of evolutions) {
     if (!ids.has(step.fromId) || !ids.has(step.toId) || step.fromId === step.toId || !Array.isArray(step.conditions)) throw new Error('Evolution references unknown species.');
-    const pair = step.fromId + '/' + step.toId;
-    if (pairs.has(pair)) throw new Error('Duplicate evolution pair.');
-    pairs.add(pair);
+    // Same from/to can be a legitimate alternative evolution requirement.
+    // Only identical condition sets are truly duplicates.
+    const variant = JSON.stringify(step);
+    if (pairs.has(variant)) throw new Error('Duplicate evolution variant.');
+    pairs.add(variant);
   }
 }
 
@@ -83,9 +85,20 @@ INSERT INTO public.pokemon_form_types(form_id,slot,type_name)
 SELECT v->>'id',t.ordinality::smallint,t.type_name FROM _pa_forms
 CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(v->'types','[]'::jsonb)) WITH ORDINALITY AS t(type_name,ordinality);
 
-INSERT INTO public.pokemon_evolutions(from_pokemon_id,to_pokemon_id,conditions)
-SELECT (v->>'fromId')::integer,(v->>'toId')::integer,v->'conditions' FROM _pa_evolutions
-ON CONFLICT(from_pokemon_id,to_pokemon_id) DO UPDATE SET conditions=excluded.conditions;
+-- Replace only the evolution pairs provided in this import, to avoid stale
+-- alternative requirements while retaining unrelated or curated evolutions.
+DELETE FROM public.pokemon_evolutions AS e
+USING _pa_evolutions AS src
+WHERE e.from_pokemon_id = (src.v->>'fromId')::integer
+  AND e.to_pokemon_id = (src.v->>'toId')::integer;
+
+INSERT INTO public.pokemon_evolutions(from_pokemon_id,to_pokemon_id,variant_index,conditions)
+SELECT (v->>'fromId')::integer,(v->>'toId')::integer,
+  row_number() over (
+    partition by (v->>'fromId')::integer,(v->>'toId')::integer
+    order by (v->'conditions')::text
+  )::smallint,
+  v->'conditions' FROM _pa_evolutions;
 
 INSERT INTO public.catalog_imports(id,source_name,source_revision,species_count,forms_count,evolutions_count,completeness,notes)
 VALUES (${safeText(tag)},${safeText(full ? 'PokéAPI CSV generated catalog' : 'Repository curated bootstrap')},${safeText(revision)},
