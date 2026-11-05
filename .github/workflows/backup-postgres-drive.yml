@@ -1,0 +1,59 @@
+name: V2.5 Encrypted PostgreSQL Backup to Drive
+
+on:
+  schedule:
+    # Every day at 00:17 America/Bogota (UTC-5).
+    - cron: '17 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: v2-5-postgres-drive-backup
+  cancel-in-progress: false
+
+jobs:
+  encrypted-backup:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      DATABASE_URL: ${{ secrets.PA_BACKUP_DATABASE_URL }}
+      AGE_BACKUP_RECIPIENT: ${{ vars.PA_BACKUP_AGE_RECIPIENT }}
+      RCLONE_CONFIG_B64: ${{ secrets.PA_BACKUP_RCLONE_CONFIG_B64 }}
+      PA_BACKUP_REMOTE: pa-backups
+    steps:
+      - name: Checkout trusted main branch
+        uses: actions/checkout@v4
+
+      - name: Require all backup credentials and a public encryption recipient
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -z "$DATABASE_URL" || -z "$RCLONE_CONFIG_B64" || -z "$AGE_BACKUP_RECIPIENT" ]]; then
+            echo "::error::Backup NOT configured: missing one or more GitHub Actions secrets/variables."
+            exit 1
+          fi
+
+      - name: Install backup utilities
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends age rclone
+
+      - name: Prepare private OAuth configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          printf '%s' "$RCLONE_CONFIG_B64" | base64 -d > "$RUNNER_TEMP/rclone.conf"
+          test -s "$RUNNER_TEMP/rclone.conf"
+
+      - name: Export, encrypt, upload and compare remote bytes
+        shell: bash
+        env:
+          RCLONE_CONFIG: ${{ runner.temp }}/rclone.conf
+        run: bash scripts/db/backup-to-drive.sh
+
+      - name: Remove temporary OAuth file
+        if: always()
+        run: rm -f "$RUNNER_TEMP/rclone.conf"
