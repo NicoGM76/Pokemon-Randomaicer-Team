@@ -27,6 +27,23 @@ describe('meta matchup explanation', () => {
     expect('winProbability' in breakdown).toBe(false);
   });
 
+  it('checks all six Champions doubles members against a metagame opponent using base typings only', () => {
+    const champions = [
+      mon(448, 'Lucario', ['fighting', 'steel']),
+      mon(373, 'Salamence', ['dragon', 'flying']),
+      mon(812, 'Rillaboom', ['grass']),
+      mon(727, 'Incineroar', ['fire', 'dark']),
+      mon(479, 'Rotom Wash', ['electric', 'water']),
+      mon(279, 'Pelipper', ['water', 'flying']),
+      mon(382, 'Kyogre', ['water'])
+    ];
+    const result = analyzeMetaMatchup([448, 373, 812, 727, 479, 279], 382, champions);
+    expect(result.checkedMembers).toBe(6);
+    expect(result.threatened).toContain(727);
+    expect(result.offensiveAnswers).toEqual(expect.arrayContaining([812, 479]));
+    expect('winProbability' in result).toBe(false);
+  });
+
   it('ignores unknown opponents and unmatched members safely', () => {
     expect(analyzeMetaMatchup([1, 999], 999, catalog).checkedMembers).toBe(0);
     expect(analyzeMetaMatchup([999, 2], 1, catalog).checkedMembers).toBe(1);

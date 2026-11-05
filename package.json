@@ -34,6 +34,7 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@testing-library/react": "latest",
-    "jsdom": "latest"
+    "jsdom": "latest",
+    "@types/node": "^22.15.0"
   }
 }

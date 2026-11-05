@@ -33,7 +33,10 @@ function rankedNames(dict, limit = 4) {
   if (!dict || typeof dict !== 'object' || Array.isArray(dict)) return [];
   return Object.entries(dict)
     .filter(([name, score]) =>
-      name !== 'Other' && name !== 'Nothing' && Number.isFinite(score) && score > 0
+      // Smogon sometimes publishes a blank move name (""), which is not a
+      // usable move and violates the UI's snapshot schema.
+      name.trim().length > 0 && name !== 'Other' && name !== 'Nothing' &&
+      Number.isFinite(score) && score > 0
     )
     .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
     .slice(0, limit).map(([name]) => name);

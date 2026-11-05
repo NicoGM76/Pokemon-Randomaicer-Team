@@ -62,3 +62,22 @@ test('chooses only complete past months, never the month currently in progress',
   assert.deepEqual(selectMonthCandidates(new Date('2026-11-03T12:00:00Z'), 3),
     ['2026-10', '2026-09', '2026-08']);
 });
+
+test('skips blank Smogon move names while retaining valid popular moves', () => {
+  const withGaps = {
+    ...raw,
+    data: {
+      ...raw.data,
+      'Great Tusk': {
+        ...raw.data['Great Tusk'],
+        Moves: { '': 999, '   ': 820, 'Headlong Rush': 350, 'Rapid Spin': 210,
+          Other: 100, Nothing: 100 }
+      }
+    }
+  };
+  const snapshot = convertChaosSnapshot(withGaps, pokemon, target, '2026-10');
+  const greatTusk = snapshot.pokemon.find(entry => entry.pokemonId === 984);
+  assert.deepEqual(greatTusk.moves, ['Headlong Rush', 'Rapid Spin']);
+  assert.equal(snapshot.pokemon.some(entry =>
+    entry.moves.some(move => !move.trim())), false);
+});
