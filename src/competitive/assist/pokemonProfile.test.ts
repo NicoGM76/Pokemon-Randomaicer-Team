@@ -49,4 +49,57 @@ describe('species-restricted PokeAPI assist', () => {
     await expect(getPokemonProfile(25, undefined, fetcher)).rejects.toThrow(/503/);
     expect(optionNames([],'attack')).toEqual([]);
   });
+  it('provides curated Aura Guard for Mega Lucario Z even when PokeAPI has no Z variety', async () => {
+    const fetcher = vi.fn().mockImplementation(async (url: string) => ({
+      ok: true,
+      json: async () => url.includes('/pokemon-species/')
+        ? { varieties: [{ pokemon: { name: 'lucario' } }, { pokemon: { name: 'lucario-mega' } }] }
+        : {
+          abilities: [{ ability: { name: 'inner-focus' } }],
+          moves: [{ move: { name: 'aura-sphere' },
+            version_group_details: [{ version_group: { name: 'scarlet-violet' } }] }]
+        }
+    }));
+    const original = await getPokemonProfile(448, undefined, fetcher);
+    expect(original.abilities).toEqual(['inner-focus']);
+    // Form-specific data must not be replaced by the cached base species.
+    const profile = await getPokemonProfile(448, 'lucario-mega-z', fetcher);
+    expect(profile.abilities).toEqual(['aura-guard']);
+    expect(profile.scarletVioletMoves).toContain('aura-sphere');
+    expect(profile.source).toContain('champions-news.pokemon-home.com');
+    expect(fetcher.mock.calls.some(([url]) => String(url).endsWith('/pokemon/lucario-mega-z'))).toBe(false);
+    expect((await getPokemonProfile(448, 'lucario-mega-z', fetcher)).abilities).toEqual(['aura-guard']);
+    expect(fetcher).toHaveBeenCalledTimes(4);
+  });
+
+
+  it('curates Mega Absol Z and Mega Garchomp Z from the base species without mixing profile cache', async () => {
+    const fetcher = vi.fn().mockImplementation(async (url: string) => ({
+      ok: true,
+      json: async () => url.includes('/pokemon-species/')
+        ? { varieties: [{ pokemon: { name: 'absol' } }, { pokemon: { name: 'garchomp' } }] }
+        : {
+          abilities: [{ ability: { name: 'pressure' } }],
+          moves: [{ move: { name: 'night-slash' },
+            version_group_details: [{ version_group: { name: 'scarlet-violet' } }] }]
+        }
+    }));
+    for (const { id, form, ability } of [
+      { id: 359, form: 'absol-mega-z', ability: 'sharpness' },
+      { id: 445, form: 'garchomp-mega-z', ability: 'levitate' }
+    ]) {
+      expect((await getPokemonProfile(id, undefined, fetcher)).abilities).toEqual(['pressure']);
+      const profile = await getPokemonProfile(id, form, fetcher);
+      expect(profile.abilities).toEqual([ability]);
+      expect(profile.scarletVioletMoves).toContain('night-slash');
+      expect(profile.availableVarieties).toContain(form);
+      expect(profile.source).toContain('bulbapedia.bulbagarden.net');
+      await expect(getPokemonProfile(id + 1, form, fetcher))
+        .rejects.toThrow(/no corresponde/);
+      expect((await getPokemonProfile(id, form, fetcher)).abilities).toEqual([ability]);
+      expect(fetcher.mock.calls.some(([url]) => String(url).endsWith('/pokemon/' + form))).toBe(false);
+    }
+    expect(fetcher).toHaveBeenCalledTimes(8);
+  });
+
 });

@@ -2,6 +2,7 @@ import type { Pokemon, PokemonType } from '../../domain/pokemon/types';
 import { getDefensiveProfile } from '../../generator/adventure/getDefensiveProfile';
 import { pokemonTypes } from '../../generator/adventure/typeChart';
 import type { CompetitiveRole, CompetitiveTeam } from './types';
+import { MEGA_Z_TYPES } from './trainingRules';
 
 export interface CompetitiveAnalysis {
   roleCounts: Record<CompetitiveRole, number>;
@@ -25,8 +26,9 @@ export function analyzeCompetitiveTeam(team: CompetitiveTeam, pokemon: Pokemon[]
     if (!entry) continue;
     filledSlots++;
     roleCounts[member.role] = (roleCounts[member.role] ?? 0) + 1;
-    for (const type of entry.types) typeCounts.add(type);
-    const profile = getDefensiveProfile(entry.types);
+    const effectiveTypes = member.formId ? MEGA_Z_TYPES[member.formId] ?? entry.types : entry.types;
+    for (const type of effectiveTypes) typeCounts.add(type);
+    const profile = getDefensiveProfile(effectiveTypes);
     for (const type of pokemonTypes) {
       if (profile.multipliers[type] > 1) {
         weaknessCounts.set(type, (weaknessCounts.get(type) ?? 0) + 1);

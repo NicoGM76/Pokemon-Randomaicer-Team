@@ -155,8 +155,6 @@
 .comp-assist-suggestions button{width:100%;display:flex;text-align:left;align-items:center;border:0;background:transparent;border-radius:7px;color:#eaf7ff;padding:10px;min-height:42px;font-size:13px;cursor:pointer}
 .comp-assist-suggestions button:hover,.comp-assist-suggestions button:focus-visible{background:#265a7b;outline:1px solid #7ccaff}
 .comp-assist-source{font-size:11px;color:#a5c7dc;line-height:1.6;padding:12px;margin:15px 0 0;border-radius:10px;background:#0f283e;border:1px solid #315875}
-.comp-rule-note{min-height:66px;padding:12px;background:#112a43;border:1px solid #385e7d;border-radius:10px;display:flex;flex-direction:column;gap:7px}
-.comp-rule-note strong{color:#e1effb;font-size:12px}
-.comp-rule-note small{color:#9cb9d1;line-height:1.6}
+.comp-two-fields.comp-form-only{grid-template-columns:minmax(0,1fr)}
 @media(max-width:900px){.comp-environment{grid-template-columns:1fr}.comp-environment-buttons{width:100%}.comp-environment-buttons button{flex:1 1 170px}}
 @media(max-width:600px){.comp-environment{padding:16px}.comp-environment-buttons button{flex:1 1 100%}.comp-assist-field input[type=search]{font-size:16px}}

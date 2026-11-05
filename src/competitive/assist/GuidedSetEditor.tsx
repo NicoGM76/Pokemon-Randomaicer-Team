@@ -4,7 +4,7 @@ import { useLocale } from '../../i18n/LocaleProvider';
 import { SAMPLE_TEMPLATES } from '../core/templates';
 import { natureEffects, roleDescriptions, roleLabels, statKeys, statLabels } from '../core/types';
 import type { CompetitiveEnvironment, CompetitiveFormat, CompetitivePokemonSet, StatKey } from '../core/types';
-import { applyFormSelection, getTrainingRules, megaOptions, MEGA_STONES, pointsFor, TERA_TYPES, withStatValue } from '../core/trainingRules';
+import { applyFormSelection, getTrainingRules, megaOptions, MEGA_STONES, MEGA_Z_TYPES, pointsFor, TERA_TYPES, withStatValue } from '../core/trainingRules';
 import { getPokemonProfile, type PokemonAssistProfile } from './pokemonProfile';
 import { ITEM_CATALOG, itemDisplay } from './items';
 import SearchAssistInput from './SearchAssistInput';
@@ -53,6 +53,7 @@ export default function GuidedSetEditor({
     : undefined;
 
   const mega = member.formId ? MEGA_STONES[member.formId] : undefined;
+  const selectedZTypes = member.formId ? MEGA_Z_TYPES[member.formId] : undefined;
   const currentAbility = profile?.abilities.find(ability => norm(ability) === norm(member.ability));
   const abilityChoice = !member.ability ? '' : currentAbility ?? '__unknown__';
   const extraVarieties = (profile?.availableVarieties ?? [])
@@ -111,7 +112,7 @@ export default function GuidedSetEditor({
         </label>
       </div>
 
-      <div className="comp-two-fields">
+      <div className={training.canTera ? 'comp-two-fields' : 'comp-two-fields comp-form-only'}>
         <label className="comp-field">Forma del Pokémon
           <select aria-label="Forma del Pokémon" value={member.formId ?? ''}
             onChange={event => onEdit(prev => applyFormSelection(prev,event.target.value,environment))}>
@@ -135,10 +136,7 @@ export default function GuidedSetEditor({
               {TERA_TYPES.map(type => <option key={type} value={type}>{name(type)}</option>)}
             </select>
           </label>
-        ) : <div className="comp-rule-note">
-          <strong>Mecánica de Champions</strong>
-          <small>Megaevolución con objeto compatible. No hay tipo Tera.</small>
-        </div>}
+        ) : null}
       </div>
 
       <div className="comp-two-fields">
@@ -157,7 +155,10 @@ export default function GuidedSetEditor({
               {member.ability} (no coincide con esta especie)
             </option>}
             {profile?.abilities.map(ability => <option key={ability} value={ability}>
-              {name(ability)}
+              {ability === 'aura-guard' ? 'Aura Protectora (Aura Guard)'
+                : ability === 'sharpness' ? 'Cortante (Sharpness)'
+                : ability === 'levitate' ? 'Levitación (Levitate)'
+                : name(ability)}
             </option>)}
           </select>
         </label>
@@ -174,9 +175,16 @@ export default function GuidedSetEditor({
           ? 'Consultando habilidades y movimientos de PokéAPI…'
           : profileStatus === 'error'
             ? 'Datos de especie no disponibles. Conservamos tu set, pero no podemos verificar habilidad ni movimientos.'
-            : environment === 'mainline'
-              ? 'Habilidades de esta especie y movimientos registrados para Escarlata/Púrpura según PokéAPI. No incluye validación de reglamentos.'
-              : 'Habilidades de la especie según PokéAPI. Los movimientos recomendados usan referencias de Escarlata/Púrpura, NO una lista legal certificada de Champions.'}
+            : selectedZTypes
+              ? (mega?.label ?? 'Megaevolución Z') + ': forma y habilidad curadas para Champions. Tipo: ' +
+                selectedZTypes.map(type => ({
+                  dark: 'Siniestro', ghost: 'Fantasma', dragon: 'Dragón',
+                  fighting: 'Lucha', steel: 'Acero'
+                } as Record<string, string>)[type] ?? name(type)).join(' / ') +
+                '. Los movimientos sugeridos proceden de Escarlata/Púrpura y no certifican legalidad en Champions.'
+              : environment === 'mainline'
+                ? 'Habilidades de esta especie y movimientos registrados para Escarlata/Púrpura según PokéAPI. No incluye validación de reglamentos.'
+                : 'Habilidades de la especie según PokéAPI. Los movimientos recomendados usan referencias de Escarlata/Púrpura, NO una lista legal certificada de Champions.'}
       </p>
 
       <h3 className="comp-mini-heading">Movimientos</h3>
