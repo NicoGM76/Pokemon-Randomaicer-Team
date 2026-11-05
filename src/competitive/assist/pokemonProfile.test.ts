@@ -102,4 +102,63 @@ describe('species-restricted PokeAPI assist', () => {
     expect(fetcher).toHaveBeenCalledTimes(8);
   });
 
+  it('recovers base Scarlet/Violet moves for Mega-Salamence without replacing its sole Mega ability', async () => {
+    const fetcher = vi.fn().mockImplementation(async (url: string) => ({
+      ok: true,
+      json: async () => url.includes('/pokemon-species/')
+        ? { varieties: [{ pokemon: { name: 'salamence' } }, { pokemon: { name: 'salamence-mega' } }] }
+        : url.endsWith('/pokemon/salamence-mega')
+          ? { abilities: [{ ability: { name: 'aerilate' } }],
+            moves: [{ move: { name: 'return' },
+              version_group_details: [{ version_group: { name: 'omega-ruby-alpha-sapphire' } }] }] }
+          : url.endsWith('/pokemon/373')
+            ? { abilities: [{ ability: { name: 'intimidate' } }],
+              moves: [
+                { move: { name: 'dragon-claw' },
+                  version_group_details: [{ version_group: { name: 'scarlet-violet' } }] },
+                { move: { name: 'protect' },
+                  version_group_details: [{ version_group: { name: 'scarlet-violet' } }] },
+                { move: { name: 'fly' },
+                  version_group_details: [{ version_group: { name: 'red-blue' } }] }
+              ] }
+            : { abilities: [], moves: [] }
+    }));
+    const profile = await getPokemonProfile(373, 'salamence-mega', fetcher);
+    expect(profile.abilities).toEqual(['aerilate']);
+    expect(profile.scarletVioletMoves).toEqual(['dragon-claw', 'protect']);
+    expect(profile.movesFromBaseSpecies).toBe(true);
+    expect(profile.source).toContain('/pokemon/salamence-mega');
+    expect(fetcher).toHaveBeenCalledTimes(3);
+    expect((await getPokemonProfile(373, 'salamence-mega', fetcher)).scarletVioletMoves)
+      .toContain('dragon-claw');
+    expect(fetcher).toHaveBeenCalledTimes(3);
+  });
+
+  it('keeps form-specific moves when they exist and never invents moves on failed base fallback', async () => {
+    const withFormMoves = vi.fn().mockImplementation(async (url: string) => ({
+      ok: true,
+      json: async () => url.includes('/pokemon-species/')
+        ? { varieties: [{ pokemon: { name: 'charizard-mega-x' } }] }
+        : { abilities: [{ ability: { name: 'tough-claws' } }],
+          moves: [{ move: { name: 'flare-blitz' },
+            version_group_details: [{ version_group: { name: 'scarlet-violet' } }] }] }
+    }));
+    const present = await getPokemonProfile(6, 'charizard-mega-x', withFormMoves);
+    expect(present.scarletVioletMoves).toEqual(['flare-blitz']);
+    expect(present.movesFromBaseSpecies).toBe(false);
+    expect(withFormMoves).toHaveBeenCalledTimes(2);
+
+    const partial = vi.fn().mockImplementation(async (url: string) => ({
+      ok: !url.endsWith('/pokemon/373'),
+      status: url.endsWith('/pokemon/373') ? 503 : 200,
+      json: async () => url.includes('/pokemon-species/')
+        ? { varieties: [{ pokemon: { name: 'salamence-mega' } }] }
+        : { abilities: [{ ability: { name: 'aerilate' } }], moves: [] }
+    }));
+    const fallbackFailed = await getPokemonProfile(373, 'salamence-mega', partial);
+    expect(fallbackFailed.abilities).toEqual(['aerilate']);
+    expect(fallbackFailed.scarletVioletMoves).toEqual([]);
+    expect(fallbackFailed.movesFromBaseSpecies).toBe(false);
+  });
+
 });
