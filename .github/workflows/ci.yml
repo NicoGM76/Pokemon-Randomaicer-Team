@@ -44,3 +44,42 @@ jobs:
 
       - name: Build
         run: npm run build
+
+  full-catalog-bootstrap:
+    # One-off bootstrap path. Credentials are NOT available in this job.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/feature/v2-5-data-backups'
+    needs: test-build
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout feature branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate verified complete Pokedex
+        run: |
+          npm run data:sync-all
+          npm run data:validate-all
+          node scripts/db/emit-catalog-sql.mjs --full > /tmp/pokemon-full-catalog.sql
+          test -s /tmp/pokemon-full-catalog.sql
+
+      - name: Commit generated public catalog to feature branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/data/generated/pokemon.json src/data/generated/evolutions.json src/data/generated/regional-dex-entries.json src/data/generated/dex-import-report.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'chore(data): bootstrap complete verified Pokedex [skip ci]'
+            git push origin HEAD:feature/v2-5-data-backups
+          fi
