@@ -10,6 +10,9 @@ import { buildCatalogUpsertSql } from '../lib/catalog-sql.mjs';
 // This tool never connects to a database or reads secrets.
 const root = process.cwd();
 const read = name => fs.readFile(path.join(root, 'src/data/generated', name + '.json'), 'utf8').then(JSON.parse);
-const [pokemon, forms, evolutions] = await Promise.all(['pokemon','forms','evolutions'].map(read));
-const sql = buildCatalogUpsertSql({ pokemon, forms, evolutions }, { full: process.argv.includes('--full') });
+const [pokemon, forms, evolutions, regionalDexEntries] = await Promise.all(['pokemon','forms','evolutions','regional-dex-entries'].map(read));
+const regionalDexes = JSON.parse(await fs.readFile(path.join(root, 'src/data/curated/regional-dexes.json'), 'utf8'));
+const includeRegional = process.argv.includes('--full');
+const data = includeRegional ? { pokemon, forms, evolutions, regionalDexes, regionalDexEntries } : { pokemon, forms, evolutions };
+const sql = buildCatalogUpsertSql(data, { full: includeRegional });
 process.stdout.write(sql);
