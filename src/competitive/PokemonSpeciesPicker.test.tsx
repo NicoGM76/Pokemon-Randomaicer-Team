@@ -17,7 +17,7 @@ function Harness() {
   return (
     <>
       <PokemonSpeciesPicker
-        pokemon={catalog} selectedId={selected} onSelect={setSelected}
+        pokemon={catalog} selectedId={selected} selectionKey="singles-0" onSelect={setSelected}
         options={catalog.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
       />
       <output data-testid="chosen">#{selected ?? 'empty'}</output>
@@ -34,7 +34,8 @@ describe('hybrid species picker', () => {
     fireEvent.change(input, { target: { value: 'Goldengo' } });
     fireEvent.click(screen.getByRole('button', { name: 'Elegir Gholdengo número 1000' }));
     expect(screen.getByTestId('chosen').textContent).toBe('#1000');
-    expect((screen.getByLabelText('Pokémon del espacio seleccionado') as HTMLSelectElement).value).toBe('1000');
+    expect(screen.queryByLabelText('Pokémon del espacio seleccionado')).toBeNull();
+    expect(screen.getByRole('button', { name: 'Explorar Pokédex completa' })).toBeTruthy();
     expect((input as HTMLInputElement).value).toBe('');
   });
 
@@ -44,12 +45,14 @@ describe('hybrid species picker', () => {
     fireEvent.change(input, { target: { value: '#1000' } });
     fireEvent.keyDown(input, { key: 'Enter', code: 'Enter' });
     expect(screen.getByTestId('chosen').textContent).toBe('#1000');
+    fireEvent.click(screen.getByRole('button', { name: 'Explorar Pokédex completa' }));
     fireEvent.change(screen.getByLabelText('Pokémon del espacio seleccionado'), { target: { value: '25' } });
     expect(screen.getByTestId('chosen').textContent).toBe('#25');
   });
 
   it('can clear search without modifying the selected Pokémon', () => {
     render(<Harness />);
+    fireEvent.click(screen.getByRole('button', { name: 'Explorar Pokédex completa' }));
     fireEvent.change(screen.getByLabelText('Pokémon del espacio seleccionado'), { target: { value: '25' } });
     const input = screen.getByRole('searchbox', { name: 'Buscar Pokémon por nombre o número' });
     fireEvent.change(input, { target: { value: 'nonexistent' } });
@@ -57,20 +60,22 @@ describe('hybrid species picker', () => {
     fireEvent.keyDown(input, { key: 'Escape', code: 'Escape' });
     expect(screen.getByTestId('chosen').textContent).toBe('#25');
   });
-  it('keeps the redundant full catalogue collapsed until explicitly requested', () => {
+  it('only mounts the optional complete list after requesting it', () => {
     render(<Harness />);
-    const native = screen.getByLabelText('Pokémon del espacio seleccionado') as HTMLSelectElement;
-    const label = native.closest('label') as HTMLLabelElement;
+    expect(screen.getAllByRole('searchbox', { name: 'Buscar Pokémon por nombre o número' })).toHaveLength(1);
+    expect(screen.queryByLabelText('Pokémon del espacio seleccionado')).toBeNull();
+
     const show = screen.getByRole('button', { name: 'Explorar Pokédex completa' });
     expect(show.getAttribute('aria-expanded')).toBe('false');
-    expect(label.hidden).toBe(true);
     fireEvent.click(show);
-    expect(label.hidden).toBe(false);
+    const native = screen.getByLabelText('Pokémon del espacio seleccionado') as HTMLSelectElement;
+    expect(native.value).toBe('');
+    expect(screen.getAllByRole('searchbox', { name: 'Buscar Pokémon por nombre o número' })).toHaveLength(1);
     expect(screen.getByRole('button', { name: 'Ocultar lista completa' }).getAttribute('aria-expanded')).toBe('true');
+
     fireEvent.change(native, { target: { value: '25' } });
     expect(screen.getByTestId('chosen').textContent).toBe('#25');
-    expect(label.hidden).toBe(true);
-    expect(screen.getByRole('button', { name: 'Explorar Pokédex completa' })).toBeTruthy();
+    expect(screen.queryByLabelText('Pokémon del espacio seleccionado')).toBeNull();
+    expect(screen.getAllByRole('searchbox', { name: 'Buscar Pokémon por nombre o número' })).toHaveLength(1);
   });
-
 });
