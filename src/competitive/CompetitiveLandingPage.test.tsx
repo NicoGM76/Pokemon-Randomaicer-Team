@@ -95,10 +95,11 @@ describe('V2.1 competitive interactive workspace', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Pokémon Champions' }));
 
     function selectSpecies(id: number) {
-      fireEvent.click(screen.getByRole('button', { name: 'Explorar Pokédex completa' }));
-      fireEvent.change(screen.getByLabelText('Pokémon del espacio seleccionado'), {
-        target: { value: String(id) }
-      });
+      const search = screen.getAllByRole('searchbox', {
+        name: 'Buscar Pokémon por nombre o número'
+      }).at(-1)!;
+      fireEvent.change(search, { target: { value: '#' + id } });
+      fireEvent.keyDown(search, { key: 'Enter', code: 'Enter' });
     }
     function expectCard(slot: number, name: string, artworkId: number) {
       const card = screen.getByRole('button', { name: 'Editar espacio ' + slot });
