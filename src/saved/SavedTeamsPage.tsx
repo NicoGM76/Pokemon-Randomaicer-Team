@@ -89,7 +89,7 @@ export default function SavedTeamsPage() {
           <h2 className="saved-section-heading">Aventura y generación</h2>
           <div className="saved-grid">
             {savedTeams.map(saved => (
-              <article className="saved-card" key={saved.id}>
+              <article className="saved-card" key={saved.id} aria-label={"Equipo de aventura: " + saved.name}>
                 <div>
                   <span className="mini-badge">{saved.config.mode === 'adventure' ? 'Aventura' : saved.config.mode === 'random' ? 'Full Random' : 'Personalizado'}</span>
                   <h2>{saved.name}</h2>
@@ -113,7 +113,7 @@ export default function SavedTeamsPage() {
           <h2 className="saved-section-heading">Competitivo</h2>
           <div className="saved-grid">
             {competitiveTeams.map(saved => (
-              <article className="saved-card" key={saved.id}>
+              <article className="saved-card" key={saved.id} aria-label={"Equipo competitivo: " + saved.name}>
                 <div>
                   <span className="mini-badge">{saved.format === 'singles' ? 'Singles 6v6' : 'Dobles VGC'}</span>
                   <h2>{saved.name}</h2>
