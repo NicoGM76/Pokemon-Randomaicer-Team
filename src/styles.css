@@ -25,3 +25,9 @@ button:disabled {
 .app-load-error button { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:10px 17px; border-radius:9px; border:1px solid #68c8ff; background:#173c59; color:#f1faff; font-weight:700; }
 .app-load-error button:hover { background:#22557b; }
 .app-load-error button:focus-visible { outline:2px solid #9bdeff; outline-offset:3px; }
+
+/* Distinct collections inside the saved teams page (Adventure vs Competitive). */
+.saved-section-heading{margin:28px 0 0;font-size:23px;color:#e6f2ff}
+.saved-section-heading + .saved-grid{margin-top:16px}
+.saved-empty-actions{justify-content:center}
+.saved-feedback{margin-top:22px;padding:14px;background:#102e45;border:1px solid #39688a;border-radius:12px;color:#b9e8ff;font-size:13px}

@@ -2,12 +2,14 @@
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import RootApp from '../RootApp';
+import { SavedCompetitiveTeamRepository } from './savedCompetitiveTeams';
 
 afterEach(() => {
   cleanup();
   window.location.hash = '';
   localStorage.clear();
   vi.unstubAllGlobals();
+  vi.restoreAllMocks();
 });
 
 describe('V2.1 competitive interactive workspace', () => {
@@ -192,6 +194,47 @@ describe('V2.1 competitive interactive workspace', () => {
     expect(screen.getByRole('heading', { name: 'Espacio 1' })).toBeTruthy();
     expect(screen.queryByRole('alert')).toBeNull();
     expect(fetcher).toHaveBeenCalledTimes(1);
+  });
+
+  it('saves named Singles and Champions Doubles teams separately, including incomplete valid rosters', async () => {
+    window.location.hash = '#/competitive';
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true, json: async () => ({ abilities: [], moves: [], varieties: [] })
+    }));
+    const prompt = vi.spyOn(window, 'prompt').mockReturnValueOnce('Mi Singles')
+      .mockReturnValueOnce('Dobles Champions');
+    render(<RootApp />);
+    expect(await screen.findByRole('heading', { name: 'Tu laboratorio competitivo' })).toBeTruthy();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Guardar equipo' }));
+    expect(screen.getByText('Añade al menos un Pokémon antes de guardar el equipo.')).toBeTruthy();
+    expect(prompt).not.toHaveBeenCalled();
+
+    const search = screen.getByRole('searchbox', { name: 'Buscar Pokémon por nombre o número' });
+    fireEvent.change(search, { target: { value: '#25' } });
+    fireEvent.keyDown(search, { key: 'Enter', code: 'Enter' });
+    expect(screen.getByRole('button', { name: 'Editar espacio 1' }).textContent).toContain('Pikachu');
+
+    fireEvent.click(screen.getByRole('button', { name: 'Guardar equipo' }));
+    expect(screen.getByText(/Equipo competitivo guardado/)).toBeTruthy();
+    expect(new SavedCompetitiveTeamRepository().getAll()[0].format).toBe('singles');
+
+    fireEvent.click(screen.getByRole('button', { name: 'Dobles estilo VGC' }));
+    const searchDoubles = screen.getByRole('searchbox', { name: 'Buscar Pokémon por nombre o número' });
+    fireEvent.change(searchDoubles, { target: { value: '#448' } });
+    fireEvent.keyDown(searchDoubles, { key: 'Enter', code: 'Enter' });
+    fireEvent.click(screen.getByRole('button', { name: 'Guardar equipo' }));
+
+    const saved = new SavedCompetitiveTeamRepository().getAll();
+    expect(saved).toHaveLength(2);
+    expect(saved.map(entry => entry.name)).toEqual(['Mi Singles', 'Dobles Champions']);
+    expect(saved.map(entry => entry.format)).toEqual(['singles', 'doubles']);
+    expect(saved[0].environment).toBe('mainline');
+    expect(saved[1].environment).toBe('champions');
+    expect(saved[0].team[0]?.pokemonId).toBe(25);
+    expect(saved[1].team[0]?.pokemonId).toBe(448);
+    expect(saved[1].team).toHaveLength(6);
+    expect(prompt).toHaveBeenCalledTimes(2);
   });
 
 });

@@ -105,7 +105,7 @@ Al recargar la página, el borrador compatible se restaura. Los datos corruptos 
 
 ### Guardados separados de borradores
 
-Los equipos guardados siguen siendo permanentes en el navegador mediante el repositorio existente. Cargar uno escribe ese equipo como borrador de Aventura y navega a `/#/adventure`.
+Los equipos de Aventura siguen en su repositorio original y se cargan como borrador de Aventura. Los equipos competitivos tienen un repositorio local independiente y se cargan como borrador en Competitivo, sin alterar el otro formato.
 
 ### Carga modular
 
@@ -395,6 +395,14 @@ La V2.4 abre un **comparador histórico optativo** dentro del panel `/#/competit
 - Las Mega clásicas (por ejemplo, **Mega-Salamence**) a menudo no tienen movimientos asociados a **Escarlata/Púrpura** en el endpoint de su forma. Cuando eso ocurre, el asistente usa los movimientos registrados para la **especie base**, conservando **la habilidad propia de la Mega**.
 - Las sugerencias de movimientos basadas en la especie base son **didácticas** y no certifican su legalidad en Pokémon Champions. Si tampoco hay movimientos base o falla la consulta, se muestra un aviso sin inventar opciones.
 - La lógica funciona igual en **los seis espacios** y conserva el almacenamiento y el idioma regional de los movimientos. Las pruebas cubren específicamente la selección de Mega-Salamence en el **espacio 6**.
+
+### Equipos competitivos guardados: Singles y Dobles
+
+- Desde `/#/competitive`, el botón **Guardar equipo** permite asignar un nombre a cada conjunto, incluso si todavía está incompleto (al menos un Pokémon).
+- `/#/saved` muestra por separado equipos de Aventura y de Competitivo. Cada equipo competitivo conserva seis posiciones, formato (Singles/Dobles), entorno (Escarlata/Púrpura o Champions), especie, forma Mega/alternativa, naturaleza, habilidad, objeto, cuatro movimientos, EVs, IVs, 66 PC de Champions y bloqueos.
+- **Cargar** recupera los seis sets y las reglas del juego correspondiente sin sobrescribir el equipo del otro formato; **Eliminar** borra solo ese guardado, no el borrador activo ni equipos de Aventura.
+- Los nombres de los movimientos permanecen canónicos en almacenamiento para que el selector global de español regional siga funcionando.
+- La conservación es **local a este navegador y perfil**, sin sincronización en la nube ni cuenta. No se confunde el guardado con la certificación de legalidad de torneos.
 
 ### V3 · Posible aplicación móvil
 

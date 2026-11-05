@@ -17,6 +17,7 @@ import type {
   CompetitiveEnvironment, CompetitiveFormat, CompetitivePokemonSet, CompetitiveTeam, CompetitiveWorkspace
 } from './core/types';
 import { validateCompetitiveTeam } from './core/validation';
+import { SavedCompetitiveTeamRepository, type SavedCompetitiveTeam } from './savedCompetitiveTeams';
 import {
   loadCompetitiveDraft, removeUnknownPokemon, saveCompetitiveDraft
 } from './competitiveDraft';
@@ -64,6 +65,7 @@ function showText(team: CompetitiveTeam, environment: CompetitiveEnvironment, lo
 
 export default function CompetitiveLandingPage() {
   const { t, locale } = useLocale();
+  const competitiveSaves = useMemo(() => new SavedCompetitiveTeamRepository(), []);
   const [workspace, setWorkspace] = useState<CompetitiveWorkspace>(() =>
     removeUnknownPokemon(loadCompetitiveDraft(), knownIds)
   );
@@ -122,6 +124,38 @@ export default function CompetitiveLandingPage() {
       updateTeam(() => next);
       setNotice('Espacio regenerado sin cambiar los demás.');
     }
+  }
+
+  function saveNamedTeam(): void {
+    if (!team.some(set => set !== null)) {
+      setNotice('Añade al menos un Pokémon antes de guardar el equipo.');
+      return;
+    }
+    const suggested = 'Equipo ' + (format === 'singles' ? 'Singles' : 'Dobles') +
+      (environment === 'champions' ? ' Champions' : ' Escarlata/Púrpura');
+    const name = window.prompt('Nombre del equipo competitivo', suggested)?.trim();
+    if (!name) return;
+    if (name.length > 100) {
+      setNotice('El nombre no puede superar los 100 caracteres.');
+      return;
+    }
+    const saved: SavedCompetitiveTeam = {
+      id: globalThis.crypto?.randomUUID?.() ?? Date.now() + '-' + Math.random().toString(36).slice(2),
+      name,
+      createdAt: new Date().toISOString(),
+      format,
+      environment,
+      // Freeze a separate snapshot, not the mutable working team's reference.
+      team: team.map(set => set ? {
+        ...set, moves: [...set.moves] as typeof set.moves,
+        evs: { ...set.evs }, ivs: { ...set.ivs },
+        championsPoints: set.championsPoints ? { ...set.championsPoints } : undefined
+      } : null)
+    };
+    const ok = competitiveSaves.save(saved);
+    setNotice(ok
+      ? 'Equipo competitivo guardado. Puedes cargarlo desde «Equipos guardados».'
+      : 'No se pudo guardar el equipo. Revisa el almacenamiento de este navegador.');
   }
 
   async function copy(): Promise<void> {
@@ -214,6 +248,7 @@ export default function CompetitiveLandingPage() {
         </div>
         <div className="comp-buttons">
           <button type="button" className="primary" onClick={generate}>Generar equipo de ejemplo</button>
+          <button type="button" className="secondary" onClick={saveNamedTeam}>Guardar equipo</button>
           <button type="button" className="secondary" onClick={copy}>Copiar texto</button>
           <button type="button" className="secondary" onClick={reset}>Vaciar formato</button>
         </div>
