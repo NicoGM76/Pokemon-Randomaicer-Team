@@ -45,3 +45,19 @@ test('different condition alternatives for a single evolution pair are preserved
   data.evolutions.push({ fromId: 25, toId: 26, conditions: [{ type: 'item', itemId: 'thunder-stone' }] });
   assert.throws(() => assertValidCatalog(data), /Duplicate evolution variant/);
 });
+
+test('validates regional dex metadata, allows #000 and generates a regional SQL import', () => {
+  const data = dataset();
+  data.regionalDexes = [{ id: 'unova-bw', name: 'Unova', region: 'Unova', kind: 'regional', entryStatus: 'pending', entryCount: 1 }];
+  data.regionalDexEntries = [{ dexId: 'unova-bw', pokemonId: 25, dexNumber: 0, source: 'pokeapi', sourceDex: 'original-unova' }];
+  assert.doesNotThrow(() => assertValidCatalog(data));
+  const sql = buildCatalogUpsertSql(data);
+  assert.match(sql, /INSERT INTO public\.regional_dex_entries/);
+  assert.match(sql, /regional_dex_entries_count/);
+
+  data.regionalDexEntries[0].dexNumber = -1;
+  assert.throws(() => assertValidCatalog(data), /Invalid regional dex entry/);
+  data.regionalDexEntries[0].dexNumber = 0;
+  data.regionalDexes[0].entryCount = 2;
+  assert.throws(() => assertValidCatalog(data), /Regional dex count mismatch/);
+});
