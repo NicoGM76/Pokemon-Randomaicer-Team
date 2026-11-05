@@ -57,7 +57,8 @@ CREATE TABLE public.pokemon_evolutions (
   from_pokemon_id integer NOT NULL REFERENCES public.pokemon_species(id) ON DELETE CASCADE,
   to_pokemon_id integer NOT NULL REFERENCES public.pokemon_species(id) ON DELETE CASCADE,
   conditions jsonb NOT NULL CHECK (jsonb_typeof(conditions) = 'array'),
-  PRIMARY KEY (from_pokemon_id,to_pokemon_id),
+  variant_index smallint NOT NULL DEFAULT 1 CHECK (variant_index BETWEEN 1 AND 100),
+  PRIMARY KEY (from_pokemon_id,to_pokemon_id,variant_index),
   CHECK (from_pokemon_id <> to_pokemon_id)
 );
 
