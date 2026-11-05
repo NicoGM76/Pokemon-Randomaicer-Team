@@ -350,7 +350,7 @@ Los archivos ligeros se sirven desde `/meta/singles.json` y `/meta/doubles.json`
 
 **Pendiente de V2.2+**: importación diferenciada de resultados y rosters reales de torneos, cambios verificables entre meses, daño con sets legales, ranking de contrarrestos y evolución automática de las regulaciones.
 
-### V2.2.x · Editor competitivo guiado e idioma global (en rama)
+### V2.2.x · Editor competitivo guiado e idioma global ✅
 
 Esta actualización mantiene el constructor anterior y añade:
 
@@ -362,6 +362,7 @@ Esta actualización mantiene el constructor anterior y añade:
 - Movimientos sugeridos a partir de la lista de Escarlata/Púrpura que PokéAPI registra para esa especie, priorizando sets didácticos existentes. **No se equiparan esos movimientos a los legales en Pokémon Champions**.
 - Objetos con buscador bilingüe de opciones frecuentes, p. ej. `res` sugiere **Restos** y guarda el ID canónico `Leftovers`. El catálogo es parcial y los objetos no listados no se consideran ilegales por defecto.
 - Formas Mega curadas de ejemplo en Champions con megapiedra asignada automáticamente. Otras formas que devuelve la API se presentan como referencia, no como legalidad confirmada.
+- **Mega-Lucario Z** disponible en Pokémon Champions (Regulación M-C): requiere **Lucarionite Z** y usa **Aura Protectora (Aura Guard)**. Se evita reutilizar accidentalmente la habilidad de Lucario base mediante caché independiente por forma. Fuentes: [regulación oficial M-C](https://champions-news.pokemon-home.com/en/page/816.html), [Aura Guard](https://bulbapedia.bulbagarden.net/wiki/Aura_Guard_(Ability)).
 - El panel de metagame de V2.2 solo muestra estadísticas cuando el formato **y** juego coinciden con el snapshot de origen.
 - Todo sigue guardándose localmente y la información adicional de PokéAPI solo se consulta al seleccionar un Pokémon en Competitivo.
 
@@ -375,7 +376,7 @@ Posible app Android/iOS reutilizando el motor y la arquitectura modular de la we
 
 ## 📌 Estado del proyecto
 
-**V1, V2.0, V2.1 y V2.2 están publicadas. El editor guiado y la localización general están en una rama de revisión, sin merge todavía.**
+**V1, V2.0, V2.1 y V2.2 están publicadas. El editor guiado y la localización general están publicados. El ajuste de Mega-Lucario Z se prepara en una rama antes del merge.**
 
 👉 https://nicogm76.github.io/Pokemon-Randomaicer-Team/
 
@@ -384,3 +385,17 @@ Posible app Android/iOS reutilizando el motor y la arquitectura modular de la we
 ## Aviso
 
 Proyecto independiente con fines educativos y de entretenimiento. Pokémon y sus nombres, criaturas y marcas relacionadas pertenecen a sus respectivos propietarios.
+
+
+### Mega Z completas en Champions (Regulación M-C, septiembre a diciembre de 2026)
+
+La selección de formas incluye **las tres Mega Z oficiales**:
+- Mega-Absol Z: Absolite Z, habilidad Sharpness (Cortante), Siniestro/Fantasma.
+- Mega-Garchomp Z: Garchompite Z, habilidad Levitate (Levitación), tipo Dragón.
+- Mega-Lucario Z: Lucarionite Z, habilidad Aura Guard (Aura Protectora), Lucha/Acero.
+
+Cada forma Z tiene piedra asignada y bloqueada automáticamente; el selector también conserva la Mega clásica de esas especies. Los tipos Z se reflejan en el análisis defensivo inicial. Para **otras Megas**, el análisis de tipos todavía utiliza los tipos base y no calcula sus cambios de estadísticas ni habilidades.
+
+Las habilidades de estas Mega Z están curadas porque PokéAPI puede no incluirlas todavía. Las sugerencias de movimientos derivan de Escarlata/Púrpura y **no certifican legalidad en Champions**, igual que el resto del editor educativo. El panel redundante «Mecánica de Champions» fue eliminado.
+
+Fuentes: [Pokémon Champions, Regulación M-C](https://champions-news.pokemon-home.com/en/page/816.html), [The Pokémon Company (Mega Z anunciadas)](https://press.pokemon.com/en/Pokemon-Celebrates-30-Years-with-New-Announcements-at-Inaugural-Pokemo), [Bulbapedia, Megaevoluciones y habilidades](https://bulbapedia.bulbagarden.net/wiki/Mega_Evolution), [Smogon, megapiedras en Champions](https://www.smogon.com/dex/champions/items/).
