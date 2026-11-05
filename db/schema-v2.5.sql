@@ -166,3 +166,12 @@ BEGIN
     END IF;
   END LOOP;
 END $rls$;
+
+
+-- Cover child-side foreign keys for referential integrity and join performance.
+CREATE INDEX pokemon_evolutions_to_idx ON public.pokemon_evolutions(to_pokemon_id);
+CREATE INDEX metagame_usage_pokemon_idx ON public.metagame_usage(pokemon_id);
+CREATE INDEX metagame_moves_move_idx ON public.metagame_moves(move_name);
+CREATE INDEX metagame_abilities_ability_idx ON public.metagame_abilities(ability_name);
+CREATE INDEX metagame_items_item_idx ON public.metagame_items(item_name);
+CREATE INDEX metagame_teammates_partner_idx ON public.metagame_teammates(teammate_pokemon_id);
