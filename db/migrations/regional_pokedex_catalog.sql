@@ -13,7 +13,7 @@ CREATE TABLE public.regional_dexes (
 CREATE TABLE public.regional_dex_entries (
   dex_id text NOT NULL REFERENCES public.regional_dexes(id) ON DELETE CASCADE,
   pokemon_id integer NOT NULL REFERENCES public.pokemon_species(id) ON DELETE CASCADE,
-  dex_number integer NOT NULL CHECK (dex_number >= 1),
+  dex_number integer NOT NULL CHECK (dex_number >= 0),
   sub_dex text NULL,
   source text NOT NULL CHECK (source IN ('pokeapi','wikidex','curated')),
   source_dex text NULL,
