@@ -389,6 +389,13 @@ La V2.4 abre un **comparador histórico optativo** dentro del panel `/#/competit
 - El buscador por nombre/número es el control principal. La **lista completa de más de mil especies** sigue disponible, pero tras pulsar «Explorar Pokédex completa» para evitar duplicar permanentemente opciones al lado de la plantilla superior.
 - Los seis miembros, sus formas y bloqueos permanecen persistidos como antes. Se incluyen pruebas de Mega-Salamence, Mega-Lucario Z, Rotom Lavado y restauración después de recargar.
 
+### Corrección del asistente competitivo: habilidades únicas y Megas (en revisión)
+
+- Si el perfil verificado de una especie o forma ofrece **una sola habilidad**, el editor la asigna automáticamente y marca el selector como no editable. Si hay varias habilidades, el usuario conserva el control. Una forma nueva nunca reutiliza automáticamente la habilidad obsoleta de la forma anterior.
+- Las Mega clásicas (por ejemplo, **Mega-Salamence**) a menudo no tienen movimientos asociados a **Escarlata/Púrpura** en el endpoint de su forma. Cuando eso ocurre, el asistente usa los movimientos registrados para la **especie base**, conservando **la habilidad propia de la Mega**.
+- Las sugerencias de movimientos basadas en la especie base son **didácticas** y no certifican su legalidad en Pokémon Champions. Si tampoco hay movimientos base o falla la consulta, se muestra un aviso sin inventar opciones.
+- La lógica funciona igual en **los seis espacios** y conserva el almacenamiento y el idioma regional de los movimientos. Las pruebas cubren específicamente la selección de Mega-Salamence en el **espacio 6**.
+
 ### V3 · Posible aplicación móvil
 
 Posible app Android/iOS reutilizando el motor y la arquitectura modular de la web.
