@@ -1,0 +1,71 @@
+name: V2.5 Import Verified Pokemon Catalog into Supabase
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: v2-5-catalog-import
+  cancel-in-progress: false
+
+jobs:
+  import-catalog:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      DATABASE_URL: ${{ secrets.PA_BACKUP_DATABASE_URL }}
+    steps:
+      - name: Require the configured server-side database connection
+        run: |
+          if [[ -z "$DATABASE_URL" ]]; then
+            echo "::error::Set repository secret PA_BACKUP_DATABASE_URL before importing."
+            exit 1
+          fi
+
+      - name: Checkout verified code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install
+        run: npm install
+
+      - name: Refresh and validate all regional Pokedex sources
+        run: |
+          npm run data:sync-all
+          npm run data:validate-all
+
+      - name: Build transactional import SQL from full validated catalog
+        run: |
+          umask 077
+          mkdir -p "$RUNNER_TEMP/pa-sql"
+          node scripts/db/emit-catalog-sql.mjs --full > "$RUNNER_TEMP/pa-sql/catalog-import.sql"
+          test -s "$RUNNER_TEMP/pa-sql/catalog-import.sql"
+
+      - name: Apply validated catalog in one transaction
+        run: |
+          docker run --rm --network host -e DATABASE_URL \
+            -v "$RUNNER_TEMP/pa-sql:/sql:ro" postgres:17 \
+            sh -ec 'psql -X --set=ON_ERROR_STOP=on --dbname="$DATABASE_URL" --file=/sql/catalog-import.sql'
+
+      - name: Verify full catalog count, relationships and import status
+        run: |
+          docker run --rm --network host -e DATABASE_URL postgres:17 \
+            sh -ec 'psql -X --set=ON_ERROR_STOP=on --dbname="$DATABASE_URL" --tuples-only --command="
+            DO \$\$
+            DECLARE species_count integer; full_loads integer;
+            BEGIN
+              SELECT count(*) INTO species_count FROM public.pokemon_species;
+              SELECT count(*) INTO full_loads FROM public.catalog_imports WHERE completeness = '\''full'\'';
+              IF species_count < 1000 OR full_loads < 1 THEN
+                RAISE EXCEPTION '\''Full catalog import incomplete: %, %'\'', species_count, full_loads;
+              END IF;
+              RAISE NOTICE '\''Validated full Pokemon catalog with % species'\'', species_count;
+            END;
+            \$\$;
+            "'
