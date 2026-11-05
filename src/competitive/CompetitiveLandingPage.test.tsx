@@ -198,6 +198,9 @@ describe('V2.1 competitive interactive workspace', () => {
 
   it('saves named Singles and Champions Doubles teams separately, including incomplete valid rosters', async () => {
     window.location.hash = '#/competitive';
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true, json: async () => ({ abilities: [], moves: [], varieties: [] })
+    }));
     const prompt = vi.spyOn(window, 'prompt').mockReturnValueOnce('Mi Singles')
       .mockReturnValueOnce('Dobles Champions');
     render(<RootApp />);
