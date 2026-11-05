@@ -1,8 +1,12 @@
+import { MEGA_STONES } from '../core/trainingRules';
+
 export interface PokemonAssistProfile {
   pokemonId: number;
   formId?: string;
   abilities: string[];
   scarletVioletMoves: string[];
+  /** True when a Mega form has no SV moves and suggestions come from its base species. */
+  movesFromBaseSpecies?: boolean;
   /** PokeAPI species varieties, not automatically verified in Pokémon Champions. */
   availableVarieties: string[];
   source: string;
@@ -63,6 +67,12 @@ type ApiSpecies = {
   varieties?: { pokemon: { name: string } }[];
 };
 
+function scarletVioletMoves(details: ApiPokemon): string[] {
+  return [...new Set((details.moves ?? [])
+    .filter(move => move.version_group_details?.some(v => v.version_group.name === 'scarlet-violet'))
+    .map(move => move.move.name).filter(Boolean))].sort();
+}
+
 async function json<T>(url: string, client: typeof fetch): Promise<T> {
   const response = await client(url);
   if (!response.ok) throw new Error('PokéAPI HTTP ' + response.status);
@@ -102,15 +112,29 @@ export function getPokemonProfile(
     const abilities = curated
       ? curated.abilities
       : [...new Set((details.abilities ?? []).map(a => a.ability?.name).filter(Boolean))];
-    const moves = [...new Set((details.moves ?? [])
-      .filter(move => move.version_group_details?.some(v => v.version_group.name === 'scarlet-violet'))
-      .map(move => move.move.name).filter(Boolean))];
+    let moves = scarletVioletMoves(details);
+    let movesFromBaseSpecies = false;
+    // Classic Mega forms are absent from Scarlet/Violet. Their form endpoint
+    // can report zero SV moves even though the species has a useful learnset.
+    // Keep the Mega's abilities, but use the BASE species for didactic move
+    // suggestions. These are never presented as Champions-legal moves.
+    if (formId && !curated && MEGA_STONES[formId]?.pokemonId === pokemonId && moves.length === 0) {
+      try {
+        const baseDetails = await json<ApiPokemon>(base + 'pokemon/' + pokemonId, client);
+        moves = scarletVioletMoves(baseDetails);
+        movesFromBaseSpecies = moves.length > 0;
+      } catch {
+        // Ability and form data are still valid when the fallback endpoint fails.
+        // No fabricated moves: the editor will show the empty-search explanation.
+      }
+    }
 
     return {
       pokemonId,
       formId,
       abilities,
-      scarletVioletMoves: moves.sort(),
+      scarletVioletMoves: moves,
+      movesFromBaseSpecies,
       availableVarieties: curated && formId
         ? [...new Set([...varieties, formId])] : varieties,
       source: curated?.source ?? base + 'pokemon/' + encodeURIComponent(name)
