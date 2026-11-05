@@ -2,8 +2,6 @@ import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocale } from '../i18n/LocaleProvider';
 import games from '../data/curated/games.json';
-import pokemonCatalog from '../data/generated/pokemon.json';
-import type { Pokemon } from '../domain/pokemon/types';
 import type { GenerationResult, SavedTeam } from '../domain/teams/types';
 import { saveAdventureDraft } from '../adventure/adventureDraft';
 import { LocalStorageTeamRepository } from '../storage/LocalStorageTeamRepository';
@@ -11,9 +9,6 @@ import {
   SavedCompetitiveTeamRepository, restoreCompetitiveTeam, type SavedCompetitiveTeam
 } from '../competitive/savedCompetitiveTeams';
 import { baseArtworkUrl, memberArtworkUrl, memberDisplayName } from '../competitive/memberArtwork';
-
-const pokemon = pokemonCatalog as unknown as Pokemon[];
-const pokemonById = new Map(pokemon.map(entry => [entry.id, entry]));
 
 function spriteUrl(id: number): string {
   return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
@@ -122,9 +117,8 @@ export default function SavedTeamsPage() {
                 <div className="saved-sprites">
                   {saved.team.map((slot, index) => {
                     if (!slot) return null;
-                    const entry = pokemonById.get(slot.pokemonId);
                     return <img key={index} src={memberArtworkUrl(slot.pokemonId, slot.formId)}
-                      title={entry ? memberDisplayName(slot.pokemonId, entry.name, slot.formId) : '#' + slot.pokemonId}
+                      title={memberDisplayName(slot.pokemonId, '#' + slot.pokemonId, slot.formId)}
                       alt="" onError={event => {
                         const fallback = baseArtworkUrl(slot.pokemonId);
                         if (event.currentTarget.src !== fallback) event.currentTarget.src = fallback;
