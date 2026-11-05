@@ -1,5 +1,161 @@
 {
   "source": "PokeAPI CSV repository",
-  "generatedAt": null,
-  "dexes": []
+  "generatedAt": "2026-11-05T16:56:38.421Z",
+  "dexes": [
+    {
+      "dexId": "kanto-classic",
+      "expected": 151,
+      "actual": 151,
+      "complete": true,
+      "missingSources": []
+    },
+    {
+      "dexId": "johto-gsc",
+      "expected": 251,
+      "actual": 251,
+      "complete": true,
+      "missingSources": []
+    },
+    {
+      "dexId": "hoenn-rse",
+      "expected": 202,
+      "actual": 202,
+      "complete": true,
+      "missingSources": []
+    },
+    {
+      "dexId": "sinnoh-dp-bdsp",
+      "expected": 151,
+      "actual": 151,
+      "complete": true,
+      "missingSources": []
+    },
+    {
+      "dexId": "sinnoh-platinum",
+      "expected": 210,
+      "actual": 210,
+      "complete": true,
+      "missingSources": []
+    },
+    {
+      "dexId": "johto-hgss",
+      "expected": 256,
+      "actual": 256,
+      "complete": true,
+      "missingSources": []
+    },
+    {
+      "dexId": "unova-bw",
+      "expected": 156,
+      "actual": 156,
+      "complete": true,
+      "missingSources": []
+    },
+    {
+      "dexId": "unova-b2w2",
+      "expected": 301,
+      "actual": 301,
+      "complete": true,
+      "missingSources": []
+    },
+    {
+      "dexId": "kalos-xy",
+      "expected": 457,
+      "actual": 457,
+      "complete": true,
+      "missingSources": []
+    },
+    {
+      "dexId": "hoenn-oras",
+      "expected": 211,
+      "actual": 211,
+      "complete": true,
+      "missingSources": []
+    },
+    {
+      "dexId": "alola-sm",
+      "expected": 302,
+      "actual": 302,
+      "complete": true,
+      "missingSources": []
+    },
+    {
+      "dexId": "alola-usum",
+      "expected": 403,
+      "actual": 403,
+      "complete": true,
+      "missingSources": []
+    },
+    {
+      "dexId": "kanto-lgpe",
+      "expected": 153,
+      "actual": 153,
+      "complete": true,
+      "missingSources": []
+    },
+    {
+      "dexId": "galar-base",
+      "expected": 400,
+      "actual": 400,
+      "complete": true,
+      "missingSources": []
+    },
+    {
+      "dexId": "galar-armor",
+      "expected": 211,
+      "actual": 211,
+      "complete": true,
+      "missingSources": []
+    },
+    {
+      "dexId": "galar-crown",
+      "expected": 210,
+      "actual": 210,
+      "complete": true,
+      "missingSources": []
+    },
+    {
+      "dexId": "hisui",
+      "expected": 242,
+      "actual": 242,
+      "complete": true,
+      "missingSources": []
+    },
+    {
+      "dexId": "paldea-base",
+      "expected": 400,
+      "actual": 400,
+      "complete": true,
+      "missingSources": []
+    },
+    {
+      "dexId": "kitakami",
+      "expected": 200,
+      "actual": 200,
+      "complete": true,
+      "missingSources": []
+    },
+    {
+      "dexId": "blueberry",
+      "expected": 243,
+      "actual": 243,
+      "complete": true,
+      "missingSources": []
+    },
+    {
+      "dexId": "lumiose",
+      "expected": 232,
+      "actual": 232,
+      "complete": true,
+      "missingSources": []
+    },
+    {
+      "dexId": "dimensional",
+      "expected": 132,
+      "actual": 132,
+      "complete": true,
+      "missingSources": []
+    }
+  ],
+  "evolutionSteps": 675
 }
