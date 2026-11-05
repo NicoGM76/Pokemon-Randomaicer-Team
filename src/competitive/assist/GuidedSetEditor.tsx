@@ -46,6 +46,21 @@ export default function GuidedSetEditor({
     return () => { active = false; };
   }, [pokemon.id, member.formId]);
 
+  // Auto-fill the only available ability after each species/form profile loads.
+  // Guard against stale responses when switching slots or Mega forms quickly.
+  useEffect(() => {
+    if (profileStatus !== 'ready' || !profile ||
+        profile.pokemonId !== pokemon.id || profile.formId !== member.formId ||
+        profile.abilities.length !== 1) return;
+
+    const onlyAbility = profile.abilities[0];
+    if (norm(member.ability) === norm(onlyAbility)) return;
+    onEdit(previous => previous.pokemonId === pokemon.id &&
+      previous.formId === member.formId
+      ? { ...previous, ability: name(onlyAbility) }
+      : previous);
+  }, [profile, profileStatus, pokemon.id, member.formId, member.ability, onEdit]);
+
   const training = getTrainingRules(environment);
   const points = pointsFor(member, environment);
   const total = statKeys.reduce((sum, stat) => sum + points[stat], 0);
@@ -143,7 +158,7 @@ export default function GuidedSetEditor({
       <div className="comp-two-fields">
         <label className="comp-field">Habilidad
           <select aria-label="Habilidad" value={profileStatus === 'ready' ? abilityChoice : ''}
-            disabled={profileStatus !== 'ready'}
+            disabled={profileStatus !== 'ready' || profile?.abilities.length === 1}
             onChange={event => onEdit(prev => ({
               ...prev, ability: name(event.target.value)
             }))}>
@@ -159,6 +174,8 @@ export default function GuidedSetEditor({
               {pokemonAbilityName(ability, locale) === ability ? name(ability) : pokemonAbilityName(ability, locale)}
             </option>)}
           </select>
+          {profileStatus === 'ready' && profile?.abilities.length === 1 &&
+            <small className="comp-assist-hint">Habilidad única asignada automáticamente.</small>}
         </label>
         <SearchAssistInput label="Objeto equipado"
           value={mega ? member.item : itemDisplay(member.item,locale)}
@@ -186,6 +203,12 @@ export default function GuidedSetEditor({
       </p>
 
       <h3 className="comp-mini-heading">Movimientos</h3>
+      {profileStatus === 'ready' && profile?.movesFromBaseSpecies &&
+        <p className="comp-assist-hint">Esta Mega no tiene movimientos registrados para Escarlata/Púrpura.
+          Se sugieren los de su especie base como referencia didáctica, no como legalidad confirmada de Champions.</p>}
+      {profileStatus === 'ready' && profile.scarletVioletMoves.length === 0 &&
+        <p className="comp-assist-hint">No hay movimientos verificados de Escarlata/Púrpura para sugerir.
+          Puedes escribir un movimiento manualmente; su legalidad no se ha comprobado.</p>}
       <div className="comp-two-fields">
         {member.moves.map((move,index) => (
           <SearchAssistInput key={index}
