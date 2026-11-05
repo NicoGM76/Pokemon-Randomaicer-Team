@@ -1,5 +1,877 @@
 [
   {
+    "fromId": 1,
+    "toId": 2,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 16
+      }
+    ]
+  },
+  {
+    "fromId": 2,
+    "toId": 3,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 32
+      }
+    ]
+  },
+  {
+    "fromId": 4,
+    "toId": 5,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 16
+      }
+    ]
+  },
+  {
+    "fromId": 5,
+    "toId": 6,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 7,
+    "toId": 8,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 16
+      }
+    ]
+  },
+  {
+    "fromId": 8,
+    "toId": 9,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 10,
+    "toId": 11,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 7
+      }
+    ]
+  },
+  {
+    "fromId": 11,
+    "toId": 12,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 10
+      }
+    ]
+  },
+  {
+    "fromId": 13,
+    "toId": 14,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 7
+      }
+    ]
+  },
+  {
+    "fromId": 14,
+    "toId": 15,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 10
+      }
+    ]
+  },
+  {
+    "fromId": 16,
+    "toId": 17,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 18
+      }
+    ]
+  },
+  {
+    "fromId": 17,
+    "toId": 18,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 19,
+    "toId": 20,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      },
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10193"
+      }
+    ]
+  },
+  {
+    "fromId": 19,
+    "toId": 20,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      }
+    ]
+  },
+  {
+    "fromId": 21,
+    "toId": 22,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      }
+    ]
+  },
+  {
+    "fromId": 23,
+    "toId": 24,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 22
+      }
+    ]
+  },
+  {
+    "fromId": 25,
+    "toId": 26,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-83"
+      },
+      {
+        "type": "special",
+        "conditionId": "region_id:7"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:25"
+      }
+    ]
+  },
+  {
+    "fromId": 25,
+    "toId": 26,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-83"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:25"
+      }
+    ]
+  },
+  {
+    "fromId": 27,
+    "toId": 28,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-885"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10203"
+      }
+    ]
+  },
+  {
+    "fromId": 27,
+    "toId": 28,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 22
+      }
+    ]
+  },
+  {
+    "fromId": 29,
+    "toId": 30,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 16
+      }
+    ]
+  },
+  {
+    "fromId": 30,
+    "toId": 31,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-81"
+      }
+    ]
+  },
+  {
+    "fromId": 32,
+    "toId": 33,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 16
+      }
+    ]
+  },
+  {
+    "fromId": 33,
+    "toId": 34,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-81"
+      }
+    ]
+  },
+  {
+    "fromId": 35,
+    "toId": 36,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-81"
+      }
+    ]
+  },
+  {
+    "fromId": 37,
+    "toId": 38,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-82"
+      }
+    ]
+  },
+  {
+    "fromId": 37,
+    "toId": 38,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-885"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10205"
+      }
+    ]
+  },
+  {
+    "fromId": 39,
+    "toId": 40,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-81"
+      }
+    ]
+  },
+  {
+    "fromId": 41,
+    "toId": 42,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 22
+      }
+    ]
+  },
+  {
+    "fromId": 42,
+    "toId": 169,
+    "conditions": [
+      {
+        "type": "friendship",
+        "minFriendship": 160
+      }
+    ]
+  },
+  {
+    "fromId": 43,
+    "toId": 44,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 21
+      }
+    ]
+  },
+  {
+    "fromId": 44,
+    "toId": 45,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-85"
+      }
+    ]
+  },
+  {
+    "fromId": 44,
+    "toId": 182,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-80"
+      }
+    ]
+  },
+  {
+    "fromId": 46,
+    "toId": 47,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 24
+      }
+    ]
+  },
+  {
+    "fromId": 48,
+    "toId": 49,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 31
+      }
+    ]
+  },
+  {
+    "fromId": 50,
+    "toId": 51,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 26
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10207"
+      }
+    ]
+  },
+  {
+    "fromId": 50,
+    "toId": 51,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 26
+      }
+    ]
+  },
+  {
+    "fromId": 52,
+    "toId": 53,
+    "conditions": [
+      {
+        "type": "friendship",
+        "minFriendship": 160
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10209"
+      }
+    ]
+  },
+  {
+    "fromId": 52,
+    "toId": 53,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 28
+      }
+    ]
+  },
+  {
+    "fromId": 52,
+    "toId": 863,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 28
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10320"
+      }
+    ]
+  },
+  {
+    "fromId": 54,
+    "toId": 55,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 33
+      }
+    ]
+  },
+  {
+    "fromId": 56,
+    "toId": 57,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 28
+      }
+    ]
+  },
+  {
+    "fromId": 57,
+    "toId": 979,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "used_move_id:889"
+      },
+      {
+        "type": "special",
+        "conditionId": "minimum_move_count:20"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:14"
+      }
+    ]
+  },
+  {
+    "fromId": 58,
+    "toId": 59,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-82"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10398"
+      }
+    ]
+  },
+  {
+    "fromId": 58,
+    "toId": 59,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-82"
+      }
+    ]
+  },
+  {
+    "fromId": 60,
+    "toId": 61,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      }
+    ]
+  },
+  {
+    "fromId": 61,
+    "toId": 62,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-84"
+      }
+    ]
+  },
+  {
+    "fromId": 61,
+    "toId": 186,
+    "conditions": [
+      {
+        "type": "trade"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:198"
+      }
+    ]
+  },
+  {
+    "fromId": 63,
+    "toId": 64,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 16
+      }
+    ]
+  },
+  {
+    "fromId": 64,
+    "toId": 65,
+    "conditions": [
+      {
+        "type": "trade"
+      }
+    ]
+  },
+  {
+    "fromId": 66,
+    "toId": 67,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 28
+      }
+    ]
+  },
+  {
+    "fromId": 67,
+    "toId": 68,
+    "conditions": [
+      {
+        "type": "trade"
+      }
+    ]
+  },
+  {
+    "fromId": 69,
+    "toId": 70,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 21
+      }
+    ]
+  },
+  {
+    "fromId": 70,
+    "toId": 71,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-85"
+      }
+    ]
+  },
+  {
+    "fromId": 72,
+    "toId": 73,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 74,
+    "toId": 75,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10211"
+      }
+    ]
+  },
+  {
+    "fromId": 74,
+    "toId": 75,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      }
+    ]
+  },
+  {
+    "fromId": 75,
+    "toId": 76,
+    "conditions": [
+      {
+        "type": "trade"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10212"
+      }
+    ]
+  },
+  {
+    "fromId": 75,
+    "toId": 76,
+    "conditions": [
+      {
+        "type": "trade"
+      }
+    ]
+  },
+  {
+    "fromId": 77,
+    "toId": 78,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 40
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10321"
+      }
+    ]
+  },
+  {
+    "fromId": 77,
+    "toId": 78,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 40
+      }
+    ]
+  },
+  {
+    "fromId": 79,
+    "toId": 80,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-1633"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10323"
+      }
+    ]
+  },
+  {
+    "fromId": 79,
+    "toId": 80,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 37
+      }
+    ]
+  },
+  {
+    "fromId": 79,
+    "toId": 199,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-1643"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10323"
+      }
+    ]
+  },
+  {
+    "fromId": 79,
+    "toId": 199,
+    "conditions": [
+      {
+        "type": "trade"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:198"
+      }
+    ]
+  },
+  {
+    "fromId": 81,
+    "toId": 82,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 82,
+    "toId": 462,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-83"
+      }
+    ]
+  },
+  {
+    "fromId": 82,
+    "toId": 462,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:10"
+      }
+    ]
+  },
+  {
+    "fromId": 82,
+    "toId": 462,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:379"
+      }
+    ]
+  },
+  {
+    "fromId": 82,
+    "toId": 462,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:446"
+      }
+    ]
+  },
+  {
+    "fromId": 82,
+    "toId": 462,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:629"
+      }
+    ]
+  },
+  {
+    "fromId": 82,
+    "toId": 462,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:771"
+      }
+    ]
+  },
+  {
+    "fromId": 82,
+    "toId": 462,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:789"
+      }
+    ]
+  },
+  {
+    "fromId": 83,
+    "toId": 865,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10325"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:8"
+      }
+    ]
+  },
+  {
+    "fromId": 84,
+    "toId": 85,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 31
+      }
+    ]
+  },
+  {
+    "fromId": 86,
+    "toId": 87,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 34
+      }
+    ]
+  },
+  {
+    "fromId": 88,
+    "toId": 89,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 38
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10214"
+      }
+    ]
+  },
+  {
+    "fromId": 88,
+    "toId": 89,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 38
+      }
+    ]
+  },
+  {
+    "fromId": 90,
+    "toId": 91,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-84"
+      }
+    ]
+  },
+  {
     "fromId": 92,
     "toId": 93,
     "conditions": [
@@ -19,12 +891,318 @@
     ]
   },
   {
+    "fromId": 95,
+    "toId": 208,
+    "conditions": [
+      {
+        "type": "trade"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:210"
+      }
+    ]
+  },
+  {
+    "fromId": 96,
+    "toId": 97,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 26
+      }
+    ]
+  },
+  {
+    "fromId": 98,
+    "toId": 99,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 28
+      }
+    ]
+  },
+  {
+    "fromId": 100,
+    "toId": 101,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-85"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10400"
+      }
+    ]
+  },
+  {
+    "fromId": 100,
+    "toId": 101,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 102,
+    "toId": 103,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-85"
+      },
+      {
+        "type": "special",
+        "conditionId": "region_id:7"
+      }
+    ]
+  },
+  {
+    "fromId": 102,
+    "toId": 103,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-85"
+      }
+    ]
+  },
+  {
+    "fromId": 104,
+    "toId": 105,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 28
+      },
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "region_id:7"
+      }
+    ]
+  },
+  {
+    "fromId": 104,
+    "toId": 105,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 28
+      }
+    ]
+  },
+  {
+    "fromId": 108,
+    "toId": 463,
+    "conditions": [
+      {
+        "type": "move_known",
+        "moveId": "move-205"
+      }
+    ]
+  },
+  {
+    "fromId": 109,
+    "toId": 110,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 35
+      },
+      {
+        "type": "special",
+        "conditionId": "region_id:8"
+      }
+    ]
+  },
+  {
+    "fromId": 109,
+    "toId": 110,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 35
+      }
+    ]
+  },
+  {
+    "fromId": 111,
+    "toId": 112,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 42
+      }
+    ]
+  },
+  {
+    "fromId": 112,
+    "toId": 464,
+    "conditions": [
+      {
+        "type": "trade"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:298"
+      }
+    ]
+  },
+  {
+    "fromId": 113,
+    "toId": 242,
+    "conditions": [
+      {
+        "type": "friendship",
+        "minFriendship": 160
+      }
+    ]
+  },
+  {
+    "fromId": 114,
+    "toId": 465,
+    "conditions": [
+      {
+        "type": "move_known",
+        "moveId": "move-246"
+      }
+    ]
+  },
+  {
+    "fromId": 116,
+    "toId": 117,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 32
+      }
+    ]
+  },
+  {
+    "fromId": 117,
+    "toId": 230,
+    "conditions": [
+      {
+        "type": "trade"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:212"
+      }
+    ]
+  },
+  {
+    "fromId": 118,
+    "toId": 119,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 33
+      }
+    ]
+  },
+  {
+    "fromId": 120,
+    "toId": 121,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-84"
+      }
+    ]
+  },
+  {
+    "fromId": 122,
+    "toId": 866,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 42
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10327"
+      }
+    ]
+  },
+  {
+    "fromId": 123,
+    "toId": 212,
+    "conditions": [
+      {
+        "type": "trade"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:210"
+      }
+    ]
+  },
+  {
+    "fromId": 123,
+    "toId": 900,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-2230"
+      }
+    ]
+  },
+  {
+    "fromId": 125,
+    "toId": 466,
+    "conditions": [
+      {
+        "type": "trade"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:299"
+      }
+    ]
+  },
+  {
+    "fromId": 126,
+    "toId": 467,
+    "conditions": [
+      {
+        "type": "trade"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:300"
+      }
+    ]
+  },
+  {
+    "fromId": 129,
+    "toId": 130,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      }
+    ]
+  },
+  {
     "fromId": 133,
     "toId": 134,
     "conditions": [
       {
         "type": "item",
-        "itemId": "water-stone"
+        "itemId": "item-84"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:133"
       }
     ]
   },
@@ -34,73 +1212,344 @@
     "conditions": [
       {
         "type": "item",
-        "itemId": "thunder-stone"
-      }
-    ]
-  },
-  {
-    "fromId": 810,
-    "toId": 811,
-    "conditions": [
+        "itemId": "item-83"
+      },
       {
-        "type": "level",
-        "minLevel": 16
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:133"
       }
     ]
   },
   {
-    "fromId": 811,
-    "toId": 812,
-    "conditions": [
-      {
-        "type": "level",
-        "minLevel": 35
-      }
-    ]
-  },
-  {
-    "fromId": 821,
-    "toId": 822,
-    "conditions": [
-      {
-        "type": "level",
-        "minLevel": 18
-      }
-    ]
-  },
-  {
-    "fromId": 822,
-    "toId": 823,
-    "conditions": [
-      {
-        "type": "level",
-        "minLevel": 38
-      }
-    ]
-  },
-  {
-    "fromId": 833,
-    "toId": 834,
-    "conditions": [
-      {
-        "type": "level",
-        "minLevel": 22
-      }
-    ]
-  },
-  {
-    "fromId": 58,
-    "toId": 59,
+    "fromId": 133,
+    "toId": 136,
     "conditions": [
       {
         "type": "item",
-        "itemId": "fire-stone"
+        "itemId": "item-82"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:133"
       }
     ]
   },
   {
-    "fromId": 848,
-    "toId": 849,
+    "fromId": 133,
+    "toId": 196,
+    "conditions": [
+      {
+        "type": "friendship",
+        "minFriendship": 160
+      },
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:133"
+      }
+    ]
+  },
+  {
+    "fromId": 133,
+    "toId": 197,
+    "conditions": [
+      {
+        "type": "friendship",
+        "minFriendship": 160
+      },
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:133"
+      }
+    ]
+  },
+  {
+    "fromId": 133,
+    "toId": 470,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-85"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:133"
+      }
+    ]
+  },
+  {
+    "fromId": 133,
+    "toId": 470,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:375"
+      },
+      {
+        "type": "special",
+        "conditionId": "near_special_rock:1"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:133"
+      }
+    ]
+  },
+  {
+    "fromId": 133,
+    "toId": 470,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:438"
+      },
+      {
+        "type": "special",
+        "conditionId": "near_special_rock:1"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:133"
+      }
+    ]
+  },
+  {
+    "fromId": 133,
+    "toId": 470,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:650"
+      },
+      {
+        "type": "special",
+        "conditionId": "near_special_rock:1"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:133"
+      }
+    ]
+  },
+  {
+    "fromId": 133,
+    "toId": 470,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:750"
+      },
+      {
+        "type": "special",
+        "conditionId": "near_special_rock:1"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:133"
+      }
+    ]
+  },
+  {
+    "fromId": 133,
+    "toId": 470,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:8"
+      },
+      {
+        "type": "special",
+        "conditionId": "near_special_rock:1"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:133"
+      }
+    ]
+  },
+  {
+    "fromId": 133,
+    "toId": 471,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-885"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:133"
+      }
+    ]
+  },
+  {
+    "fromId": 133,
+    "toId": 471,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:380"
+      },
+      {
+        "type": "special",
+        "conditionId": "near_special_rock:1"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:133"
+      }
+    ]
+  },
+  {
+    "fromId": 133,
+    "toId": 471,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:445"
+      },
+      {
+        "type": "special",
+        "conditionId": "near_special_rock:1"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:133"
+      }
+    ]
+  },
+  {
+    "fromId": 133,
+    "toId": 471,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:48"
+      },
+      {
+        "type": "special",
+        "conditionId": "near_special_rock:1"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:133"
+      }
+    ]
+  },
+  {
+    "fromId": 133,
+    "toId": 471,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:640"
+      },
+      {
+        "type": "special",
+        "conditionId": "near_special_rock:1"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:133"
+      }
+    ]
+  },
+  {
+    "fromId": 133,
+    "toId": 471,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:775"
+      },
+      {
+        "type": "special",
+        "conditionId": "near_special_rock:1"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:133"
+      }
+    ]
+  },
+  {
+    "fromId": 133,
+    "toId": 700,
+    "conditions": [
+      {
+        "type": "friendship",
+        "minFriendship": 160
+      },
+      {
+        "type": "special",
+        "conditionId": "known_move_type_id:18"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:133"
+      }
+    ]
+  },
+  {
+    "fromId": 133,
+    "toId": 700,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "known_move_type_id:18"
+      },
+      {
+        "type": "special",
+        "conditionId": "minimum_affection:2"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:133"
+      }
+    ]
+  },
+  {
+    "fromId": 137,
+    "toId": 233,
+    "conditions": [
+      {
+        "type": "trade"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:229"
+      }
+    ]
+  },
+  {
+    "fromId": 138,
+    "toId": 139,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 40
+      }
+    ]
+  },
+  {
+    "fromId": 140,
+    "toId": 141,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 40
+      }
+    ]
+  },
+  {
+    "fromId": 147,
+    "toId": 148,
     "conditions": [
       {
         "type": "level",
@@ -109,28 +1558,953 @@
     ]
   },
   {
-    "fromId": 885,
-    "toId": 886,
+    "fromId": 148,
+    "toId": 149,
     "conditions": [
       {
         "type": "level",
-        "minLevel": 50
+        "minLevel": 55
       }
     ]
   },
   {
-    "fromId": 886,
-    "toId": 887,
+    "fromId": 152,
+    "toId": 153,
     "conditions": [
       {
         "type": "level",
-        "minLevel": 60
+        "minLevel": 16
       }
     ]
   },
   {
-    "fromId": 835,
-    "toId": 836,
+    "fromId": 153,
+    "toId": 154,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 32
+      }
+    ]
+  },
+  {
+    "fromId": 155,
+    "toId": 156,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 14
+      }
+    ]
+  },
+  {
+    "fromId": 155,
+    "toId": 156,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 17
+      },
+      {
+        "type": "special",
+        "conditionId": "region_id:9"
+      }
+    ]
+  },
+  {
+    "fromId": 156,
+    "toId": 157,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      },
+      {
+        "type": "special",
+        "conditionId": "region_id:9"
+      }
+    ]
+  },
+  {
+    "fromId": 156,
+    "toId": 157,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 158,
+    "toId": 159,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 18
+      }
+    ]
+  },
+  {
+    "fromId": 159,
+    "toId": 160,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 161,
+    "toId": 162,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 15
+      }
+    ]
+  },
+  {
+    "fromId": 163,
+    "toId": 164,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      }
+    ]
+  },
+  {
+    "fromId": 165,
+    "toId": 166,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 18
+      }
+    ]
+  },
+  {
+    "fromId": 167,
+    "toId": 168,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 22
+      }
+    ]
+  },
+  {
+    "fromId": 170,
+    "toId": 171,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 27
+      }
+    ]
+  },
+  {
+    "fromId": 172,
+    "toId": 25,
+    "conditions": [
+      {
+        "type": "friendship",
+        "minFriendship": 220
+      }
+    ]
+  },
+  {
+    "fromId": 173,
+    "toId": 35,
+    "conditions": [
+      {
+        "type": "friendship",
+        "minFriendship": 160
+      }
+    ]
+  },
+  {
+    "fromId": 174,
+    "toId": 39,
+    "conditions": [
+      {
+        "type": "friendship",
+        "minFriendship": 160
+      }
+    ]
+  },
+  {
+    "fromId": 175,
+    "toId": 176,
+    "conditions": [
+      {
+        "type": "friendship",
+        "minFriendship": 160
+      }
+    ]
+  },
+  {
+    "fromId": 176,
+    "toId": 468,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-107"
+      }
+    ]
+  },
+  {
+    "fromId": 177,
+    "toId": 178,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      }
+    ]
+  },
+  {
+    "fromId": 179,
+    "toId": 180,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 15
+      }
+    ]
+  },
+  {
+    "fromId": 180,
+    "toId": 181,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 183,
+    "toId": 184,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 18
+      }
+    ]
+  },
+  {
+    "fromId": 187,
+    "toId": 188,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 18
+      }
+    ]
+  },
+  {
+    "fromId": 188,
+    "toId": 189,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 27
+      }
+    ]
+  },
+  {
+    "fromId": 190,
+    "toId": 424,
+    "conditions": [
+      {
+        "type": "move_known",
+        "moveId": "move-458"
+      }
+    ]
+  },
+  {
+    "fromId": 191,
+    "toId": 192,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-80"
+      }
+    ]
+  },
+  {
+    "fromId": 193,
+    "toId": 469,
+    "conditions": [
+      {
+        "type": "move_known",
+        "moveId": "move-246"
+      }
+    ]
+  },
+  {
+    "fromId": 194,
+    "toId": 195,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      }
+    ]
+  },
+  {
+    "fromId": 194,
+    "toId": 980,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10422"
+      }
+    ]
+  },
+  {
+    "fromId": 198,
+    "toId": 430,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-108"
+      }
+    ]
+  },
+  {
+    "fromId": 200,
+    "toId": 429,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-108"
+      }
+    ]
+  },
+  {
+    "fromId": 203,
+    "toId": 981,
+    "conditions": [
+      {
+        "type": "move_known",
+        "moveId": "move-888"
+      }
+    ]
+  },
+  {
+    "fromId": 204,
+    "toId": 205,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 31
+      }
+    ]
+  },
+  {
+    "fromId": 206,
+    "toId": 982,
+    "conditions": [
+      {
+        "type": "move_known",
+        "moveId": "move-887"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:EC 100 % 0 !="
+      }
+    ]
+  },
+  {
+    "fromId": 206,
+    "toId": 982,
+    "conditions": [
+      {
+        "type": "move_known",
+        "moveId": "move-887"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:EC 100 % 0 =="
+      }
+    ]
+  },
+  {
+    "fromId": 207,
+    "toId": 472,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:304"
+      }
+    ]
+  },
+  {
+    "fromId": 209,
+    "toId": 210,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 23
+      }
+    ]
+  },
+  {
+    "fromId": 211,
+    "toId": 904,
+    "conditions": [
+      {
+        "type": "move_known",
+        "moveId": "move-839"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10403"
+      }
+    ]
+  },
+  {
+    "fromId": 211,
+    "toId": 904,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10403"
+      },
+      {
+        "type": "special",
+        "conditionId": "used_move_id:839"
+      },
+      {
+        "type": "special",
+        "conditionId": "minimum_move_count:20"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:12"
+      }
+    ]
+  },
+  {
+    "fromId": 211,
+    "toId": 904,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10403"
+      },
+      {
+        "type": "special",
+        "conditionId": "used_move_id:839"
+      },
+      {
+        "type": "special",
+        "conditionId": "minimum_move_count:20"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:14"
+      }
+    ]
+  },
+  {
+    "fromId": 215,
+    "toId": 461,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:303"
+      }
+    ]
+  },
+  {
+    "fromId": 215,
+    "toId": 903,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:303"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10404"
+      }
+    ]
+  },
+  {
+    "fromId": 216,
+    "toId": 217,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 217,
+    "toId": 901,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-2231"
+      }
+    ]
+  },
+  {
+    "fromId": 218,
+    "toId": 219,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 38
+      }
+    ]
+  },
+  {
+    "fromId": 220,
+    "toId": 221,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 33
+      }
+    ]
+  },
+  {
+    "fromId": 221,
+    "toId": 473,
+    "conditions": [
+      {
+        "type": "move_known",
+        "moveId": "move-246"
+      }
+    ]
+  },
+  {
+    "fromId": 222,
+    "toId": 864,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 38
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10332"
+      }
+    ]
+  },
+  {
+    "fromId": 223,
+    "toId": 224,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      }
+    ]
+  },
+  {
+    "fromId": 228,
+    "toId": 229,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 24
+      }
+    ]
+  },
+  {
+    "fromId": 231,
+    "toId": 232,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      }
+    ]
+  },
+  {
+    "fromId": 233,
+    "toId": 474,
+    "conditions": [
+      {
+        "type": "trade"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:301"
+      }
+    ]
+  },
+  {
+    "fromId": 234,
+    "toId": 899,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "used_move_id:828"
+      },
+      {
+        "type": "special",
+        "conditionId": "minimum_move_count:20"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:11"
+      }
+    ]
+  },
+  {
+    "fromId": 236,
+    "toId": 106,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      },
+      {
+        "type": "special",
+        "conditionId": "relative_physical_stats:1"
+      }
+    ]
+  },
+  {
+    "fromId": 236,
+    "toId": 107,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      },
+      {
+        "type": "special",
+        "conditionId": "relative_physical_stats:-1"
+      }
+    ]
+  },
+  {
+    "fromId": 236,
+    "toId": 237,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      }
+    ]
+  },
+  {
+    "fromId": 238,
+    "toId": 124,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 239,
+    "toId": 125,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 240,
+    "toId": 126,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 246,
+    "toId": 247,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 247,
+    "toId": 248,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 55
+      }
+    ]
+  },
+  {
+    "fromId": 252,
+    "toId": 253,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 16
+      }
+    ]
+  },
+  {
+    "fromId": 253,
+    "toId": 254,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 255,
+    "toId": 256,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 16
+      }
+    ]
+  },
+  {
+    "fromId": 256,
+    "toId": 257,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 258,
+    "toId": 259,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 16
+      }
+    ]
+  },
+  {
+    "fromId": 259,
+    "toId": 260,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 261,
+    "toId": 262,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 18
+      }
+    ]
+  },
+  {
+    "fromId": 263,
+    "toId": 264,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10333"
+      }
+    ]
+  },
+  {
+    "fromId": 263,
+    "toId": 264,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      }
+    ]
+  },
+  {
+    "fromId": 264,
+    "toId": 862,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 35
+      },
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10334"
+      }
+    ]
+  },
+  {
+    "fromId": 265,
+    "toId": 266,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 7
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:EC 16 >> 10 % 4 <="
+      }
+    ]
+  },
+  {
+    "fromId": 265,
+    "toId": 266,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 7
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:PID 16 >> 10 % 4 <="
+      }
+    ]
+  },
+  {
+    "fromId": 265,
+    "toId": 268,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 7
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:EC 16 >> 10 % 5 >="
+      }
+    ]
+  },
+  {
+    "fromId": 265,
+    "toId": 268,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 7
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:PID 16 >> 10 % 5 >="
+      }
+    ]
+  },
+  {
+    "fromId": 266,
+    "toId": 267,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 10
+      }
+    ]
+  },
+  {
+    "fromId": 268,
+    "toId": 269,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 10
+      }
+    ]
+  },
+  {
+    "fromId": 270,
+    "toId": 271,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 14
+      }
+    ]
+  },
+  {
+    "fromId": 271,
+    "toId": 272,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-84"
+      }
+    ]
+  },
+  {
+    "fromId": 273,
+    "toId": 274,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 14
+      }
+    ]
+  },
+  {
+    "fromId": 274,
+    "toId": 275,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-85"
+      }
+    ]
+  },
+  {
+    "fromId": 276,
+    "toId": 277,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 22
+      }
+    ]
+  },
+  {
+    "fromId": 278,
+    "toId": 279,
     "conditions": [
       {
         "type": "level",
@@ -159,12 +2533,5857 @@
     ]
   },
   {
+    "fromId": 281,
+    "toId": 475,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-109"
+      },
+      {
+        "type": "gender",
+        "value": "male"
+      }
+    ]
+  },
+  {
+    "fromId": 283,
+    "toId": 284,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 22
+      }
+    ]
+  },
+  {
+    "fromId": 285,
+    "toId": 286,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 23
+      }
+    ]
+  },
+  {
+    "fromId": 287,
+    "toId": 288,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 18
+      }
+    ]
+  },
+  {
+    "fromId": 288,
+    "toId": 289,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 290,
+    "toId": 291,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      }
+    ]
+  },
+  {
+    "fromId": 290,
+    "toId": 292,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "trigger:4"
+      }
+    ]
+  },
+  {
+    "fromId": 293,
+    "toId": 294,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      }
+    ]
+  },
+  {
+    "fromId": 294,
+    "toId": 295,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 40
+      }
+    ]
+  },
+  {
+    "fromId": 296,
+    "toId": 297,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 24
+      }
+    ]
+  },
+  {
+    "fromId": 298,
+    "toId": 183,
+    "conditions": [
+      {
+        "type": "friendship",
+        "minFriendship": 160
+      }
+    ]
+  },
+  {
+    "fromId": 299,
+    "toId": 476,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-83"
+      }
+    ]
+  },
+  {
+    "fromId": 299,
+    "toId": 476,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:10"
+      }
+    ]
+  },
+  {
+    "fromId": 299,
+    "toId": 476,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:379"
+      }
+    ]
+  },
+  {
+    "fromId": 299,
+    "toId": 476,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:446"
+      }
+    ]
+  },
+  {
+    "fromId": 299,
+    "toId": 476,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:629"
+      }
+    ]
+  },
+  {
+    "fromId": 299,
+    "toId": 476,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:771"
+      }
+    ]
+  },
+  {
+    "fromId": 299,
+    "toId": 476,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:789"
+      }
+    ]
+  },
+  {
+    "fromId": 300,
+    "toId": 301,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-81"
+      }
+    ]
+  },
+  {
+    "fromId": 304,
+    "toId": 305,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 32
+      }
+    ]
+  },
+  {
+    "fromId": 305,
+    "toId": 306,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 42
+      }
+    ]
+  },
+  {
+    "fromId": 307,
+    "toId": 308,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 37
+      }
+    ]
+  },
+  {
+    "fromId": 309,
+    "toId": 310,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 26
+      }
+    ]
+  },
+  {
+    "fromId": 315,
+    "toId": 407,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-107"
+      }
+    ]
+  },
+  {
+    "fromId": 316,
+    "toId": 317,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 26
+      }
+    ]
+  },
+  {
+    "fromId": 318,
+    "toId": 319,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 320,
+    "toId": 321,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 40
+      }
+    ]
+  },
+  {
+    "fromId": 322,
+    "toId": 323,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 33
+      }
+    ]
+  },
+  {
+    "fromId": 325,
+    "toId": 326,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 32
+      }
+    ]
+  },
+  {
+    "fromId": 328,
+    "toId": 329,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 35
+      }
+    ]
+  },
+  {
+    "fromId": 329,
+    "toId": 330,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 45
+      }
+    ]
+  },
+  {
+    "fromId": 331,
+    "toId": 332,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 32
+      }
+    ]
+  },
+  {
+    "fromId": 333,
+    "toId": 334,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 35
+      }
+    ]
+  },
+  {
+    "fromId": 339,
+    "toId": 340,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 341,
+    "toId": 342,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 343,
+    "toId": 344,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 345,
+    "toId": 346,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 40
+      }
+    ]
+  },
+  {
+    "fromId": 347,
+    "toId": 348,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 40
+      }
+    ]
+  },
+  {
+    "fromId": 349,
+    "toId": 350,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "minimum_beauty:170"
+      }
+    ]
+  },
+  {
+    "fromId": 349,
+    "toId": 350,
+    "conditions": [
+      {
+        "type": "trade"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:580"
+      }
+    ]
+  },
+  {
+    "fromId": 353,
+    "toId": 354,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 37
+      }
+    ]
+  },
+  {
+    "fromId": 355,
+    "toId": 356,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 37
+      }
+    ]
+  },
+  {
+    "fromId": 356,
+    "toId": 477,
+    "conditions": [
+      {
+        "type": "trade"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:302"
+      }
+    ]
+  },
+  {
+    "fromId": 360,
+    "toId": 202,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 15
+      }
+    ]
+  },
+  {
+    "fromId": 361,
+    "toId": 362,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 42
+      }
+    ]
+  },
+  {
+    "fromId": 361,
+    "toId": 478,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-109"
+      },
+      {
+        "type": "gender",
+        "value": "female"
+      }
+    ]
+  },
+  {
+    "fromId": 363,
+    "toId": 364,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 32
+      }
+    ]
+  },
+  {
+    "fromId": 364,
+    "toId": 365,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 44
+      }
+    ]
+  },
+  {
+    "fromId": 366,
+    "toId": 367,
+    "conditions": [
+      {
+        "type": "trade"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:203"
+      }
+    ]
+  },
+  {
+    "fromId": 366,
+    "toId": 368,
+    "conditions": [
+      {
+        "type": "trade"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:204"
+      }
+    ]
+  },
+  {
+    "fromId": 371,
+    "toId": 372,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 372,
+    "toId": 373,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 50
+      }
+    ]
+  },
+  {
+    "fromId": 374,
+    "toId": 375,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      }
+    ]
+  },
+  {
+    "fromId": 375,
+    "toId": 376,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 45
+      }
+    ]
+  },
+  {
+    "fromId": 387,
+    "toId": 388,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 18
+      }
+    ]
+  },
+  {
+    "fromId": 388,
+    "toId": 389,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 32
+      }
+    ]
+  },
+  {
+    "fromId": 390,
+    "toId": 391,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 14
+      }
+    ]
+  },
+  {
+    "fromId": 391,
+    "toId": 392,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 393,
+    "toId": 394,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 16
+      }
+    ]
+  },
+  {
+    "fromId": 394,
+    "toId": 395,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 396,
+    "toId": 397,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 14
+      }
+    ]
+  },
+  {
+    "fromId": 397,
+    "toId": 398,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 34
+      }
+    ]
+  },
+  {
+    "fromId": 399,
+    "toId": 400,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 15
+      }
+    ]
+  },
+  {
+    "fromId": 401,
+    "toId": 402,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 10
+      }
+    ]
+  },
+  {
+    "fromId": 403,
+    "toId": 404,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 15
+      }
+    ]
+  },
+  {
+    "fromId": 404,
+    "toId": 405,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 406,
+    "toId": 315,
+    "conditions": [
+      {
+        "type": "friendship",
+        "minFriendship": 160
+      },
+      {
+        "type": "time",
+        "value": "day"
+      }
+    ]
+  },
+  {
+    "fromId": 408,
+    "toId": 409,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 410,
+    "toId": 411,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 412,
+    "toId": 413,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      },
+      {
+        "type": "gender",
+        "value": "female"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10034"
+      }
+    ]
+  },
+  {
+    "fromId": 412,
+    "toId": 413,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      },
+      {
+        "type": "gender",
+        "value": "female"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10035"
+      }
+    ]
+  },
+  {
+    "fromId": 412,
+    "toId": 413,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      },
+      {
+        "type": "gender",
+        "value": "female"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:412"
+      }
+    ]
+  },
+  {
+    "fromId": 412,
+    "toId": 414,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      },
+      {
+        "type": "gender",
+        "value": "male"
+      }
+    ]
+  },
+  {
+    "fromId": 415,
+    "toId": 416,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 21
+      },
+      {
+        "type": "gender",
+        "value": "female"
+      }
+    ]
+  },
+  {
+    "fromId": 418,
+    "toId": 419,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 26
+      }
+    ]
+  },
+  {
+    "fromId": 420,
+    "toId": 421,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      }
+    ]
+  },
+  {
+    "fromId": 422,
+    "toId": 423,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10039"
+      }
+    ]
+  },
+  {
+    "fromId": 422,
+    "toId": 423,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:422"
+      }
+    ]
+  },
+  {
+    "fromId": 425,
+    "toId": 426,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 28
+      }
+    ]
+  },
+  {
+    "fromId": 427,
+    "toId": 428,
+    "conditions": [
+      {
+        "type": "friendship",
+        "minFriendship": 160
+      }
+    ]
+  },
+  {
+    "fromId": 431,
+    "toId": 432,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 38
+      }
+    ]
+  },
+  {
+    "fromId": 433,
+    "toId": 358,
+    "conditions": [
+      {
+        "type": "friendship",
+        "minFriendship": 220
+      },
+      {
+        "type": "time",
+        "value": "night"
+      }
+    ]
+  },
+  {
+    "fromId": 434,
+    "toId": 435,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 34
+      }
+    ]
+  },
+  {
+    "fromId": 436,
+    "toId": 437,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 33
+      }
+    ]
+  },
+  {
+    "fromId": 438,
+    "toId": 185,
+    "conditions": [
+      {
+        "type": "move_known",
+        "moveId": "move-102"
+      }
+    ]
+  },
+  {
+    "fromId": 439,
+    "toId": 122,
+    "conditions": [
+      {
+        "type": "move_known",
+        "moveId": "move-102"
+      },
+      {
+        "type": "special",
+        "conditionId": "region_id:8"
+      }
+    ]
+  },
+  {
+    "fromId": 439,
+    "toId": 122,
+    "conditions": [
+      {
+        "type": "move_known",
+        "moveId": "move-102"
+      }
+    ]
+  },
+  {
+    "fromId": 440,
+    "toId": 113,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:110"
+      }
+    ]
+  },
+  {
+    "fromId": 443,
+    "toId": 444,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 24
+      }
+    ]
+  },
+  {
+    "fromId": 444,
+    "toId": 445,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 48
+      }
+    ]
+  },
+  {
+    "fromId": 446,
+    "toId": 143,
+    "conditions": [
+      {
+        "type": "friendship",
+        "minFriendship": 160
+      }
+    ]
+  },
+  {
+    "fromId": 447,
+    "toId": 448,
+    "conditions": [
+      {
+        "type": "friendship",
+        "minFriendship": 160
+      },
+      {
+        "type": "time",
+        "value": "day"
+      }
+    ]
+  },
+  {
+    "fromId": 449,
+    "toId": 450,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 34
+      }
+    ]
+  },
+  {
+    "fromId": 451,
+    "toId": 452,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 40
+      }
+    ]
+  },
+  {
+    "fromId": 453,
+    "toId": 454,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 37
+      }
+    ]
+  },
+  {
+    "fromId": 456,
+    "toId": 457,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 31
+      }
+    ]
+  },
+  {
+    "fromId": 458,
+    "toId": 226,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "party_species_id:223"
+      }
+    ]
+  },
+  {
+    "fromId": 459,
+    "toId": 460,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 40
+      }
+    ]
+  },
+  {
+    "fromId": 495,
+    "toId": 496,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 17
+      }
+    ]
+  },
+  {
+    "fromId": 496,
+    "toId": 497,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 498,
+    "toId": 499,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 17
+      }
+    ]
+  },
+  {
+    "fromId": 499,
+    "toId": 500,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 501,
+    "toId": 502,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 17
+      }
+    ]
+  },
+  {
+    "fromId": 502,
+    "toId": 503,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      },
+      {
+        "type": "special",
+        "conditionId": "region_id:9"
+      }
+    ]
+  },
+  {
+    "fromId": 502,
+    "toId": 503,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 504,
+    "toId": 505,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      }
+    ]
+  },
+  {
+    "fromId": 506,
+    "toId": 507,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 16
+      }
+    ]
+  },
+  {
+    "fromId": 507,
+    "toId": 508,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 32
+      }
+    ]
+  },
+  {
+    "fromId": 509,
+    "toId": 510,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      }
+    ]
+  },
+  {
+    "fromId": 511,
+    "toId": 512,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-85"
+      }
+    ]
+  },
+  {
+    "fromId": 513,
+    "toId": 514,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-82"
+      }
+    ]
+  },
+  {
+    "fromId": 515,
+    "toId": 516,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-84"
+      }
+    ]
+  },
+  {
+    "fromId": 517,
+    "toId": 518,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-81"
+      }
+    ]
+  },
+  {
+    "fromId": 519,
+    "toId": 520,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 21
+      }
+    ]
+  },
+  {
+    "fromId": 520,
+    "toId": 521,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 32
+      }
+    ]
+  },
+  {
+    "fromId": 522,
+    "toId": 523,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 27
+      }
+    ]
+  },
+  {
+    "fromId": 524,
+    "toId": 525,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      }
+    ]
+  },
+  {
+    "fromId": 525,
+    "toId": 526,
+    "conditions": [
+      {
+        "type": "trade"
+      }
+    ]
+  },
+  {
+    "fromId": 527,
+    "toId": 528,
+    "conditions": [
+      {
+        "type": "friendship",
+        "minFriendship": 160
+      }
+    ]
+  },
+  {
+    "fromId": 529,
+    "toId": 530,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 31
+      }
+    ]
+  },
+  {
+    "fromId": 532,
+    "toId": 533,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      }
+    ]
+  },
+  {
+    "fromId": 533,
+    "toId": 534,
+    "conditions": [
+      {
+        "type": "trade"
+      }
+    ]
+  },
+  {
+    "fromId": 535,
+    "toId": 536,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      }
+    ]
+  },
+  {
+    "fromId": 536,
+    "toId": 537,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 540,
+    "toId": 541,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      }
+    ]
+  },
+  {
+    "fromId": 541,
+    "toId": 542,
+    "conditions": [
+      {
+        "type": "friendship",
+        "minFriendship": 220
+      }
+    ]
+  },
+  {
+    "fromId": 543,
+    "toId": 544,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 22
+      }
+    ]
+  },
+  {
+    "fromId": 544,
+    "toId": 545,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 546,
+    "toId": 547,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-80"
+      }
+    ]
+  },
+  {
+    "fromId": 548,
+    "toId": 549,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-80"
+      },
+      {
+        "type": "special",
+        "conditionId": "region_id:9"
+      }
+    ]
+  },
+  {
+    "fromId": 548,
+    "toId": 549,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-80"
+      }
+    ]
+  },
+  {
+    "fromId": 550,
+    "toId": 902,
+    "conditions": [
+      {
+        "type": "gender",
+        "value": "female"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10416"
+      },
+      {
+        "type": "special",
+        "conditionId": "minimum_damage_taken:294"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:13"
+      }
+    ]
+  },
+  {
+    "fromId": 550,
+    "toId": 902,
+    "conditions": [
+      {
+        "type": "gender",
+        "value": "male"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10416"
+      },
+      {
+        "type": "special",
+        "conditionId": "minimum_damage_taken:294"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:13"
+      }
+    ]
+  },
+  {
+    "fromId": 551,
+    "toId": 552,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 29
+      }
+    ]
+  },
+  {
+    "fromId": 552,
+    "toId": 553,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 40
+      }
+    ]
+  },
+  {
+    "fromId": 554,
+    "toId": 555,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-885"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10335"
+      }
+    ]
+  },
+  {
+    "fromId": 554,
+    "toId": 555,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 35
+      }
+    ]
+  },
+  {
+    "fromId": 557,
+    "toId": 558,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 34
+      }
+    ]
+  },
+  {
+    "fromId": 559,
+    "toId": 560,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 39
+      }
+    ]
+  },
+  {
+    "fromId": 562,
+    "toId": 563,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 34
+      }
+    ]
+  },
+  {
+    "fromId": 562,
+    "toId": 867,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:890"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10338"
+      },
+      {
+        "type": "special",
+        "conditionId": "minimum_damage_taken:49"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:9"
+      }
+    ]
+  },
+  {
+    "fromId": 564,
+    "toId": 565,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 37
+      }
+    ]
+  },
+  {
+    "fromId": 566,
+    "toId": 567,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 37
+      }
+    ]
+  },
+  {
+    "fromId": 568,
+    "toId": 569,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 570,
+    "toId": 571,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10407"
+      }
+    ]
+  },
+  {
+    "fromId": 570,
+    "toId": 571,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 572,
+    "toId": 573,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-107"
+      }
+    ]
+  },
+  {
+    "fromId": 574,
+    "toId": 575,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 32
+      }
+    ]
+  },
+  {
+    "fromId": 575,
+    "toId": 576,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 41
+      }
+    ]
+  },
+  {
+    "fromId": 577,
+    "toId": 578,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 32
+      }
+    ]
+  },
+  {
+    "fromId": 578,
+    "toId": 579,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 41
+      }
+    ]
+  },
+  {
+    "fromId": 580,
+    "toId": 581,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 35
+      }
+    ]
+  },
+  {
+    "fromId": 582,
+    "toId": 583,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 35
+      }
+    ]
+  },
+  {
+    "fromId": 583,
+    "toId": 584,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 47
+      }
+    ]
+  },
+  {
+    "fromId": 585,
+    "toId": 586,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 34
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10068"
+      }
+    ]
+  },
+  {
+    "fromId": 585,
+    "toId": 586,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 34
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10069"
+      }
+    ]
+  },
+  {
+    "fromId": 585,
+    "toId": 586,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 34
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10070"
+      }
+    ]
+  },
+  {
+    "fromId": 585,
+    "toId": 586,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 34
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:585"
+      }
+    ]
+  },
+  {
+    "fromId": 588,
+    "toId": 589,
+    "conditions": [
+      {
+        "type": "trade"
+      }
+    ]
+  },
+  {
+    "fromId": 590,
+    "toId": 591,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 39
+      }
+    ]
+  },
+  {
+    "fromId": 592,
+    "toId": 593,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 40
+      }
+    ]
+  },
+  {
+    "fromId": 595,
+    "toId": 596,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 597,
+    "toId": 598,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 40
+      }
+    ]
+  },
+  {
+    "fromId": 599,
+    "toId": 600,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 38
+      }
+    ]
+  },
+  {
+    "fromId": 600,
+    "toId": 601,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 49
+      }
+    ]
+  },
+  {
+    "fromId": 602,
+    "toId": 603,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 39
+      }
+    ]
+  },
+  {
+    "fromId": 603,
+    "toId": 604,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-83"
+      }
+    ]
+  },
+  {
+    "fromId": 605,
+    "toId": 606,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 42
+      }
+    ]
+  },
+  {
+    "fromId": 607,
+    "toId": 608,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 41
+      }
+    ]
+  },
+  {
+    "fromId": 608,
+    "toId": 609,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-108"
+      }
+    ]
+  },
+  {
+    "fromId": 610,
+    "toId": 611,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 38
+      }
+    ]
+  },
+  {
+    "fromId": 611,
+    "toId": 612,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 48
+      }
+    ]
+  },
+  {
+    "fromId": 613,
+    "toId": 614,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 37
+      }
+    ]
+  },
+  {
+    "fromId": 616,
+    "toId": 617,
+    "conditions": [
+      {
+        "type": "trade"
+      }
+    ]
+  },
+  {
+    "fromId": 619,
+    "toId": 620,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 50
+      }
+    ]
+  },
+  {
+    "fromId": 622,
+    "toId": 623,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 43
+      }
+    ]
+  },
+  {
+    "fromId": 624,
+    "toId": 625,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 52
+      }
+    ]
+  },
+  {
+    "fromId": 625,
+    "toId": 983,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "trigger:15"
+      }
+    ]
+  },
+  {
+    "fromId": 627,
+    "toId": 628,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 54
+      },
+      {
+        "type": "special",
+        "conditionId": "region_id:9"
+      }
+    ]
+  },
+  {
+    "fromId": 627,
+    "toId": 628,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 54
+      }
+    ]
+  },
+  {
+    "fromId": 629,
+    "toId": 630,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 54
+      }
+    ]
+  },
+  {
+    "fromId": 633,
+    "toId": 634,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 50
+      }
+    ]
+  },
+  {
+    "fromId": 634,
+    "toId": 635,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 64
+      }
+    ]
+  },
+  {
+    "fromId": 636,
+    "toId": 637,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 59
+      }
+    ]
+  },
+  {
+    "fromId": 650,
+    "toId": 651,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 16
+      }
+    ]
+  },
+  {
+    "fromId": 651,
+    "toId": 652,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 653,
+    "toId": 654,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 16
+      }
+    ]
+  },
+  {
+    "fromId": 654,
+    "toId": 655,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 656,
+    "toId": 657,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 16
+      }
+    ]
+  },
+  {
+    "fromId": 657,
+    "toId": 658,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 659,
+    "toId": 660,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      }
+    ]
+  },
+  {
+    "fromId": 661,
+    "toId": 662,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 17
+      }
+    ]
+  },
+  {
+    "fromId": 662,
+    "toId": 663,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 35
+      }
+    ]
+  },
+  {
+    "fromId": 664,
+    "toId": 665,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 9
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10271"
+      }
+    ]
+  },
+  {
+    "fromId": 664,
+    "toId": 665,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 9
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10272"
+      }
+    ]
+  },
+  {
+    "fromId": 664,
+    "toId": 665,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 9
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10273"
+      }
+    ]
+  },
+  {
+    "fromId": 664,
+    "toId": 665,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 9
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10274"
+      }
+    ]
+  },
+  {
+    "fromId": 664,
+    "toId": 665,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 9
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10275"
+      }
+    ]
+  },
+  {
+    "fromId": 664,
+    "toId": 665,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 9
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10276"
+      }
+    ]
+  },
+  {
+    "fromId": 664,
+    "toId": 665,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 9
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10277"
+      }
+    ]
+  },
+  {
+    "fromId": 664,
+    "toId": 665,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 9
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10278"
+      }
+    ]
+  },
+  {
+    "fromId": 664,
+    "toId": 665,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 9
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10279"
+      }
+    ]
+  },
+  {
+    "fromId": 664,
+    "toId": 665,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 9
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10280"
+      }
+    ]
+  },
+  {
+    "fromId": 664,
+    "toId": 665,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 9
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10281"
+      }
+    ]
+  },
+  {
+    "fromId": 664,
+    "toId": 665,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 9
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10282"
+      }
+    ]
+  },
+  {
+    "fromId": 664,
+    "toId": 665,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 9
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10283"
+      }
+    ]
+  },
+  {
+    "fromId": 664,
+    "toId": 665,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 9
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10284"
+      }
+    ]
+  },
+  {
+    "fromId": 664,
+    "toId": 665,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 9
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10285"
+      }
+    ]
+  },
+  {
+    "fromId": 664,
+    "toId": 665,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 9
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10286"
+      }
+    ]
+  },
+  {
+    "fromId": 664,
+    "toId": 665,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 9
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10287"
+      }
+    ]
+  },
+  {
+    "fromId": 664,
+    "toId": 665,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 9
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10288"
+      }
+    ]
+  },
+  {
+    "fromId": 664,
+    "toId": 665,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 9
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10289"
+      }
+    ]
+  },
+  {
+    "fromId": 664,
+    "toId": 665,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 9
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:664"
+      }
+    ]
+  },
+  {
+    "fromId": 665,
+    "toId": 666,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 12
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10290"
+      }
+    ]
+  },
+  {
+    "fromId": 665,
+    "toId": 666,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 12
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10291"
+      }
+    ]
+  },
+  {
+    "fromId": 665,
+    "toId": 666,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 12
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10292"
+      }
+    ]
+  },
+  {
+    "fromId": 665,
+    "toId": 666,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 12
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10293"
+      }
+    ]
+  },
+  {
+    "fromId": 665,
+    "toId": 666,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 12
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10294"
+      }
+    ]
+  },
+  {
+    "fromId": 665,
+    "toId": 666,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 12
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10295"
+      }
+    ]
+  },
+  {
+    "fromId": 665,
+    "toId": 666,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 12
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10296"
+      }
+    ]
+  },
+  {
+    "fromId": 665,
+    "toId": 666,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 12
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10297"
+      }
+    ]
+  },
+  {
+    "fromId": 665,
+    "toId": 666,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 12
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10298"
+      }
+    ]
+  },
+  {
+    "fromId": 665,
+    "toId": 666,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 12
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10299"
+      }
+    ]
+  },
+  {
+    "fromId": 665,
+    "toId": 666,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 12
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10300"
+      }
+    ]
+  },
+  {
+    "fromId": 665,
+    "toId": 666,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 12
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10301"
+      }
+    ]
+  },
+  {
+    "fromId": 665,
+    "toId": 666,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 12
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10302"
+      }
+    ]
+  },
+  {
+    "fromId": 665,
+    "toId": 666,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 12
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10303"
+      }
+    ]
+  },
+  {
+    "fromId": 665,
+    "toId": 666,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 12
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10304"
+      }
+    ]
+  },
+  {
+    "fromId": 665,
+    "toId": 666,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 12
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10305"
+      }
+    ]
+  },
+  {
+    "fromId": 665,
+    "toId": 666,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 12
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10306"
+      }
+    ]
+  },
+  {
+    "fromId": 665,
+    "toId": 666,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 12
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10307"
+      }
+    ]
+  },
+  {
+    "fromId": 665,
+    "toId": 666,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 12
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10308"
+      }
+    ]
+  },
+  {
+    "fromId": 665,
+    "toId": 666,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 12
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:665"
+      }
+    ]
+  },
+  {
+    "fromId": 667,
+    "toId": 668,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 35
+      }
+    ]
+  },
+  {
+    "fromId": 669,
+    "toId": 670,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 19
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10103"
+      }
+    ]
+  },
+  {
+    "fromId": 669,
+    "toId": 670,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 19
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10104"
+      }
+    ]
+  },
+  {
+    "fromId": 669,
+    "toId": 670,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 19
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10105"
+      }
+    ]
+  },
+  {
+    "fromId": 669,
+    "toId": 670,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 19
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10106"
+      }
+    ]
+  },
+  {
+    "fromId": 669,
+    "toId": 670,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 19
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:669"
+      }
+    ]
+  },
+  {
+    "fromId": 670,
+    "toId": 671,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-107"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10107"
+      }
+    ]
+  },
+  {
+    "fromId": 670,
+    "toId": 671,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-107"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10108"
+      }
+    ]
+  },
+  {
+    "fromId": 670,
+    "toId": 671,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-107"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10109"
+      }
+    ]
+  },
+  {
+    "fromId": 670,
+    "toId": 671,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-107"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10110"
+      }
+    ]
+  },
+  {
+    "fromId": 670,
+    "toId": 671,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-107"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:670"
+      }
+    ]
+  },
+  {
+    "fromId": 672,
+    "toId": 673,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 32
+      }
+    ]
+  },
+  {
+    "fromId": 674,
+    "toId": 675,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 32
+      },
+      {
+        "type": "special",
+        "conditionId": "party_type_id:17"
+      }
+    ]
+  },
+  {
+    "fromId": 677,
+    "toId": 678,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      },
+      {
+        "type": "gender",
+        "value": "female"
+      }
+    ]
+  },
+  {
+    "fromId": 677,
+    "toId": 678,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      },
+      {
+        "type": "gender",
+        "value": "male"
+      }
+    ]
+  },
+  {
+    "fromId": 679,
+    "toId": 680,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 35
+      }
+    ]
+  },
+  {
+    "fromId": 680,
+    "toId": 681,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-108"
+      }
+    ]
+  },
+  {
+    "fromId": 682,
+    "toId": 683,
+    "conditions": [
+      {
+        "type": "trade"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:687"
+      }
+    ]
+  },
+  {
+    "fromId": 684,
+    "toId": 685,
+    "conditions": [
+      {
+        "type": "trade"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:686"
+      }
+    ]
+  },
+  {
+    "fromId": 686,
+    "toId": 687,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      },
+      {
+        "type": "special",
+        "conditionId": "turn_upside_down:1"
+      }
+    ]
+  },
+  {
+    "fromId": 688,
+    "toId": 689,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 39
+      }
+    ]
+  },
+  {
+    "fromId": 690,
+    "toId": 691,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 48
+      }
+    ]
+  },
+  {
+    "fromId": 692,
+    "toId": 693,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 37
+      }
+    ]
+  },
+  {
+    "fromId": 694,
+    "toId": 695,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-80"
+      }
+    ]
+  },
+  {
+    "fromId": 696,
+    "toId": 697,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 39
+      },
+      {
+        "type": "time",
+        "value": "day"
+      }
+    ]
+  },
+  {
+    "fromId": 698,
+    "toId": 699,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 39
+      },
+      {
+        "type": "time",
+        "value": "night"
+      }
+    ]
+  },
+  {
+    "fromId": 704,
+    "toId": 705,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 40
+      },
+      {
+        "type": "special",
+        "conditionId": "region_id:9"
+      }
+    ]
+  },
+  {
+    "fromId": 704,
+    "toId": 705,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 40
+      }
+    ]
+  },
+  {
+    "fromId": 705,
+    "toId": 706,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 50
+      },
+      {
+        "type": "special",
+        "conditionId": "needs_overworld_rain:1"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10410"
+      }
+    ]
+  },
+  {
+    "fromId": 705,
+    "toId": 706,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 50
+      },
+      {
+        "type": "special",
+        "conditionId": "needs_overworld_rain:1"
+      }
+    ]
+  },
+  {
+    "fromId": 708,
+    "toId": 709,
+    "conditions": [
+      {
+        "type": "trade"
+      }
+    ]
+  },
+  {
+    "fromId": 710,
+    "toId": 711,
+    "conditions": [
+      {
+        "type": "trade"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10126"
+      }
+    ]
+  },
+  {
+    "fromId": 710,
+    "toId": 711,
+    "conditions": [
+      {
+        "type": "trade"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10127"
+      }
+    ]
+  },
+  {
+    "fromId": 710,
+    "toId": 711,
+    "conditions": [
+      {
+        "type": "trade"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10128"
+      }
+    ]
+  },
+  {
+    "fromId": 710,
+    "toId": 711,
+    "conditions": [
+      {
+        "type": "trade"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:710"
+      }
+    ]
+  },
+  {
+    "fromId": 712,
+    "toId": 713,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 37
+      },
+      {
+        "type": "special",
+        "conditionId": "region_id:9"
+      }
+    ]
+  },
+  {
+    "fromId": 712,
+    "toId": 713,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 37
+      }
+    ]
+  },
+  {
+    "fromId": 714,
+    "toId": 715,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 48
+      }
+    ]
+  },
+  {
+    "fromId": 722,
+    "toId": 723,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 17
+      }
+    ]
+  },
+  {
+    "fromId": 723,
+    "toId": 724,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 34
+      }
+    ]
+  },
+  {
+    "fromId": 723,
+    "toId": 724,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      },
+      {
+        "type": "special",
+        "conditionId": "region_id:9"
+      }
+    ]
+  },
+  {
+    "fromId": 725,
+    "toId": 726,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 17
+      }
+    ]
+  },
+  {
+    "fromId": 726,
+    "toId": 727,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 34
+      }
+    ]
+  },
+  {
+    "fromId": 728,
+    "toId": 729,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 17
+      }
+    ]
+  },
+  {
+    "fromId": 729,
+    "toId": 730,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 34
+      }
+    ]
+  },
+  {
+    "fromId": 731,
+    "toId": 732,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 14
+      }
+    ]
+  },
+  {
+    "fromId": 732,
+    "toId": 733,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 28
+      }
+    ]
+  },
+  {
+    "fromId": 734,
+    "toId": 735,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      },
+      {
+        "type": "time",
+        "value": "day"
+      }
+    ]
+  },
+  {
+    "fromId": 736,
+    "toId": 737,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      }
+    ]
+  },
+  {
+    "fromId": 737,
+    "toId": 738,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-83"
+      }
+    ]
+  },
+  {
+    "fromId": 737,
+    "toId": 738,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:771"
+      }
+    ]
+  },
+  {
+    "fromId": 737,
+    "toId": 738,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:789"
+      }
+    ]
+  },
+  {
+    "fromId": 739,
+    "toId": 740,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-885"
+      }
+    ]
+  },
+  {
+    "fromId": 739,
+    "toId": 740,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "location_id:775"
+      }
+    ]
+  },
+  {
+    "fromId": 742,
+    "toId": 743,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      }
+    ]
+  },
+  {
+    "fromId": 744,
+    "toId": 745,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      },
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:744"
+      }
+    ]
+  },
+  {
+    "fromId": 744,
+    "toId": 745,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      },
+      {
+        "type": "time",
+        "value": "dusk"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10310"
+      }
+    ]
+  },
+  {
+    "fromId": 744,
+    "toId": 745,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      },
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:744"
+      }
+    ]
+  },
+  {
+    "fromId": 747,
+    "toId": 748,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 38
+      }
+    ]
+  },
+  {
+    "fromId": 749,
+    "toId": 750,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 751,
+    "toId": 752,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 22
+      }
+    ]
+  },
+  {
+    "fromId": 753,
+    "toId": 754,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 34
+      },
+      {
+        "type": "time",
+        "value": "day"
+      }
+    ]
+  },
+  {
+    "fromId": 755,
+    "toId": 756,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 24
+      }
+    ]
+  },
+  {
+    "fromId": 757,
+    "toId": 758,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 33
+      },
+      {
+        "type": "gender",
+        "value": "female"
+      }
+    ]
+  },
+  {
+    "fromId": 759,
+    "toId": 760,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 27
+      }
+    ]
+  },
+  {
+    "fromId": 761,
+    "toId": 762,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 18
+      }
+    ]
+  },
+  {
+    "fromId": 762,
+    "toId": 763,
+    "conditions": [
+      {
+        "type": "move_known",
+        "moveId": "move-23"
+      }
+    ]
+  },
+  {
+    "fromId": 767,
+    "toId": 768,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 769,
+    "toId": 770,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 42
+      }
+    ]
+  },
+  {
+    "fromId": 772,
+    "toId": 773,
+    "conditions": [
+      {
+        "type": "friendship",
+        "minFriendship": 160
+      }
+    ]
+  },
+  {
+    "fromId": 782,
+    "toId": 783,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 35
+      }
+    ]
+  },
+  {
+    "fromId": 783,
+    "toId": 784,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 45
+      }
+    ]
+  },
+  {
+    "fromId": 789,
+    "toId": 790,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 43
+      }
+    ]
+  },
+  {
+    "fromId": 790,
+    "toId": 791,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 53
+      }
+    ]
+  },
+  {
+    "fromId": 790,
+    "toId": 792,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 53
+      }
+    ]
+  },
+  {
+    "fromId": 803,
+    "toId": 804,
+    "conditions": [
+      {
+        "type": "move_known",
+        "moveId": "move-406"
+      }
+    ]
+  },
+  {
+    "fromId": 808,
+    "toId": 809,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "trigger:17"
+      }
+    ]
+  },
+  {
+    "fromId": 810,
+    "toId": 811,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 16
+      }
+    ]
+  },
+  {
+    "fromId": 811,
+    "toId": 812,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 35
+      }
+    ]
+  },
+  {
+    "fromId": 813,
+    "toId": 814,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 16
+      }
+    ]
+  },
+  {
+    "fromId": 814,
+    "toId": 815,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 35
+      }
+    ]
+  },
+  {
+    "fromId": 816,
+    "toId": 817,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 16
+      }
+    ]
+  },
+  {
+    "fromId": 817,
+    "toId": 818,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 35
+      }
+    ]
+  },
+  {
+    "fromId": 819,
+    "toId": 820,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 24
+      }
+    ]
+  },
+  {
+    "fromId": 821,
+    "toId": 822,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 18
+      }
+    ]
+  },
+  {
+    "fromId": 822,
+    "toId": 823,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 38
+      }
+    ]
+  },
+  {
+    "fromId": 824,
+    "toId": 825,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 10
+      }
+    ]
+  },
+  {
+    "fromId": 825,
+    "toId": 826,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 827,
+    "toId": 828,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 18
+      }
+    ]
+  },
+  {
+    "fromId": 829,
+    "toId": 830,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 20
+      }
+    ]
+  },
+  {
+    "fromId": 831,
+    "toId": 832,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 24
+      }
+    ]
+  },
+  {
+    "fromId": 833,
+    "toId": 834,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 22
+      }
+    ]
+  },
+  {
+    "fromId": 835,
+    "toId": 836,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      }
+    ]
+  },
+  {
+    "fromId": 837,
+    "toId": 838,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 18
+      }
+    ]
+  },
+  {
+    "fromId": 838,
+    "toId": 839,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 34
+      }
+    ]
+  },
+  {
+    "fromId": 840,
+    "toId": 841,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-1175"
+      }
+    ]
+  },
+  {
+    "fromId": 840,
+    "toId": 842,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-1174"
+      }
+    ]
+  },
+  {
+    "fromId": 840,
+    "toId": 1011,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-2109"
+      }
+    ]
+  },
+  {
+    "fromId": 843,
+    "toId": 844,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 846,
+    "toId": 847,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 26
+      }
+    ]
+  },
+  {
+    "fromId": 848,
+    "toId": 849,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      },
+      {
+        "type": "special",
+        "conditionId": "nature_bitmask:10473025"
+      }
+    ]
+  },
+  {
+    "fromId": 848,
+    "toId": 849,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      },
+      {
+        "type": "special",
+        "conditionId": "nature_bitmask:23081406"
+      }
+    ]
+  },
+  {
+    "fromId": 850,
+    "toId": 851,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 28
+      }
+    ]
+  },
+  {
+    "fromId": 852,
+    "toId": 853,
+    "conditions": [
+      {
+        "type": "move_known",
+        "moveId": "move-269"
+      }
+    ]
+  },
+  {
+    "fromId": 854,
+    "toId": 855,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-1311"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:854"
+      }
+    ]
+  },
+  {
+    "fromId": 854,
+    "toId": 855,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-1312"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10344"
+      }
+    ]
+  },
+  {
+    "fromId": 856,
+    "toId": 857,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 32
+      }
+    ]
+  },
+  {
+    "fromId": 857,
+    "toId": 858,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 42
+      }
+    ]
+  },
+  {
+    "fromId": 859,
+    "toId": 860,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 32
+      }
+    ]
+  },
+  {
+    "fromId": 860,
+    "toId": 861,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 42
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1167"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1167"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1167"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1167"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1168"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1168"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1168"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1168"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1169"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1169"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1169"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1169"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1170"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1170"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1170"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1170"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1171"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1171"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1171"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1171"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1172"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1172"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1172"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1172"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1173"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1173"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1173"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "day"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1173"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "dusk"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1167"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_SEC 10 >="
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "dusk"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1168"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_SEC 10 >="
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "dusk"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1169"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_SEC 10 >="
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "dusk"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1170"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_SEC 10 >="
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "dusk"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1171"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_SEC 10 >="
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "dusk"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1172"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_SEC 10 >="
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "dusk"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1173"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_SEC 10 >="
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1167"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1167"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1167"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1167"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1168"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1168"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1168"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1168"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1169"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1169"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1169"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1169"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1170"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1170"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1170"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1170"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1171"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1171"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1171"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1171"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1172"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1172"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1172"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1172"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1173"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1173"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 0 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1173"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 < &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 868,
+    "toId": 869,
+    "conditions": [
+      {
+        "type": "time",
+        "value": "night"
+      },
+      {
+        "type": "special",
+        "conditionId": "held_item_id:1173"
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:SPIN_DIR 1 == SPIN_SEC 5 >= &&"
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:5"
+      }
+    ]
+  },
+  {
+    "fromId": 872,
+    "toId": 873,
+    "conditions": [
+      {
+        "type": "friendship",
+        "minFriendship": 160
+      },
+      {
+        "type": "time",
+        "value": "night"
+      }
+    ]
+  },
+  {
+    "fromId": 878,
+    "toId": 879,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 34
+      }
+    ]
+  },
+  {
+    "fromId": 884,
+    "toId": 1018,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-2232"
+      }
+    ]
+  },
+  {
+    "fromId": 885,
+    "toId": 886,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 50
+      }
+    ]
+  },
+  {
+    "fromId": 886,
+    "toId": 887,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 60
+      }
+    ]
+  },
+  {
+    "fromId": 891,
+    "toId": 892,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-1675"
+      }
+    ]
+  },
+  {
+    "fromId": 891,
+    "toId": 892,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-1676"
+      }
+    ]
+  },
+  {
     "fromId": 891,
     "toId": 892,
     "conditions": [
       {
         "type": "special",
-        "conditionId": "tower-of-two-fists"
+        "conditionId": "trigger:6"
+      }
+    ]
+  },
+  {
+    "fromId": 891,
+    "toId": 892,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "trigger:7"
+      }
+    ]
+  },
+  {
+    "fromId": 906,
+    "toId": 907,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 16
+      }
+    ]
+  },
+  {
+    "fromId": 907,
+    "toId": 908,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 909,
+    "toId": 910,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 16
+      }
+    ]
+  },
+  {
+    "fromId": 910,
+    "toId": 911,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 912,
+    "toId": 913,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 16
+      }
+    ]
+  },
+  {
+    "fromId": 913,
+    "toId": 914,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 36
+      }
+    ]
+  },
+  {
+    "fromId": 915,
+    "toId": 916,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 18
+      },
+      {
+        "type": "gender",
+        "value": "female"
+      }
+    ]
+  },
+  {
+    "fromId": 915,
+    "toId": 916,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 18
+      },
+      {
+        "type": "gender",
+        "value": "male"
+      }
+    ]
+  },
+  {
+    "fromId": 917,
+    "toId": 918,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 15
+      }
+    ]
+  },
+  {
+    "fromId": 919,
+    "toId": 920,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 24
+      }
+    ]
+  },
+  {
+    "fromId": 921,
+    "toId": 922,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 18
+      }
+    ]
+  },
+  {
+    "fromId": 922,
+    "toId": 923,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "minimum_steps:1000"
+      }
+    ]
+  },
+  {
+    "fromId": 924,
+    "toId": 925,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:EC 100 % 0 !="
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:10"
+      }
+    ]
+  },
+  {
+    "fromId": 924,
+    "toId": 925,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      },
+      {
+        "type": "special",
+        "conditionId": "condition_expression:EC 100 % 0 =="
+      },
+      {
+        "type": "special",
+        "conditionId": "trigger:10"
+      }
+    ]
+  },
+  {
+    "fromId": 926,
+    "toId": 927,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 26
+      }
+    ]
+  },
+  {
+    "fromId": 928,
+    "toId": 929,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      }
+    ]
+  },
+  {
+    "fromId": 929,
+    "toId": 930,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 35
+      }
+    ]
+  },
+  {
+    "fromId": 932,
+    "toId": 933,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 24
+      }
+    ]
+  },
+  {
+    "fromId": 933,
+    "toId": 934,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 38
+      }
+    ]
+  },
+  {
+    "fromId": 935,
+    "toId": 936,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-2045"
+      }
+    ]
+  },
+  {
+    "fromId": 935,
+    "toId": 937,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-1677"
+      }
+    ]
+  },
+  {
+    "fromId": 938,
+    "toId": 939,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-83"
+      }
+    ]
+  },
+  {
+    "fromId": 940,
+    "toId": 941,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 25
+      }
+    ]
+  },
+  {
+    "fromId": 942,
+    "toId": 943,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 944,
+    "toId": 945,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 28
+      }
+    ]
+  },
+  {
+    "fromId": 946,
+    "toId": 947,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "minimum_steps:1000"
+      }
+    ]
+  },
+  {
+    "fromId": 948,
+    "toId": 949,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      }
+    ]
+  },
+  {
+    "fromId": 951,
+    "toId": 952,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-82"
+      }
+    ]
+  },
+  {
+    "fromId": 953,
+    "toId": 954,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "minimum_steps:1000"
+      }
+    ]
+  },
+  {
+    "fromId": 955,
+    "toId": 956,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 35
+      }
+    ]
+  },
+  {
+    "fromId": 957,
+    "toId": 958,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 24
+      }
+    ]
+  },
+  {
+    "fromId": 958,
+    "toId": 959,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 38
+      }
+    ]
+  },
+  {
+    "fromId": 960,
+    "toId": 961,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 26
+      }
+    ]
+  },
+  {
+    "fromId": 963,
+    "toId": 964,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 38
+      },
+      {
+        "type": "special",
+        "conditionId": "needs_multiplayer:1"
+      }
+    ]
+  },
+  {
+    "fromId": 965,
+    "toId": 966,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 40
+      }
+    ]
+  },
+  {
+    "fromId": 969,
+    "toId": 970,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 35
+      }
+    ]
+  },
+  {
+    "fromId": 971,
+    "toId": 972,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 30
+      },
+      {
+        "type": "time",
+        "value": "night"
+      }
+    ]
+  },
+  {
+    "fromId": 974,
+    "toId": 975,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-885"
+      }
+    ]
+  },
+  {
+    "fromId": 996,
+    "toId": 997,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 35
+      }
+    ]
+  },
+  {
+    "fromId": 997,
+    "toId": 998,
+    "conditions": [
+      {
+        "type": "level",
+        "minLevel": 54
+      }
+    ]
+  },
+  {
+    "fromId": 999,
+    "toId": 1000,
+    "conditions": [
+      {
+        "type": "special",
+        "conditionId": "trigger:16"
+      }
+    ]
+  },
+  {
+    "fromId": 1011,
+    "toId": 1019,
+    "conditions": [
+      {
+        "type": "move_known",
+        "moveId": "move-913"
+      }
+    ]
+  },
+  {
+    "fromId": 1012,
+    "toId": 1013,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-2110"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:1012"
+      }
+    ]
+  },
+  {
+    "fromId": 1012,
+    "toId": 1013,
+    "conditions": [
+      {
+        "type": "item",
+        "itemId": "item-2111"
+      },
+      {
+        "type": "special",
+        "conditionId": "required_pokemon_form_id:10447"
       }
     ]
   }

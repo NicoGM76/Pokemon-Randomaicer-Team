@@ -7,7 +7,7 @@ const STATS = ['hp', 'attack', 'defense', 'specialAttack', 'specialDefense', 'sp
 const safeText = value => "'" + String(value).replaceAll("'", "''") + "'";
 const jsonLiteral = value => safeText(JSON.stringify(value)) + '::jsonb';
 
-export function assertValidCatalog({ pokemon, forms, evolutions }) {
+export function assertValidCatalog({ pokemon, forms, evolutions, regionalDexes, regionalDexEntries }) {
   if (![pokemon, forms, evolutions].every(Array.isArray)) throw new Error('Expected pokemon, forms, evolutions arrays.');
   if (pokemon.length === 0) throw new Error('Refusing an empty Pokémon catalog.');
   const ids = new Set();
@@ -34,18 +34,60 @@ export function assertValidCatalog({ pokemon, forms, evolutions }) {
   const pairs = new Set();
   for (const step of evolutions) {
     if (!ids.has(step.fromId) || !ids.has(step.toId) || step.fromId === step.toId || !Array.isArray(step.conditions)) throw new Error('Evolution references unknown species.');
-    const pair = step.fromId + '/' + step.toId;
-    if (pairs.has(pair)) throw new Error('Duplicate evolution pair.');
-    pairs.add(pair);
+    // Same from/to can be a legitimate alternative evolution requirement.
+    // Only identical condition sets are truly duplicates.
+    const variant = JSON.stringify(step);
+    if (pairs.has(variant)) throw new Error('Duplicate evolution variant.');
+    pairs.add(variant);
+  }
+  if ((regionalDexes === undefined) !== (regionalDexEntries === undefined))
+    throw new Error('Regional dex metadata and entries must be supplied together.');
+  if (regionalDexes !== undefined) {
+    if (!Array.isArray(regionalDexes) || !Array.isArray(regionalDexEntries)) throw new Error('Invalid regional dex arrays.');
+    const dexIds = new Set();
+    for (const dex of regionalDexes) {
+      if (!dex || typeof dex.id !== 'string' || !dex.id.trim() || dexIds.has(dex.id) ||
+          !Number.isInteger(dex.entryCount) || dex.entryCount < 0 ||
+          !['regional','content'].includes(dex.kind) ||
+          !['pending','imported','reviewed','published'].includes(dex.entryStatus)) throw new Error('Invalid regional dex metadata.');
+      dexIds.add(dex.id);
+    }
+    const uniqueEntries = new Set();
+    for (const entry of regionalDexEntries) {
+      if (!dexIds.has(entry.dexId) || !ids.has(entry.pokemonId) ||
+          !Number.isInteger(entry.dexNumber) || entry.dexNumber < 0 ||
+          !['pokeapi','wikidex','curated'].includes(entry.source)) throw new Error('Invalid regional dex entry.');
+      const key = entry.dexId + '/' + entry.pokemonId;
+      if (uniqueEntries.has(key)) throw new Error('Duplicate regional dex entry.');
+      uniqueEntries.add(key);
+    }
+    for (const dex of regionalDexes) {
+      const observed = regionalDexEntries.filter(e => e.dexId === dex.id).length;
+      if (observed !== dex.entryCount) throw new Error('Regional dex count mismatch: ' + dex.id);
+    }
   }
 }
 
 export function buildCatalogUpsertSql(data, { full = false } = {}) {
   assertValidCatalog(data);
   if (full && data.pokemon.length < 1000) throw new Error('Refusing to label a partial catalog as full (<1000 species).');
-  const { pokemon, forms, evolutions } = data;
+  const { pokemon, forms, evolutions, regionalDexes, regionalDexEntries } = data;
+  if (full && (!regionalDexes || regionalDexes.length < 20 || !regionalDexEntries || regionalDexEntries.length < 5000))
+    throw new Error('Refusing to label a regional catalog as full without verified dex entries.');
   const revision = createHash('sha256').update(JSON.stringify(data)).digest('hex');
   const tag = (full ? 'full-' : 'sample-') + revision.slice(0, 20);
+  const regionalSql = regionalDexes ? [
+    'CREATE TEMP TABLE _pa_dexes (v jsonb) ON COMMIT DROP;',
+    'INSERT INTO _pa_dexes(v) SELECT value FROM jsonb_array_elements(' + jsonLiteral(regionalDexes) + ');',
+    'CREATE TEMP TABLE _pa_dex_entries (v jsonb) ON COMMIT DROP;',
+    'INSERT INTO _pa_dex_entries(v) SELECT value FROM jsonb_array_elements(' + jsonLiteral(regionalDexEntries) + ');',
+    'INSERT INTO public.regional_dexes(id,name,region,entry_count,kind,entry_status,source_url,sub_dexes)',
+    "SELECT v->>'id',v->>'name',v->>'region',(v->>'entryCount')::integer,v->>'kind',v->>'entryStatus',v->>'sourceUrl',COALESCE(v->'subDexes','[]'::jsonb) FROM _pa_dexes",
+    'ON CONFLICT(id) DO UPDATE SET name=excluded.name,region=excluded.region,entry_count=excluded.entry_count,kind=excluded.kind,entry_status=excluded.entry_status,source_url=excluded.source_url,sub_dexes=excluded.sub_dexes;',
+    "DELETE FROM public.regional_dex_entries WHERE dex_id IN (SELECT v->>'id' FROM _pa_dexes);",
+    'INSERT INTO public.regional_dex_entries(dex_id,pokemon_id,dex_number,sub_dex,source,source_dex)',
+    "SELECT v->>'dexId',(v->>'pokemonId')::integer,(v->>'dexNumber')::integer,v->>'subDex',v->>'source',v->>'sourceDex' FROM _pa_dex_entries;"
+  ].join('\n') : '';
   const sql = `-- Generated import. Source integrity: SHA-256 ${revision}.
 -- TRANSACTIONAL. Does not delete species missing from this import, nor user data.
 BEGIN;
@@ -83,13 +125,26 @@ INSERT INTO public.pokemon_form_types(form_id,slot,type_name)
 SELECT v->>'id',t.ordinality::smallint,t.type_name FROM _pa_forms
 CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(v->'types','[]'::jsonb)) WITH ORDINALITY AS t(type_name,ordinality);
 
-INSERT INTO public.pokemon_evolutions(from_pokemon_id,to_pokemon_id,conditions)
-SELECT (v->>'fromId')::integer,(v->>'toId')::integer,v->'conditions' FROM _pa_evolutions
-ON CONFLICT(from_pokemon_id,to_pokemon_id) DO UPDATE SET conditions=excluded.conditions;
+-- Replace only the evolution pairs provided in this import, to avoid stale
+-- alternative requirements while retaining unrelated or curated evolutions.
+DELETE FROM public.pokemon_evolutions AS e
+USING _pa_evolutions AS src
+WHERE e.from_pokemon_id = (src.v->>'fromId')::integer
+  AND e.to_pokemon_id = (src.v->>'toId')::integer;
 
-INSERT INTO public.catalog_imports(id,source_name,source_revision,species_count,forms_count,evolutions_count,completeness,notes)
+INSERT INTO public.pokemon_evolutions(from_pokemon_id,to_pokemon_id,variant_index,conditions)
+SELECT (v->>'fromId')::integer,(v->>'toId')::integer,
+  row_number() over (
+    partition by (v->>'fromId')::integer,(v->>'toId')::integer
+    order by (v->'conditions')::text
+  )::smallint,
+  v->'conditions' FROM _pa_evolutions;
+
+${regionalSql}
+
+INSERT INTO public.catalog_imports(id,source_name,source_revision,species_count,forms_count,evolutions_count,regional_dex_entries_count,completeness,notes)
 VALUES (${safeText(tag)},${safeText(full ? 'PokéAPI CSV generated catalog' : 'Repository curated bootstrap')},${safeText(revision)},
-${pokemon.length},${forms.length},${evolutions.length},${safeText(full ? 'full' : 'sample')},
+${pokemon.length},${forms.length},${evolutions.length},${regionalDexEntries?.length ?? 0},${safeText(full ? 'full' : 'sample')},
 ${safeText(full ? 'Validated generated data (1000+ species).' : 'Sample only. Full catalog is generated during CI builds.')})
 ON CONFLICT(id) DO NOTHING;
 COMMIT;

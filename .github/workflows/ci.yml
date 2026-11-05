@@ -36,6 +36,9 @@ jobs:
       - name: Sync verified competitive metagame snapshots
         run: npm run data:sync-meta
 
+      - name: Validate backup script syntax
+        run: bash -n scripts/db/backup-to-drive.sh scripts/db/restore-check.sh
+
       - name: Test competitive source converter
         run: npm run meta:test
 

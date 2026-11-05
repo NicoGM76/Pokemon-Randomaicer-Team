@@ -1,6 +1,6 @@
 # V2.5: PostgreSQL sin presupuesto y recuperación ante fallos
 
-**Decisión:** comenzar sin presupuesto recurrente. **En ejecución:** el proyecto Supabase Free, las 15 tablas y sus RLS ya existen; una primera muestra de catálogo se importó. El Drive dedicado y sus cinco subcarpetas están creados. Aún **no hay** backup real ni failover de producción implementados.
+**Decisión:** comenzar sin presupuesto recurrente. **En ejecución:** el proyecto Supabase Free y **17 tablas** con RLS ya existen. El catálogo completo se importó: **1025 Pokémon**, **675 evoluciones**, **22 Pokédex**, **5474 entradas**. El Drive dedicado y sus cinco subcarpetas están creados. Aún **no hay** backup real ni failover de producción implementados.
 
 ## 1. Componentes y responsabilidades
 
@@ -85,8 +85,8 @@ Fase 2 (no habilitada de entrada): cuentas y equipos privados. Diseñar autentic
 
 ## 6. Entregables y criterios de aceptación
 
-1. [x] Crear proyecto PostgreSQL sin costo mensual (región São Paulo) y aplicar las tres migraciones iniciales del esquema.
-2. [ ] Cargar **catálogo completo** validado y cotejar; primera carga de muestra realizada: 43 especies, 2 formas y 17 evoluciones, sin referencias rotas.
+1. [x] Crear proyecto PostgreSQL sin costo mensual (región São Paulo) y aplicar esquema más migraciones de variantes evolutivas y Pokédex regionales.
+2. [x] Cargar catálogo completo validado: 1025 especies, 675 evoluciones y 5474 entradas de 22 Pokédex; sin referencias rotas y con importación `full` registrada.
 3. [ ] Drive **dedicado** ya conectado y carpetas creadas; falta restringir las credenciales para la automatización del backup.
 4. [ ] Implementar rutina automática de exportar, cifrar, subir, retener y alertar.
 5. [ ] Demostrar restauración real desde Drive a PostgreSQL alternativo.
@@ -100,8 +100,8 @@ Fase 2 (no habilitada de entrada): cuentas y equipos privados. Diseñar autentic
 
 ## Avances verificados (5 de noviembre de 2026)
 
-- Proyecto Supabase: `pokemon-adventure` (`ffnutyxsfjkbdgavfmpv`), 15 tablas con RLS y acceso público solo de lectura; consulta PostgreSQL y controles de integridad exitosos.
-- Migraciones aplicadas: `create_pokemon_catalog_v25`, `index_pokemon_catalog_foreign_keys`, `grant_catalog_server_import`.
-- Registro de importación: `bootstrap-repo-sample-v1`, `completeness=sample`, 43 especies, 67 tipos, 2 formas y 17 evoluciones. La web aún no se conecta a este esquema.
+- Proyecto Supabase: `pokemon-adventure` (`ffnutyxsfjkbdgavfmpv`), 17 tablas con RLS y acceso público solo de lectura; consulta PostgreSQL y controles de integridad exitosos.
+- Migraciones aplicadas: `create_pokemon_catalog_v25`, `index_pokemon_catalog_foreign_keys`, `grant_catalog_server_import`, `preserve_evolution_alternative_conditions`, `regional_pokedex_catalog`, `allow_zero_regional_dex_number`.
+- Registros de importación: muestra inicial `bootstrap-repo-sample-v1` y catálogo completo `pokeapi-csv-2026-11-05-full` (`completeness=full`). Cifras actuales: 1025 especies, 1551 tipos, 2 formas, 675 pasos evolutivos y 5474 entradas. La web aún no se conecta a este esquema.
 - Drive: https://drive.google.com/drive/folders/1zuJuD8I4Na2nc_oxHfxHMljMv3XI4NNE
-- Scripts de exportación validados: [db/README.md](../db/README.md).
+- Scripts de exportación y procedimientos de backup preparados: [db/README.md](../db/README.md) y [db/backup-setup.md](../db/backup-setup.md). **No existe todavía backup automático verificado**.

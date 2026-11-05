@@ -31,3 +31,33 @@ test('rejects referential integrity problems before writing SQL', () => {
   data.evolutions = []; data.forms[0].pokemonId = 999;
   assert.throws(() => assertValidCatalog(data), /form reference/);
 });
+
+test('different condition alternatives for a single evolution pair are preserved', () => {
+  const data = dataset();
+  data.pokemon.push({ ...species, id: 26, name: 'Raichu' });
+  data.evolutions.push({ fromId: 25, toId: 26, conditions: [{ type: 'item', itemId: 'thunder-stone' }] });
+  data.evolutions.push({ fromId: 25, toId: 26, conditions: [{ type: 'special', conditionId: 'special-variant' }] });
+  assert.doesNotThrow(() => assertValidCatalog(data));
+  const sql = buildCatalogUpsertSql(data);
+  assert.match(sql, /row_number\(\) over/);
+  assert.match(sql, /variant_index/);
+  assert.match(sql, /DELETE FROM public\.pokemon_evolutions/);
+  data.evolutions.push({ fromId: 25, toId: 26, conditions: [{ type: 'item', itemId: 'thunder-stone' }] });
+  assert.throws(() => assertValidCatalog(data), /Duplicate evolution variant/);
+});
+
+test('validates regional dex metadata, allows #000 and generates a regional SQL import', () => {
+  const data = dataset();
+  data.regionalDexes = [{ id: 'unova-bw', name: 'Unova', region: 'Unova', kind: 'regional', entryStatus: 'pending', entryCount: 1 }];
+  data.regionalDexEntries = [{ dexId: 'unova-bw', pokemonId: 25, dexNumber: 0, source: 'pokeapi', sourceDex: 'original-unova' }];
+  assert.doesNotThrow(() => assertValidCatalog(data));
+  const sql = buildCatalogUpsertSql(data);
+  assert.match(sql, /INSERT INTO public\.regional_dex_entries/);
+  assert.match(sql, /regional_dex_entries_count/);
+
+  data.regionalDexEntries[0].dexNumber = -1;
+  assert.throws(() => assertValidCatalog(data), /Invalid regional dex entry/);
+  data.regionalDexEntries[0].dexNumber = 0;
+  data.regionalDexes[0].entryCount = 2;
+  assert.throws(() => assertValidCatalog(data), /Regional dex count mismatch/);
+});
