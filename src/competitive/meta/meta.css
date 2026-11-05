@@ -40,3 +40,23 @@
 .comp-meta-official p{margin:7px 0}
 @media(max-width:850px){.comp-meta-layout{grid-template-columns:1fr}.comp-meta-rank-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.comp-meta-panel{padding:16px}.comp-meta-header{align-items:flex-start;flex-direction:column}.comp-meta-period{width:100%;align-items:center}.comp-meta-rank-list{grid-template-columns:1fr}.comp-meta-sample,.comp-meta-matchups{grid-template-columns:1fr}.comp-meta-details{padding:13px}}
+
+/* V2.4: monthly history is opt-in and remains usable on narrow screens. */
+.comp-meta-history-launch{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:20px;padding:16px;border:1px solid #426f94;border-radius:12px;background:#122b42}
+.comp-meta-history-launch h3{margin:5px 0;font-size:16px}
+.comp-meta-history-launch p{max-width:580px;margin:0;color:#a8c9dd;font-size:12px;line-height:1.6}
+.comp-meta-history-launch button{flex-shrink:0;cursor:pointer;min-height:44px}
+.comp-meta-history{margin-top:14px;padding:17px;background:#09192b;border:1px solid #345b78;border-radius:12px;font-size:12px;line-height:1.65}
+.comp-meta-history h3{font-size:18px;margin:5px 0 9px}
+.comp-meta-history>p{color:#b5d0e2}
+.comp-meta-history a{color:#92d4ff;text-decoration:underline}
+.comp-meta-history-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}
+.comp-meta-history-grid>div{min-width:0;padding:14px;background:#122b42;border-radius:12px}
+.comp-meta-history-grid h4{font-size:14px;margin:0 0 9px}
+.comp-meta-history-grid ol{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px}
+.comp-meta-history-grid li{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:12px;padding:8px 0;border-bottom:1px solid #2b526d}
+.comp-meta-history-grid li span{overflow:hidden;text-overflow:ellipsis}
+.comp-meta-history-grid li strong{white-space:nowrap;color:#95ddff}
+.comp-meta-history-grid li small{grid-column:1/-1;color:#adc9dc}
+.comp-meta-history-note{font-size:11px}
+@media(max-width:720px){.comp-meta-history-launch{flex-direction:column;align-items:stretch}.comp-meta-history-grid{grid-template-columns:1fr}}
