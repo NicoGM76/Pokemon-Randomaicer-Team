@@ -19,12 +19,14 @@ function niceName(name: string): string {
  */
 export default function PokemonSpeciesPicker({ pokemon, selectedId, onSelect, options }: Props) {
   const [query, setQuery] = useState('');
+  const [browseAll, setBrowseAll] = useState(false);
   const suggestions = useMemo(() => searchPokemon(pokemon, query), [pokemon, query]);
   const isSearching = query.trim().length > 0;
 
   function choose(id: number) {
     onSelect(id);
     setQuery('');
+    setBrowseAll(false);
   }
 
   return (
@@ -49,7 +51,7 @@ export default function PokemonSpeciesPicker({ pokemon, selectedId, onSelect, op
         />
       </label>
       <p id="comp-species-search-help" className="comp-species-help">
-        Escribe y elige una coincidencia, o pulsa Enter para la primera. También puedes explorar la lista completa.
+        Escribe para encontrar un Pokémon y pulsa Enter o elige una coincidencia.
       </p>
 
       {isSearching && <div className="comp-species-matches">
@@ -73,7 +75,13 @@ export default function PokemonSpeciesPicker({ pokemon, selectedId, onSelect, op
         )}
       </div>}
 
-      <label className="comp-field comp-species-select">
+      <button type="button" className="comp-species-browse-toggle"
+        aria-expanded={browseAll} aria-controls="comp-species-complete-catalog"
+        onClick={() => setBrowseAll(open => !open)}>
+        {browseAll ? 'Ocultar lista completa' : 'Explorar Pokédex completa'}
+      </button>
+      <label id="comp-species-complete-catalog" className="comp-field comp-species-select"
+        hidden={!browseAll}>
         Pokémon del espacio seleccionado
         <select value={selectedId ?? ''} onChange={event => choose(Number(event.target.value))}>
           <option value="">Vacío, elige una especie</option>
