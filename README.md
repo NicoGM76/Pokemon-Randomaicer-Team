@@ -404,6 +404,12 @@ La V2.4 abre un **comparador histórico optativo** dentro del panel `/#/competit
 - Los nombres de los movimientos permanecen canónicos en almacenamiento para que el selector global de español regional siga funcionando.
 - La conservación es **local a este navegador y perfil**, sin sincronización en la nube ni cuenta. No se confunde el guardado con la certificación de legalidad de torneos.
 
+### V2.5 · PostgreSQL y contingencia sin presupuesto (diseño aprobado)
+
+Elegida la fase de bajo costo: **Supabase Free para PostgreSQL**, **copias cifradas y versionadas en Google Drive dedicado**, y **modo de lectura degradado con los JSON estáticos y caché local** si falla la base. Drive es almacenamiento de copias, no réplica SQL activa. Los servicios aún no se han desplegado ni configurado para generar respaldos.
+
+[Diseño, seguridad, política de retención, escenarios de caída y criterios de aceptación](docs/v2-5-postgres-backup-free.md).
+
 ### V3 · Posible aplicación móvil
 
 Posible app Android/iOS reutilizando el motor y la arquitectura modular de la web.
