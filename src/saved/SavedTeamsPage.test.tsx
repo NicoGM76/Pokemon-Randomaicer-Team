@@ -80,7 +80,7 @@ describe('SavedTeamsPage', () => {
     const competitiveCard = screen.getByRole('article', { name: 'Equipo competitivo: Doble Mega Champions' });
     expect(within(adventureCard).getByRole('button', { name: 'Cargar' })).toBeTruthy();
     expect(within(competitiveCard).getByText('Pokémon Champions · 66 PC')).toBeTruthy();
-    expect(within(competitiveCard).getByRole('img', { hidden: true }).getAttribute('src')).toContain('/10310.png');
+    expect(competitiveCard.querySelector('img')?.getAttribute('src')).toContain('/10310.png');
 
     fireEvent.click(within(competitiveCard).getByRole('button', { name: 'Cargar' }));
     expect(await screen.findByText('Competitive route')).toBeTruthy();
