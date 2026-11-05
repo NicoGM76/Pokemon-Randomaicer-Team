@@ -1,13 +1,13 @@
 # V2.5: PostgreSQL sin presupuesto y recuperación ante fallos
 
-**Decisión:** comenzar sin presupuesto recurrente. Esta versión es un diseño técnico y una lista de aceptación, **no** un despliegue de PostgreSQL, una conexión a Drive ni alta disponibilidad implementada.
+**Decisión:** comenzar sin presupuesto recurrente. **En ejecución:** el proyecto Supabase Free, las 15 tablas y sus RLS ya existen; una primera muestra de catálogo se importó. El Drive dedicado y sus cinco subcarpetas están creados. Aún **no hay** backup real ni failover de producción implementados.
 
 ## 1. Componentes y responsabilidades
 
 | Componente | Responsabilidad | Estado previo |
 | --- | --- | --- |
-| Supabase Free, PostgreSQL | Origen principal para datos normalizados y metadatos curados | Integración autorizada; aún sin proyecto creado |
-| Google Drive dedicado | Almacén externo para copias cifradas, con historial, fuera del proveedor de la base | Por configurar |
+| Supabase Free, PostgreSQL | Origen principal para datos normalizados y metadatos curados | Proyecto `pokemon-adventure` creado en São Paulo, PostgreSQL 17; esquema aplicado |
+| Google Drive dedicado | Almacén externo para copias cifradas, con historial, fuera del proveedor de la base | Cuenta dedicada conectada y carpetas creadas; aún sin rutina de backup |
 | GitHub Pages | Frontend estático y snapshots **públicos** y versionados del catálogo/metagame | Ya existe; JSON generados durante el build |
 | Almacenamiento local | Borradores y equipos guardados del navegador, y futura caché de lectura | localStorage activo; adaptador IndexedDB disponible |
 | GitHub Actions | Orquestar exportación, verificación de integridad y alertas | Existe pipeline de datos; **no** existe todavía exportación a Drive |
@@ -61,7 +61,7 @@ Pokemon-Adventure-DB-Backups/
   restore-tests/
 ```
 
-La ruta anterior es una **propuesta**; todavía no indica que exista una carpeta ni que se esté creando un respaldo.
+La carpeta raíz y las cinco subcarpetas **ya existen en Google Drive**. Esto **no** implica que se hayan producido copias de seguridad.
 
 ## 4. Preparación relacional antes de migrar
 
@@ -85,9 +85,9 @@ Fase 2 (no habilitada de entrada): cuentas y equipos privados. Diseñar autentic
 
 ## 6. Entregables y criterios de aceptación
 
-1. [ ] Crear proyecto PostgreSQL (con aprobación de costo/región) y aplicar migraciones versionadas.
-2. [ ] Cargar datos iniciales con validación, procedencia y rollback; comparar con JSON existentes.
-3. [ ] Crear/autorizar un Drive **dedicado** y restringir credenciales a ejecución del backup.
+1. [x] Crear proyecto PostgreSQL sin costo mensual (región São Paulo) y aplicar las tres migraciones iniciales del esquema.
+2. [ ] Cargar **catálogo completo** validado y cotejar; primera carga de muestra realizada: 43 especies, 2 formas y 17 evoluciones, sin referencias rotas.
+3. [ ] Drive **dedicado** ya conectado y carpetas creadas; falta restringir las credenciales para la automatización del backup.
 4. [ ] Implementar rutina automática de exportar, cifrar, subir, retener y alertar.
 5. [ ] Demostrar restauración real desde Drive a PostgreSQL alternativo.
 6. [ ] Introducir capa de datos frontend con fallback a snapshot/caché cuando falle la API.
@@ -97,3 +97,11 @@ Fase 2 (no habilitada de entrada): cuentas y equipos privados. Diseñar autentic
 10. [ ] Documentar recuperación paso a paso, tiempos medidos, integridad y propietario del procedimiento.
 
 **Sin concluir los puntos 3-9 no afirmar que contamos con backups automáticos ni tolerancia real a fallos.**
+
+## Avances verificados (5 de noviembre de 2026)
+
+- Proyecto Supabase: `pokemon-adventure` (`ffnutyxsfjkbdgavfmpv`), 15 tablas con RLS y acceso público solo de lectura; consulta PostgreSQL y controles de integridad exitosos.
+- Migraciones aplicadas: `create_pokemon_catalog_v25`, `index_pokemon_catalog_foreign_keys`, `grant_catalog_server_import`.
+- Registro de importación: `bootstrap-repo-sample-v1`, `completeness=sample`, 43 especies, 67 tipos, 2 formas y 17 evoluciones. La web aún no se conecta a este esquema.
+- Drive: https://drive.google.com/drive/folders/1zuJuD8I4Na2nc_oxHfxHMljMv3XI4NNE
+- Scripts de exportación validados: [db/README.md](../db/README.md).
