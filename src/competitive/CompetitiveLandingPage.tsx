@@ -1,6 +1,9 @@
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import pokemonCatalog from '../data/generated/pokemon.json';
 import { useLocale } from '../i18n/LocaleProvider';
+import type { Locale } from '../i18n/LocaleProvider';
+import { pokemonAbilityName, pokemonMoveName, pokemonNatureName } from '../i18n/pokemonTerms';
+import { itemDisplay } from './assist/items';
 import type { Pokemon } from '../domain/pokemon/types';
 import { analyzeCompetitiveTeam } from './core/analysis';
 import PokemonSpeciesPicker from './PokemonSpeciesPicker';
@@ -40,7 +43,7 @@ function formatTitle(format: CompetitiveFormat): string {
   return format === 'singles' ? 'Singles 6v6' : 'Dobles estilo VGC';
 }
 
-function showText(team: CompetitiveTeam, environment: CompetitiveEnvironment): string {
+function showText(team: CompetitiveTeam, environment: CompetitiveEnvironment, locale: Locale): string {
   return team.filter((member): member is CompetitivePokemonSet => member !== null).map(member => {
     const entry = lookup.get(member.pokemonId);
     const assigned = pointsFor(member, environment);
@@ -49,20 +52,20 @@ function showText(team: CompetitiveTeam, environment: CompetitiveEnvironment): s
     const ivs = statKeys.filter(stat => member.ivs[stat] !== 31)
       .map(stat => member.ivs[stat] + ' ' + statLabels[stat]).join(' / ');
     return [
-      (entry ? niceName(entry.name) : '#' + member.pokemonId) + (member.item ? ' @ ' + member.item : ''),
-      'Ability: ' + member.ability,
+      (entry ? niceName(entry.name) : '#' + member.pokemonId) + (member.item ? ' @ ' + itemDisplay(member.item, locale) : ''),
+      'Habilidad: ' + pokemonAbilityName(member.ability, locale),
       (environment === 'champions' ? 'PC: ' : 'EVs: ') + evs,
       ...(environment === 'mainline' && ivs ? ['IVs: ' + ivs] : []),
-      ...(member.formId ? ['Form: ' + member.formId] : []),
-      ...(environment === 'mainline' && member.teraType ? ['Tera Type: ' + member.teraType] : []),
-      member.nature + ' Nature',
-      ...member.moves.filter(Boolean).map(move => '- ' + move)
+      ...(member.formId ? ['Forma: ' + member.formId] : []),
+      ...(environment === 'mainline' && member.teraType ? ['Tipo Tera: ' + member.teraType] : []),
+      pokemonNatureName(member.nature, locale) + ' (naturaleza)',
+      ...member.moves.filter(Boolean).map(move => '- ' + pokemonMoveName(move, locale))
     ].join('\n');
   }).join('\n\n');
 }
 
 export default function CompetitiveLandingPage() {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const [workspace, setWorkspace] = useState<CompetitiveWorkspace>(() =>
     removeUnknownPokemon(loadCompetitiveDraft(), knownIds)
   );
@@ -124,7 +127,7 @@ export default function CompetitiveLandingPage() {
   }
 
   async function copy(): Promise<void> {
-    const text = showText(team, environment);
+    const text = showText(team, environment, locale);
     if (!text) {
       setNotice('Primero añade algún Pokémon.');
       return;
