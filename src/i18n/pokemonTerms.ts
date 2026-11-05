@@ -16,9 +16,9 @@ function normalize(text: string): string {
 }
 
 const catalogs: Record<Category, TermCatalog> = {
-  moves: officialTerms.moves as TermCatalog,
-  abilities: { ...(officialTerms.abilities as TermCatalog), ...curatedAbilities },
-  natures: officialTerms.natures as TermCatalog
+  moves: officialTerms.moves as unknown as TermCatalog,
+  abilities: { ...(officialTerms.abilities as unknown as TermCatalog), ...curatedAbilities },
+  natures: officialTerms.natures as unknown as TermCatalog
 };
 
 const indexes = {} as Record<Category, Map<string, TermRow>>;
