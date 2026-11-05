@@ -167,4 +167,31 @@ describe('V2.1 competitive interactive workspace', () => {
     expectOnlyOneSearch();
   });
 
+  it('opens verified V2.2 matchups without losing the competitive editor', async () => {
+    const fixture = {
+      schemaVersion: 1, status: 'ready', format: 'singles',
+      label: 'Singles · Gen 9 OU', description: 'OU ladder', droppedSpecies: 0,
+      source: {
+        organization: 'Smogon / Pokémon Showdown', kind: 'ladder',
+        month: '2026-10', ladderId: 'gen9ou', cutoff: 1695, battles: 56789,
+        url: 'https://www.smogon.com/stats/2026-10/chaos/gen9ou-1695.json'
+      },
+      pokemon: [{ pokemonId: 6, usagePercent: 20.5, moves: ['Flamethrower'],
+        items: ['Leftovers'], abilities: ['Blaze'], teammates: [] }]
+    };
+    const fetcher = vi.fn().mockResolvedValue({ ok: true, json: async () => fixture });
+    vi.stubGlobal('fetch', fetcher);
+    window.location.hash = '#/competitive';
+    render(<RootApp />);
+    expect(await screen.findByRole('heading', { name: 'Tu laboratorio competitivo' })).toBeTruthy();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Ver metagame y matchups' }));
+    expect(await screen.findByText('Singles · Gen 9 OU')).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Metagame y matchups' })).toBeTruthy();
+    expect(screen.getByRole('combobox', { name: 'Pokémon rival para analizar' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Espacio 1' })).toBeTruthy();
+    expect(screen.queryByRole('alert')).toBeNull();
+    expect(fetcher).toHaveBeenCalledTimes(1);
+  });
+
 });
