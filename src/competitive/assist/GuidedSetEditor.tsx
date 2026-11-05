@@ -206,7 +206,7 @@ export default function GuidedSetEditor({
       {profileStatus === 'ready' && profile?.movesFromBaseSpecies &&
         <p className="comp-assist-hint">Esta Mega no tiene movimientos registrados para Escarlata/Púrpura.
           Se sugieren los de su especie base como referencia didáctica, no como legalidad confirmada de Champions.</p>}
-      {profileStatus === 'ready' && profile.scarletVioletMoves.length === 0 &&
+      {profileStatus === 'ready' && profile?.scarletVioletMoves.length === 0 &&
         <p className="comp-assist-hint">No hay movimientos verificados de Escarlata/Púrpura para sugerir.
           Puedes escribir un movimiento manualmente; su legalidad no se ha comprobado.</p>}
       <div className="comp-two-fields">
