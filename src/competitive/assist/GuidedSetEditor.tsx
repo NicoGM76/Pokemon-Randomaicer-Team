@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { Pokemon, PokemonStats } from '../../domain/pokemon/types';
 import { useLocale } from '../../i18n/LocaleProvider';
+import { pokemonAbilityName, pokemonMoveName, pokemonNatureName } from '../../i18n/pokemonTerms';
 import { SAMPLE_TEMPLATES } from '../core/templates';
 import { natureEffects, roleDescriptions, roleLabels, statKeys, statLabels } from '../core/types';
 import type { CompetitiveEnvironment, CompetitiveFormat, CompetitivePokemonSet, StatKey } from '../core/types';
@@ -70,9 +71,9 @@ export default function GuidedSetEditor({
       .flatMap(template => template.moves);
     return suggestions.map(move => {
       const text = name(move);
-      return { id: text, label: text, priority: relevant.some(v => norm(v) === norm(move)) ? 1 : 0 };
+      return { id: text, label: pokemonMoveName(move, locale), priority: relevant.some(v => norm(v) === norm(move)) ? 1 : 0 };
     }).sort((a,b) => b.priority-a.priority || a.label.localeCompare(b.label));
-  },[profile, pokemon.id, format]);
+  },[profile, pokemon.id, format, locale]);
 
   const [up,down] = natureEffects[member.nature] ?? [null,null];
   const natureDescription = !up || !down
@@ -107,7 +108,7 @@ export default function GuidedSetEditor({
           <select value={member.nature} onChange={event =>
             onEdit(prev => ({ ...prev, nature: event.target.value }))}>
             {Object.keys(natureEffects).map(value =>
-              <option key={value} value={value}>{value}</option>)}
+              <option key={value} value={value}>{pokemonNatureName(value, locale)}</option>)}
           </select>
         </label>
       </div>
@@ -155,10 +156,7 @@ export default function GuidedSetEditor({
               {member.ability} (no coincide con esta especie)
             </option>}
             {profile?.abilities.map(ability => <option key={ability} value={ability}>
-              {ability === 'aura-guard' ? 'Aura Protectora (Aura Guard)'
-                : ability === 'sharpness' ? 'Cortante (Sharpness)'
-                : ability === 'levitate' ? 'Levitación (Levitate)'
-                : name(ability)}
+              {pokemonAbilityName(ability, locale) === ability ? name(ability) : pokemonAbilityName(ability, locale)}
             </option>)}
           </select>
         </label>
@@ -193,6 +191,7 @@ export default function GuidedSetEditor({
           <SearchAssistInput key={index}
             label={'Movimiento ' + (index+1)} value={move}
             options={moveOptions} placeholder="Escribe para buscar movimientos"
+            displayValue={value => pokemonMoveName(value, locale)}
             onChange={value => onEdit(prev => ({
               ...prev,
               moves: prev.moves.map((old,i) => i===index ? value : old) as CompetitivePokemonSet['moves']
