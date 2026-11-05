@@ -11,6 +11,7 @@ import { baseArtworkUrl, memberArtworkUrl, memberDisplayName } from './memberArt
 import { createManualSet, generateCompetitiveTeam, regenerateCompetitiveSlot } from './core/teamBuilder';
 import GuidedSetEditor from './assist/GuidedSetEditor';
 import { getTrainingRules, pointsFor } from './core/trainingRules';
+import LoadFailureBoundary from '../error/LoadFailureBoundary';
 import { roleLabels, statKeys, statLabels } from './core/types';
 import type {
   CompetitiveEnvironment, CompetitiveFormat, CompetitivePokemonSet, CompetitiveTeam, CompetitiveWorkspace
@@ -275,11 +276,13 @@ export default function CompetitiveLandingPage() {
             a Dobles de Pokémon Champions. No se mezclarán estadísticas de juegos distintos.
           </div>
         ) : (
-          <Suspense fallback={<p className="comp-subdued" role="status">Preparando estadísticas competitivas…</p>}>
-            <MetaInsightsPanel key={format + environment} format={format} pokemon={pokemon}
-              teamIds={team.filter((slot): slot is CompetitivePokemonSet => slot !== null).map(slot => slot.pokemonId)}
-              showLearning={workspace.showLearning} />
-          </Suspense>
+          <LoadFailureBoundary scope="matchups">
+            <Suspense fallback={<p className="comp-subdued" role="status">Preparando estadísticas competitivas…</p>}>
+              <MetaInsightsPanel key={format + environment} format={format} pokemon={pokemon}
+                teamIds={team.filter((slot): slot is CompetitivePokemonSet => slot !== null).map(slot => slot.pokemonId)}
+                showLearning={workspace.showLearning} />
+            </Suspense>
+          </LoadFailureBoundary>
         )}
       </div>}
 
