@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build-full-snapshot:
@@ -58,16 +58,3 @@ jobs:
           path: export/
           retention-days: 7
           if-no-files-found: error
-
-      # Initial bootstrap only. The bot commit is not part of public history until
-      # reviewed/merged through PR. No DB password or API key is involved.
-      - name: Publish verified catalog to the bootstrap branch
-        if: github.ref_name == 'feature/v2-5-data-backups'
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add src/data/generated/pokemon.json src/data/generated/evolutions.json src/data/generated/regional-dex-entries.json src/data/generated/dex-import-report.json
-          if ! git diff --cached --quiet; then
-            git commit -m "chore(data): check in validated full Pokemon catalog [skip ci]"
-            git push origin HEAD:feature/v2-5-data-backups
-          fi
