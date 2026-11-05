@@ -78,4 +78,62 @@ describe('V2.1 competitive interactive workspace', () => {
     expect(await screen.findByRole('heading', { name: 'Tu laboratorio competitivo' })).toBeTruthy();
     expect((screen.getByLabelText('Movimiento 1') as HTMLInputElement).value).toBe('Thunderbolt');
   });
+  it('updates roster art and form label for Mega-Salamence, Mega-Lucario Z and Rotom Lavado, including reload', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockImplementation(async (url: string) => ({
+      ok: true,
+      json: async () => String(url).includes('/pokemon-species/')
+        ? { varieties: [
+          { pokemon: { name: 'salamence' } }, { pokemon: { name: 'salamence-mega' } },
+          { pokemon: { name: 'lucario' } }, { pokemon: { name: 'rotom' } },
+          { pokemon: { name: 'rotom-wash' } }
+        ] }
+        : { abilities: [{ ability: { name: 'intimidate' } }], moves: [] }
+    })));
+    window.location.hash = '#/competitive';
+    const view = render(<RootApp />);
+    expect(await screen.findByRole('heading', { name: 'Tu laboratorio competitivo' })).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: 'Pokémon Champions' }));
+
+    function selectSpecies(id: number) {
+      fireEvent.click(screen.getByRole('button', { name: 'Explorar Pokédex completa' }));
+      fireEvent.change(screen.getByLabelText('Pokémon del espacio seleccionado'), {
+        target: { value: String(id) }
+      });
+    }
+    function expectCard(slot: number, name: string, artworkId: number) {
+      const card = screen.getByRole('button', { name: 'Editar espacio ' + slot });
+      expect(card.textContent).toContain(name);
+      expect(card.querySelector('img')?.getAttribute('src')).toContain('/' + artworkId + '.png');
+    }
+
+    selectSpecies(373);
+    fireEvent.change(screen.getByRole('combobox', { name: 'Forma del Pokémon' }), {
+      target: { value: 'salamence-mega' }
+    });
+    expectCard(1, 'Mega-Salamence', 10089);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Editar espacio 2' }));
+    selectSpecies(448);
+    fireEvent.change(screen.getByRole('combobox', { name: 'Forma del Pokémon' }), {
+      target: { value: 'lucario-mega-z' }
+    });
+    expectCard(2, 'Mega-Lucario Z', 10310);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Editar espacio 3' }));
+    selectSpecies(479);
+    expect(await screen.findByRole('option', { name: /Rotom Wash · forma de referencia/ })).toBeTruthy();
+    fireEvent.change(screen.getByRole('combobox', { name: 'Forma del Pokémon' }), {
+      target: { value: 'rotom-wash' }
+    });
+    expectCard(3, 'Rotom Lavado', 10009);
+    expectCard(1, 'Mega-Salamence', 10089);
+
+    view.unmount();
+    render(<RootApp />);
+    expect(await screen.findByRole('heading', { name: 'Tu laboratorio competitivo' })).toBeTruthy();
+    expectCard(1, 'Mega-Salamence', 10089);
+    expectCard(2, 'Mega-Lucario Z', 10310);
+    expectCard(3, 'Rotom Lavado', 10009);
+  });
+
 });
