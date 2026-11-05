@@ -5,7 +5,7 @@ import { pokemonAbilityName, pokemonMoveName, pokemonNatureName } from '../../i1
 import { SAMPLE_TEMPLATES } from '../core/templates';
 import { natureEffects, roleDescriptions, roleLabels, statKeys, statLabels } from '../core/types';
 import type { CompetitiveEnvironment, CompetitiveFormat, CompetitivePokemonSet, StatKey } from '../core/types';
-import { applyFormSelection, getTrainingRules, megaOptions, MEGA_STONES, MEGA_Z_TYPES, pointsFor, TERA_TYPES, withStatValue } from '../core/trainingRules';
+import { applyFormSelection, getTrainingRules, megaOptions, MEGA_STONES, MEGA_Z_TYPES, maxAssignablePoints, pointsFor, TERA_TYPES, withStatValue } from '../core/trainingRules';
 import { getPokemonProfile, type PokemonAssistProfile } from './pokemonProfile';
 import { ITEM_CATALOG, itemDisplay } from './items';
 import SearchAssistInput from './SearchAssistInput';
@@ -226,11 +226,18 @@ export default function GuidedSetEditor({
       </div>
 
       <h3 className="comp-mini-heading">{training.label} <small>{total} / {training.totalMax}</small></h3>
+      <p className="comp-assist-hint" role="status">
+        {total >= training.totalMax
+          ? total > training.totalMax
+            ? 'El reparto supera el máximo. Reduce puntos para corregirlo.'
+            : 'Límite alcanzado. Reduce una estadística para subir otra.'
+          : 'Disponibles: ' + (training.totalMax - total) + ' ' + training.label + '.'}
+      </p>
       <div className="comp-stat-grid">
         {statKeys.map(stat => (
           <label className="comp-field" key={stat}>{statLabels[stat]}
             <input aria-label={training.label + ' ' + statLabels[stat]}
-              type="number" min="0" max={training.statMax} step="1"
+              type="number" min="0" max={maxAssignablePoints(member, stat, environment)} step="1"
               value={points[stat]} onChange={event => updatePoints(stat,event.target.value)} />
           </label>
         ))}

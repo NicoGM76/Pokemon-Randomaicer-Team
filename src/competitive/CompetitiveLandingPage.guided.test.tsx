@@ -247,4 +247,56 @@ describe('guided competitive editor', () => {
     expect(screen.queryByText('Habilidad única asignada automáticamente.')).toBeNull();
   });
 
+  it('caps Champions PC at 66 and releases points when a stat is reduced', async () => {
+    mockPokemonApi();
+    window.location.hash = '#/competitive';
+    render(<RootApp />);
+    fireEvent.click(await screen.findByRole('button', { name: 'Pokémon Champions' }));
+    await selectSpecies(6);
+
+    const hp = screen.getByRole('spinbutton', { name: 'PC PS' }) as HTMLInputElement;
+    const defense = screen.getByRole('spinbutton', { name: 'PC Defensa' }) as HTMLInputElement;
+    const speed = screen.getByRole('spinbutton', { name: 'PC Velocidad' }) as HTMLInputElement;
+    expect(hp.value).toBe('1');
+    expect(speed.value).toBe('32');
+    expect(defense.max).toBe('1');
+
+    fireEvent.change(hp, { target: { value: '2' } });
+    expect(screen.getByText('Límite alcanzado. Reduce una estadística para subir otra.')).toBeTruthy();
+    expect(defense.max).toBe('0');
+    fireEvent.change(defense, { target: { value: '20' } });
+    expect(defense.value).toBe('0');
+    fireEvent.change(speed, { target: { value: '22' } });
+    expect(defense.max).toBe('10');
+    expect(screen.getByText('Disponibles: 10 PC.')).toBeTruthy();
+
+    fireEvent.change(defense, { target: { value: '50' } });
+    expect(defense.value).toBe('10');
+    expect(screen.getByText('Límite alcanzado. Reduce una estadística para subir otra.')).toBeTruthy();
+    expect(screen.getByRole('heading', { name: /PC.*66.*66/ })).toBeTruthy();
+    expect(screen.queryByText(/PC suman 67\/66/)).toBeNull();
+  });
+
+  it('caps saga principal EVs at 510 and allows lowering for reallocation', async () => {
+    mockPokemonApi();
+    window.location.hash = '#/competitive';
+    render(<RootApp />);
+    await selectSpecies(6);
+
+    const hp = screen.getByRole('spinbutton', { name: 'EVs PS' }) as HTMLInputElement;
+    const defense = screen.getByRole('spinbutton', { name: 'EVs Defensa' }) as HTMLInputElement;
+    const speed = screen.getByRole('spinbutton', { name: 'EVs Velocidad' }) as HTMLInputElement;
+    expect(hp.value).toBe('4');
+    expect(defense.max).toBe('2');
+    fireEvent.change(hp, { target: { value: '6' } });
+    expect(defense.max).toBe('0');
+    fireEvent.change(defense, { target: { value: '200' } });
+    expect(defense.value).toBe('0');
+    fireEvent.change(speed, { target: { value: '242' } });
+    expect(defense.max).toBe('10');
+    fireEvent.change(defense, { target: { value: '12' } });
+    expect(defense.value).toBe('10');
+    expect(screen.getByRole('heading', { name: /EVs.*510.*510/ })).toBeTruthy();
+  });
+
 });

@@ -98,10 +98,31 @@ export const TERA_TYPES = [
   'flying','psychic','bug','rock','ghost','dragon','dark','steel','fairy'
 ] as const;
 
+/**
+ * Remaining capacity for one stat, including the value already assigned to it.
+ * Editing an existing stat stays possible even after the total budget is full.
+ */
+export function maxAssignablePoints(
+  member: CompetitivePokemonSet, stat: StatKey, environment: CompetitiveEnvironment
+): number {
+  const rules = getTrainingRules(environment);
+  const points = pointsFor(member, environment);
+  const usedElsewhere = statKeys.reduce((sum, key) => {
+    if (key === stat) return sum;
+    const assigned = points[key];
+    return sum + (Number.isFinite(assigned) ? Math.max(0, assigned) : 0);
+  }, 0);
+  return Math.max(0, Math.min(rules.statMax, Math.floor(rules.totalMax - usedElsewhere)));
+}
+
 export function withStatValue(member: CompetitivePokemonSet, stat: StatKey,
   value: number, environment: CompetitiveEnvironment): CompetitivePokemonSet {
+  const max = maxAssignablePoints(member, stat, environment);
+  // Both typing and the number-input spinners must obey the SAME rule.
+  const requested = Number.isFinite(value) ? Math.trunc(value) : 0;
+  const limited = Math.max(0, Math.min(max, requested));
   if (environment === 'champions') {
-    return { ...member, championsPoints: { ...pointsFor(member, 'champions'), [stat]: value } };
+    return { ...member, championsPoints: { ...pointsFor(member, 'champions'), [stat]: limited } };
   }
-  return { ...member, evs: { ...member.evs, [stat]: value } };
+  return { ...member, evs: { ...member.evs, [stat]: limited } };
 }

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Pokemon } from '../../domain/pokemon/types';
-import { championsPointsFromEVs, getTrainingRules, applyFormSelection, pointsFor, megaOptions, MEGA_Z_TYPES } from './trainingRules';
+import { championsPointsFromEVs, getTrainingRules, applyFormSelection, pointsFor, megaOptions, MEGA_Z_TYPES, maxAssignablePoints, withStatValue } from './trainingRules';
 import { createManualSet } from './teamBuilder';
 import { validateCompetitiveTeam } from './validation';
 import { analyzeCompetitiveTeam } from './analysis';
@@ -18,6 +18,49 @@ describe('mainline vs Champions training', () => {
     expect(pointsFor(set, 'champions').speed).toBe(32);
     expect(pointsFor(set, 'mainline')).toEqual(set.evs);
     expect(championsPointsFromEVs(set.evs).hp).toBe(1);
+  });
+
+  it('stops Champions PC at 66/66 without blocking redistribution', () => {
+    const initial = createManualSet(pokemon);
+    const full = { ...initial, championsPoints: {
+      hp: 24, attack: 32, defense: 0, specialAttack: 0, specialDefense: 10, speed: 0
+    } };
+    expect(maxAssignablePoints(full, 'defense', 'champions')).toBe(0);
+    expect(maxAssignablePoints(full, 'specialDefense', 'champions')).toBe(10);
+    // Typing 1, pasting 99 or using a spinner cannot exceed the budget.
+    for (const requested of [1, 99, 1000]) {
+      expect(withStatValue(full, 'defense', requested, 'champions').championsPoints).toEqual(full.championsPoints);
+    }
+    expect(withStatValue(full, 'specialDefense', 30, 'champions').championsPoints?.specialDefense).toBe(10);
+    const reduced = withStatValue(full, 'attack', 30, 'champions');
+    expect(reduced.championsPoints?.attack).toBe(30);
+    expect(maxAssignablePoints(reduced, 'defense', 'champions')).toBe(2);
+    const redistributed = withStatValue(reduced, 'defense', 32, 'champions');
+    expect(redistributed.championsPoints?.defense).toBe(2);
+    expect(Object.values(redistributed.championsPoints ?? {}).reduce((sum, val) => sum + val, 0)).toBe(66);
+    expect(validateCompetitiveTeam('doubles', [redistributed], 'champions')
+      .some(issue => issue.code === 'stat_total' || issue.code === 'stat_per_stat')).toBe(false);
+    expect(redistributed.evs).toEqual(initial.evs);
+  });
+
+  it('respects individual caps, clamps invalid entries and keeps mainline EVs independent', () => {
+    const original = createManualSet(pokemon);
+    const full = { ...original, evs: {
+      hp: 4, attack: 252, defense: 2, specialAttack: 0, specialDefense: 0, speed: 252
+    } };
+    expect(maxAssignablePoints(full, 'specialAttack', 'mainline')).toBe(0);
+    expect(withStatValue(full, 'specialAttack', 1, 'mainline').evs.specialAttack).toBe(0);
+    const opened = withStatValue(full, 'speed', 244, 'mainline');
+    expect(maxAssignablePoints(opened, 'specialAttack', 'mainline')).toBe(8);
+    const changed = withStatValue(opened, 'specialAttack', 999, 'mainline');
+    expect(changed.evs.specialAttack).toBe(8);
+    expect(Object.values(changed.evs).reduce((sum, value) => sum + value, 0)).toBe(510);
+    expect(withStatValue(changed, 'hp', -20, 'mainline').evs.hp).toBe(0);
+    expect(withStatValue(changed, 'hp', 3.9, 'mainline').evs.hp).toBe(3);
+    expect(withStatValue(changed, 'hp', Number.POSITIVE_INFINITY, 'mainline').evs.hp).toBe(0);
+    expect(changed.championsPoints).toBeUndefined();
+    expect(maxAssignablePoints(original, 'speed', 'champions')).toBe(32);
+    expect(withStatValue(original, 'speed', 999, 'champions').championsPoints?.speed).toBe(32);
   });
 
   it('preserves original EVs when custom Champions points are edited', () => {
