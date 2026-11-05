@@ -63,7 +63,7 @@ describe('V2.1 competitive interactive workspace', () => {
     render(<RootApp />);
     expect(await screen.findByRole('heading', { name: 'Tu laboratorio competitivo' })).toBeTruthy();
     expect((screen.getByLabelText('Pokémon del espacio seleccionado') as HTMLSelectElement).value).toBe('1000');
-    expect((screen.getByLabelText('Movimiento 1') as HTMLInputElement).value).toBe('Make It Rain');
+    expect((screen.getByLabelText('Movimiento 1') as HTMLInputElement).value).toBe('Fiebre Dorada');
   });
 
   it('edits a manual species and keeps its move after leaving the page', async () => {
@@ -72,10 +72,10 @@ describe('V2.1 competitive interactive workspace', () => {
     expect(await screen.findByRole('heading', { name: 'Tu laboratorio competitivo' })).toBeTruthy();
     fireEvent.change(screen.getByLabelText('Pokémon del espacio seleccionado'), { target: { value: '25' } });
     fireEvent.change(screen.getByLabelText('Movimiento 1'), { target: { value: 'Thunderbolt' } });
-    await waitFor(() => expect((screen.getByLabelText('Movimiento 1') as HTMLInputElement).value).toBe('Thunderbolt'));
+    await waitFor(() => expect((screen.getByLabelText('Movimiento 1') as HTMLInputElement).value).toBe('Atactrueno'));
     view.unmount();
     render(<RootApp />);
     expect(await screen.findByRole('heading', { name: 'Tu laboratorio competitivo' })).toBeTruthy();
-    expect((screen.getByLabelText('Movimiento 1') as HTMLInputElement).value).toBe('Thunderbolt');
+    expect((screen.getByLabelText('Movimiento 1') as HTMLInputElement).value).toBe('Atactrueno');
   });
 });

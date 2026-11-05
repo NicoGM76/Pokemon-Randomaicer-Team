@@ -1,5 +1,8 @@
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import type { Pokemon } from '../../domain/pokemon/types';
+import { useLocale } from '../../i18n/LocaleProvider';
+import { pokemonAbilityName, pokemonMoveName } from '../../i18n/pokemonTerms';
+import { itemDisplay } from '../assist/items';
 import { analyzeMetaMatchup, isMetaSnapshot } from './matchups';
 import type { MetaFormat, MetaResponse, MetaSnapshot } from './types';
 import './meta.css';
@@ -32,6 +35,7 @@ export default function MetaInsightsPanel({
   teamIds: number[];
   showLearning: boolean;
 }) {
+  const { locale } = useLocale();
   const [view, setView] = useState<ViewState>(() => {
     const snapshot = memoryCache.get(format);
     return snapshot ? { kind: 'ready', snapshot } : { kind: 'loading' };
@@ -173,9 +177,9 @@ export default function MetaInsightsPanel({
               </div>
             </div>
             <div className="comp-meta-sample">
-              <div><strong>Movimientos destacados</strong><span>{selected.moves.join(' · ') || 'Sin desglose'}</span></div>
-              <div><strong>Objetos destacados</strong><span>{selected.items.join(' · ') || 'Sin desglose'}</span></div>
-              <div><strong>Habilidades</strong><span>{selected.abilities.join(' · ') || 'Sin desglose'}</span></div>
+              <div><strong>Movimientos destacados</strong><span>{selected.moves.map(move => pokemonMoveName(move, locale)).join(' · ') || 'Sin desglose'}</span></div>
+              <div><strong>Objetos destacados</strong><span>{selected.items.map(item => itemDisplay(item, locale)).join(' · ') || 'Sin desglose'}</span></div>
+              <div><strong>Habilidades</strong><span>{selected.abilities.map(ability => pokemonAbilityName(ability, locale)).join(' · ') || 'Sin desglose'}</span></div>
               <div><strong>Asociación positiva con</strong><span>{names(selected.teammates) || 'Sin datos compatibles'}</span></div>
             </div>
             <h3>Presión de tipos frente a tu equipo</h3>

@@ -38,7 +38,7 @@ describe('guided competitive editor', () => {
     fireEvent.change(await screen.findByLabelText('Pokémon del espacio seleccionado'), { target: { value: '25' } });
     const ability = await screen.findByRole('combobox', { name: 'Habilidad' });
     await waitFor(() => expect((ability as HTMLSelectElement).options.length).toBeGreaterThan(1));
-    expect(screen.getByRole('option', { name: /Static/i })).toBeTruthy();
+    expect(screen.getByRole('option', { name: 'Electricidad Estática' })).toBeTruthy();
     expect(screen.queryByRole('option', { name: /Intimidate/i })).toBeNull();
 
     const item = screen.getByRole('searchbox', { name: 'Objeto equipado' });
@@ -48,8 +48,13 @@ describe('guided competitive editor', () => {
 
     const move = screen.getByRole('searchbox', { name: 'Movimiento 1' });
     fireEvent.change(move, { target: { value: 'thunder' } });
-    fireEvent.click(await screen.findByRole('button', { name: /Elegir Thunderbolt/i }));
-    expect((move as HTMLInputElement).value).toBe('Thunderbolt');
+    fireEvent.click(await screen.findByRole('button', { name: /Elegir Atactrueno/i }));
+    expect((move as HTMLInputElement).value).toBe('Atactrueno');
+    const language = screen.getByRole('combobox', { name: 'Idioma de la página' });
+    fireEvent.change(language, { target: { value: 'es-ES' } });
+    expect((move as HTMLInputElement).value).toBe('Rayo');
+    fireEvent.change(language, { target: { value: 'es-419' } });
+    expect((move as HTMLInputElement).value).toBe('Atactrueno');
   });
 
   it('does not mix OU ladder data with a Champions Singles editor', async () => {
@@ -126,6 +131,46 @@ describe('guided competitive editor', () => {
       expect(screen.getByText(new RegExp(type))).toBeTruthy();
     }
     expect(screen.queryByText('Mecánica de Champions')).toBeNull();
+  });
+
+  it('uses regional Spanish for Lucario moves while keeping the selected move across language switches', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockImplementation(async (url: string) => ({
+      ok: true,
+      json: async () => String(url).includes('/pokemon-species/')
+        ? { varieties: [{ pokemon: { name: 'lucario' } }] }
+        : {
+          abilities: [{ ability: { name: 'inner-focus' } }],
+          moves: ['aura-sphere', 'aerial-ace', 'brick-break'].map(name => ({
+            move: { name }, version_group_details: [{ version_group: { name: 'scarlet-violet' } }]
+          }))
+        }
+    })));
+    window.location.hash = '#/competitive';
+    render(<RootApp />);
+    fireEvent.click(await screen.findByRole('button', { name: 'Pokémon Champions' }));
+    fireEvent.change(screen.getByLabelText('Pokémon del espacio seleccionado'), {
+      target: { value: '448' }
+    });
+    fireEvent.change(screen.getByRole('combobox', { name: 'Forma del Pokémon' }), {
+      target: { value: 'lucario-mega-z' }
+    });
+    const move = await screen.findByRole('searchbox', { name: 'Movimiento 1' }) as HTMLInputElement;
+    fireEvent.focus(move);
+    expect(await screen.findByRole('button', { name: 'Elegir Aura Esfera' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Elegir As Aéreo' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Elegir Karatazo' })).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: 'Elegir Aura Esfera' }));
+    expect(move.value).toBe('Aura Esfera');
+
+    const language = screen.getByRole('combobox', { name: 'Idioma de la página' });
+    fireEvent.change(language, { target: { value: 'es-ES' } });
+    expect(move.value).toBe('Esfera Aural');
+    const emptyMove = screen.getByRole('searchbox', { name: 'Movimiento 2' });
+    fireEvent.focus(emptyMove);
+    expect(await screen.findByRole('button', { name: 'Elegir Golpe Aéreo' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Elegir Demolición' })).toBeTruthy();
+    fireEvent.change(language, { target: { value: 'es-419' } });
+    expect(move.value).toBe('Aura Esfera');
   });
 
 });
