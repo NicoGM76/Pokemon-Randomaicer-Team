@@ -141,7 +141,7 @@ export default function SavedTeamsPage() {
           </div>
         </section>}
       </>}
-      {notice && <p className="comp-notice" role="status">{notice}</p>}
+      {notice && <p className="saved-feedback" role="status">{notice}</p>}
     </main>
   );
 }
