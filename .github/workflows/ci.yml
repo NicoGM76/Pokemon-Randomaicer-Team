@@ -81,5 +81,7 @@ jobs:
           git add src/data/generated/pokemon.json src/data/generated/evolutions.json src/data/generated/regional-dex-entries.json src/data/generated/dex-import-report.json
           if ! git diff --cached --quiet; then
             git commit -m 'chore(data): bootstrap complete verified Pokedex [skip ci]'
+            git fetch origin feature/v2-5-data-backups
+            git rebase origin/feature/v2-5-data-backups
             git push origin HEAD:feature/v2-5-data-backups
           fi
