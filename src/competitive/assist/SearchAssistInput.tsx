@@ -9,6 +9,8 @@ interface Props {
   onChange: (value: string) => void;
   disabled?: boolean;
   hint?: string;
+  /** Localized rendering of a canonical stored value; stored data stays stable. */
+  displayValue?: (value: string) => string;
 }
 
 function norm(value: string) {
@@ -17,7 +19,7 @@ function norm(value: string) {
 }
 
 export default function SearchAssistInput({
-  label, value, options, placeholder, onChange, disabled = false, hint
+  label, value, options, placeholder, onChange, disabled = false, hint, displayValue
 }: Props) {
   const [isFocused, setFocused] = useState(false);
   const matches = useMemo(() => {
@@ -30,16 +32,22 @@ export default function SearchAssistInput({
       })
       .slice(0,8);
   },[options,value]);
-  const exactChoice = options.some(option =>
+  const exactOption = options.find(option =>
     norm(option.id) === norm(value) || norm(option.label) === norm(value));
+  const exactChoice = Boolean(exactOption);
+  const shownValue = exactOption?.label ?? (displayValue?.(value) ?? value);
   const showSuggestions = isFocused || (value.trim().length > 0 && !exactChoice);
   return (
     <div className="comp-assist-field">
       <label className="comp-field">{label}
-        <input type="search" aria-label={label} value={value} disabled={disabled}
+        <input type="search" aria-label={label} value={shownValue} disabled={disabled}
           autoComplete="off" placeholder={placeholder}
           onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
+          onBlur={() => {
+            setFocused(false);
+            // Spanish or English exact typed names resolve to their canonical ID.
+            if (exactOption && value !== exactOption.id) onChange(exactOption.id);
+          }}
           onChange={event => onChange(event.target.value)}
           onKeyDown={event => {
             if (event.key === 'Enter' && isFocused && matches.length > 0) {
