@@ -46,7 +46,7 @@ function isSet(value: unknown): value is CompetitivePokemonSet {
     && (set.teraType === undefined || TERA_TYPES.some(type => type === set.teraType));
 }
 
-function isTeam(value: unknown): value is CompetitiveTeam {
+export function isCompetitiveTeam(value: unknown): value is CompetitiveTeam {
   return Array.isArray(value)
     && value.length === 6
     && value.every(member => member === null || isSet(member));
@@ -60,7 +60,7 @@ function isWorkspace(value: unknown): value is CompetitiveWorkspace {
     && Number.isInteger(state.selectedSlot)
     && (state.selectedSlot ?? -1) >= 0 && (state.selectedSlot ?? 6) <= 5
     && Boolean(state.teams)
-    && isTeam(state.teams?.singles) && isTeam(state.teams?.doubles)
+    && isCompetitiveTeam(state.teams?.singles) && isCompetitiveTeam(state.teams?.doubles)
     && (state.environmentByFormat === undefined || (
       (state.environmentByFormat.singles === 'mainline' || state.environmentByFormat.singles === 'champions') &&
       (state.environmentByFormat.doubles === 'mainline' || state.environmentByFormat.doubles === 'champions')
