@@ -27,33 +27,50 @@ async function fetchWithTimeout(url) {
   }
 }
 
+// Keep the primary snapshot required, but history optional. Never reuse an
+// older cached file after a newer sync fails to find a comparable sample.
 const outputs = [];
+const pendingFiles = [];
 for (const target of META_TARGETS) {
-  let snapshot;
+  const verified = [];
   const failures = [];
   for (const month of latestMonths) {
     const url = 'https://www.smogon.com/stats/' + month + '/chaos/'
       + target.ladderId + '-' + target.cutoff + '.json';
     try {
       const raw = await fetchWithTimeout(url);
-      snapshot = convertChaosSnapshot(raw, pokemon, target, month);
+      const snapshot = convertChaosSnapshot(raw, pokemon, target, month);
       if (snapshot.pokemon.length < 8) throw new Error('Fewer than 8 mapped Pokémon');
-      break;
+      verified.push(snapshot);
+      if (verified.length === 2) break;
     } catch (error) {
       failures.push(month + ': ' + String(error?.message ?? error));
     }
   }
-  if (!snapshot) {
+  if (verified.length === 0) {
     throw new Error('No verified snapshot for ' + target.key
       + '. Tried ' + latestMonths.join(', ') + '. ' + failures.join(' | '));
   }
-  const filepath = path.join(outputDir, target.key + '.json');
-  await fs.writeFile(filepath, JSON.stringify(snapshot), 'utf8');
+  const latest = verified[0];
+  const previous = verified[1] ?? {
+    schemaVersion: 1,
+    status: 'unavailable',
+    format: target.key,
+    message: 'No hay dos meses verificados del mismo formato, regulación y rating en la ventana consultada.'
+  };
+  pendingFiles.push({ filename: target.key + '.json', snapshot: latest });
+  pendingFiles.push({ filename: target.key + '-previous.json', snapshot: previous });
   outputs.push({
-    format: target.key, month: snapshot.source.month,
-    ladder: snapshot.source.ladderId, matched: snapshot.pokemon.length,
-    dropped: snapshot.droppedSpecies, battles: snapshot.source.battles
+    format: target.key,
+    month: latest.source.month, previousMonth: verified[1]?.source.month ?? null,
+    ladder: latest.source.ladderId, matched: latest.pokemon.length,
+    dropped: latest.droppedSpecies, battles: latest.source.battles
   });
+}
+
+// Ensure BOTH formats have a verified latest month before replacing any file.
+for (const { filename, snapshot } of pendingFiles) {
+  await fs.writeFile(path.join(outputDir, filename), JSON.stringify(snapshot), 'utf8');
 }
 
 console.log('Smogon competitive snapshots refreshed: ' + JSON.stringify(outputs, null, 2));

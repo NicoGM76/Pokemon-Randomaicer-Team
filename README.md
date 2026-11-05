@@ -368,6 +368,20 @@ Esta actualización mantiene el constructor anterior y añade:
 
 **Límites actuales:** no es un validador oficial de equipos ni de regulaciones vigentes; el catálogo de formas y objetos no es exhaustivo. Los nombres ingleses de Pokémon y algunos términos técnicos de PokéAPI aún pueden aparecer en las recomendaciones aunque la interfaz esté en español.
 
+### V2.4 · Evolución mensual del metagame (en revisión)
+
+La V2.4 abre un **comparador histórico optativo** dentro del panel `/#/competitive`, a partir del punto pendiente «cambios verificables entre meses» documentado en V2.2.
+
+- El proceso de sincronización busca hasta **dos meses completos y verificables** dentro de las últimas cuatro opciones. Mantiene el último mes como obligatorio, pero el segundo es opcional.
+- Se publican `meta/singles.json`, `meta/doubles.json` y sus históricos `meta/singles-previous.json` y `meta/doubles-previous.json`. Un histórico no disponible genera un marcador explícito y evita mostrar datos antiguos por accidente.
+- El botón **Comparar meses de uso** descarga el histórico solo cuando se solicita. No penaliza la carga inicial de Aventura, Colección ni Competitivo.
+- Las comparativas presentan aumentos y disminuciones de **puntos porcentuales de uso ponderado**, junto con valores anteriores/actuales y la fuente original de cada período.
+- Se requiere mismo formato, misma escalera y regulación, misma organización y mismo corte de rating. Una combinación incompatible **no se compara**.
+- Los Pokémon ausentes del top 100 de alguna muestra se tratan como **sin dato comparable**, nunca como 0% de uso.
+- Se indican los dos meses reales verificados (aunque no sean consecutivos) sin fingir tendencias ni estadísticas de torneos.
+
+**Límites:** no calcula victoria, fuerza del equipo, daño ni causalidad. La selección histórica es una fotografía de la escalera de Pokémon Showdown/Smogon y no equivale a datos de Championships oficiales. La V2.3 de aprendizaje sigue sin una entrega independiente formal: esta V2.4 aborda el backlog verificable de V2.2 sin presentar esa versión como completada.
+
 ### V3 · Posible aplicación móvil
 
 Posible app Android/iOS reutilizando el motor y la arquitectura modular de la web.
@@ -376,7 +390,7 @@ Posible app Android/iOS reutilizando el motor y la arquitectura modular de la we
 
 ## 📌 Estado del proyecto
 
-**V1, V2.0, V2.1 y V2.2 están publicadas. El editor guiado y la localización general están publicados. El ajuste de Mega-Lucario Z se prepara en una rama antes del merge.**
+**V1, V2.0, V2.1 y V2.2 están publicadas. El editor guiado, la localización general y las tres Mega Z están integrados. La V2.4 incorpora una comparativa histórica opcional de uso competitivo.**
 
 👉 https://nicogm76.github.io/Pokemon-Randomaicer-Team/
 
