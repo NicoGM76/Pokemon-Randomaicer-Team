@@ -165,7 +165,8 @@ describe('guided competitive editor', () => {
     const language = screen.getByRole('combobox', { name: 'Idioma de la página' });
     fireEvent.change(language, { target: { value: 'es-ES' } });
     expect(move.value).toBe('Esfera Aural');
-    fireEvent.focus(move);
+    const emptyMove = screen.getByRole('searchbox', { name: 'Movimiento 2' });
+    fireEvent.focus(emptyMove);
     expect(await screen.findByRole('button', { name: 'Elegir Golpe Aéreo' })).toBeTruthy();
     expect(screen.getByRole('button', { name: 'Elegir Demolición' })).toBeTruthy();
     fireEvent.change(language, { target: { value: 'es-419' } });
