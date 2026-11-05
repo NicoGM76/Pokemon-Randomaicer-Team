@@ -159,6 +159,7 @@ BEGIN
     EXECUTE format('ALTER TABLE public.%I ENABLE ROW LEVEL SECURITY',tbl);
     EXECUTE format('REVOKE ALL ON public.%I FROM anon, authenticated, PUBLIC',tbl);
     EXECUTE format('GRANT SELECT ON public.%I TO anon, authenticated',tbl);
+    EXECUTE format('GRANT SELECT, INSERT, UPDATE, DELETE ON public.%I TO service_role',tbl);
     IF tbl = 'source_snapshots' THEN
       EXECUTE format('CREATE POLICY public_read_verified ON public.%I FOR SELECT TO anon, authenticated USING (status = ''ready'')',tbl);
     ELSE
