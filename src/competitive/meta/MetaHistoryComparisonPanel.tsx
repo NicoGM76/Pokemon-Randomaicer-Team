@@ -17,7 +17,7 @@ export default function MetaHistoryComparisonPanel({
   format, snapshot, pokemon
 }: { format: MetaFormat; snapshot: MetaSnapshot; pokemon: Pokemon[] }) {
   const [state, setState] = useState<HistoryState>({ kind: 'loading' });
-  const names = useMemo(() => new Map(pokemon.map(entry => [
+  const names = useMemo(() => new Map<number, string>(pokemon.map(entry => [
     entry.id, entry.name.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
   ])), [pokemon]);
 
