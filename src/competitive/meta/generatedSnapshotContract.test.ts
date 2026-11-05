@@ -57,11 +57,32 @@ function explainInvalid(value: unknown, format: MetaFormat): string {
 
 describe('published competitive snapshot contract', () => {
   for (const format of formats) {
-    it('accepts the generated ' + format + ' snapshot before deployment', async () => {
-      const json = JSON.parse(await fs.readFile('public/meta/' + format + '.json', 'utf8')) as unknown;
-      // Checked-in placeholders remain legitimate for offline/local test runs.
-      if (!process.env.CI && (json as { status?: string }).status === 'unavailable') return;
-      expect(isMetaSnapshot(json, format), explainInvalid(json, format)).toBe(true);
-    });
+    for (const { suffix, optional } of [
+      { suffix: '', optional: false },
+      { suffix: '-previous', optional: true }
+    ]) {
+      it('accepts the generated ' + format + suffix + ' snapshot before deployment', async () => {
+        const file = 'public/meta/' + format + suffix + '.json';
+        let content: string;
+        try {
+          content = await fs.readFile(file, 'utf8');
+        } catch (error) {
+          // Historical files do not exist in the checked-in offline placeholders.
+          if (!process.env.CI && optional) return;
+          throw error;
+        }
+        const json = JSON.parse(content) as unknown;
+        const state = json as { status?: string; format?: string; schemaVersion?: number };
+        if (state.status === 'unavailable') {
+          if (optional) {
+            expect(state.format).toBe(format);
+            expect(state.schemaVersion).toBe(1);
+            return;
+          }
+          if (!process.env.CI) return;
+        }
+        expect(isMetaSnapshot(json, format), file + '\n' + explainInvalid(json, format)).toBe(true);
+      });
+    }
   }
 });
