@@ -1,7 +1,7 @@
 import type {
   CompetitiveEnvironment, CompetitiveFormat, CompetitiveTeam, CompetitiveWorkspace
 } from './core/types';
-import { createEmptyWorkspace, isCompetitiveTeam, loadCompetitiveDraft, saveCompetitiveDraft } from './competitiveDraft';
+import { isCompetitiveTeam, loadCompetitiveDraft, saveCompetitiveDraft } from './competitiveDraft';
 
 export const COMPETITIVE_SAVED_TEAMS_KEY = 'pokemon-team-generator:saved:competitive:v1';
 
@@ -31,8 +31,25 @@ function validSaved(value: unknown): value is SavedCompetitiveTeam {
     && isCompetitiveTeam(data.team);
 }
 
+const unavailableStorage: StorageLike = {
+  getItem: () => null,
+  setItem: () => { throw new Error('Almacenamiento local no disponible'); }
+};
+
+function browserStorage(): StorageLike {
+  try {
+    return globalThis.localStorage ?? unavailableStorage;
+  } catch {
+    return unavailableStorage;
+  }
+}
+
 export class SavedCompetitiveTeamRepository {
-  constructor(private readonly storage: StorageLike = globalThis.localStorage) {}
+  private readonly storage: StorageLike;
+
+  constructor(storage?: StorageLike) {
+    this.storage = storage ?? browserStorage();
+  }
 
   getAll(): SavedCompetitiveTeam[] {
     try {
@@ -78,14 +95,17 @@ export function restoreCompetitiveTeam(
   saved: SavedCompetitiveTeam, current: CompetitiveWorkspace = loadCompetitiveDraft()
 ): CompetitiveWorkspace {
   if (!validSaved(saved)) return current;
-  const defaults = createEmptyWorkspace();
-  const environments = { ...defaults.environmentByFormat, ...current.environmentByFormat };
+  const environments: Record<CompetitiveFormat, CompetitiveEnvironment> = {
+    singles: current.environmentByFormat?.singles ?? 'mainline',
+    doubles: current.environmentByFormat?.doubles ?? 'champions'
+  };
+  environments[saved.format] = saved.environment;
   const restored: CompetitiveWorkspace = {
     ...current,
     format: saved.format,
     selectedSlot: 0,
     teams: { ...current.teams, [saved.format]: saved.team },
-    environmentByFormat: { ...environments, [saved.format]: saved.environment }
+    environmentByFormat: environments
   };
   saveCompetitiveDraft(restored);
   return restored;
