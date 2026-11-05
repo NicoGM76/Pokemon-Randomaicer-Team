@@ -1,12 +1,6 @@
 name: V2.5 Full Pokemon Catalog Export
 
 on:
-  push:
-    branches:
-      - feature/v2-5-data-backups
-    paths:
-      - .github/workflows/export-full-catalog.yml
-      - scripts/db/**
   workflow_dispatch:
 
 permissions:
