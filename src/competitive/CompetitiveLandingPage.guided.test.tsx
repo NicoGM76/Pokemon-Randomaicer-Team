@@ -173,4 +173,76 @@ describe('guided competitive editor', () => {
     expect(move.value).toBe('Aura Esfera');
   });
 
+  it('suggests Mega-Salamence moves in slot six and auto-assigns each unique form ability', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockImplementation(async (url: string) => ({
+      ok: true,
+      json: async () => String(url).includes('/pokemon-species/')
+        ? { varieties: [
+            { pokemon: { name: 'salamence' } },
+            { pokemon: { name: 'salamence-mega' } }
+          ] }
+        : String(url).endsWith('/pokemon/salamence-mega')
+          ? { abilities: [{ ability: { name: 'aerilate' } }],
+              moves: [{ move: { name: 'return' },
+                version_group_details: [{ version_group: { name: 'omega-ruby-alpha-sapphire' } }] }] }
+          : { abilities: [{ ability: { name: 'intimidate' } }],
+              moves: [
+                { move: { name: 'dragon-claw' },
+                  version_group_details: [{ version_group: { name: 'scarlet-violet' } }] },
+                { move: { name: 'protect' },
+                  version_group_details: [{ version_group: { name: 'scarlet-violet' } }] }
+              ] }
+    })));
+    window.location.hash = '#/competitive';
+    render(<RootApp />);
+    fireEvent.click(await screen.findByRole('button', { name: 'Pokémon Champions' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Editar espacio 6' }));
+    const search = screen.getByRole('searchbox', { name: 'Buscar Pokémon por nombre o número' });
+    fireEvent.change(search, { target: { value: '#373' } });
+    fireEvent.keyDown(search, { key: 'Enter', code: 'Enter' });
+
+    const ability = await screen.findByRole('combobox', { name: 'Habilidad' }) as HTMLSelectElement;
+    await waitFor(() => expect(ability.value).toBe('intimidate'));
+    expect(ability.disabled).toBe(true);
+
+    fireEvent.change(screen.getByRole('combobox', { name: 'Forma del Pokémon' }), {
+      target: { value: 'salamence-mega' }
+    });
+    await waitFor(() => expect(ability.value).toBe('aerilate'));
+    expect(ability.disabled).toBe(true);
+    expect(screen.getByText('Habilidad única asignada automáticamente.')).toBeTruthy();
+    expect(screen.getByText(/Esta Mega no tiene movimientos registrados para Escarlata\/Púrpura/)).toBeTruthy();
+
+    const move = screen.getByRole('searchbox', { name: 'Movimiento 1' }) as HTMLInputElement;
+    fireEvent.focus(move);
+    const option = await screen.findByRole('button', { name: 'Elegir Garra Dragón' });
+    expect(screen.getByRole('button', { name: 'Elegir Protección' })).toBeTruthy();
+    fireEvent.click(option);
+    expect(move.value).toBe('Garra Dragón');
+
+    const slot = screen.getByRole('button', { name: 'Editar espacio 6' });
+    expect(slot.textContent).toContain('Mega-Salamence');
+    expect(slot.querySelector('img')?.getAttribute('src')).toContain('/10089.png');
+    expect(screen.getByRole('heading', { name: 'Espacio 6' })).toBeTruthy();
+  });
+
+  it('leaves the ability unselected when the species offers multiple valid abilities', async () => {
+    mockPokemonApi();
+    window.location.hash = '#/competitive';
+    render(<RootApp />);
+    fireEvent.change(screen.getByRole('searchbox', { name: 'Buscar Pokémon por nombre o número' }), {
+      target: { value: '#25' }
+    });
+    fireEvent.keyDown(screen.getByRole('searchbox', { name: 'Buscar Pokémon por nombre o número' }), {
+      key: 'Enter', code: 'Enter'
+    });
+    const ability = await screen.findByRole('combobox', { name: 'Habilidad' }) as HTMLSelectElement;
+    await waitFor(() => expect(ability.options.length).toBe(3));
+    expect(ability.value).toBe('');
+    expect(ability.disabled).toBe(false);
+    fireEvent.change(ability, { target: { value: 'lightning-rod' } });
+    expect(ability.value).toBe('lightning-rod');
+    expect(screen.queryByText('Habilidad única asignada automáticamente.')).toBeNull();
+  });
+
 });
