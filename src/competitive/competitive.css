@@ -158,3 +158,9 @@
 .comp-two-fields.comp-form-only{grid-template-columns:minmax(0,1fr)}
 @media(max-width:900px){.comp-environment{grid-template-columns:1fr}.comp-environment-buttons{width:100%}.comp-environment-buttons button{flex:1 1 170px}}
 @media(max-width:600px){.comp-environment{padding:16px}.comp-environment-buttons button{flex:1 1 100%}.comp-assist-field input[type=search]{font-size:16px}}
+
+/* Keep full-Pokédex browsing optional. The team roster already shows the active six. */
+.comp-species-browse-toggle{align-self:flex-start;border:0;background:transparent;color:#a7dfff;text-decoration:underline;text-underline-offset:3px;padding:5px 2px;cursor:pointer;font-size:12px}
+.comp-species-browse-toggle:hover{color:#e7f5ff}
+.comp-species-browse-toggle:focus-visible{outline:2px solid #8ad7ff;outline-offset:3px;border-radius:3px}
+.comp-species-select[hidden]{display:none}

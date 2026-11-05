@@ -57,4 +57,20 @@ describe('hybrid species picker', () => {
     fireEvent.keyDown(input, { key: 'Escape', code: 'Escape' });
     expect(screen.getByTestId('chosen').textContent).toBe('#25');
   });
+  it('keeps the redundant full catalogue collapsed until explicitly requested', () => {
+    render(<Harness />);
+    const native = screen.getByLabelText('Pokémon del espacio seleccionado') as HTMLSelectElement;
+    const label = native.closest('label') as HTMLLabelElement;
+    const show = screen.getByRole('button', { name: 'Explorar Pokédex completa' });
+    expect(show.getAttribute('aria-expanded')).toBe('false');
+    expect(label.hidden).toBe(true);
+    fireEvent.click(show);
+    expect(label.hidden).toBe(false);
+    expect(screen.getByRole('button', { name: 'Ocultar lista completa' }).getAttribute('aria-expanded')).toBe('true');
+    fireEvent.change(native, { target: { value: '25' } });
+    expect(screen.getByTestId('chosen').textContent).toBe('#25');
+    expect(label.hidden).toBe(true);
+    expect(screen.getByRole('button', { name: 'Explorar Pokédex completa' })).toBeTruthy();
+  });
+
 });

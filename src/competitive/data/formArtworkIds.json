@@ -1,0 +1,1309 @@
+{
+  "source": "PokeAPI/pokeapi data/v2/csv/pokemon.csv (non-default varieties; artwork falls back to base if absent)",
+  "forms": {
+    "deoxys-attack": {
+      "artworkId": 10001,
+      "speciesId": 386
+    },
+    "deoxys-defense": {
+      "artworkId": 10002,
+      "speciesId": 386
+    },
+    "deoxys-speed": {
+      "artworkId": 10003,
+      "speciesId": 386
+    },
+    "wormadam-sandy": {
+      "artworkId": 10004,
+      "speciesId": 413
+    },
+    "wormadam-trash": {
+      "artworkId": 10005,
+      "speciesId": 413
+    },
+    "shaymin-sky": {
+      "artworkId": 10006,
+      "speciesId": 492
+    },
+    "giratina-origin": {
+      "artworkId": 10007,
+      "speciesId": 487
+    },
+    "rotom-heat": {
+      "artworkId": 10008,
+      "speciesId": 479
+    },
+    "rotom-wash": {
+      "artworkId": 10009,
+      "speciesId": 479
+    },
+    "rotom-frost": {
+      "artworkId": 10010,
+      "speciesId": 479
+    },
+    "rotom-fan": {
+      "artworkId": 10011,
+      "speciesId": 479
+    },
+    "rotom-mow": {
+      "artworkId": 10012,
+      "speciesId": 479
+    },
+    "castform-sunny": {
+      "artworkId": 10013,
+      "speciesId": 351
+    },
+    "castform-rainy": {
+      "artworkId": 10014,
+      "speciesId": 351
+    },
+    "castform-snowy": {
+      "artworkId": 10015,
+      "speciesId": 351
+    },
+    "basculin-blue-striped": {
+      "artworkId": 10016,
+      "speciesId": 550
+    },
+    "darmanitan-zen": {
+      "artworkId": 10017,
+      "speciesId": 555
+    },
+    "meloetta-pirouette": {
+      "artworkId": 10018,
+      "speciesId": 648
+    },
+    "tornadus-therian": {
+      "artworkId": 10019,
+      "speciesId": 641
+    },
+    "thundurus-therian": {
+      "artworkId": 10020,
+      "speciesId": 642
+    },
+    "landorus-therian": {
+      "artworkId": 10021,
+      "speciesId": 645
+    },
+    "kyurem-black": {
+      "artworkId": 10022,
+      "speciesId": 646
+    },
+    "kyurem-white": {
+      "artworkId": 10023,
+      "speciesId": 646
+    },
+    "keldeo-resolute": {
+      "artworkId": 10024,
+      "speciesId": 647
+    },
+    "meowstic-female": {
+      "artworkId": 10025,
+      "speciesId": 678
+    },
+    "aegislash-blade": {
+      "artworkId": 10026,
+      "speciesId": 681
+    },
+    "pumpkaboo-small": {
+      "artworkId": 10027,
+      "speciesId": 710
+    },
+    "pumpkaboo-large": {
+      "artworkId": 10028,
+      "speciesId": 710
+    },
+    "pumpkaboo-super": {
+      "artworkId": 10029,
+      "speciesId": 710
+    },
+    "gourgeist-small": {
+      "artworkId": 10030,
+      "speciesId": 711
+    },
+    "gourgeist-large": {
+      "artworkId": 10031,
+      "speciesId": 711
+    },
+    "gourgeist-super": {
+      "artworkId": 10032,
+      "speciesId": 711
+    },
+    "venusaur-mega": {
+      "artworkId": 10033,
+      "speciesId": 3
+    },
+    "charizard-mega-x": {
+      "artworkId": 10034,
+      "speciesId": 6
+    },
+    "charizard-mega-y": {
+      "artworkId": 10035,
+      "speciesId": 6
+    },
+    "blastoise-mega": {
+      "artworkId": 10036,
+      "speciesId": 9
+    },
+    "alakazam-mega": {
+      "artworkId": 10037,
+      "speciesId": 65
+    },
+    "gengar-mega": {
+      "artworkId": 10038,
+      "speciesId": 94
+    },
+    "kangaskhan-mega": {
+      "artworkId": 10039,
+      "speciesId": 115
+    },
+    "pinsir-mega": {
+      "artworkId": 10040,
+      "speciesId": 127
+    },
+    "gyarados-mega": {
+      "artworkId": 10041,
+      "speciesId": 130
+    },
+    "aerodactyl-mega": {
+      "artworkId": 10042,
+      "speciesId": 142
+    },
+    "mewtwo-mega-x": {
+      "artworkId": 10043,
+      "speciesId": 150
+    },
+    "mewtwo-mega-y": {
+      "artworkId": 10044,
+      "speciesId": 150
+    },
+    "ampharos-mega": {
+      "artworkId": 10045,
+      "speciesId": 181
+    },
+    "scizor-mega": {
+      "artworkId": 10046,
+      "speciesId": 212
+    },
+    "heracross-mega": {
+      "artworkId": 10047,
+      "speciesId": 214
+    },
+    "houndoom-mega": {
+      "artworkId": 10048,
+      "speciesId": 229
+    },
+    "tyranitar-mega": {
+      "artworkId": 10049,
+      "speciesId": 248
+    },
+    "blaziken-mega": {
+      "artworkId": 10050,
+      "speciesId": 257
+    },
+    "gardevoir-mega": {
+      "artworkId": 10051,
+      "speciesId": 282
+    },
+    "mawile-mega": {
+      "artworkId": 10052,
+      "speciesId": 303
+    },
+    "aggron-mega": {
+      "artworkId": 10053,
+      "speciesId": 306
+    },
+    "medicham-mega": {
+      "artworkId": 10054,
+      "speciesId": 308
+    },
+    "manectric-mega": {
+      "artworkId": 10055,
+      "speciesId": 310
+    },
+    "banette-mega": {
+      "artworkId": 10056,
+      "speciesId": 354
+    },
+    "absol-mega": {
+      "artworkId": 10057,
+      "speciesId": 359
+    },
+    "garchomp-mega": {
+      "artworkId": 10058,
+      "speciesId": 445
+    },
+    "lucario-mega": {
+      "artworkId": 10059,
+      "speciesId": 448
+    },
+    "abomasnow-mega": {
+      "artworkId": 10060,
+      "speciesId": 460
+    },
+    "floette-eternal": {
+      "artworkId": 10061,
+      "speciesId": 670
+    },
+    "latias-mega": {
+      "artworkId": 10062,
+      "speciesId": 380
+    },
+    "latios-mega": {
+      "artworkId": 10063,
+      "speciesId": 381
+    },
+    "swampert-mega": {
+      "artworkId": 10064,
+      "speciesId": 260
+    },
+    "sceptile-mega": {
+      "artworkId": 10065,
+      "speciesId": 254
+    },
+    "sableye-mega": {
+      "artworkId": 10066,
+      "speciesId": 302
+    },
+    "altaria-mega": {
+      "artworkId": 10067,
+      "speciesId": 334
+    },
+    "gallade-mega": {
+      "artworkId": 10068,
+      "speciesId": 475
+    },
+    "audino-mega": {
+      "artworkId": 10069,
+      "speciesId": 531
+    },
+    "sharpedo-mega": {
+      "artworkId": 10070,
+      "speciesId": 319
+    },
+    "slowbro-mega": {
+      "artworkId": 10071,
+      "speciesId": 80
+    },
+    "steelix-mega": {
+      "artworkId": 10072,
+      "speciesId": 208
+    },
+    "pidgeot-mega": {
+      "artworkId": 10073,
+      "speciesId": 18
+    },
+    "glalie-mega": {
+      "artworkId": 10074,
+      "speciesId": 362
+    },
+    "diancie-mega": {
+      "artworkId": 10075,
+      "speciesId": 719
+    },
+    "metagross-mega": {
+      "artworkId": 10076,
+      "speciesId": 376
+    },
+    "kyogre-primal": {
+      "artworkId": 10077,
+      "speciesId": 382
+    },
+    "groudon-primal": {
+      "artworkId": 10078,
+      "speciesId": 383
+    },
+    "rayquaza-mega": {
+      "artworkId": 10079,
+      "speciesId": 384
+    },
+    "pikachu-rock-star": {
+      "artworkId": 10080,
+      "speciesId": 25
+    },
+    "pikachu-belle": {
+      "artworkId": 10081,
+      "speciesId": 25
+    },
+    "pikachu-pop-star": {
+      "artworkId": 10082,
+      "speciesId": 25
+    },
+    "pikachu-phd": {
+      "artworkId": 10083,
+      "speciesId": 25
+    },
+    "pikachu-libre": {
+      "artworkId": 10084,
+      "speciesId": 25
+    },
+    "pikachu-cosplay": {
+      "artworkId": 10085,
+      "speciesId": 25
+    },
+    "hoopa-unbound": {
+      "artworkId": 10086,
+      "speciesId": 720
+    },
+    "camerupt-mega": {
+      "artworkId": 10087,
+      "speciesId": 323
+    },
+    "lopunny-mega": {
+      "artworkId": 10088,
+      "speciesId": 428
+    },
+    "salamence-mega": {
+      "artworkId": 10089,
+      "speciesId": 373
+    },
+    "beedrill-mega": {
+      "artworkId": 10090,
+      "speciesId": 15
+    },
+    "rattata-alola": {
+      "artworkId": 10091,
+      "speciesId": 19
+    },
+    "raticate-alola": {
+      "artworkId": 10092,
+      "speciesId": 20
+    },
+    "raticate-totem-alola": {
+      "artworkId": 10093,
+      "speciesId": 20
+    },
+    "pikachu-original-cap": {
+      "artworkId": 10094,
+      "speciesId": 25
+    },
+    "pikachu-hoenn-cap": {
+      "artworkId": 10095,
+      "speciesId": 25
+    },
+    "pikachu-sinnoh-cap": {
+      "artworkId": 10096,
+      "speciesId": 25
+    },
+    "pikachu-unova-cap": {
+      "artworkId": 10097,
+      "speciesId": 25
+    },
+    "pikachu-kalos-cap": {
+      "artworkId": 10098,
+      "speciesId": 25
+    },
+    "pikachu-alola-cap": {
+      "artworkId": 10099,
+      "speciesId": 25
+    },
+    "raichu-alola": {
+      "artworkId": 10100,
+      "speciesId": 26
+    },
+    "sandshrew-alola": {
+      "artworkId": 10101,
+      "speciesId": 27
+    },
+    "sandslash-alola": {
+      "artworkId": 10102,
+      "speciesId": 28
+    },
+    "vulpix-alola": {
+      "artworkId": 10103,
+      "speciesId": 37
+    },
+    "ninetales-alola": {
+      "artworkId": 10104,
+      "speciesId": 38
+    },
+    "diglett-alola": {
+      "artworkId": 10105,
+      "speciesId": 50
+    },
+    "dugtrio-alola": {
+      "artworkId": 10106,
+      "speciesId": 51
+    },
+    "meowth-alola": {
+      "artworkId": 10107,
+      "speciesId": 52
+    },
+    "persian-alola": {
+      "artworkId": 10108,
+      "speciesId": 53
+    },
+    "geodude-alola": {
+      "artworkId": 10109,
+      "speciesId": 74
+    },
+    "graveler-alola": {
+      "artworkId": 10110,
+      "speciesId": 75
+    },
+    "golem-alola": {
+      "artworkId": 10111,
+      "speciesId": 76
+    },
+    "grimer-alola": {
+      "artworkId": 10112,
+      "speciesId": 88
+    },
+    "muk-alola": {
+      "artworkId": 10113,
+      "speciesId": 89
+    },
+    "exeggutor-alola": {
+      "artworkId": 10114,
+      "speciesId": 103
+    },
+    "marowak-alola": {
+      "artworkId": 10115,
+      "speciesId": 105
+    },
+    "greninja-battle-bond": {
+      "artworkId": 10116,
+      "speciesId": 658
+    },
+    "greninja-ash": {
+      "artworkId": 10117,
+      "speciesId": 658
+    },
+    "zygarde-10-power-construct": {
+      "artworkId": 10118,
+      "speciesId": 718
+    },
+    "zygarde-50-power-construct": {
+      "artworkId": 10119,
+      "speciesId": 718
+    },
+    "zygarde-complete": {
+      "artworkId": 10120,
+      "speciesId": 718
+    },
+    "gumshoos-totem": {
+      "artworkId": 10121,
+      "speciesId": 735
+    },
+    "vikavolt-totem": {
+      "artworkId": 10122,
+      "speciesId": 738
+    },
+    "oricorio-pom-pom": {
+      "artworkId": 10123,
+      "speciesId": 741
+    },
+    "oricorio-pau": {
+      "artworkId": 10124,
+      "speciesId": 741
+    },
+    "oricorio-sensu": {
+      "artworkId": 10125,
+      "speciesId": 741
+    },
+    "lycanroc-midnight": {
+      "artworkId": 10126,
+      "speciesId": 745
+    },
+    "wishiwashi-school": {
+      "artworkId": 10127,
+      "speciesId": 746
+    },
+    "lurantis-totem": {
+      "artworkId": 10128,
+      "speciesId": 754
+    },
+    "salazzle-totem": {
+      "artworkId": 10129,
+      "speciesId": 758
+    },
+    "minior-orange-meteor": {
+      "artworkId": 10130,
+      "speciesId": 774
+    },
+    "minior-yellow-meteor": {
+      "artworkId": 10131,
+      "speciesId": 774
+    },
+    "minior-green-meteor": {
+      "artworkId": 10132,
+      "speciesId": 774
+    },
+    "minior-blue-meteor": {
+      "artworkId": 10133,
+      "speciesId": 774
+    },
+    "minior-indigo-meteor": {
+      "artworkId": 10134,
+      "speciesId": 774
+    },
+    "minior-violet-meteor": {
+      "artworkId": 10135,
+      "speciesId": 774
+    },
+    "minior-red": {
+      "artworkId": 10136,
+      "speciesId": 774
+    },
+    "minior-orange": {
+      "artworkId": 10137,
+      "speciesId": 774
+    },
+    "minior-yellow": {
+      "artworkId": 10138,
+      "speciesId": 774
+    },
+    "minior-green": {
+      "artworkId": 10139,
+      "speciesId": 774
+    },
+    "minior-blue": {
+      "artworkId": 10140,
+      "speciesId": 774
+    },
+    "minior-indigo": {
+      "artworkId": 10141,
+      "speciesId": 774
+    },
+    "minior-violet": {
+      "artworkId": 10142,
+      "speciesId": 774
+    },
+    "mimikyu-busted": {
+      "artworkId": 10143,
+      "speciesId": 778
+    },
+    "mimikyu-totem-disguised": {
+      "artworkId": 10144,
+      "speciesId": 778
+    },
+    "mimikyu-totem-busted": {
+      "artworkId": 10145,
+      "speciesId": 778
+    },
+    "kommo-o-totem": {
+      "artworkId": 10146,
+      "speciesId": 784
+    },
+    "magearna-original": {
+      "artworkId": 10147,
+      "speciesId": 801
+    },
+    "pikachu-partner-cap": {
+      "artworkId": 10148,
+      "speciesId": 25
+    },
+    "marowak-totem": {
+      "artworkId": 10149,
+      "speciesId": 105
+    },
+    "ribombee-totem": {
+      "artworkId": 10150,
+      "speciesId": 743
+    },
+    "rockruff-own-tempo": {
+      "artworkId": 10151,
+      "speciesId": 744
+    },
+    "lycanroc-dusk": {
+      "artworkId": 10152,
+      "speciesId": 745
+    },
+    "araquanid-totem": {
+      "artworkId": 10153,
+      "speciesId": 752
+    },
+    "togedemaru-totem": {
+      "artworkId": 10154,
+      "speciesId": 777
+    },
+    "necrozma-dusk": {
+      "artworkId": 10155,
+      "speciesId": 800
+    },
+    "necrozma-dawn": {
+      "artworkId": 10156,
+      "speciesId": 800
+    },
+    "necrozma-ultra": {
+      "artworkId": 10157,
+      "speciesId": 800
+    },
+    "pikachu-starter": {
+      "artworkId": 10158,
+      "speciesId": 25
+    },
+    "eevee-starter": {
+      "artworkId": 10159,
+      "speciesId": 133
+    },
+    "pikachu-world-cap": {
+      "artworkId": 10160,
+      "speciesId": 25
+    },
+    "meowth-galar": {
+      "artworkId": 10161,
+      "speciesId": 52
+    },
+    "ponyta-galar": {
+      "artworkId": 10162,
+      "speciesId": 77
+    },
+    "rapidash-galar": {
+      "artworkId": 10163,
+      "speciesId": 78
+    },
+    "slowpoke-galar": {
+      "artworkId": 10164,
+      "speciesId": 79
+    },
+    "slowbro-galar": {
+      "artworkId": 10165,
+      "speciesId": 80
+    },
+    "farfetchd-galar": {
+      "artworkId": 10166,
+      "speciesId": 83
+    },
+    "weezing-galar": {
+      "artworkId": 10167,
+      "speciesId": 110
+    },
+    "mr-mime-galar": {
+      "artworkId": 10168,
+      "speciesId": 122
+    },
+    "articuno-galar": {
+      "artworkId": 10169,
+      "speciesId": 144
+    },
+    "zapdos-galar": {
+      "artworkId": 10170,
+      "speciesId": 145
+    },
+    "moltres-galar": {
+      "artworkId": 10171,
+      "speciesId": 146
+    },
+    "slowking-galar": {
+      "artworkId": 10172,
+      "speciesId": 199
+    },
+    "corsola-galar": {
+      "artworkId": 10173,
+      "speciesId": 222
+    },
+    "zigzagoon-galar": {
+      "artworkId": 10174,
+      "speciesId": 263
+    },
+    "linoone-galar": {
+      "artworkId": 10175,
+      "speciesId": 264
+    },
+    "darumaka-galar": {
+      "artworkId": 10176,
+      "speciesId": 554
+    },
+    "darmanitan-galar-standard": {
+      "artworkId": 10177,
+      "speciesId": 555
+    },
+    "darmanitan-galar-zen": {
+      "artworkId": 10178,
+      "speciesId": 555
+    },
+    "yamask-galar": {
+      "artworkId": 10179,
+      "speciesId": 562
+    },
+    "stunfisk-galar": {
+      "artworkId": 10180,
+      "speciesId": 618
+    },
+    "zygarde-10": {
+      "artworkId": 10181,
+      "speciesId": 718
+    },
+    "cramorant-gulping": {
+      "artworkId": 10182,
+      "speciesId": 845
+    },
+    "cramorant-gorging": {
+      "artworkId": 10183,
+      "speciesId": 845
+    },
+    "toxtricity-low-key": {
+      "artworkId": 10184,
+      "speciesId": 849
+    },
+    "eiscue-noice": {
+      "artworkId": 10185,
+      "speciesId": 875
+    },
+    "indeedee-female": {
+      "artworkId": 10186,
+      "speciesId": 876
+    },
+    "morpeko-hangry": {
+      "artworkId": 10187,
+      "speciesId": 877
+    },
+    "zacian-crowned": {
+      "artworkId": 10188,
+      "speciesId": 888
+    },
+    "zamazenta-crowned": {
+      "artworkId": 10189,
+      "speciesId": 889
+    },
+    "eternatus-eternamax": {
+      "artworkId": 10190,
+      "speciesId": 890
+    },
+    "urshifu-rapid-strike": {
+      "artworkId": 10191,
+      "speciesId": 892
+    },
+    "zarude-dada": {
+      "artworkId": 10192,
+      "speciesId": 893
+    },
+    "calyrex-ice": {
+      "artworkId": 10193,
+      "speciesId": 898
+    },
+    "calyrex-shadow": {
+      "artworkId": 10194,
+      "speciesId": 898
+    },
+    "venusaur-gmax": {
+      "artworkId": 10195,
+      "speciesId": 3
+    },
+    "charizard-gmax": {
+      "artworkId": 10196,
+      "speciesId": 6
+    },
+    "blastoise-gmax": {
+      "artworkId": 10197,
+      "speciesId": 9
+    },
+    "butterfree-gmax": {
+      "artworkId": 10198,
+      "speciesId": 12
+    },
+    "pikachu-gmax": {
+      "artworkId": 10199,
+      "speciesId": 25
+    },
+    "meowth-gmax": {
+      "artworkId": 10200,
+      "speciesId": 52
+    },
+    "machamp-gmax": {
+      "artworkId": 10201,
+      "speciesId": 68
+    },
+    "gengar-gmax": {
+      "artworkId": 10202,
+      "speciesId": 94
+    },
+    "kingler-gmax": {
+      "artworkId": 10203,
+      "speciesId": 99
+    },
+    "lapras-gmax": {
+      "artworkId": 10204,
+      "speciesId": 131
+    },
+    "eevee-gmax": {
+      "artworkId": 10205,
+      "speciesId": 133
+    },
+    "snorlax-gmax": {
+      "artworkId": 10206,
+      "speciesId": 143
+    },
+    "garbodor-gmax": {
+      "artworkId": 10207,
+      "speciesId": 569
+    },
+    "melmetal-gmax": {
+      "artworkId": 10208,
+      "speciesId": 809
+    },
+    "rillaboom-gmax": {
+      "artworkId": 10209,
+      "speciesId": 812
+    },
+    "cinderace-gmax": {
+      "artworkId": 10210,
+      "speciesId": 815
+    },
+    "inteleon-gmax": {
+      "artworkId": 10211,
+      "speciesId": 818
+    },
+    "corviknight-gmax": {
+      "artworkId": 10212,
+      "speciesId": 823
+    },
+    "orbeetle-gmax": {
+      "artworkId": 10213,
+      "speciesId": 826
+    },
+    "drednaw-gmax": {
+      "artworkId": 10214,
+      "speciesId": 834
+    },
+    "coalossal-gmax": {
+      "artworkId": 10215,
+      "speciesId": 839
+    },
+    "flapple-gmax": {
+      "artworkId": 10216,
+      "speciesId": 841
+    },
+    "appletun-gmax": {
+      "artworkId": 10217,
+      "speciesId": 842
+    },
+    "sandaconda-gmax": {
+      "artworkId": 10218,
+      "speciesId": 844
+    },
+    "toxtricity-amped-gmax": {
+      "artworkId": 10219,
+      "speciesId": 849
+    },
+    "centiskorch-gmax": {
+      "artworkId": 10220,
+      "speciesId": 851
+    },
+    "hatterene-gmax": {
+      "artworkId": 10221,
+      "speciesId": 858
+    },
+    "grimmsnarl-gmax": {
+      "artworkId": 10222,
+      "speciesId": 861
+    },
+    "alcremie-gmax": {
+      "artworkId": 10223,
+      "speciesId": 869
+    },
+    "copperajah-gmax": {
+      "artworkId": 10224,
+      "speciesId": 879
+    },
+    "duraludon-gmax": {
+      "artworkId": 10225,
+      "speciesId": 884
+    },
+    "urshifu-single-strike-gmax": {
+      "artworkId": 10226,
+      "speciesId": 892
+    },
+    "urshifu-rapid-strike-gmax": {
+      "artworkId": 10227,
+      "speciesId": 892
+    },
+    "toxtricity-low-key-gmax": {
+      "artworkId": 10228,
+      "speciesId": 849
+    },
+    "growlithe-hisui": {
+      "artworkId": 10229,
+      "speciesId": 58
+    },
+    "arcanine-hisui": {
+      "artworkId": 10230,
+      "speciesId": 59
+    },
+    "voltorb-hisui": {
+      "artworkId": 10231,
+      "speciesId": 100
+    },
+    "electrode-hisui": {
+      "artworkId": 10232,
+      "speciesId": 101
+    },
+    "typhlosion-hisui": {
+      "artworkId": 10233,
+      "speciesId": 157
+    },
+    "qwilfish-hisui": {
+      "artworkId": 10234,
+      "speciesId": 211
+    },
+    "sneasel-hisui": {
+      "artworkId": 10235,
+      "speciesId": 215
+    },
+    "samurott-hisui": {
+      "artworkId": 10236,
+      "speciesId": 503
+    },
+    "lilligant-hisui": {
+      "artworkId": 10237,
+      "speciesId": 549
+    },
+    "zorua-hisui": {
+      "artworkId": 10238,
+      "speciesId": 570
+    },
+    "zoroark-hisui": {
+      "artworkId": 10239,
+      "speciesId": 571
+    },
+    "braviary-hisui": {
+      "artworkId": 10240,
+      "speciesId": 628
+    },
+    "sliggoo-hisui": {
+      "artworkId": 10241,
+      "speciesId": 705
+    },
+    "goodra-hisui": {
+      "artworkId": 10242,
+      "speciesId": 706
+    },
+    "avalugg-hisui": {
+      "artworkId": 10243,
+      "speciesId": 713
+    },
+    "decidueye-hisui": {
+      "artworkId": 10244,
+      "speciesId": 724
+    },
+    "dialga-origin": {
+      "artworkId": 10245,
+      "speciesId": 483
+    },
+    "palkia-origin": {
+      "artworkId": 10246,
+      "speciesId": 484
+    },
+    "basculin-white-striped": {
+      "artworkId": 10247,
+      "speciesId": 550
+    },
+    "basculegion-female": {
+      "artworkId": 10248,
+      "speciesId": 902
+    },
+    "enamorus-therian": {
+      "artworkId": 10249,
+      "speciesId": 905
+    },
+    "tauros-paldea-combat-breed": {
+      "artworkId": 10250,
+      "speciesId": 128
+    },
+    "tauros-paldea-blaze-breed": {
+      "artworkId": 10251,
+      "speciesId": 128
+    },
+    "tauros-paldea-aqua-breed": {
+      "artworkId": 10252,
+      "speciesId": 128
+    },
+    "wooper-paldea": {
+      "artworkId": 10253,
+      "speciesId": 194
+    },
+    "oinkologne-female": {
+      "artworkId": 10254,
+      "speciesId": 916
+    },
+    "dudunsparce-three-segment": {
+      "artworkId": 10255,
+      "speciesId": 982
+    },
+    "palafin-hero": {
+      "artworkId": 10256,
+      "speciesId": 964
+    },
+    "maushold-family-of-three": {
+      "artworkId": 10257,
+      "speciesId": 925
+    },
+    "tatsugiri-droopy": {
+      "artworkId": 10258,
+      "speciesId": 978
+    },
+    "tatsugiri-stretchy": {
+      "artworkId": 10259,
+      "speciesId": 978
+    },
+    "squawkabilly-blue-plumage": {
+      "artworkId": 10260,
+      "speciesId": 931
+    },
+    "squawkabilly-yellow-plumage": {
+      "artworkId": 10261,
+      "speciesId": 931
+    },
+    "squawkabilly-white-plumage": {
+      "artworkId": 10262,
+      "speciesId": 931
+    },
+    "gimmighoul-roaming": {
+      "artworkId": 10263,
+      "speciesId": 999
+    },
+    "koraidon-limited-build": {
+      "artworkId": 10264,
+      "speciesId": 1007
+    },
+    "koraidon-sprinting-build": {
+      "artworkId": 10265,
+      "speciesId": 1007
+    },
+    "koraidon-swimming-build": {
+      "artworkId": 10266,
+      "speciesId": 1007
+    },
+    "koraidon-gliding-build": {
+      "artworkId": 10267,
+      "speciesId": 1007
+    },
+    "miraidon-low-power-mode": {
+      "artworkId": 10268,
+      "speciesId": 1008
+    },
+    "miraidon-drive-mode": {
+      "artworkId": 10269,
+      "speciesId": 1008
+    },
+    "miraidon-aquatic-mode": {
+      "artworkId": 10270,
+      "speciesId": 1008
+    },
+    "miraidon-glide-mode": {
+      "artworkId": 10271,
+      "speciesId": 1008
+    },
+    "ursaluna-bloodmoon": {
+      "artworkId": 10272,
+      "speciesId": 901
+    },
+    "ogerpon-wellspring-mask": {
+      "artworkId": 10273,
+      "speciesId": 1017
+    },
+    "ogerpon-hearthflame-mask": {
+      "artworkId": 10274,
+      "speciesId": 1017
+    },
+    "ogerpon-cornerstone-mask": {
+      "artworkId": 10275,
+      "speciesId": 1017
+    },
+    "terapagos-terastal": {
+      "artworkId": 10276,
+      "speciesId": 1024
+    },
+    "terapagos-stellar": {
+      "artworkId": 10277,
+      "speciesId": 1024
+    },
+    "clefable-mega": {
+      "artworkId": 10278,
+      "speciesId": 36
+    },
+    "victreebel-mega": {
+      "artworkId": 10279,
+      "speciesId": 71
+    },
+    "starmie-mega": {
+      "artworkId": 10280,
+      "speciesId": 121
+    },
+    "dragonite-mega": {
+      "artworkId": 10281,
+      "speciesId": 149
+    },
+    "meganium-mega": {
+      "artworkId": 10282,
+      "speciesId": 154
+    },
+    "feraligatr-mega": {
+      "artworkId": 10283,
+      "speciesId": 160
+    },
+    "skarmory-mega": {
+      "artworkId": 10284,
+      "speciesId": 227
+    },
+    "froslass-mega": {
+      "artworkId": 10285,
+      "speciesId": 478
+    },
+    "emboar-mega": {
+      "artworkId": 10286,
+      "speciesId": 500
+    },
+    "excadrill-mega": {
+      "artworkId": 10287,
+      "speciesId": 530
+    },
+    "scolipede-mega": {
+      "artworkId": 10288,
+      "speciesId": 545
+    },
+    "scrafty-mega": {
+      "artworkId": 10289,
+      "speciesId": 560
+    },
+    "eelektross-mega": {
+      "artworkId": 10290,
+      "speciesId": 604
+    },
+    "chandelure-mega": {
+      "artworkId": 10291,
+      "speciesId": 609
+    },
+    "chesnaught-mega": {
+      "artworkId": 10292,
+      "speciesId": 652
+    },
+    "delphox-mega": {
+      "artworkId": 10293,
+      "speciesId": 655
+    },
+    "greninja-mega": {
+      "artworkId": 10294,
+      "speciesId": 658
+    },
+    "pyroar-mega": {
+      "artworkId": 10295,
+      "speciesId": 668
+    },
+    "floette-mega": {
+      "artworkId": 10296,
+      "speciesId": 670
+    },
+    "malamar-mega": {
+      "artworkId": 10297,
+      "speciesId": 687
+    },
+    "barbaracle-mega": {
+      "artworkId": 10298,
+      "speciesId": 689
+    },
+    "dragalge-mega": {
+      "artworkId": 10299,
+      "speciesId": 691
+    },
+    "hawlucha-mega": {
+      "artworkId": 10300,
+      "speciesId": 701
+    },
+    "zygarde-mega": {
+      "artworkId": 10301,
+      "speciesId": 718
+    },
+    "drampa-mega": {
+      "artworkId": 10302,
+      "speciesId": 780
+    },
+    "falinks-mega": {
+      "artworkId": 10303,
+      "speciesId": 870
+    },
+    "raichu-mega-x": {
+      "artworkId": 10304,
+      "speciesId": 26
+    },
+    "raichu-mega-y": {
+      "artworkId": 10305,
+      "speciesId": 26
+    },
+    "chimecho-mega": {
+      "artworkId": 10306,
+      "speciesId": 358
+    },
+    "absol-mega-z": {
+      "artworkId": 10307,
+      "speciesId": 359
+    },
+    "staraptor-mega": {
+      "artworkId": 10308,
+      "speciesId": 398
+    },
+    "garchomp-mega-z": {
+      "artworkId": 10309,
+      "speciesId": 445
+    },
+    "lucario-mega-z": {
+      "artworkId": 10310,
+      "speciesId": 448
+    },
+    "heatran-mega": {
+      "artworkId": 10311,
+      "speciesId": 485
+    },
+    "darkrai-mega": {
+      "artworkId": 10312,
+      "speciesId": 491
+    },
+    "golurk-mega": {
+      "artworkId": 10313,
+      "speciesId": 623
+    },
+    "meowstic-male-mega": {
+      "artworkId": 10314,
+      "speciesId": 678
+    },
+    "crabominable-mega": {
+      "artworkId": 10315,
+      "speciesId": 740
+    },
+    "golisopod-mega": {
+      "artworkId": 10316,
+      "speciesId": 768
+    },
+    "magearna-mega": {
+      "artworkId": 10317,
+      "speciesId": 801
+    },
+    "magearna-original-mega": {
+      "artworkId": 10318,
+      "speciesId": 801
+    },
+    "zeraora-mega": {
+      "artworkId": 10319,
+      "speciesId": 807
+    },
+    "scovillain-mega": {
+      "artworkId": 10320,
+      "speciesId": 952
+    },
+    "glimmora-mega": {
+      "artworkId": 10321,
+      "speciesId": 970
+    },
+    "tatsugiri-curly-mega": {
+      "artworkId": 10322,
+      "speciesId": 978
+    },
+    "tatsugiri-droopy-mega": {
+      "artworkId": 10323,
+      "speciesId": 978
+    },
+    "tatsugiri-stretchy-mega": {
+      "artworkId": 10324,
+      "speciesId": 978
+    },
+    "baxcalibur-mega": {
+      "artworkId": 10325,
+      "speciesId": 998
+    },
+    "meowstic-female-mega": {
+      "artworkId": 10326,
+      "speciesId": 678
+    }
+  }
+}

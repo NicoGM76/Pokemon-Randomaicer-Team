@@ -382,6 +382,13 @@ La V2.4 abre un **comparador histórico optativo** dentro del panel `/#/competit
 
 **Límites:** no calcula victoria, fuerza del equipo, daño ni causalidad. La selección histórica es una fotografía de la escalera de Pokémon Showdown/Smogon y no equivale a datos de Championships oficiales. La V2.3 de aprendizaje sigue sin una entrega independiente formal: esta V2.4 aborda el backlog verificable de V2.2 sin presentar esa versión como completada.
 
+### Ajuste visual del equipo competitivo (en revisión)
+
+- Las tarjetas de la plantilla competitiva muestran **la imagen y el nombre de la forma seleccionada**: Mega-Salamence, Mega-Lucario (incluida Mega Z), Rotom Lavado y otras variantes registradas en el catálogo de PokéAPI.
+- Los IDs alternativos proceden de [PokéAPI pokemon.csv](https://github.com/PokeAPI/pokeapi/blob/master/data/v2/csv/pokemon.csv), sin confundir ID de especie con ID de forma. Si el arte alternativo no existe o falla la carga, la imagen vuelve a la especie base.
+- El buscador por nombre/número es el control principal. La **lista completa de más de mil especies** sigue disponible, pero tras pulsar «Explorar Pokédex completa» para evitar duplicar permanentemente opciones al lado de la plantilla superior.
+- Los seis miembros, sus formas y bloqueos permanecen persistidos como antes. Se incluyen pruebas de Mega-Salamence, Mega-Lucario Z, Rotom Lavado y restauración después de recargar.
+
 ### V3 · Posible aplicación móvil
 
 Posible app Android/iOS reutilizando el motor y la arquitectura modular de la web.
