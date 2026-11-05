@@ -4,6 +4,7 @@ import { useLocale } from '../i18n/LocaleProvider';
 import type { Pokemon } from '../domain/pokemon/types';
 import { analyzeCompetitiveTeam } from './core/analysis';
 import PokemonSpeciesPicker from './PokemonSpeciesPicker';
+import { baseArtworkUrl, memberArtworkUrl, memberDisplayName } from './memberArtwork';
 import { createManualSet, generateCompetitiveTeam, regenerateCompetitiveSlot } from './core/teamBuilder';
 import GuidedSetEditor from './assist/GuidedSetEditor';
 import { getTrainingRules, pointsFor } from './core/trainingRules';
@@ -31,10 +32,6 @@ function niceName(name: string): string {
 const pokemonOptions = sortedPokemon.map(entry => (
   <option key={entry.id} value={entry.id}>#{entry.id} · {niceName(entry.name)}</option>
 ));
-
-function spriteUrl(id: number): string {
-  return 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' + id + '.png';
-}
 
 function formatTitle(format: CompetitiveFormat): string {
   return format === 'singles' ? 'Singles 6v6' : 'Dobles estilo VGC';
@@ -226,15 +223,21 @@ export default function CompetitiveLandingPage() {
         <div className="comp-roster-grid">
           {team.map((set, index) => {
             const entry = set ? lookup.get(set.pokemonId) : null;
+            const visibleName = entry ? memberDisplayName(entry.id, entry.name, set?.formId) : '';
             return (
               <article key={index} className={workspace.selectedSlot === index ? 'comp-slot selected' : 'comp-slot'}>
                 <button type="button" className="comp-slot-main" aria-label={'Editar espacio ' + (index + 1)}
                   onClick={() => setWorkspace(previous => ({ ...previous, selectedSlot: index }))}>
                   <span className="comp-slot-top"><span>ESPACIO {index + 1}</span>{set?.locked ? '🔒' : '◇'}</span>
                   {entry
-                    ? <img src={spriteUrl(entry.id)} alt="" loading="lazy" />
+                    ? <img key={entry.id + ':' + (set?.formId ?? 'base')}
+                        src={memberArtworkUrl(entry.id, set?.formId)} alt="" loading="lazy"
+                        onError={event => {
+                          const fallback = baseArtworkUrl(entry.id);
+                          if (event.currentTarget.src !== fallback) event.currentTarget.src = fallback;
+                        }}/>
                     : <div className="comp-empty-art" aria-hidden="true">＋</div>}
-                  <strong>{entry ? niceName(entry.name) : 'Añadir Pokémon'}</strong>
+                  <strong>{entry ? visibleName : 'Añadir Pokémon'}</strong>
                   <small>{set ? roleLabels[set.role] : 'Selecciona este espacio'}</small>
                 </button>
                 {set && <button type="button" className="comp-lock"
