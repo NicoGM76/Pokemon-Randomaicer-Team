@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import type { Pokemon } from '../../domain/pokemon/types';
 import { analyzeMetaMatchup, isMetaSnapshot } from './matchups';
 import type { MetaFormat, MetaResponse, MetaSnapshot } from './types';
@@ -10,6 +10,8 @@ type ViewState =
   | { kind: 'ready'; snapshot: MetaSnapshot };
 
 const labels = { singles: 'Singles', doubles: 'Dobles' };
+const MetaHistoryComparisonPanel = lazy(() => import('./MetaHistoryComparisonPanel'));
+
 const memoryCache = new Map<MetaFormat, MetaSnapshot>();
 
 function niceName(name: string): string {
@@ -32,6 +34,7 @@ export default function MetaInsightsPanel({
     return snapshot ? { kind: 'ready', snapshot } : { kind: 'loading' };
   });
   const [opponentId, setOpponentId] = useState<number>(0);
+  const [showHistory, setShowHistory] = useState(false);
   const lookup = useMemo(() => new Map(pokemon.map(entry => [entry.id, entry])), [pokemon]);
 
   useEffect(() => {
@@ -112,6 +115,22 @@ export default function MetaInsightsPanel({
         No significa porcentaje de victorias ni probabilidad de ganar contra él.
         Las formas alternativas sin equivalencia exacta se excluyen del catálogo.
       </div>}
+
+      <section className="comp-meta-history-launch">
+        <div>
+          <span className="section-kicker">V2.4 · HISTÓRICO</span>
+          <h3>¿Cómo cambió el metagame?</h3>
+          <p>Compara dos meses verificados de la misma regulación y corte de rating.
+            No descargamos datos históricos hasta que lo solicites.</p>
+        </div>
+        <button type="button" className="secondary" aria-expanded={showHistory}
+          onClick={() => setShowHistory(value => !value)}>
+          {showHistory ? 'Ocultar comparación mensual' : 'Comparar meses de uso'}
+        </button>
+      </section>
+      {showHistory && <Suspense fallback={<p role="status">Preparando comparación…</p>}>
+        <MetaHistoryComparisonPanel format={format} snapshot={snapshot} pokemon={pokemon}/>
+      </Suspense>}
 
       <div className="comp-meta-layout">
         <div className="comp-meta-ranking">
