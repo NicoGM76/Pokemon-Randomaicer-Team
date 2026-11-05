@@ -412,6 +412,8 @@ Elegida la fase de bajo costo: **Supabase Free para PostgreSQL**, **copias cifra
 
 [PostgreSQL V2.5: esquema implementado, migraciones y carga de catálogo](db/README.md).
 
+**Estado V2.5:** en Supabase hay 1025 especies, 675 evoluciones y 5474 entradas de 22 Pokédex; 17 tablas con RLS. El sitio web sigue usando JSON y guardados locales. El respaldo cifrado automático **aún necesita** configurar los secretos de GitHub Actions y hacer una restauración comprobada: [Guía de configuración](db/backup-setup.md).
+
 ### V3 · Posible aplicación móvil
 
 Posible app Android/iOS reutilizando el motor y la arquitectura modular de la web.
