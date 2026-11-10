@@ -1,0 +1,20 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="index,follow"><title>Pokemon Adventure Backup | OAuth de Google Drive</title><meta name="description" content="Descripción de la integración privada de Google Drive para copias cifradas de PostgreSQL de Pokémon Adventure."><style>
+:root{color-scheme:dark;font-family:Inter,system-ui,Segoe UI,sans-serif;background:#100e20;color:#eee8ff}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at top,#30204b,#100e20 65%);line-height:1.65}
+main{max-width:780px;margin:6vh auto;padding:32px 34px;background:#1a1530;border:1px solid #5e477f;border-radius:20px;box-shadow:0 18px 58px #0006}
+h1{margin:0 0 10px;font-size:clamp(1.8rem,4vw,2.5rem);color:#c5abff}h2{margin:27px 0 8px;font-size:1.18rem;color:#a9dffb}
+a{color:#8fd9ff}a:focus{outline:2px solid #8fd9ff;outline-offset:3px}nav{margin-top:25px;border-top:1px solid #4b3b62;padding-top:15px}
+nav a{display:inline-block;margin:0 18px 8px 0}.muted{color:#bfb7d4}.status{display:inline-block;border:1px solid #7b5d9e;border-radius:999px;padding:3px 12px;margin-bottom:20px;font-size:.85rem}
+li{margin:5px 0}code{color:#a9dffb;overflow-wrap:anywhere}@media(max-width:700px){main{margin:12px;padding:22px}}
+</style></head><body><main>
+<p class="status">Integración privada · En configuración</p>
+<h1>Pokémon Adventure Backup</h1>
+<p>Herramienta de mantenimiento de <a href="./">Pokémon Adventure Team Generator</a>. Esta integración OAuth utiliza <strong>Google Drive únicamente como destino de copias de seguridad</strong> de la base PostgreSQL del proyecto. No es un servicio público de inicio de sesión para jugadores.</p>
+<h2>¿Para qué solicitamos autorización?</h2>
+<p>El propietario conecta una cuenta de Google dedicada a respaldos mediante <strong>rclone</strong>. La automatización de GitHub Actions está diseñada para crear un archivo PostgreSQL, cifrarlo con <strong>age</strong>, subir el archivo cifrado al Drive dedicado y comprobar su transferencia. También puede consultar los nombres y metadatos de archivos necesarios para esas tareas.</p>
+<p>La autorización puede otorgar a rclone permisos sobre más archivos de Drive que los presentes en la carpeta de respaldos, dependiendo de los alcances OAuth aprobados. El uso previsto está limitado a la carpeta <code>Pokemon-Adventure-DB-Backups</code>.</p>
+<h2>Estado actual</h2><p>La integración se está configurando. <strong>No se afirma que existan copias automáticas o restauraciones verificadas</strong> hasta completar las pruebas de operación.</p>
+<h2>Datos y privacidad</h2><p>Consulta la <a href="backup-privacy.html">Política de privacidad</a> para entender qué datos se procesan, quién puede acceder, cómo revocar el permiso y qué se conserva.</p>
+<nav><a href="backup-privacy.html">Política de privacidad</a><a href="backup-terms.html">Condiciones de uso</a><a href="./">Sitio de Pokémon Adventure</a><a href="https://github.com/NicoGM76/Pokemon-Randomaicer-Team">Código del proyecto</a></nav>
+<p class="muted">Última actualización: 10 de noviembre de 2026.</p>
+</main></body></html>
